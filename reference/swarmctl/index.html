@@ -1,0 +1,6368 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.swarmd.dev/reference/swarmctl/">
+      
+      
+        <link rel="prev" href="../configuration/">
+      
+      
+        <link rel="next" href="../../troubleshooting/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Swarmctl - swarmd documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#swarmctl-cli-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="swarmd documentation" class="md-header__button md-logo" aria-label="swarmd documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            swarmd documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Swarmctl
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="swarmd documentation" class="md-nav__button md-logo" aria-label="swarmd documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    swarmd documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/conversation-channels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conversation Channels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/workflows-and-llm-controls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows and LLM Controls
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/cost-and-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost and Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/storage-and-retention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage and Retention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/trading-setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trading Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/instinct/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instinct layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/memory-rag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory &amp; RAG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Swarmctl
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Swarmctl
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl backup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config-reload" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config reload
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config-reload-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config reload-status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-doctor" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl doctor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-doctor-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl doctor feature
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-doctor-feature-enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl doctor feature enable
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-execution-inspect" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl execution inspect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-execution-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl execution list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl init
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-init-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl init project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-init-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl init swarm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct import
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-retire" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct retire
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-create" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key create
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-revoke" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key revoke
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-rotate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key rotate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp call
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp servers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp tools
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory audit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-backfill-titles" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory backfill-titles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-cache-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory cache-stats
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-dlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory dlq
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-dlq-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory dlq list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-dlq-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory dlq replay
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-epochs" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory epochs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-evict" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory evict
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall-evaluations" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall evaluations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall-set-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall set-policy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-gist" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory gist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-prune-candidates" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory prune-candidates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-reassign" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory reassign
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-recheck-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory recheck-urls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory reclassify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-reembed" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory reembed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-regraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory regraph
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory rollback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory scope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-scope-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory scope list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-scope-retag" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory scope retag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory stats
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-wipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory wipe
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-models-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl models list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project archive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-delete-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project delete-now
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-unarchive" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project unarchive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-cancel" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders cancel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders delete
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders schedule
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl restore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl retention
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill import
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill info
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill register
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill remove
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill validate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl swarm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-swarm-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl swarm list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-swarm-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl swarm show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-tail" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl tail
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-amend" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task amend
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task answer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-cancel" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task cancel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-close" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task close
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-directive" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task directive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task explain
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task get
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task message
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task messages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task pause
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task resume
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-retry" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task retry
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task submit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-tail" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task tail
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow-validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow validate
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../release-notes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl backup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config-reload" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config reload
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config-reload-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config reload-status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-config-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl config show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-doctor" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl doctor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-doctor-feature" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl doctor feature
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-doctor-feature-enable" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl doctor feature enable
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl execution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-execution-inspect" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl execution inspect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-execution-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl execution list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl init
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-init-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl init project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-init-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl init swarm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct import
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-retire" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct retire
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-instinct-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl instinct show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-create" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key create
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-revoke" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key revoke
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-rotate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key rotate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-key-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl key update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp call
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp servers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-mcp-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl mcp tools
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory audit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-backfill-titles" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory backfill-titles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-cache-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory cache-stats
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-dlq" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory dlq
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-dlq-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory dlq list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-dlq-replay" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory dlq replay
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-epochs" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory epochs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-evict" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory evict
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory feedback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall-evaluations" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall evaluations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall mode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-firewall-set-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory firewall set-policy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-gist" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory gist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-prune-candidates" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory prune-candidates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-reassign" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory reassign
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-recheck-urls" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory recheck-urls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-reclassify" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory reclassify
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-reembed" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory reembed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-regraph" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory regraph
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory rollback
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory scope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-scope-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory scope list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-scope-retag" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory scope retag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory stats
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-memory-wipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl memory wipe
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-models-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl models list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project archive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-delete-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project delete-now
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-project-unarchive" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl project unarchive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-cancel" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders cancel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders delete
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders schedule
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-reminders-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl reminders show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl restore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl retention
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-export" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-import" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill import
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill info
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill install
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-register" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill register
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-remove" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill remove
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill search
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-skill-validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl skill validate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-swarm" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl swarm
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-swarm-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl swarm list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-swarm-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl swarm show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-tail" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl tail
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-amend" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task amend
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task answer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-cancel" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task cancel
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-close" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task close
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-directive" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task directive
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task explain
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-get" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task get
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task message
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task messages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task pause
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task resume
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-retry" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task retry
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-submit" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task submit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-task-tail" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl task tail
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#swarmctl-workflow-validate" class="md-nav__link">
+    <span class="md-ellipsis">
+      swarmctl workflow validate
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<!-- Generated by `make docs-gen` from swarmd source — do not edit by hand. -->
+
+<h1 id="swarmctl-cli-reference">swarmctl CLI reference<a class="headerlink" href="#swarmctl-cli-reference" title="Permanent link">&para;</a></h1>
+<p>swarmctl inspects and controls a running swarmd daemon.</p>
+<h2 id="swarmctl-backup">swarmctl backup<a class="headerlink" href="#swarmctl-backup" title="Permanent link">&para;</a></h2>
+<p>Create a one-file archive of the swarmd deployment</p>
+<p>Create a tarball containing:
+  - pg_dump of the database
+  - the artifacts directory
+  - the project workspaces directory (per-project git repos)
+  - a snapshot of the main config file + configs/ directory</p>
+<p>Output path defaults to ./swarmd-backup-YYYYMMDD-HHMMSS.tgz. The archive
+is portable across hosts when restored via 'swarmctl restore'.</p>
+<p>Requires: pg_dump on PATH with credentials resolved from config.</p>
+<p>Examples:
+  swarmctl backup
+  swarmctl backup --out /backups/daily.tgz</p>
+<div class="highlight"><pre><span></span><code>swarmctl backup [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out</code></td>
+<td></td>
+<td>output archive path (default auto-generated)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-config">swarmctl config<a class="headerlink" href="#swarmctl-config" title="Permanent link">&para;</a></h2>
+<p>Inspect and control daemon configuration</p>
+<h2 id="swarmctl-config-reload">swarmctl config reload<a class="headerlink" href="#swarmctl-config-reload" title="Permanent link">&para;</a></h2>
+<p>Trigger a configuration reload</p>
+<p>Trigger a manual reload of the daemon config and registry. Equivalent
+to sending SIGHUP to the swarmd process. Useful when the file watcher
+doesn't pick up a change (network filesystem, edit-in-place with
+overwrite semantics, etc).</p>
+<div class="highlight"><pre><span></span><code>swarmctl config reload [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--force</code></td>
+<td><code>false</code></td>
+<td>Reload even when validation errors are present</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-config-reload-status">swarmctl config reload-status<a class="headerlink" href="#swarmctl-config-reload-status" title="Permanent link">&para;</a></h2>
+<p>Show last reload outcome and any validation errors</p>
+<div class="highlight"><pre><span></span><code>swarmctl config reload-status [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output instead of the human summary</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-config-show">swarmctl config show<a class="headerlink" href="#swarmctl-config-show" title="Permanent link">&para;</a></h2>
+<p>Dump effective daemon config (secrets redacted)</p>
+<div class="highlight"><pre><span></span><code>swarmctl config show [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>true</code></td>
+<td>JSON output (the only supported shape — default)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-doctor">swarmctl doctor<a class="headerlink" href="#swarmctl-doctor" title="Permanent link">&para;</a></h2>
+<p>Diagnose and repair common issues</p>
+<p>Run diagnostic checks against the swarmd daemon and optionally fix issues.</p>
+<p>Operational state:
+  stale_leases          Tasks stuck in LEASED/RUNNING with expired leases
+  orphaned_watchers     Telegram watchers for tasks already completed/failed
+  stuck_executions      Executions in RUNNING/PENDING for over 1 hour
+  task_state_audit      Terminal tasks with leaked lease fields</p>
+<p>Schema &amp; storage:
+  config_validation     Validate all project/swarm/workflow YAML configs
+  workflow_swarm_compat Flag (project, workflow) pairs whose swarm can't satisfy the workflow's roles
+  role_prompt_sanity    Lint swarm role prompts: tool refs vs allowedTools, output shape, untrusted_content awareness
+  eval_suite_lint       Parse configs/evals/*.json; flag suites with missing/incompatible project/workflow/swarm
+  database_schema       Verify expected tables and indexes exist (incl. 2026.4.11+ additions)
+  orphan_fk_rows        Detect orphan rows in audit / llm_usage / watchers referencing missing tasks
+  orphan_worktrees      .worktrees/ subdirs with no matching live task</p>
+<p>Runtime:
+  podman_config         Check podman availability and rootless configuration
+  agent_images          Verify agent images referenced in swarm configs are available
+  env_file_freshness    Flag EnvironmentFile= entries modified after daemon
+                        start (systemd reads them only at ExecStart, so
+                        post-edit secrets are invisible until restart)</p>
+<p>Security:
+  api_security_posture  Flag API auth disabled with non-loopback listen address
+  api_key_strength      Detect weak / placeholder API keys
+  secrets_permissions   Secrets files/dirs with world-readable permissions
+  config_secret_hygiene Config.yaml plaintext secrets or loose permissions (recommends ${ENV_VAR})</p>
+<p>Cost &amp; budget:
+  pricing_coverage      Models in swarm configs missing from pricing.yaml
+  autonomy_budget_guard Autonomy-enabled projects with no hard $ cap
+  budget_utilisation    Projects at ≥80%% of daily or monthly hard cap
+  dispatcher_role       When telegram.dispatcher_project_id is set,
+                        the chosen project's swarm should declare a
+                        "dispatcher" role so dashboard role+model
+                        aggregation rows align with the swarm catalogue.</p>
+<p>Use --fix to automatically repair stale_leases, orphaned_watchers,
+stuck_executions, task_state_audit, orphan_fk_rows, orphan_worktrees,
+secrets_permissions, and dispatcher_role findings. Schema, runtime,
+security posture, pricing, and budget checks are diagnostic only
+because they require operator config changes or external runtime actions.</p>
+<div class="highlight"><pre><span></span><code>swarmctl doctor [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--fix</code></td>
+<td><code>false</code></td>
+<td>Automatically repair detected issues</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-doctor-feature">swarmctl doctor feature<a class="headerlink" href="#swarmctl-doctor-feature" title="Permanent link">&para;</a></h2>
+<p>Show feature-doctor diagnoses (all features, or one by id)</p>
+<p>Query the daemon's feature-doctor surface and render a status table.</p>
+<p>Without an id argument, all registered features are listed with their
+current status (ok/ready/blocked/degraded/unknown).</p>
+<p>With an id argument, full prereq detail (including remediation hints for
+unmet prereqs) is shown for that feature.</p>
+<p>Exit code 1 when any feature is blocked or degraded.</p>
+<div class="highlight"><pre><span></span><code>swarmctl doctor feature [id] [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-doctor-feature-enable">swarmctl doctor feature enable<a class="headerlink" href="#swarmctl-doctor-feature-enable" title="Permanent link">&para;</a></h2>
+<p>Propose (or apply) enabling a feature via the feature doctor</p>
+<p>Compute the gate changes required to enable a feature and optionally apply them.</p>
+<p>Without --apply (dry-run): prints the proposed gate changes and apply
+mechanism. No config is mutated.</p>
+<p>With --apply: sends the changes to the daemon, which:
+  1. Backs up config.yaml
+  2. Writes all gate changes (comment-preserving)
+  3. Triggers a config reload
+  4. Runs the feature's verify check
+  5. Rolls back to the backup on any failure</p>
+<p>This command requires admin credentials (SWARMD_API_KEY must be an admin key
+when auth is enabled).</p>
+<div class="highlight"><pre><span></span><code>swarmctl doctor feature enable &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--apply</code></td>
+<td><code>false</code></td>
+<td>Apply the gate changes (default: dry-run only)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-execution">swarmctl execution<a class="headerlink" href="#swarmctl-execution" title="Permanent link">&para;</a></h2>
+<p>Manage executions</p>
+<p>Inspect and list workflow executions in the swarmd control plane.</p>
+<h2 id="swarmctl-execution-inspect">swarmctl execution inspect<a class="headerlink" href="#swarmctl-execution-inspect" title="Permanent link">&para;</a></h2>
+<p>Inspect an execution</p>
+<p>Get detailed information about an execution by ID.</p>
+<div class="highlight"><pre><span></span><code>swarmctl execution inspect &lt;executionId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-execution-list">swarmctl execution list<a class="headerlink" href="#swarmctl-execution-list" title="Permanent link">&para;</a></h2>
+<p>List executions</p>
+<p>List executions for a project, optionally filtered by task or status.</p>
+<div class="highlight"><pre><span></span><code>swarmctl execution list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--all</code></td>
+<td><code>false</code></td>
+<td>Show every execution instead of aggregating retries by task</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--status</code></td>
+<td></td>
+<td>Filter by status (PENDING, RUNNING, COMPLETED, FAILED, CANCELLED)</td>
+</tr>
+<tr>
+<td><code>-t</code>, <code>--task</code></td>
+<td></td>
+<td>Filter by task ID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-init">swarmctl init<a class="headerlink" href="#swarmctl-init" title="Permanent link">&para;</a></h2>
+<p>Initialize swarmd resources</p>
+<h2 id="swarmctl-init-project">swarmctl init project<a class="headerlink" href="#swarmctl-init-project" title="Permanent link">&para;</a></h2>
+<p>Create a project YAML config</p>
+<p>Create a project config under configs/projects, validate it against the registry, and optionally print it with --dry-run.</p>
+<div class="highlight"><pre><span></span><code>swarmctl init project &lt;name&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--autonomy</code></td>
+<td><code>false</code></td>
+<td>Enable autonomy in the generated project</td>
+</tr>
+<tr>
+<td><code>--config-dir</code></td>
+<td></td>
+<td>Registry config directory (default: SWARMD_CONFIGS_DIR or ./configs)</td>
+</tr>
+<tr>
+<td><code>--display-name</code></td>
+<td></td>
+<td>Human-readable project name</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Print generated YAML instead of writing it</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td><code>false</code></td>
+<td>Overwrite an existing project file</td>
+</tr>
+<tr>
+<td><code>--goal</code></td>
+<td></td>
+<td>Autonomy goal</td>
+</tr>
+<tr>
+<td><code>--param</code></td>
+<td><code>[]</code></td>
+<td>Template parameter (repeatable). Format: name=value</td>
+</tr>
+<tr>
+<td><code>--swarm</code></td>
+<td><code>basic-swarm</code></td>
+<td>Swarm ID</td>
+</tr>
+<tr>
+<td><code>--template</code></td>
+<td></td>
+<td>Materialise from a template slug (e.g. personal-assistant, news-feed). Bypasses the built-in YAML generator; use --param name=value to set template parameters.</td>
+</tr>
+<tr>
+<td><code>--workflow</code></td>
+<td><code>adaptive</code></td>
+<td>Default workflow ID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-init-swarm">swarmctl init swarm<a class="headerlink" href="#swarmctl-init-swarm" title="Permanent link">&para;</a></h2>
+<p>Create a SWARM.md config from a preset template</p>
+<p>Generate a new swarm config by copying one of the built-in preset
+templates and rewriting its swarmId to the name you pass. The generated
+file is a WORKFLOW.md-style SWARM.md (YAML frontmatter + Markdown body)
+and is validated against the full registry before it lands on disk.</p>
+<p>Available presets (use --list to see the one-line description of each):
+  basic            lead + coder + reviewer — minimal code swarm
+  dev              lead + feasibility + analyst + coder + tester + reviewer + scout + architect — full code stack
+  research         lead + researcher + writer — good for digest / scan / summary projects
+  companion-ingest reviewer + analyst + summarizer + rag-ingester — companion swarm with async-ingest role</p>
+<p>Examples:
+  swarmctl init swarm my-swarm --template basic
+  swarmctl init swarm itpe-triage --template research --dry-run
+  swarmctl init swarm my-ingest-swarm --template companion-ingest --force
+  swarmctl init swarm --list</p>
+<div class="highlight"><pre><span></span><code>swarmctl init swarm &lt;name&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--config-dir</code></td>
+<td></td>
+<td>Registry config directory (default: SWARMD_CONFIGS_DIR or ./configs)</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Print generated SWARM.md instead of writing it</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td><code>false</code></td>
+<td>Overwrite an existing swarm file</td>
+</tr>
+<tr>
+<td><code>--list</code></td>
+<td><code>false</code></td>
+<td>List available preset templates and exit</td>
+</tr>
+<tr>
+<td><code>--template</code></td>
+<td><code>basic</code></td>
+<td>Preset template: basic | dev | research | companion-ingest</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-instinct">swarmctl instinct<a class="headerlink" href="#swarmctl-instinct" title="Permanent link">&para;</a></h2>
+<p>Inspect, retire, export, and import learned instincts</p>
+<p>Browse the continuous-learning instinct layer.</p>
+<p>Instincts are confidence-scored learned patterns ("in situation T,
+action A held") mined from the audit spine. They are advisory: surfaced
+as evidence behind their own gates, never auto-applied.</p>
+<p>list / show / retire operate against the running daemon's
+/api/v1/instincts surface. export / import are the cross-deployment
+sharing primitive — export pulls matching instincts into a portable
+frontmatter file; import parses + validates such a file.</p>
+<h2 id="swarmctl-instinct-export">swarmctl instinct export<a class="headerlink" href="#swarmctl-instinct-export" title="Permanent link">&para;</a></h2>
+<p>Export matching instincts to a portable frontmatter file</p>
+<p>Export pulls instincts matching the filter out of the running daemon
+and writes them in the LLD frontmatter shape (a YAML document with a
+top-level instincts: list). The structured trigger is emitted as a
+nested map; it round-trips to the trigger_json column on import.</p>
+<p>swarmctl instinct export --domain recovery -o recovery-instincts.yaml</p>
+<div class="highlight"><pre><span></span><code>swarmctl instinct export [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--domain</code></td>
+<td></td>
+<td>Filter by domain</td>
+</tr>
+<tr>
+<td><code>--min-confidence</code></td>
+<td><code>0</code></td>
+<td>Only instincts with confidence &gt;= this (0-1)</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Filter by project ID</td>
+</tr>
+<tr>
+<td><code>--scope</code></td>
+<td></td>
+<td>Filter by scope</td>
+</tr>
+<tr>
+<td><code>--status</code></td>
+<td></td>
+<td>Filter by status</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>1000</code></td>
+<td>Maximum rows to export (1-1000)</td>
+</tr>
+<tr>
+<td><code>-o</code>, <code>--output</code></td>
+<td></td>
+<td>Write to file instead of stdout</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-instinct-import">swarmctl instinct import<a class="headerlink" href="#swarmctl-instinct-import" title="Permanent link">&para;</a></h2>
+<p>Parse + validate a portable instinct frontmatter file</p>
+<p>Import reads a SWARM instinct frontmatter file (as produced by
+'swarmctl instinct export'), validates every entry, and reports the
+parsed instincts.</p>
+<p>Verify-only: this slice has no instinct-create write path (instincts are
+mined by the daemon's extraction worker, not hand-injected), so import
+never mutates the daemon — it confirms the file is well-formed and shows
+what it carries.</p>
+<div class="highlight"><pre><span></span><code>swarmctl instinct import &lt;file&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Parse + validate only (default behaviour; kept for symmetry)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output the parsed instincts as JSON</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-instinct-list">swarmctl instinct list<a class="headerlink" href="#swarmctl-instinct-list" title="Permanent link">&para;</a></h2>
+<p>List instincts (filterable by domain, scope, project, status, confidence)</p>
+<p>Show instincts from the running daemon, highest confidence first.</p>
+<p>Filters compose with AND. Default limit 100; max 1000.</p>
+<p>swarmctl instinct list --domain recovery --status active
+  swarmctl instinct list --project assistant --min-confidence 0.6</p>
+<div class="highlight"><pre><span></span><code>swarmctl instinct list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--domain</code></td>
+<td></td>
+<td>Filter by domain (recovery|cost|quality|retrieval|workflow)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of table</td>
+</tr>
+<tr>
+<td><code>--min-confidence</code></td>
+<td><code>0</code></td>
+<td>Only instincts with confidence &gt;= this (0-1)</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Filter by project ID</td>
+</tr>
+<tr>
+<td><code>--scope</code></td>
+<td></td>
+<td>Filter by scope (project|global)</td>
+</tr>
+<tr>
+<td><code>--status</code></td>
+<td></td>
+<td>Filter by status (candidate|active|promoted|retired)</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>100</code></td>
+<td>Maximum rows to return (1-1000)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-instinct-retire">swarmctl instinct retire<a class="headerlink" href="#swarmctl-instinct-retire" title="Permanent link">&para;</a></h2>
+<p>Retire an instinct (advisory — it stays for audit)</p>
+<p>Flip an instinct to status=retired. Advisory only: the row stays
+for audit and nothing about agent behaviour changes — it is simply
+removed from the advisory surfaces. Idempotent.</p>
+<div class="highlight"><pre><span></span><code>swarmctl instinct retire &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-instinct-show">swarmctl instinct show<a class="headerlink" href="#swarmctl-instinct-show" title="Permanent link">&para;</a></h2>
+<p>Show a single instinct by id</p>
+<div class="highlight"><pre><span></span><code>swarmctl instinct show &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-key">swarmctl key<a class="headerlink" href="#swarmctl-key" title="Permanent link">&para;</a></h2>
+<p>Manage per-project API keys</p>
+<p>Create, list, rotate, and revoke DB-backed bearer tokens scoped to a
+single project. The token's bound project is the authoritative cost-row
+target — X-Swarmd-Project-ID header overrides are IGNORED for DB-backed
+keys, closing the cross-project billing leak that the legacy static-key
+path allowed.</p>
+<p>The secret returned by 'create' and 'rotate' is shown ONCE on stdout.
+Capture it now; the daemon stores only a sha256 hash and cannot recover
+the raw key later.</p>
+<h2 id="swarmctl-key-create">swarmctl key create<a class="headerlink" href="#swarmctl-key-create" title="Permanent link">&para;</a></h2>
+<p>Mint a new API key for a project</p>
+<p>Generate a new sk-swarmd-<project>.<random> token. The raw secret is printed ONCE.</p>
+<div class="highlight"><pre><span></span><code>swarmctl key create [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--expires</code></td>
+<td></td>
+<td>Expiration (RFC3339 or duration like 30d, 6m, 1y). Empty = never.</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of human text</td>
+</tr>
+<tr>
+<td><code>--name</code></td>
+<td></td>
+<td>Operator-friendly label (required)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-key-list">swarmctl key list<a class="headerlink" href="#swarmctl-key-list" title="Permanent link">&para;</a></h2>
+<p>List API keys for a project (no secrets returned)</p>
+<div class="highlight"><pre><span></span><code>swarmctl key list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of a table</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-key-revoke">swarmctl key revoke<a class="headerlink" href="#swarmctl-key-revoke" title="Permanent link">&para;</a></h2>
+<p>Soft-delete an API key (idempotent)</p>
+<div class="highlight"><pre><span></span><code>swarmctl key revoke &lt;keyID&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-key-rotate">swarmctl key rotate<a class="headerlink" href="#swarmctl-key-rotate" title="Permanent link">&para;</a></h2>
+<p>Mint a new key with the same name + expiry; revoke the old</p>
+<div class="highlight"><pre><span></span><code>swarmctl key rotate &lt;keyID&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of human text</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-key-update">swarmctl key update<a class="headerlink" href="#swarmctl-key-update" title="Permanent link">&para;</a></h2>
+<p>Update an existing key's allowed_workflows list</p>
+<p>Add, remove, or replace workflows on a key's allowed_workflows
+list without minting a new secret. Three modes, mutually exclusive
+per invocation:</p>
+<p>--add-workflow X[,Y]      append X (and Y) to the current list
+  --remove-workflow X[,Y]   drop X (and Y) from the current list
+  --set-workflows X,Y,Z     replace the list wholesale; pass '' to
+                            mean "every workflow the project permits"</p>
+<p>Add / remove modes fetch the current list, mutate, and PUT the
+result — last writer wins on concurrent edits. Set mode is the
+raw PUT.</p>
+<p>Examples:
+  swarmctl key update -p my-project --add-workflow=rag-ingest <keyID>
+  swarmctl key update -p my-project --remove-workflow=doc-review <keyID>
+  swarmctl key update -p my-project --set-workflows=research-gather,rag-ingest <keyID>
+  swarmctl key update -p my-project --set-workflows='' <keyID>   # = every project workflow</p>
+<div class="highlight"><pre><span></span><code>swarmctl key update &lt;keyID&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--add-workflow</code></td>
+<td><code>[]</code></td>
+<td>Workflow ID(s) to append to allowed_workflows. Repeatable / comma-separated.</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of human text</td>
+</tr>
+<tr>
+<td><code>--remove-workflow</code></td>
+<td><code>[]</code></td>
+<td>Workflow ID(s) to drop from allowed_workflows. Repeatable / comma-separated.</td>
+</tr>
+<tr>
+<td><code>--set-workflows</code></td>
+<td><code>[]</code></td>
+<td>Workflow ID(s) replacing allowed_workflows. Empty value (--set-workflows='') clears the list = every project workflow.</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-mcp">swarmctl mcp<a class="headerlink" href="#swarmctl-mcp" title="Permanent link">&para;</a></h2>
+<p>Inspect and call MCP tools wired to a project</p>
+<h2 id="swarmctl-mcp-call">swarmctl mcp call<a class="headerlink" href="#swarmctl-mcp-call" title="Permanent link">&para;</a></h2>
+<p>Invoke one MCP tool directly (debug path; skips the LLM)</p>
+<p>Invoke one MCP tool by its qualified name (mcp__{server}__{tool}) and
+print the result. Arguments are a JSON object supplied via --args. Use
+this to prove a scraper / gmail / github connection is live without
+spinning up an agent container and paying for an LLM call.</p>
+<p>Examples:
+  swarmctl mcp tools -p janka
+  swarmctl mcp servers
+  swarmctl mcp call -p janka --tool mcp__scraper__web_fetch \
+      --args '{"url":"https://example.com","project_id":"janka","allowed_hosts":["*"],"text_only":true,"max_bytes":2000}'</p>
+<div class="highlight"><pre><span></span><code>swarmctl mcp call [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--args</code></td>
+<td><code>{}</code></td>
+<td>Arguments as a JSON object (default "{}")</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output instead of the plain-text response body</td>
+</tr>
+<tr>
+<td><code>--tool</code></td>
+<td></td>
+<td>Qualified tool name: mcp__{server}__{tool} (required)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-mcp-servers">swarmctl mcp servers<a class="headerlink" href="#swarmctl-mcp-servers" title="Permanent link">&para;</a></h2>
+<p>List the daemon-level MCP server inventory</p>
+<p>List every MCP server declared at the daemon level (top-level
+mcp.servers block) with its reachability state and the tool catalog
+each advertises. Listing a server here does NOT grant any project
+access to its tools — that still requires editing the project's own
+mcp.servers list.</p>
+<div class="highlight"><pre><span></span><code>swarmctl mcp servers [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output instead of the table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-mcp-tools">swarmctl mcp tools<a class="headerlink" href="#swarmctl-mcp-tools" title="Permanent link">&para;</a></h2>
+<p>List tools a project's MCP servers advertise</p>
+<div class="highlight"><pre><span></span><code>swarmctl mcp tools [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output instead of the table</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory">swarmctl memory<a class="headerlink" href="#swarmctl-memory" title="Permanent link">&para;</a></h2>
+<p>Operate on project memory chunks</p>
+<p>Administrative commands for per-project RAG memory (project_memory_chunks).</p>
+<h2 id="swarmctl-memory-audit">swarmctl memory audit<a class="headerlink" href="#swarmctl-memory-audit" title="Permanent link">&para;</a></h2>
+<p>List unvalidated chunks (default: unverified + legacy)</p>
+<p>Show chunks awaiting validation review. The default filter targets
+the two states an operator cares about for content quality:
+- unverified: freshly ingested chunks the system hasn't validated yet
+- legacy:     chunks pre-dating the 2026.4 memory-hardening migration</p>
+<p>Pass --status to narrow to a specific subset (e.g. --status legacy to
+hand-audit the legacy backlog). The output is project-scoped so a typo
+can't dump the whole deployment.</p>
+<p>For per-chunk correction, use the dispatcher's memory_correct chat
+tool (faster — embed similarity finds the wrong claim automatically).</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory audit [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--full</code></td>
+<td><code>false</code></td>
+<td>Show full chunk preview (~200 chars) instead of the one-line summary</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of a table</td>
+</tr>
+<tr>
+<td><code>--status</code></td>
+<td><code>[]</code></td>
+<td>Filter by validation_status (repeatable). Default: unverified,legacy.</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>100</code></td>
+<td>Max rows (1-500)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-backfill-titles">swarmctl memory backfill-titles<a class="headerlink" href="#swarmctl-memory-backfill-titles" title="Permanent link">&para;</a></h2>
+<p>Generate LLM topic labels for chunks with NULL content_title</p>
+<p>Walk project_memory_chunks rows where content_title IS NULL and ask the
+configured Titler LLM (memory.titler.model in swarmd.yaml) to generate a
+short topic label for each. The label powers the operator vector-cloud
+UI: chunks without one fall back to their first markdown heading and
+then to the source filename, which is usually noise.</p>
+<p>The daemon does the work — this command just drives it batch by batch
+and prints progress. Safe to interrupt and re-run; it always resumes
+from wherever it left off because the query selects WHERE content_title
+IS NULL.</p>
+<p>Examples:
+  swarmctl memory backfill-titles                    # title everything
+  swarmctl memory backfill-titles --dry-run          # count only
+  swarmctl memory backfill-titles --batch-size 5     # smaller batches
+  swarmctl memory backfill-titles --max 100          # stop after 100</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory backfill-titles [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--batch-size</code></td>
+<td><code>10</code></td>
+<td>Chunks per LLM-call batch (1-100)</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Only report how many chunks are missing a title</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON summary instead of human-readable progress</td>
+</tr>
+<tr>
+<td><code>--max</code></td>
+<td><code>0</code></td>
+<td>Stop after this many chunks have been processed (0 = unlimited)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-cache-stats">swarmctl memory cache-stats<a class="headerlink" href="#swarmctl-memory-cache-stats" title="Permanent link">&para;</a></h2>
+<p>Show LLM cache effectiveness (embedding + response)</p>
+<p>Report row counts, lifetime hits, $ saved, and on-disk size for the
+embedding cache (Phase D — keyed on content_hash+model) and the
+response cache (Phase E — keyed on model+purpose+prompt). Both
+caches must be enabled in the daemon config to populate; either
+or both may render as "disabled" on a fresh deployment.</p>
+<p>Example:
+  swarmctl memory cache-stats
+  swarmctl memory cache-stats --json</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory cache-stats [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output instead of the short-form table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-dlq">swarmctl memory dlq<a class="headerlink" href="#swarmctl-memory-dlq" title="Permanent link">&para;</a></h2>
+<p>Inspect and replay chunks in the memory embed DLQ</p>
+<p>The memory DLQ (memory_embed_dlq table) holds chunks the embed worker
+couldn't store on its own — embedder unavailable, dimension mismatch,
+oversized content, etc. The worker auto-retries rows whose retry_after
+has lapsed; permanently-parked rows (retry_count = -1) need an operator
+to either fix the underlying cause and replay, or delete the chunk.</p>
+<h2 id="swarmctl-memory-dlq-list">swarmctl memory dlq list<a class="headerlink" href="#swarmctl-memory-dlq-list" title="Permanent link">&para;</a></h2>
+<p>List DLQ entries</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory dlq list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of table</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>100</code></td>
+<td>Max rows (1-1000)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Filter by project ID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-dlq-replay">swarmctl memory dlq replay<a class="headerlink" href="#swarmctl-memory-dlq-replay" title="Permanent link">&para;</a></h2>
+<p>Move one or more chunks back to the embed queue</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory dlq replay &lt;chunkId...&gt;
+</code></pre></div>
+<h2 id="swarmctl-memory-epochs">swarmctl memory epochs<a class="headerlink" href="#swarmctl-memory-epochs" title="Permanent link">&para;</a></h2>
+<p>List recent corpus epochs (snapshots) for a project</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory epochs [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--limit</code></td>
+<td><code>20</code></td>
+<td>Max epochs to show</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-evict">swarmctl memory evict<a class="headerlink" href="#swarmctl-memory-evict" title="Permanent link">&para;</a></h2>
+<p>Permanently delete memory chunks (GDPR-style hard eviction)</p>
+<p>Permanently delete the named project_memory_chunks rows. Cascades
+through memory_embed_queue + memory_embed_dlq + entity_mentions (FK
+ON DELETE CASCADE) and nulls out project_memory_quarantine.
+released_chunk_id where it pointed at the evicted chunk. A per-chunk
+tombstone row lands in memory_eviction_audit so the deletion itself
+is auditable (the GDPR compliance hook — deletion without record of
+the deletion is itself non-compliant).</p>
+<p>Eviction is DESTRUCTIVE and IRREVERSIBLE. For "this record is wrong,
+demote it in search" use the soft-refute path (swarmctl via
+memory_correct dispatcher tool) instead. Use evict only for:</p>
+<ul>
+<li>GDPR / privacy-driven "forget this" requests.</li>
+<li>Cleanup of confirmed-bad records that soft-refute leaves
+    cluttering the index.</li>
+<li>Cascading cleanup tied to a hard-deleted source artifact.</li>
+</ul>
+<p>Requires --confirm so it can't fire from a typo. --reason is
+recorded on the audit row; pass a short prose justification
+(e.g. "GDPR DSAR 2026-05-20-12" or "operator: confirmed wrong
+ticker"). Empty --reason still records the row but flags the
+operator: get-it-right-on-the-first-call gap.</p>
+<p>Two selectors (exactly one required):
+  --chunks  explicit comma-separated chunk IDs
+  --scope   every chunk under a repo_scope; --scope="" targets the
+            UNTAGGED (NULL) bucket — e.g. memories ingested before
+            scopes existed. Running without --confirm prints the
+            match count and refuses (a built-in dry run).</p>
+<p>Examples:
+  # explicit IDs:
+  swarmctl memory evict --project assistant \
+      --chunks mc_abc123,mc_def456 \
+      --reason "GDPR DSAR 2026-05-20-12" --confirm</p>
+<p># preview, then evict the untagged (pre-scope) bucket:
+  swarmctl memory evict -p acme --scope ""            # dry run (count only)
+  swarmctl memory evict -p acme --scope "" \
+      --reason "pre-scope cleanup" --confirm</p>
+<p># evict everything under a specific (wrong/dead) scope:
+  swarmctl memory evict -p acme --scope github.com/old/repo --confirm</p>
+<p>Note: the project filter is the IDOR guard. Chunk IDs that exist
+under a different project will be silently ignored — the command
+reports the count actually deleted so an operator who pastes the
+wrong IDs notices the discrepancy.</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory evict [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--chunks</code></td>
+<td></td>
+<td>Comma-separated chunk IDs to evict (one of --chunks / --scope)</td>
+</tr>
+<tr>
+<td><code>--confirm</code></td>
+<td><code>false</code></td>
+<td>REQUIRED safety gate — refuses to delete without this</td>
+</tr>
+<tr>
+<td><code>--reason</code></td>
+<td></td>
+<td>Audit-trail reason recorded on the tombstone row</td>
+</tr>
+<tr>
+<td><code>--scope</code></td>
+<td></td>
+<td>Evict EVERY chunk under this repo_scope (one of --chunks / --scope). Pass --scope="" for the untagged (NULL) bucket — e.g. pre-scope memories.</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-feedback">swarmctl memory feedback<a class="headerlink" href="#swarmctl-memory-feedback" title="Permanent link">&para;</a></h2>
+<p>Show chunk-utility analytics for a project's memory</p>
+<p>Renders memory retrieval feedback for one project: how many chunks
+are indexed, how many were actually retrieved at least once in the
+window, and a sample of unretrieved chunk IDs that are auto-prune
+candidates.</p>
+<p>Sources: project_memory_chunks (indexed) + memory_retrieval_audit
+(per-search rows). Empty values usually mean the audit repo isn't
+wired or the schema migration hasn't run yet — see
+deployments/postgres/schema/001_initial.sql.</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory feedback [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--days</code></td>
+<td><code>30</code></td>
+<td>Window length in days (capped at 365)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>--sample</code></td>
+<td><code>20</code></td>
+<td>Number of unretrieved chunk IDs to print (capped at 200)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-firewall">swarmctl memory firewall<a class="headerlink" href="#swarmctl-memory-firewall" title="Permanent link">&para;</a></h2>
+<p>Policy-Aware Memory Firewall — inspect evaluations + mode</p>
+<p>Read-only operator surface for the Policy-Aware Memory Firewall.</p>
+<p>The firewall attaches policy metadata (provenance / sensitivity /
+expiry / tenant / role / purpose) to every memory chunk and
+emits an audit row per retrieval decision. These verbs surface
+the audit trail + the daemon's current enforcement mode.</p>
+<p>Requires an admin-scoped API key.</p>
+<h2 id="swarmctl-memory-firewall-evaluations">swarmctl memory firewall evaluations<a class="headerlink" href="#swarmctl-memory-firewall-evaluations" title="Permanent link">&para;</a></h2>
+<p>List recent firewall evaluations for a project</p>
+<p>Page through memory_policy_evaluations rows, newest first.</p>
+<p>Filter by decision class to surface a specific compliance pattern:</p>
+<p>swarmctl memory firewall evaluations --project p1 --decision block_role_not_permitted
+  swarmctl memory firewall evaluations --project p1 --decision block_expired --since 2026-05-01
+  swarmctl memory firewall evaluations --project p1 --decision allow --limit 200</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory firewall evaluations [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--csv</code></td>
+<td><code>false</code></td>
+<td>Stream RFC 4180 CSV instead of table (default 30-day window for compliance exports)</td>
+</tr>
+<tr>
+<td><code>--decision</code></td>
+<td></td>
+<td>Filter by decision class (allow | block_expired | block_tenant_mismatch | block_role_not_permitted | block_purpose_not_allowed | block_sensitivity_tier)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of table</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+<tr>
+<td><code>--since</code></td>
+<td></td>
+<td>Lower bound timestamp (YYYY-MM-DD or RFC3339); default last 7 days</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>50</code></td>
+<td>Maximum rows (1-500)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-firewall-mode">swarmctl memory firewall mode<a class="headerlink" href="#swarmctl-memory-firewall-mode" title="Permanent link">&para;</a></h2>
+<p>Print the daemon's current firewall enforcement mode</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory firewall mode [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-firewall-set-policy">swarmctl memory firewall set-policy<a class="headerlink" href="#swarmctl-memory-firewall-set-policy" title="Permanent link">&para;</a></h2>
+<p>Mutate per-chunk firewall policy (admin-only)</p>
+<p>Edit one chunk's firewall policy. Only the flags you pass are
+applied — others stay at their stored values. The policy_digest is
+recomputed server-side; the response carries the new value so you
+can verify the round-trip.</p>
+<p>Examples:</p>
+<p>swarmctl memory firewall set-policy c1 --sensitivity restricted
+  swarmctl memory firewall set-policy c1 --permitted-roles coder,analyst
+  swarmctl memory firewall set-policy c1 --permitted-roles ''           # clear (deny-all)
+  swarmctl memory firewall set-policy c1 --allowed-purposes operational,audit_review
+  swarmctl memory firewall set-policy c1 --expires-at 2026-12-31T23:59:59Z
+  swarmctl memory firewall set-policy c1 --tenant-id tenant-a</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory firewall set-policy &lt;chunk_id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--allowed-purposes</code></td>
+<td></td>
+<td>Comma-separated list (operational|training_data|audit_review|compliance_export); empty = deny-all</td>
+</tr>
+<tr>
+<td><code>--expires-at</code></td>
+<td></td>
+<td>RFC3339 timestamp; empty = clear</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+<tr>
+<td><code>--permitted-roles</code></td>
+<td></td>
+<td>Comma-separated list of allowed roles; empty = deny-all</td>
+</tr>
+<tr>
+<td><code>--sensitivity</code></td>
+<td></td>
+<td>Sensitivity tier (public|internal|confidential|restricted)</td>
+</tr>
+<tr>
+<td><code>--tenant-id</code></td>
+<td></td>
+<td>Tenant ID (empty = clear)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-gist">swarmctl memory gist<a class="headerlink" href="#swarmctl-memory-gist" title="Permanent link">&para;</a></h2>
+<p>Show the periodic LLM-free per-project term-frequency gist</p>
+<p>Print the latest gist (top-N ranked terms by raw frequency over the
+project's chunk corpus) produced by the consolidate worker. The worker
+runs every ~10 minutes by default; a 404 means the loop hasn't fired
+for this project yet.</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory gist &lt;projectID&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of a table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-prune-candidates">swarmctl memory prune-candidates<a class="headerlink" href="#swarmctl-memory-prune-candidates" title="Permanent link">&para;</a></h2>
+<p>List chunks that haven't been retrieved in --since (auto-prune candidates)</p>
+<p>Print chunk IDs that are indexed for --project but haven't appeared in
+any memory_retrieval_audit row since now() - --since. These are the
+candidates for the memory feedback loop's prune signal: chunks that
+the corpus stores but nothing actually reads.</p>
+<p>The command DOES NOT delete anything — it surfaces the list so an
+operator can decide. To actually prune, follow up with project-side
+tooling or 'swarmctl memory wipe' for the whole project.</p>
+<p>Examples:
+  swarmctl memory prune-candidates --project assistant
+  swarmctl memory prune-candidates --project assistant --since 90d
+  swarmctl memory prune-candidates --project assistant --json --limit 500</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory prune-candidates [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of a table</td>
+</tr>
+<tr>
+<td><code>--limit</code></td>
+<td><code>100</code></td>
+<td>Max candidates to return</td>
+</tr>
+<tr>
+<td><code>--since</code></td>
+<td><code>720h0m0s</code></td>
+<td>Retrieval lookback window (default 30d)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-reassign">swarmctl memory reassign<a class="headerlink" href="#swarmctl-memory-reassign" title="Permanent link">&para;</a></h2>
+<p>Move memory chunks from one project to another</p>
+<p>Move all project_memory_chunks rows from --from to --to in a single
+transaction, handling the (project_id, content_hash) unique constraint by
+dropping source rows whose hashes already exist at the destination.</p>
+<p>Example:
+  swarmctl memory reassign --from old-project --to new-project
+  swarmctl memory reassign --from old-project --to new-project --dry-run</p>
+<p>Use --dry-run first to see counts without making changes.</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory reassign [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Report what would change without writing</td>
+</tr>
+<tr>
+<td><code>--from</code></td>
+<td></td>
+<td>source project ID (required)</td>
+</tr>
+<tr>
+<td><code>--to</code></td>
+<td></td>
+<td>destination project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-recheck-urls">swarmctl memory recheck-urls<a class="headerlink" href="#swarmctl-memory-recheck-urls" title="Permanent link">&para;</a></h2>
+<p>HEAD-ping every URL in a project's memory chunks and flag dead ones</p>
+<p>Walk project_memory_chunks for --project, extract URLs from each chunk's
+content, and issue a short-timeout HEAD against every URL. Chunks whose URLs
+are all dead are flagged (is_alive=false); chunks with at least one alive URL
+are confirmed (is_alive=true). Dead URLs stay indexed — they're just flagged
+so consuming agents (researcher, dispatcher) can prefer live hits and warn
+when only dead ones survive.</p>
+<p>The command is the operator-actionable MVP for URL liveness. A periodic
+auto-worker that runs this on a schedule is a follow-up; for now operators
+run this on demand when a recent E2E shows agents pulling stale URLs.</p>
+<p>Examples:
+  swarmctl memory recheck-urls --project assistant
+  swarmctl memory recheck-urls --project assistant --limit 100
+  swarmctl memory recheck-urls --project assistant --timeout 3s --json</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory recheck-urls [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON summary instead of human-readable output</td>
+</tr>
+<tr>
+<td><code>--limit</code></td>
+<td><code>0</code></td>
+<td>Max chunks to check (0 = all)</td>
+</tr>
+<tr>
+<td><code>--timeout</code></td>
+<td><code>5s</code></td>
+<td>Per-URL HEAD timeout (default 5s)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-reclassify">swarmctl memory reclassify<a class="headerlink" href="#swarmctl-memory-reclassify" title="Permanent link">&para;</a></h2>
+<p>Re-derive content_class for unclassified chunks</p>
+<p>Walk every chunk in --project whose content_class is 'unclassified'
+(or empty) and re-derive the class.</p>
+<p>Default (deterministic): apply ClassifyByRole to each chunk's
+producer_role. Chunks whose producer_role is empty or maps to
+ClassUnclassified are left alone.</p>
+<p>--use-llm: chunks the deterministic pass leaves unclassified are
+sent to the LLM classifier (POST /api/v1/memory/reclassify-llm).
+Requires the daemon to be running with memory.classifier.enabled=true
+in config. Costs one LLM call per chunk; the CLI loops batches
+until the queue drains.</p>
+<p>--llm-only: SKIP the deterministic pass entirely. Useful when an
+operator has manually reset chunks to 'unclassified' specifically
+to force LLM reclassification — without this flag the deterministic
+pass would immediately re-stamp them based on producer_role, leaving
+nothing for the LLM to see. Implies --use-llm. Requires the daemon.</p>
+<p>The deterministic mapping is the canonical Phase-2 table
+(researcher → research, analyst → spec, reviewer → decision,
+coder/etc. → commit_msg, tester/etc. → diagnostic, lead → spec,
+vision → external_fetch, strategist → spec, risk-officer → decision,
+executor → commit_msg).</p>
+<p>Examples:
+  swarmctl memory reclassify --project assistant --dry-run
+  swarmctl memory reclassify --project assistant
+  swarmctl memory reclassify --project assistant --use-llm
+  swarmctl memory reclassify --project assistant --llm-only
+  swarmctl memory reclassify --project assistant --use-llm --batch-size 5
+  swarmctl memory reclassify --project assistant --json</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory reclassify [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--batch-size</code></td>
+<td><code>10</code></td>
+<td>Chunks per LLM batch when --use-llm is set (1-50)</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Report what would change without writing</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON summary instead of human-readable output</td>
+</tr>
+<tr>
+<td><code>--llm-only</code></td>
+<td><code>false</code></td>
+<td>Skip the deterministic pass; send every unclassified chunk straight to the LLM classifier. Implies --use-llm.</td>
+</tr>
+<tr>
+<td><code>--use-llm</code></td>
+<td><code>false</code></td>
+<td>After the deterministic pass, send remaining unclassified chunks to the LLM classifier</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-reembed">swarmctl memory reembed<a class="headerlink" href="#swarmctl-memory-reembed" title="Permanent link">&para;</a></h2>
+<p>Re-enqueue every chunk in a project for embedding</p>
+<p>Push every chunk in --project back onto memory_embed_queue so the
+worker re-embeds them with the currently-configured model + dimension.
+Use after upgrading the embedding model or changing
+memory.embedding_dimension in swarmd.yaml.</p>
+<p>The command only inserts queue rows — it doesn't touch existing
+embeddings; the worker overwrites those one batch at a time. Safe to
+interrupt and re-run; queued rows for chunks that already came around
+are skipped via ON CONFLICT.</p>
+<p>By default the command stays attached after enqueueing and reports
+progress every few seconds until the queue drains. Pass --no-watch
+to detach immediately (e.g. for use inside scripts where you want
+the parent process to handle the polling).</p>
+<p>Examples:
+  swarmctl memory reembed --project assistant
+  swarmctl memory reembed --project assistant --no-watch
+  swarmctl memory reembed --project assistant --interval 1s
+  swarmctl memory reembed --project assistant --json</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory reembed [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--interval</code></td>
+<td><code>3s</code></td>
+<td>Progress poll interval (with --watch)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit machine-readable JSON summary (implies --no-watch)</td>
+</tr>
+<tr>
+<td><code>--no-watch</code></td>
+<td><code>false</code></td>
+<td>Detach after enqueueing instead of polling for progress</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-regraph">swarmctl memory regraph<a class="headerlink" href="#swarmctl-memory-regraph" title="Permanent link">&para;</a></h2>
+<p>Re-flag chunks with zero edges so the KG worker reprocesses them</p>
+<p>Re-flag every chunk in --project that produced zero published
+edges, so the daemon's KG extraction worker picks them up on its next
+tick and re-runs the four-stage pipeline (extractor → resolver →
+relationship → validator) with whatever logic is currently shipping.</p>
+<p>Use after a KG-pipeline fix to make existing isolated entities benefit
+from the change. Without this, the fix only helps NEW chunks.</p>
+<p>Idempotent: re-running against the same project re-flags the same
+chunk set minus any that the latest pass DID manage to extract edges
+from. --dry-run reports the candidate count without writing.</p>
+<p>Examples:
+  swarmctl memory regraph --project assistant --dry-run
+  swarmctl memory regraph --project assistant
+  swarmctl memory regraph --project assistant --json</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory regraph [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Report candidate count without writing</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON summary instead of human-readable output</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-rollback">swarmctl memory rollback<a class="headerlink" href="#swarmctl-memory-rollback" title="Permanent link">&para;</a></h2>
+<p>Roll back the corpus to a prior snapshot</p>
+<p>Atomically deactivate every epoch newer than --to and re-activate every
+epoch up to and including --to for the given project. Default is preview;
+pass --apply to execute. Records the action in corpus_rollbacks.</p>
+<p>Example:
+  swarmctl memory rollback --project assistant --to epoch_xxx
+  swarmctl memory rollback --project assistant --to epoch_xxx --apply</p>
+<p>Use the epoch listing first to pick a target:
+  swarmctl memory epochs --project assistant</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory rollback [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--apply</code></td>
+<td><code>false</code></td>
+<td>Actually perform the rollback (default: dry-run)</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+<tr>
+<td><code>--reason</code></td>
+<td></td>
+<td>Optional rollback reason</td>
+</tr>
+<tr>
+<td><code>--to</code></td>
+<td></td>
+<td>Target epoch ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-scope">swarmctl memory scope<a class="headerlink" href="#swarmctl-memory-scope" title="Permanent link">&para;</a></h2>
+<p>Inspect and bulk-edit the per-chunk repo scope</p>
+<p>Two subcommands for managing the per-chunk repo-scope tag. The
+scope partitions a single project's RAG so one operator's many repos
+don't cross-pollute each other's recall results.</p>
+<p>list   — distinct scopes + chunk counts (the namespace inventory)
+  retag  — bulk update chunks from one scope (or NULL) to another</p>
+<p>The chunk-side semantics are:
+  NULL        = uncategorized (untagged chunks; visible under
+                 every scoped recall during the transition window)
+  "*"         = cross-cutting (surfaces in every scoped recall)
+  any string  = repo token (typically a git remote, e.g.
+                 "github.com/acme/myrepo")</p>
+<h2 id="swarmctl-memory-scope-list">swarmctl memory scope list<a class="headerlink" href="#swarmctl-memory-scope-list" title="Permanent link">&para;</a></h2>
+<p>List distinct repo_scope values in a project, with chunk counts</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory scope list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of a table</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-scope-retag">swarmctl memory scope retag<a class="headerlink" href="#swarmctl-memory-scope-retag" title="Permanent link">&para;</a></h2>
+<p>Bulk-promote chunks from one scope to another</p>
+<p>Update the repo scope on every chunk in a project that matches the
+selectors. Typical use is bulk-promoting a backlog of untagged chunks:</p>
+<p># Tag every uncategorized chunk in a project as a given repo:
+  swarmctl memory scope retag -p my-project --to=github.com/acme/myrepo</p>
+<p># Fix a typo across a previously-scoped batch:
+  swarmctl memory scope retag -p my-project --from=github.com/acme/old-repo --to=github.com/acme/myrepo</p>
+<p># Narrow with a source_name LIKE filter (only re-tag a subset):
+  swarmctl memory scope retag -p my-project \
+      --from=                   \
+      --to=github.com/acme/myrepo \
+      --source-name-like='docs-%'</p>
+<p>Defaults: --from is empty (NULL / uncategorized chunks). Pass --from=X
+to migrate a specific scope; pass --source-name-like to narrow.</p>
+<p>Always runs against the live daemon's chunk store.
+Use --dry-run to preview row counts before commit.</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory scope retag [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Show affected count without writing</td>
+</tr>
+<tr>
+<td><code>--from</code></td>
+<td></td>
+<td>Source scope to promote from. Empty / unset = NULL (uncategorized chunks). Pass '*' to retag cross-cutting chunks.</td>
+</tr>
+<tr>
+<td><code>--source-name-like</code></td>
+<td></td>
+<td>Optional source_name SQL LIKE pattern to narrow which chunks get retagged (e.g. 'lld-%').</td>
+</tr>
+<tr>
+<td><code>--to</code></td>
+<td></td>
+<td>Target scope to stamp on matched chunks (required). '*' = cross-cutting; '' is rejected (would un-tag).</td>
+</tr>
+<tr>
+<td><code>--yes</code></td>
+<td><code>false</code></td>
+<td>Skip the interactive confirmation prompt</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-search">swarmctl memory search<a class="headerlink" href="#swarmctl-memory-search" title="Permanent link">&para;</a></h2>
+<p>Search project memory (RAG index)</p>
+<p>Query a project's hybrid RAG index and print the top matches. Wraps
+GET /api/v1/projects/{project}/memory/search. Useful for verifying what
+the researcher role is actually retrieving before you pin a behaviour
+down in prompts.</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory search [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output instead of the short-form table</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>10</code></td>
+<td>Max results (1-50)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+<tr>
+<td><code>-q</code>, <code>--query</code></td>
+<td></td>
+<td>Search query (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-stats">swarmctl memory stats<a class="headerlink" href="#swarmctl-memory-stats" title="Permanent link">&para;</a></h2>
+<p>Show per-project RAG chunk counts and embedding coverage</p>
+<p>Report total chunks, embedded chunks, and embed-queue depth for every
+project (or one, with --project). Embedding coverage = embedded/total;
+100% means the embed worker has caught up. A non-zero queue depth with
+100% coverage means the worker is about to re-embed something (e.g.
+after a model change).</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory stats [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Show only this project (default: all)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-memory-wipe">swarmctl memory wipe<a class="headerlink" href="#swarmctl-memory-wipe" title="Permanent link">&para;</a></h2>
+<p>Delete every memory artifact for one project</p>
+<p>Wipe one project's memory state in a single transaction:</p>
+<ul>
+<li>project_memory_chunks            (chunk content + embeddings)</li>
+<li>memory_embed_queue / dlq         (cascade from chunks)</li>
+<li>knowledge_entities / edges       (KG nodes + relationships, project-scoped)</li>
+<li>entity_mentions                  (cascade from entities + chunks)</li>
+<li>project_memory_quarantine        (rejected chunks; --keep-quarantine to preserve)</li>
+<li>project_ingest_queue             (pending ingest items)</li>
+<li>corpus_epochs / corpus_epochs_active (snapshot history)</li>
+<li>memory_retrieval_audit           (search history; --keep-audit to preserve)</li>
+</ul>
+<p>This is irreversible. Use --dry-run first to see counts, then run
+without it (you'll get a confirmation prompt unless --yes is set).</p>
+<p>Examples:
+  swarmctl memory wipe --project assistant --dry-run
+  swarmctl memory wipe --project assistant
+  swarmctl memory wipe --project assistant --yes --keep-quarantine</p>
+<p>What it does NOT touch:
+  - tasks, executions, artifacts (use those tools separately)
+  - chunks already reassigned to other projects (only filters by project_id)
+  - Source files on disk (this is purely a DB wipe)</p>
+<div class="highlight"><pre><span></span><code>swarmctl memory wipe [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Show counts without deleting</td>
+</tr>
+<tr>
+<td><code>--keep-audit</code></td>
+<td><code>false</code></td>
+<td>Preserve memory_retrieval_audit rows</td>
+</tr>
+<tr>
+<td><code>--keep-graph</code></td>
+<td><code>false</code></td>
+<td>Preserve knowledge_entities / edges / mentions</td>
+</tr>
+<tr>
+<td><code>--keep-quarantine</code></td>
+<td><code>false</code></td>
+<td>Preserve project_memory_quarantine rows</td>
+</tr>
+<tr>
+<td><code>--yes</code></td>
+<td><code>false</code></td>
+<td>Skip confirmation prompt</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-models">swarmctl models<a class="headerlink" href="#swarmctl-models" title="Permanent link">&para;</a></h2>
+<p>Discover and inspect chat-provider models</p>
+<p>List models served by each enabled chat sub-provider.</p>
+<p>The daemon walks every enabled chat sub-provider that supports
+discovery (HTTP gateway, Vertex, claude/codex subscriptions, claude/codex
+CLIs) and aggregates the results. Each row is crosswalked against
+configs/pricing.yaml so you can see at a glance which models have
+explicit cost entries — those without will accrue spend at the
+configured 'default' rate (or zero) until pricing.yaml is updated.</p>
+<p>Sources:
+  live   — fetched from the provider's /v1/models endpoint
+  static — curated list (Claude / Codex OAuth surfaces don't expose
+           a public model list, so the daemon ships a hardcoded one)</p>
+<h2 id="swarmctl-models-list">swarmctl models list<a class="headerlink" href="#swarmctl-models-list" title="Permanent link">&para;</a></h2>
+<p>List discoverable models across all chat sub-providers</p>
+<div class="highlight"><pre><span></span><code>swarmctl models list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>--provider</code></td>
+<td></td>
+<td>Filter to one sub-provider (e.g. vertex, http, claude-subscription)</td>
+</tr>
+<tr>
+<td><code>--unpriced</code></td>
+<td><code>false</code></td>
+<td>Only show models without a pricing.yaml entry</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-project">swarmctl project<a class="headerlink" href="#swarmctl-project" title="Permanent link">&para;</a></h2>
+<p>Inspect projects loaded by the daemon</p>
+<h2 id="swarmctl-project-archive">swarmctl project archive<a class="headerlink" href="#swarmctl-project-archive" title="Permanent link">&para;</a></h2>
+<p>Archive a project (schedule it for deletion after a grace window)</p>
+<p>Flip a project's lifecycle to archived. The daemon stops
+dispatching new work for the project immediately. After the
+grace window elapses the archive-sweeper hard-deletes the
+project YAML, every project-scoped DB row, and every artifact
+blob on disk.</p>
+<p>Unarchive any time during the grace window to restore the
+project. Default grace is 7 days.</p>
+<div class="highlight"><pre><span></span><code>swarmctl project archive &lt;projectId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--grace</code></td>
+<td><code>7d</code></td>
+<td>Grace window before deletion (e.g. 1d, 7d, 30d, 90d, 12h)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+<tr>
+<td><code>--reason</code></td>
+<td></td>
+<td>Optional operator-visible reason recorded in the YAML</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-project-delete-now">swarmctl project delete-now<a class="headerlink" href="#swarmctl-project-delete-now" title="Permanent link">&para;</a></h2>
+<p>Skip the grace window — wipe an archived project on the next sweeper tick</p>
+<p>Rewind the scheduledDeleteAt timestamp to ~now and kick the
+archive-sweeper. The project's YAML, DB rows, and artifact
+blobs are wiped within seconds.</p>
+<p>Requires the project to be archived first (use 'project
+archive' if it isn't). Cannot be undone.</p>
+<div class="highlight"><pre><span></span><code>swarmctl project delete-now &lt;projectId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-project-list">swarmctl project list<a class="headerlink" href="#swarmctl-project-list" title="Permanent link">&para;</a></h2>
+<p>List projects the daemon is serving</p>
+<div class="highlight"><pre><span></span><code>swarmctl project list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-project-show">swarmctl project show<a class="headerlink" href="#swarmctl-project-show" title="Permanent link">&para;</a></h2>
+<p>Show one project's full config</p>
+<div class="highlight"><pre><span></span><code>swarmctl project show &lt;projectId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-project-unarchive">swarmctl project unarchive<a class="headerlink" href="#swarmctl-project-unarchive" title="Permanent link">&para;</a></h2>
+<p>Restore an archived project to active</p>
+<p>Clear the lifecycle block on a previously-archived project.
+The grace window resets, new tasks can dispatch again, and the
+sweeper stops tracking the project for deletion.</p>
+<div class="highlight"><pre><span></span><code>swarmctl project unarchive &lt;projectId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-reminders">swarmctl reminders<a class="headerlink" href="#swarmctl-reminders" title="Permanent link">&para;</a></h2>
+<p>Inspect / cancel scheduled reminders</p>
+<p>List and cancel rows in the dispatcher_reminders ledger.</p>
+<p>Reminders are created by the dispatcher's set_reminder tool when an
+operator asks the bot for one in chat. This CLI exists for terminal-
+only operators (no chat session) and for cleaning up stuck rows.</p>
+<p>Calls are served by the daemon's /api/v1/reminders endpoints.</p>
+<h2 id="swarmctl-reminders-cancel">swarmctl reminders cancel<a class="headerlink" href="#swarmctl-reminders-cancel" title="Permanent link">&para;</a></h2>
+<p>Cancel a pending reminder</p>
+<p>Flip a pending or firing dispatcher_reminders row to status=cancelled.
+The heartbeat will skip it on subsequent ticks.</p>
+<p>Idempotent: cancelling an already-terminal row is a no-op.</p>
+<div class="highlight"><pre><span></span><code>swarmctl reminders cancel &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-reminders-delete">swarmctl reminders delete<a class="headerlink" href="#swarmctl-reminders-delete" title="Permanent link">&para;</a></h2>
+<p>Physically remove a reminder row</p>
+<p>Delete the dispatcher_reminders row entirely. Distinct from
+'cancel' which preserves the row for audit. Intended for operator
+cleanup of stale rows — e.g. reminders that survived a project
+deletion (B-12), recurring rules gone awry, test data lingering.</p>
+<p>The row is gone after this — no recovery, no audit trail of the
+content (only an admin_audit_log entry naming the deletion). Use
+'cancel' instead if you want the row preserved.</p>
+<p>Returns 404 if the id doesn't exist; idempotent for scripts that
+need to ignore "already gone".</p>
+<div class="highlight"><pre><span></span><code>swarmctl reminders delete &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+<tr>
+<td><code>--yes</code></td>
+<td><code>false</code></td>
+<td>Skip the y/N confirmation prompt</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-reminders-list">swarmctl reminders list<a class="headerlink" href="#swarmctl-reminders-list" title="Permanent link">&para;</a></h2>
+<p>List reminders (filterable by status, operator, project)</p>
+<p>Show rows from the dispatcher_reminders ledger, fire-time ascending.</p>
+<p>Filters compose with AND. Default limit 50; max 500.</p>
+<p>Common queries:
+  swarmctl reminders list --status pending
+  swarmctl reminders list --status pending --project assistant
+  swarmctl reminders list --operator telegram:42 --status fired</p>
+<div class="highlight"><pre><span></span><code>swarmctl reminders list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of table</td>
+</tr>
+<tr>
+<td><code>--operator</code></td>
+<td></td>
+<td>Filter by operator id (e.g. 'telegram:42')</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Filter by project id</td>
+</tr>
+<tr>
+<td><code>--status</code></td>
+<td></td>
+<td>Filter by status (pending|firing|fired|cancelled|expired)</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--limit</code></td>
+<td><code>50</code></td>
+<td>Maximum rows to return (1-500)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-reminders-schedule">swarmctl reminders schedule<a class="headerlink" href="#swarmctl-reminders-schedule" title="Permanent link">&para;</a></h2>
+<p>Create a one-shot or recurring reminder from natural language</p>
+<p>Parse free-form text into a reminder via the daemon's
+natural-language parser, confirm, and commit. Supports both
+one-shot ("tomorrow at 9") and recurring ("every Monday at 9am")
+schedules; recurring rows carry a 5-field POSIX cron expression
+and the heartbeat re-arms them after every fire.</p>
+<p>Examples:
+  swarmctl reminders schedule "remind me in 3 hours to check the deploy" \
+      --operator telegram:42 --channel telegram --channel-ref 42
+  swarmctl reminders schedule "every Monday at 9am send the news digest" \
+      --operator telegram:42 --channel telegram --channel-ref 42
+  swarmctl reminders schedule "every weekday morning until June 1 send a tick" \
+      --operator webchat:abc --channel webchat --channel-ref abc \
+      --timezone Europe/Prague</p>
+<p>By default the CLI prints the parsed reminder, asks for y/N confirmation,
+then commits. Pass --yes to skip the prompt (scripted use).</p>
+<div class="highlight"><pre><span></span><code>swarmctl reminders schedule &lt;natural-language text&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--channel-ref</code></td>
+<td></td>
+<td>Channel-specific delivery ref (chat_id, thread, message-id) — required</td>
+</tr>
+<tr>
+<td><code>--channel</code></td>
+<td></td>
+<td>Delivery channel kind (telegram|slack|email|webchat|github) — required</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+<tr>
+<td><code>--operator</code></td>
+<td></td>
+<td>Operator id (e.g. telegram:42) — required</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Project id (optional)</td>
+</tr>
+<tr>
+<td><code>--timezone</code></td>
+<td></td>
+<td>Operator timezone (IANA, e.g. Europe/Prague). Defaults to UTC.</td>
+</tr>
+<tr>
+<td><code>--yes</code></td>
+<td><code>false</code></td>
+<td>Skip the y/N confirmation prompt</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-reminders-show">swarmctl reminders show<a class="headerlink" href="#swarmctl-reminders-show" title="Permanent link">&para;</a></h2>
+<p>Show a single reminder by id</p>
+<div class="highlight"><pre><span></span><code>swarmctl reminders show &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-restore">swarmctl restore<a class="headerlink" href="#swarmctl-restore" title="Permanent link">&para;</a></h2>
+<p>Restore a swarmd deployment from a backup archive</p>
+<p>Restore the database, artifacts directory, project workspaces, and
+configs from an archive produced by 'swarmctl backup'. The daemon
+MUST NOT be running. Requires psql on PATH. Refuses to run unless
+--force is set.</p>
+<p>Two safety gates run before the restore proceeds:
+  1. Schema-presence gate (B-8): if the target already carries a
+     swarmd-owned schema (migrations rows OR canonical PG types like
+     artifact_class), the restore is refused. Override with --clean
+     (drops the schema first) or --allow-non-empty (proceeds anyway,
+     usually fails on CREATE TYPE collisions).
+  2. Row-count gate: refuses targets with non-empty projects/tasks
+     tables. Override with --allow-non-empty.</p>
+<p>Examples:
+  # Fresh target — no swarmd schema yet
+  swarmctl restore --from swarmd-backup-20260501-040000.tgz --force</p>
+<p># Daemon already migrated the target; wipe + restore
+  swarmctl restore --from <archive> --force --clean</p>
+<p># Explicitly accept collisions (rarely useful)
+  swarmctl restore --from <archive> --force --allow-non-empty</p>
+<p>See docs/DEPLOYMENT.md "Backup and Restore" for the full matrix.</p>
+<div class="highlight"><pre><span></span><code>swarmctl restore [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--allow-non-empty</code></td>
+<td><code>false</code></td>
+<td>permit restore into a DB with existing project/task rows</td>
+</tr>
+<tr>
+<td><code>--clean</code></td>
+<td><code>false</code></td>
+<td>DROP SCHEMA public CASCADE before restore — wipes any swarmd schema already loaded on the target</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td><code>false</code></td>
+<td>required — confirms the daemon is stopped and the DB can be overwritten</td>
+</tr>
+<tr>
+<td><code>--from</code></td>
+<td></td>
+<td>archive path (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-retention">swarmctl retention<a class="headerlink" href="#swarmctl-retention" title="Permanent link">&para;</a></h2>
+<p>Preview or apply retention pruning</p>
+<p>Prune historical operational state older than the configured retention
+windows. Defaults to preview mode — counts what would be pruned without
+deleting anything. Add --apply to actually delete.</p>
+<p>Windows default to:
+  task_llm_usage  = 90 days
+  tool_audit_log  = 30 days
+  terminal tasks  = 60 days
+  terminal execs  = 60 days
+  artifacts       = 60 days  (DB + file on disk)</p>
+<p>Minimum floor is 1 day regardless of config. project_memory_chunks is
+NEVER pruned.</p>
+<p>Examples:
+  swarmctl retention                          # preview all projects
+  swarmctl retention --project janka          # preview one project
+  swarmctl retention --project janka --apply  # actually prune janka</p>
+<div class="highlight"><pre><span></span><code>swarmctl retention [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--apply</code></td>
+<td><code>false</code></td>
+<td>actually delete rows (default: preview only)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>emit machine-readable JSON instead of a table</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>operate on a single project (default: all)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill">swarmctl skill<a class="headerlink" href="#swarmctl-skill" title="Permanent link">&para;</a></h2>
+<p>Export, import, and validate portable SWARM-SKILL.md files</p>
+<p>Portable SKILL.md interop layer.</p>
+<p>A SWARM-SKILL.md is a single Markdown file that bundles a workflow
+plus the roles its steps reference, with YAML frontmatter shaped
+after the agentskills.io SKILL.md spec. The file is publishable
+(one file, one curl) and ingestable (one swarmctl call materialises
+the workflow + roles into the deployed config tree).</p>
+<h2 id="swarmctl-skill-export">swarmctl skill export<a class="headerlink" href="#swarmctl-skill-export" title="Permanent link">&para;</a></h2>
+<p>Export a workflow + its roles as a portable SWARM-SKILL.md</p>
+<p>Export packages the named workflow and the roles its steps reference
+into a single SWARM-SKILL.md file with agentskills.io-shaped frontmatter.</p>
+<p>Argument is always <project>/<workflow>:
+  - <project> resolves to that project's swarm (where the roles live);
+  - <workflow> selects which workflow in the registry to bundle.</p>
+<p>The standard flag drops the metadata.swarmd.* block so the resulting
+file is consumable by non-swarmd SKILL.md tools. Standard files are
+one-way: they cannot be re-imported.</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill export &lt;project&gt;/&lt;workflow&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td></td>
+<td>Set the canonical author field</td>
+</tr>
+<tr>
+<td><code>--license</code></td>
+<td></td>
+<td>Set the canonical license field (SPDX identifier)</td>
+</tr>
+<tr>
+<td><code>--standard</code></td>
+<td><code>false</code></td>
+<td>Drop metadata.swarmd.* — produce a clean agentskills.io SKILL.md</td>
+</tr>
+<tr>
+<td><code>--version</code></td>
+<td></td>
+<td>Override the canonical version field</td>
+</tr>
+<tr>
+<td><code>-o</code>, <code>--output</code></td>
+<td></td>
+<td>Write to file instead of stdout</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-import">swarmctl skill import<a class="headerlink" href="#swarmctl-skill-import" title="Permanent link">&para;</a></h2>
+<p>Materialise a SWARM-SKILL.md into the deployed configs tree</p>
+<p>Import a SWARM-SKILL.md, writing a fresh WORKFLOW.md plus the
+merged target swarm.</p>
+<p>A target swarm is required — either the project's swarm (via
+--project), an explicit swarm (--into-swarm), or a brand-new
+swarm to create (--as-swarm).</p>
+<p>Conflict detection is up-front: workflow IDs that already exist or
+role names that collide are surfaced together before any write.</p>
+<p>Use --dry-run to preview the writes without touching disk.</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill import &lt;file&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--as-swarm</code></td>
+<td></td>
+<td>Create a new swarm with the imported roles (overrides --into-swarm)</td>
+</tr>
+<tr>
+<td><code>--configs-dir</code></td>
+<td></td>
+<td>Configs directory (default: SWARMD_CONFIGS_DIR or ~/.config/swarmd/configs)</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Print the would-be writes without touching disk</td>
+</tr>
+<tr>
+<td><code>--into-swarm</code></td>
+<td></td>
+<td>Merge the imported roles into this existing swarm (overrides --project)</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>Resolve target swarm from this project's config</td>
+</tr>
+<tr>
+<td><code>--rename-role</code></td>
+<td><code>[]</code></td>
+<td>Rewrite imported role names; repeat for multiple, format old=new</td>
+</tr>
+<tr>
+<td><code>--rename-workflow</code></td>
+<td></td>
+<td>Change the imported workflow's ID</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-info">swarmctl skill info<a class="headerlink" href="#swarmctl-skill-info" title="Permanent link">&para;</a></h2>
+<p>Show detail about an installed skill</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill info &lt;handle&gt;/&lt;skill&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output as JSON</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-install">swarmctl skill install<a class="headerlink" href="#swarmctl-skill-install" title="Permanent link">&para;</a></h2>
+<p>Install a SWARM-SKILL.md from a local path, HTTPS URL, git URL, or registry handle</p>
+<p>Resolve a source to a SWARM-SKILL.md, materialise its workflow + roles
+into the deployed configs tree under a namespaced ID prefix, and record
+the install in the ledger.</p>
+<p>Source forms:
+  ./skill.md                       local file
+  file:///abs/path/skill.md        local file (URL form)
+  https://example.com/skill.md     direct HTTPS GET
+  git+https://github.com/h/r.git   git clone, picks SKILL.md at root
+  vadim/research                   resolved via the registry index</p>
+<p>--handle / --skill let an operator override the (handle, skill) tuple
+the ledger records when installing from a non-registry source where
+the canonical identity isn't otherwise known.</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill install &lt;source&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Resolve + validate without writing anything</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td><code>false</code></td>
+<td>Re-install (overwrite materialised files) even when the ledger already has this skill</td>
+</tr>
+<tr>
+<td><code>--handle</code></td>
+<td></td>
+<td>Override ledger handle when installing from a non-registry source</td>
+</tr>
+<tr>
+<td><code>--registry</code></td>
+<td></td>
+<td>Override registry index URL (defaults to SWARMD_SKILL_REGISTRY_URL or https://skills.swarmd.dev)</td>
+</tr>
+<tr>
+<td><code>--skill</code></td>
+<td></td>
+<td>Override ledger skill name when installing from a non-registry source</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-list">swarmctl skill list<a class="headerlink" href="#swarmctl-skill-list" title="Permanent link">&para;</a></h2>
+<p>List installed skills</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output as JSON</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-rate">swarmctl skill rate<a class="headerlink" href="#swarmctl-skill-rate" title="Permanent link">&para;</a></h2>
+<p>Submit a rating for an installed skill</p>
+<p>POST {handle, skill, stars} to <registry>/rating.</p>
+<p>Best-effort: a 404 / network failure is reported but doesn't
+return a non-zero exit (so a busted registry doesn't break
+scripts).</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill rate &lt;handle&gt;/&lt;skill&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--registry</code></td>
+<td></td>
+<td>Override registry URL</td>
+</tr>
+<tr>
+<td><code>--stars</code></td>
+<td><code>0</code></td>
+<td>Stars (1-5)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-register">swarmctl skill register<a class="headerlink" href="#swarmctl-skill-register" title="Permanent link">&para;</a></h2>
+<p>Print PR-submit instructions for the registry index</p>
+<p>Build a skills.yaml row for <handle>/<skill> and print
+either:</p>
+<ul>
+<li>The exact YAML snippet to append to the registry repo's
+    skills.yaml (default), so the operator can submit a PR
+    manually; OR</li>
+<li>With --gh, run "gh pr create" against the registry's
+    SkillRegistryRepo (default skills.swarmd.dev). Requires
+    the gh CLI on PATH.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>swarmctl skill register &lt;handle&gt;/&lt;skill&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--description</code></td>
+<td></td>
+<td>One-line description</td>
+</tr>
+<tr>
+<td><code>--gh</code></td>
+<td><code>false</code></td>
+<td>Open a PR via gh CLI instead of printing the snippet</td>
+</tr>
+<tr>
+<td><code>--git-url</code></td>
+<td></td>
+<td>Git URL the new skill installs from (required)</td>
+</tr>
+<tr>
+<td><code>--homepage</code></td>
+<td></td>
+<td>Project homepage URL</td>
+</tr>
+<tr>
+<td><code>--registry</code></td>
+<td></td>
+<td>Override registry index URL</td>
+</tr>
+<tr>
+<td><code>--tag</code></td>
+<td><code>[]</code></td>
+<td>Tag (repeat for multiple)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-remove">swarmctl skill remove<a class="headerlink" href="#swarmctl-skill-remove" title="Permanent link">&para;</a></h2>
+<p>Remove an installed skill (deletes materialised files + ledger row)</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill remove &lt;handle&gt;/&lt;skill&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--keep-mirror</code></td>
+<td><code>false</code></td>
+<td>Keep the source mirror copy (default: delete)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-search">swarmctl skill search<a class="headerlink" href="#swarmctl-skill-search" title="Permanent link">&para;</a></h2>
+<p>Search the registry index</p>
+<p>Fetch <registry>/index.json and filter by query.</p>
+<p>Query matches case-insensitively against handle, skill name,
+description, and tag list. Empty query lists every skill in the
+index. The registry URL defaults to https://skills.swarmd.dev;
+override with --registry or SWARMD_SKILL_REGISTRY_URL.</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill search [&lt;query&gt;] [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output as JSON</td>
+</tr>
+<tr>
+<td><code>--registry</code></td>
+<td></td>
+<td>Override registry index URL</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-update">swarmctl skill update<a class="headerlink" href="#swarmctl-skill-update" title="Permanent link">&para;</a></h2>
+<p>Re-fetch the source for an installed skill and re-materialise</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill update [&lt;handle&gt;/&lt;skill&gt;] [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--all</code></td>
+<td><code>false</code></td>
+<td>Update every installed skill</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-skill-validate">swarmctl skill validate<a class="headerlink" href="#swarmctl-skill-validate" title="Permanent link">&para;</a></h2>
+<p>Validate a SWARM-SKILL.md file or directory of files</p>
+<p>Validate a SWARM-SKILL.md file or every *.md immediate child of a directory.</p>
+<p>Enforces the agentskills.io / SKILL.md frontmatter shape plus the
+swarmd payload consistency rules:
+  - name (required, lowercase-hyphens, ≤64 chars)
+  - description (required, ≤1024 chars)
+  - version (required, semver shape)
+  - author / license (recommended; warnings only)
+  - metadata.swarmd.schema_version must be 1 (when present)
+  - every workflow step has a prompt
+  - every step's role exists in metadata.swarmd.roles
+  - file size ≤100k chars; warns over 15k</p>
+<p>Exit code 0 on clean or warnings-only; 1 on any ERROR finding.</p>
+<div class="highlight"><pre><span></span><code>swarmctl skill validate &lt;path&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--fix</code></td>
+<td><code>false</code></td>
+<td>Print suggested replacements for findings that have a mechanical hint</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output the validation report as JSON</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-swarm">swarmctl swarm<a class="headerlink" href="#swarmctl-swarm" title="Permanent link">&para;</a></h2>
+<p>Inspect swarm definitions</p>
+<h2 id="swarmctl-swarm-list">swarmctl swarm list<a class="headerlink" href="#swarmctl-swarm-list" title="Permanent link">&para;</a></h2>
+<p>List swarms</p>
+<div class="highlight"><pre><span></span><code>swarmctl swarm list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-swarm-show">swarmctl swarm show<a class="headerlink" href="#swarmctl-swarm-show" title="Permanent link">&para;</a></h2>
+<p>Show one swarm's full definition (roles, prompts, permissions)</p>
+<div class="highlight"><pre><span></span><code>swarmctl swarm show &lt;swarmId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-tail">swarmctl tail<a class="headerlink" href="#swarmctl-tail" title="Permanent link">&para;</a></h2>
+<p>Tail task logs (alias for <code>swarmctl task tail</code>)</p>
+<p>Alias for <code>swarmctl task tail</code>. Prints current container logs for a running task, or the latest persisted failure/result excerpt after completion.</p>
+<div class="highlight"><pre><span></span><code>swarmctl tail &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-f</code>, <code>--follow</code></td>
+<td><code>false</code></td>
+<td>Poll and print appended log lines</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--lines</code></td>
+<td><code>200</code></td>
+<td>Number of lines to show</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task">swarmctl task<a class="headerlink" href="#swarmctl-task" title="Permanent link">&para;</a></h2>
+<p>Manage tasks</p>
+<p>Inspect, list, cancel, and retry tasks in the swarmd control plane.</p>
+<h2 id="swarmctl-task-amend">swarmctl task amend<a class="headerlink" href="#swarmctl-task-amend" title="Permanent link">&para;</a></h2>
+<p>Amend the task brief; re-queues from non-running state</p>
+<div class="highlight"><pre><span></span><code>swarmctl task amend &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td></td>
+<td>Author identity (operator handle, defaults to OS user)</td>
+</tr>
+<tr>
+<td><code>--new-brief</code></td>
+<td></td>
+<td>New brief text</td>
+</tr>
+<tr>
+<td><code>--reason</code></td>
+<td></td>
+<td>Optional reason for the amendment</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-answer">swarmctl task answer<a class="headerlink" href="#swarmctl-task-answer" title="Permanent link">&para;</a></h2>
+<p>Reply to an open checkpoint and re-queue the task</p>
+<div class="highlight"><pre><span></span><code>swarmctl task answer &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td></td>
+<td>Author identity (operator handle, defaults to OS user)</td>
+</tr>
+<tr>
+<td><code>--checkpoint</code></td>
+<td></td>
+<td>Checkpoint message id (required)</td>
+</tr>
+<tr>
+<td><code>--choice</code></td>
+<td></td>
+<td>Selected option id (for decision checkpoints)</td>
+</tr>
+<tr>
+<td><code>--content</code></td>
+<td></td>
+<td>Message content</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-cancel">swarmctl task cancel<a class="headerlink" href="#swarmctl-task-cancel" title="Permanent link">&para;</a></h2>
+<p>Cancel a task</p>
+<p>Cancel a task by ID. Only tasks in QUEUED, LEASED, RUNNING, or PENDING status can be cancelled.</p>
+<div class="highlight"><pre><span></span><code>swarmctl task cancel &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-close">swarmctl task close<a class="headerlink" href="#swarmctl-task-close" title="Permanent link">&para;</a></h2>
+<p>Close a task (operator-confirmed terminal)</p>
+<div class="highlight"><pre><span></span><code>swarmctl task close &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td></td>
+<td>Author identity (operator handle, defaults to OS user)</td>
+</tr>
+<tr>
+<td><code>--reason</code></td>
+<td></td>
+<td>Optional closure reason</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-directive">swarmctl task directive<a class="headerlink" href="#swarmctl-task-directive" title="Permanent link">&para;</a></h2>
+<p>Post a directive (course correction) — re-queues the task on non-running state</p>
+<div class="highlight"><pre><span></span><code>swarmctl task directive &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td></td>
+<td>Author identity (operator handle, defaults to OS user)</td>
+</tr>
+<tr>
+<td><code>--content</code></td>
+<td></td>
+<td>Message content</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-explain">swarmctl task explain<a class="headerlink" href="#swarmctl-task-explain" title="Permanent link">&para;</a></h2>
+<p>Generate a post-mortem explanation for a terminal task</p>
+<p>Joins the task's failure context (last error, step outcomes, recent
+tool calls, container log tail) and asks the configured chat
+provider for an operator-friendly paragraph explaining what went
+wrong and what to try next.</p>
+<p>By default prints just the summary paragraph. Pass --show-data to
+also dump the structured inputs the model saw, or --json for the
+full machine-readable response.</p>
+<div class="highlight"><pre><span></span><code>swarmctl task explain &lt;task-id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>--show-data</code></td>
+<td><code>false</code></td>
+<td>Print the structured inputs the model saw alongside the summary</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-get">swarmctl task get<a class="headerlink" href="#swarmctl-task-get" title="Permanent link">&para;</a></h2>
+<p>Get a single task's details</p>
+<p>Fetch one task by ID. Prints the task envelope (status, workflow, timestamps) and, with --json, the full API response including payload.</p>
+<div class="highlight"><pre><span></span><code>swarmctl task get &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-list">swarmctl task list<a class="headerlink" href="#swarmctl-task-list" title="Permanent link">&para;</a></h2>
+<p>List tasks</p>
+<p>List tasks for a project, optionally filtered by status.</p>
+<div class="highlight"><pre><span></span><code>swarmctl task list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--status</code></td>
+<td></td>
+<td>Filter by status (PENDING, QUEUED, RUNNING, COMPLETED, FAILED, CANCELLED)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-message">swarmctl task message<a class="headerlink" href="#swarmctl-task-message" title="Permanent link">&para;</a></h2>
+<p>Post a message to a task's conversation thread</p>
+<div class="highlight"><pre><span></span><code>swarmctl task message &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td></td>
+<td>Author identity (operator handle, defaults to OS user)</td>
+</tr>
+<tr>
+<td><code>--content</code></td>
+<td></td>
+<td>Message content</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-messages">swarmctl task messages<a class="headerlink" href="#swarmctl-task-messages" title="Permanent link">&para;</a></h2>
+<p>List a task's conversation messages</p>
+<div class="highlight"><pre><span></span><code>swarmctl task messages &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-pause">swarmctl task pause<a class="headerlink" href="#swarmctl-task-pause" title="Permanent link">&para;</a></h2>
+<p>Pause an active task</p>
+<div class="highlight"><pre><span></span><code>swarmctl task pause &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-resume">swarmctl task resume<a class="headerlink" href="#swarmctl-task-resume" title="Permanent link">&para;</a></h2>
+<p>Resume a paused task</p>
+<div class="highlight"><pre><span></span><code>swarmctl task resume &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-retry">swarmctl task retry<a class="headerlink" href="#swarmctl-task-retry" title="Permanent link">&para;</a></h2>
+<p>Retry a task</p>
+<p>Retry a failed or cancelled task by ID. The task is re-queued for execution.</p>
+<div class="highlight"><pre><span></span><code>swarmctl task retry &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--reset-attempts</code></td>
+<td><code>false</code></td>
+<td>Reset attempt counter to 1</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-submit">swarmctl task submit<a class="headerlink" href="#swarmctl-task-submit" title="Permanent link">&para;</a></h2>
+<p>Submit a new task</p>
+<p>Submit a new task to a project's queue. The --prompt flag is the
+operator-friendly shortcut for the context.prompt payload shape every
+researcher role already reads; for custom shapes use --context-json.</p>
+<p>Examples:
+  swarmctl task submit -p janka --prompt "Summarise yesterday's scans"
+  swarmctl task submit -p snake --task-type feature --prompt "Implement X"
+  swarmctl task submit -p n8n-agents --workflow adaptive --prompt "..." --priority 10</p>
+<div class="highlight"><pre><span></span><code>swarmctl task submit [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--attach</code></td>
+<td><code>[]</code></td>
+<td>Attach a file as an input artifact (snapshotted + auto-extracted into project memory). Repeatable; e.g. --attach book.epub --attach paper.pdf</td>
+</tr>
+<tr>
+<td><code>--context-json</code></td>
+<td></td>
+<td>Raw JSON object to set as the task context (mutually exclusive with --prompt)</td>
+</tr>
+<tr>
+<td><code>--idempotency-key</code></td>
+<td></td>
+<td>Optional idempotency key; duplicate submits return the existing task</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output the raw API response instead of the human summary</td>
+</tr>
+<tr>
+<td><code>--priority</code></td>
+<td><code>0</code></td>
+<td>Priority 0-100; 0 uses the project's default</td>
+</tr>
+<tr>
+<td><code>--prompt</code></td>
+<td></td>
+<td>Task prompt — shorthand for --context-json '{"prompt":"..."}'</td>
+</tr>
+<tr>
+<td><code>--task-type</code></td>
+<td><code>research</code></td>
+<td>Task type label (free-form; surfaces in <code>task list</code>)</td>
+</tr>
+<tr>
+<td><code>--workflow</code></td>
+<td></td>
+<td>Override the project's default workflow</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-task-tail">swarmctl task tail<a class="headerlink" href="#swarmctl-task-tail" title="Permanent link">&para;</a></h2>
+<p>Tail task logs</p>
+<p>Print current container logs for a running task, or the latest persisted failure/result excerpt after completion.</p>
+<div class="highlight"><pre><span></span><code>swarmctl task tail &lt;taskId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-f</code>, <code>--follow</code></td>
+<td><code>false</code></td>
+<td>Poll and print appended log lines</td>
+</tr>
+<tr>
+<td><code>-n</code>, <code>--lines</code></td>
+<td><code>200</code></td>
+<td>Number of lines to show</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-version">swarmctl version<a class="headerlink" href="#swarmctl-version" title="Permanent link">&para;</a></h2>
+<p>Print the version number</p>
+<div class="highlight"><pre><span></span><code>swarmctl version
+</code></pre></div>
+<h2 id="swarmctl-workflow">swarmctl workflow<a class="headerlink" href="#swarmctl-workflow" title="Permanent link">&para;</a></h2>
+<p>Inspect workflow definitions</p>
+<h2 id="swarmctl-workflow-list">swarmctl workflow list<a class="headerlink" href="#swarmctl-workflow-list" title="Permanent link">&para;</a></h2>
+<p>List workflows</p>
+<div class="highlight"><pre><span></span><code>swarmctl workflow list [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-workflow-show">swarmctl workflow show<a class="headerlink" href="#swarmctl-workflow-show" title="Permanent link">&para;</a></h2>
+<p>Show one workflow's full definition</p>
+<div class="highlight"><pre><span></span><code>swarmctl workflow show &lt;workflowId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output in JSON format</td>
+</tr>
+</tbody>
+</table>
+<h2 id="swarmctl-workflow-validate">swarmctl workflow validate<a class="headerlink" href="#swarmctl-workflow-validate" title="Permanent link">&para;</a></h2>
+<p>Validate a WORKFLOW.md file or a directory of workflows against the SKILL.md shape</p>
+<p>Validate a WORKFLOW.md file or every *.md immediate child of a directory.</p>
+<p>Enforces the agentskills.io / SKILL.md frontmatter shape:
+  - name (required, lowercase-hyphens, ≤64 chars)
+  - description (required, ≤1024 chars)
+  - version (required, semver shape)
+  - author / license (recommended; warnings only)
+  - metadata.related_skills (optional list of name-shaped entries)
+  - file size ≤100k chars; warns over 15k
+  - body must have a '## Prompts' section when frontmatter
+    declares agent steps with no inline 'prompt:'</p>
+<p>Exit code 0 on clean or warnings-only; 1 on any ERROR finding.</p>
+<p>The --fix flag prints suggested replacements inline; writing
+them back is out of scope and remains a manual edit.</p>
+<div class="highlight"><pre><span></span><code>swarmctl workflow validate &lt;path&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--fix</code></td>
+<td><code>false</code></td>
+<td>Print suggested fixes for findings that have a mechanical hint</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output the validation report as JSON</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>

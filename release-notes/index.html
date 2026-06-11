@@ -1,0 +1,1368 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://docs.swarmd.dev/release-notes/">
+      
+      
+        <link rel="prev" href="../troubleshooting/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Release Notes - swarmd documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#release-notes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="swarmd documentation" class="md-header__button md-logo" aria-label="swarmd documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            swarmd documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Release Notes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="swarmd documentation" class="md-nav__button md-logo" aria-label="swarmd documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    swarmd documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Getting Started
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../concepts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/conversation-channels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conversation Channels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/workflows-and-llm-controls/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workflows and LLM Controls
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/cost-and-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost and Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/storage-and-retention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage and Retention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/trading-setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trading Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/instinct/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instinct layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/memory-rag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory &amp; RAG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/swarmctl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Swarmctl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Release Notes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#202659" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.9
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202658" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202657" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202656" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202655" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202654" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202653" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202652" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202651" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202650" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earlier-releases-20264x" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earlier releases (2026.4.x)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#202659" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.9
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202658" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202657" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202656" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202655" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202654" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202653" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202652" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202651" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202650" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.5.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earlier-releases-20264x" class="md-nav__link">
+    <span class="md-ellipsis">
+      Earlier releases (2026.4.x)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h1>
+<p>A curated, reverse-chronological summary of user-facing changes in swarmd.
+Each entry highlights what changed for you as an operator — new features,
+behavior changes, and notable fixes. Internal-only changes are omitted.</p>
+<div class="admonition tip">
+<p class="admonition-title">Upgrading</p>
+<p>New configuration keys are additive and default to the previous behavior,
+so upgrades generally require no config changes. Always take a backup
+before upgrading. A few releases ask you to restart the daemon to pick up
+new behavior; those are called out below.</p>
+</div>
+<hr />
+<h2 id="202659">2026.5.9<a class="headerlink" href="#202659" title="Permanent link">&para;</a></h2>
+<p>The conversational <strong>project setup wizard</strong> now works end-to-end: start a new
+project from a guided chat, resume or cancel a draft, and have it created and
+running just like a template-based project. You can pin the wizard to its own
+model independently of your default chat model.</p>
+<p>Other highlights:</p>
+<ul>
+<li><strong>Official packages and binaries.</strong> Releases now ship prebuilt <code>swarmd</code> and
+  <code>swarmctl</code> binaries (Linux amd64 and arm64) plus RPM and DEB packages,
+  attached to each GitHub release.</li>
+<li><strong>Stronger default network isolation for agents.</strong> New installs default to a
+  zero-egress agent network: agents reach swarmd for model and tool access but
+  cannot reach the internet. Roles that genuinely need outbound access can opt
+  in per role.</li>
+<li><strong>More resilient chat under rate limits.</strong> The model client now honors
+  rate-limit retry hints and backs off automatically instead of failing the
+  request.</li>
+<li><strong>Chat history loads on page open.</strong> The web chat view now shows your prior
+  conversation immediately instead of starting blank.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Structured output is model-dependent</p>
+<p>Features that need strictly structured model output (such as the wizard)
+are most reliable on models that honor structured-output requests. The
+wizard tolerates models that reply in prose, so it stays usable regardless.</p>
+</div>
+<h2 id="202658">2026.5.8<a class="headerlink" href="#202658" title="Permanent link">&para;</a></h2>
+<p>Two operator-facing capabilities landed alongside a large stability pass:</p>
+<ul>
+<li><strong>Counterfactual replay.</strong> Re-run any past task with a single variable
+  changed — a different model or a different prompt — and compare the original
+  and the new run side by side, including cost, latency, and per-step
+  differences. Available from the command line and the web UI.</li>
+<li><strong>Memory policy controls.</strong> Every memory item now carries policy metadata
+  (sensitivity, provenance, expiry, and access scope), and every retrieval is
+  recorded for audit. Three modes let you choose how strictly policies are
+  enforced: off, advisory (the default — nothing is blocked, but everything is
+  logged), or enforce. The default is safe to adopt without changing existing
+  workflows.</li>
+</ul>
+<p>This release also closed a broad set of reliability and security fixes across
+task execution, scheduling, memory, and inbound channels.</p>
+<h2 id="202657">2026.5.7<a class="headerlink" href="#202657" title="Permanent link">&para;</a></h2>
+<p>A large <strong>user-experience release</strong>.</p>
+<ul>
+<li><strong>New landing page</strong> with at-a-glance tiles (active tasks, active chats,
+  today's spend, next autonomy run) and a cross-project activity feed.</li>
+<li><strong>Project template gallery.</strong> Browse a catalog of starter projects in the web
+  UI (or via <code>swarmctl init project --template &lt;slug&gt;</code>) and create one from a
+  simple form, filterable by domain.</li>
+<li><strong>Per-project home page</strong> with a readable summary card, autonomy status, and
+  an effective data-retention panel that shows your actual pruning windows.</li>
+<li><strong>Friendlier error messages.</strong> Failed tasks now show a plain-language banner
+  explaining what went wrong, with the technical detail tucked underneath.</li>
+<li><strong>Retry a failed task from the step that failed</strong>, directly in the UI.</li>
+<li><strong>Smarter memory recall</strong>, including optional date-range filtering ("what did
+  we discuss last week") and a resilience cascade so memory search keeps working
+  even if part of the search backend hiccups.</li>
+<li><strong>High-availability friendliness.</strong> If you run more than one swarmd instance,
+  polling channels now coordinate so a single inbound message is handled once,
+  not duplicated.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Optional new settings</p>
+<p>The client request timeout is now configurable for long-running commands,
+and projects gain optional <code>description</code> and retention settings that surface
+on the new home page.</p>
+</div>
+<h2 id="202656">2026.5.6<a class="headerlink" href="#202656" title="Permanent link">&para;</a></h2>
+<p>A guardrails and memory-quality hardening release.</p>
+<ul>
+<li><strong>Runaway-loop protection for adaptive workflows.</strong> A misconfigured router
+  can no longer spawn an endless chain of child tasks; routing now caps its
+  depth and fails clearly instead of looping. If a workflow previously relied on
+  a silent fallback, review your candidate-workflow list (see the behavior note
+  below).</li>
+<li><strong>More reliable memory classification</strong>, including an optional background pass
+  that keeps newly ingested memory labeled without manual cleanup.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Behavior change</p>
+<p>Adaptive routing no longer silently falls back to your project's default
+workflow when a step picks an out-of-list choice — it now fails loudly. If
+you depended on the old fallback, tighten your candidate list or disable
+strict mode. Restart the daemon to pick up the new behavior.</p>
+</div>
+<h2 id="202655">2026.5.5<a class="headerlink" href="#202655" title="Permanent link">&para;</a></h2>
+<p>A memory-quality release focused on retrieval precision.</p>
+<ul>
+<li><strong>Better recall</strong> through a set of ranking improvements (richer embedding
+  context, reranking, result diversification, and time-to-live enforcement) that
+  surface more relevant memory without any change to how you use it.</li>
+<li><strong>New memory maintenance commands</strong>: reclassify, re-embed (for model
+  upgrades), and list prune candidates.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>reclassify<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+swarmctl<span class="w"> </span>memory<span class="w"> </span>reembed<span class="w">     </span>--project<span class="w"> </span>&lt;project&gt;
+swarmctl<span class="w"> </span>memory<span class="w"> </span>prune-candidates<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+</code></pre></div>
+<h2 id="202654">2026.5.4<a class="headerlink" href="#202654" title="Permanent link">&para;</a></h2>
+<p>A reliability release.</p>
+<ul>
+<li><strong>Native AWS Bedrock support</strong> for chat and agents, removing a translation
+  hop for Bedrock-hosted models.</li>
+<li><strong>Sturdier scheduling and recovery.</strong> Interrupted tasks recover faster,
+  models that get stuck producing the wrong output shape are stopped instead of
+  burning budget, and lease handling under heavy load is more robust.</li>
+<li><strong>Model-quality visibility.</strong> New dashboards surface which models are
+  producing malformed output and how often retries recover, so you can spot a
+  poorly behaving model and swap it.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Upgrade</p>
+<p>Restart the daemon after upgrading. If you build the agent image yourself,
+rebuild it to pick up this release's runtime improvements.</p>
+</div>
+<h2 id="202653">2026.5.3<a class="headerlink" href="#202653" title="Permanent link">&para;</a></h2>
+<p>A trading-reliability and output-correctness release.</p>
+<ul>
+<li><strong>Declarative output schemas.</strong> Agent roles can declare the exact shape of
+  their output in one place, eliminating a whole class of "valid output, wrong
+  shape" failures. <code>swarmctl doctor</code> flags mismatches before they cause a
+  failed run.</li>
+<li><strong>Trading safety controls</strong>, including stop-loss bounds, a daily-loss circuit
+  breaker, and a market-hours guard that skips ticks outside regular trading
+  hours (saving the cost of pointless out-of-hours runs).</li>
+<li><strong>Security hardening</strong> across container isolation, secret detection, webhook
+  authentication, and API input validation.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Upgrade</p>
+<p>Restart the daemon to activate the new schema enforcement and trading
+settings. Review your trading caps — the new limits ship with conservative
+defaults you may want to tune.</p>
+</div>
+<h2 id="202652">2026.5.2<a class="headerlink" href="#202652" title="Permanent link">&para;</a></h2>
+<p>A trading reliability and observability release.</p>
+<ul>
+<li><strong>Atomic bracket orders</strong> close the window where an entry order could fill
+  before its protective stop was placed.</li>
+<li><strong>Per-task post-mortem explainer.</strong> Failed tasks now include a plain-language
+  paragraph explaining why they failed, alongside the step outcomes and audit
+  trail.</li>
+<li><strong>Security fixes</strong>, including requiring authentication on the web UI subtree
+  and closing a cross-project access path.</li>
+</ul>
+<h2 id="202651">2026.5.1<a class="headerlink" href="#202651" title="Permanent link">&para;</a></h2>
+<p>The first <strong>autonomous trading</strong> capability: an end-to-end broker integration
+with position-aware stop-loss enforcement, technical-analysis indicators, and a
+news/fundamentals source, wired into a strategist → risk-officer → executor
+workflow. See <a href="../guides/trading-setup/">Trading setup</a> to configure it.</p>
+<p>Cancelled tasks now show their accumulated LLM cost in the UI, and autonomy's
+duplicate-suppression now matches by topic similarity rather than exact text.</p>
+<h2 id="202650">2026.5.0<a class="headerlink" href="#202650" title="Permanent link">&para;</a></h2>
+<p>The <strong>trustworthy-output</strong> release. A multi-phase hallucination-detection
+pipeline now runs across agents, chat replies, and the autonomy loop, flagging
+unsupported claims (a quoted URL that was never fetched, a referenced file that
+was never produced, a numeric claim with no source) and either failing the step
+for retry or surfacing the finding in the UI.</p>
+<p>Also in this release: multimodal task input (image uploads through chat), an
+additional first-class chat provider, secret detection and redaction at every
+persistence point, and a larger operator UI (spend deep-dive, live tool-call
+audit stream, routing-decision panel).</p>
+<hr />
+<h2 id="earlier-releases-20264x">Earlier releases (2026.4.x)<a class="headerlink" href="#earlier-releases-20264x" title="Permanent link">&para;</a></h2>
+<p>The 2026.4 series built swarmd from its first stable release into a capable
+multi-agent platform. Notable user-facing milestones:</p>
+<ul>
+<li><strong>2026.4.14</strong> — A typed agent tool set (<code>file_edit</code>, <code>grep</code>, <code>glob</code>, and
+  typed git inspection tools) with per-role allowlists; live task-log tailing
+  in the CLI and UI; signed webhook ingress with audit history; a project
+  onboarding wizard; and a browser-based project YAML editor with validation.</li>
+<li><strong>2026.4.13</strong> — Direct-API access to subscription-billed model backends
+  (no CLI subprocess), a multi-backend chat router, a headless-browser fetch
+  capability for agents, and an expanded <code>swarmctl doctor</code> with new schema,
+  security, cost, and hygiene checks.</li>
+<li><strong>2026.4.12</strong> — Per-task cost drill-down, local-timezone budgets, tool-call
+  rate limits, a per-project data-retention sweeper, and <code>swarmctl backup</code> /
+  <code>restore</code>.</li>
+<li><strong>2026.4.11</strong> — First-class <strong>LLM spend tracking</strong>: per-step token and cost
+  metrics, a per-project spend panel (24h / 7d / 30d / month-to-date with a
+  per-role breakdown), and soft/hard USD budgets enforced before work starts.
+  Introduced "effective cost" (spend per successful step) so a cheap-but-flaky
+  model stops looking cheap. See <a href="../guides/cost-and-caching/">Cost and caching</a>.</li>
+<li><strong>2026.4.10</strong> — Per-user channel project scoping enforced on every action,
+  per-project tool servers reached through the daemon (no per-agent
+  credentials), and a deterministic git-backed workspace so "task completed"
+  reliably means "output was saved."</li>
+<li><strong>2026.4.9</strong> — Per-task git worktree isolation, a swarm-agnostic adaptive
+  workflow that works with any swarm, a runtime autopilot on/off toggle, and
+  lenient registry loading so one broken project no longer takes down the rest.</li>
+<li><strong>2026.4.8</strong> — Per-role model overrides applied correctly to warm containers,
+  an expanded <code>swarmctl doctor</code>, and additional conversation session controls.</li>
+<li><strong>2026.4.7</strong> — <strong>First stable release.</strong> The autonomous development pipeline,
+  durable task queue and scheduler, the multi-step workflow engine, the
+  server-rendered web dashboard, and the conversational bot interface.</li>
+</ul>
+<hr />
+<p>For configuration details on anything mentioned here, see
+<a href="../reference/configuration/">Configuration reference</a> and the
+<a href="../guides/">Guides</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>
