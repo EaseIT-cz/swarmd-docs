@@ -1306,7 +1306,7 @@ relay CA.</p>
 <p>All four <code>relay_ingress</code> keys are required together, and the block is only valid
 on a node that runs workers — the daemon refuses to start otherwise.</p>
 <h3 id="3-configure-the-dmz-webhook-node-client-side">3. Configure the DMZ webhook node (client side)<a class="headerlink" href="#3-configure-the-dmz-webhook-node-client-side" title="Permanent link">&para;</a></h3>
-<p>The webhook node is the public edge. Three things matter:</p>
+<p>The webhook node is the public edge. Four things matter:</p>
 <ul>
 <li><code>node.profile: webhook</code> makes it a relay node.</li>
 <li><code>node.relay.*</code> points it at the job tier's mTLS listener. <strong>All four of
@@ -1317,6 +1317,11 @@ on a node that runs workers — the daemon refuses to start otherwise.</p>
   at a small local SQLite file keeps the DMZ box free of any database
   credential; leaving the default (<code>postgres</code>) would make a DMZ node with no
   route to the database fail to start.</li>
+<li><code>api.auth_enabled: false</code>. API authentication is <strong>on by default</strong>, and when it
+  is on the daemon requires <code>api.api_keys</code> — so a config without keys fails to
+  start. A webhook node serves no bearer-authenticated API (only HMAC-verified
+  webhook ingress), so turn auth off here rather than placing an API key on the
+  public box. Keep your API keys on the UI/job tier, where the API is served.</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># DMZ webhook node config</span>
 <span class="nt">server</span><span class="p">:</span>
@@ -1335,6 +1340,9 @@ on a node that runs workers — the daemon refuses to start otherwise.</p>
 <span class="nt">database</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
 <span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/relay.db</span><span class="w">    </span><span class="c1"># must be on a writable mount</span>
+
+<span class="nt">api</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                 </span><span class="c1"># no bearer-auth API on a webhook node; ingress is HMAC-verified</span>
 </code></pre></div>
 <h3 id="4-run-the-webhook-node">4. Run the webhook node<a class="headerlink" href="#4-run-the-webhook-node" title="Permanent link">&para;</a></h3>
 <p>Use the <code>thin</code> container image for a webhook node — it carries no executor and
@@ -1398,6 +1406,11 @@ fault.</p>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Won't start: "api.api_keys is required when api.auth_enabled is true"</td>
+<td>API auth is on by default and a webhook node has no <code>api_keys</code></td>
+<td>Set <code>api.auth_enabled: false</code> on the webhook node; keep API keys on the UI/job tier.</td>
+</tr>
 <tr>
 <td>Webhook node won't start, fails on database connect</td>
 <td><code>database.driver</code> left at the <code>postgres</code> default with no route to the database</td>
