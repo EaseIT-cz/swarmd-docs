@@ -698,6 +698,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -899,6 +908,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -922,6 +940,13 @@ carry context forward across tasks, with caches that cut cost and latency.</p>
 </code></pre></div>
 <p>This enables the <code>memory.*</code> gates — LLM consolidation, response cache, and
 embedding cache — and restarts the daemon during an idle window.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>The doctor checks that the embedding model is actually reachable. When
+<code>memory.embedding_endpoint</code> is set, it probes that endpoint directly (the
+endpoint embeddings really use — typically a local Ollama / TEI server),
+not the chat-provider model catalog. If no embedding endpoint is
+configured, embeddings fall back to the agent/chat endpoint and the chat
+catalog is checked instead.</p>
 
 
 
