@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/guides/trading-setup/">
+        <link rel="canonical" href="https://docs.swarmd.dev/guides/clustering/">
       
       
-        <link rel="prev" href="../clustering/">
+        <link rel="prev" href="../storage-and-retention/">
       
       
-        <link rel="next" href="../../features/instinct/">
+        <link rel="next" href="../trading-setup/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Trading Setup - swarmd documentation</title>
+        <title>Clustering and the DMZ Webhook Relay - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#trading-setup" class="md-skip">
+        <a href="#clustering-and-the-dmz-webhook-relay" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Trading Setup
+              Clustering and the DMZ Webhook Relay
             
           </span>
         </div>
@@ -531,27 +531,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../clustering/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Clustering and the DMZ Webhook Relay
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -568,7 +547,7 @@
           
   
   <span class="md-ellipsis">
-    Trading Setup
+    Clustering and the DMZ Webhook Relay
   </span>
   
 
@@ -579,7 +558,7 @@
         
   
   <span class="md-ellipsis">
-    Trading Setup
+    Clustering and the DMZ Webhook Relay
   </span>
   
 
@@ -601,109 +580,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-the-stack-contains" class="md-nav__link">
+  <a href="#when-to-cluster" class="md-nav__link">
     <span class="md-ellipsis">
-      What the stack contains
+      When to cluster
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-enable-a-paper-account-at-ibkr" class="md-nav__link">
+  <a href="#node-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 1 — enable a paper account at IBKR
+      Node profiles
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-stage-credentials" class="md-nav__link">
+  <a href="#reference-topology" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 2 — stage credentials
+      Reference topology
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-confirm-the-connection" class="md-nav__link">
+  <a href="#walkthrough-set-up-a-dmz-webhook-relay" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 3 — confirm the connection
+      Walkthrough: set up a DMZ webhook relay
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-wire-it-into-a-project" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 4 — wire it into a project
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-5-validate-before-letting-agents-trade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 5 — validate before letting agents trade
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 5 — validate before letting agents trade">
+    <nav class="md-nav" aria-label="Walkthrough: set up a DMZ webhook relay">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configure-the-watchlist-and-market-data" class="md-nav__link">
+  <a href="#1-generate-the-mutual-tls-material" class="md-nav__link">
     <span class="md-ellipsis">
-      Configure the watchlist and market data
+      1. Generate the mutual-TLS material
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#verify-reads-then-verify-writes-are-blocked" class="md-nav__link">
+  <a href="#2-configure-the-job-tier-server-side" class="md-nav__link">
     <span class="md-ellipsis">
-      Verify reads, then verify writes are blocked
+      2. Configure the job tier (server side)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#place-one-tiny-order-by-hand" class="md-nav__link">
+  <a href="#3-configure-the-dmz-webhook-node-client-side" class="md-nav__link">
     <span class="md-ellipsis">
-      Place one tiny order by hand
+      3. Configure the DMZ webhook node (client side)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#confirm-the-caps-actually-bite" class="md-nav__link">
+  <a href="#4-run-the-webhook-node" class="md-nav__link">
     <span class="md-ellipsis">
-      Confirm the caps actually bite
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#survive-a-forced-reconnect" class="md-nav__link">
-    <span class="md-ellipsis">
-      Survive a forced reconnect
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-supervised-for-a-day-with-tight-caps" class="md-nav__link">
-    <span class="md-ellipsis">
-      Run supervised for a day with tight caps
+      4. Run the webhook node
     </span>
   </a>
   
@@ -715,45 +658,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stop-loss-enforcement" class="md-nav__link">
+  <a href="#validate-and-observe" class="md-nav__link">
     <span class="md-ellipsis">
-      Stop-loss enforcement
+      Validate and observe
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#kill-switch" class="md-nav__link">
+  <a href="#operating-notes" class="md-nav__link">
     <span class="md-ellipsis">
-      Kill switch
+      Operating notes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#live-promotion" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      Live promotion
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-note-on-market-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      A note on market data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-to-go-next" class="md-nav__link">
-    <span class="md-ellipsis">
-      Where to go next
+      Troubleshooting
     </span>
   </a>
   
@@ -763,6 +688,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trading-setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trading Setup
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1083,109 +1029,73 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-the-stack-contains" class="md-nav__link">
+  <a href="#when-to-cluster" class="md-nav__link">
     <span class="md-ellipsis">
-      What the stack contains
+      When to cluster
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-1-enable-a-paper-account-at-ibkr" class="md-nav__link">
+  <a href="#node-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 1 — enable a paper account at IBKR
+      Node profiles
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-2-stage-credentials" class="md-nav__link">
+  <a href="#reference-topology" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 2 — stage credentials
+      Reference topology
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-3-confirm-the-connection" class="md-nav__link">
+  <a href="#walkthrough-set-up-a-dmz-webhook-relay" class="md-nav__link">
     <span class="md-ellipsis">
-      Step 3 — confirm the connection
+      Walkthrough: set up a DMZ webhook relay
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-4-wire-it-into-a-project" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 4 — wire it into a project
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#step-5-validate-before-letting-agents-trade" class="md-nav__link">
-    <span class="md-ellipsis">
-      Step 5 — validate before letting agents trade
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Step 5 — validate before letting agents trade">
+    <nav class="md-nav" aria-label="Walkthrough: set up a DMZ webhook relay">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#configure-the-watchlist-and-market-data" class="md-nav__link">
+  <a href="#1-generate-the-mutual-tls-material" class="md-nav__link">
     <span class="md-ellipsis">
-      Configure the watchlist and market data
+      1. Generate the mutual-TLS material
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#verify-reads-then-verify-writes-are-blocked" class="md-nav__link">
+  <a href="#2-configure-the-job-tier-server-side" class="md-nav__link">
     <span class="md-ellipsis">
-      Verify reads, then verify writes are blocked
+      2. Configure the job tier (server side)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#place-one-tiny-order-by-hand" class="md-nav__link">
+  <a href="#3-configure-the-dmz-webhook-node-client-side" class="md-nav__link">
     <span class="md-ellipsis">
-      Place one tiny order by hand
+      3. Configure the DMZ webhook node (client side)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#confirm-the-caps-actually-bite" class="md-nav__link">
+  <a href="#4-run-the-webhook-node" class="md-nav__link">
     <span class="md-ellipsis">
-      Confirm the caps actually bite
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#survive-a-forced-reconnect" class="md-nav__link">
-    <span class="md-ellipsis">
-      Survive a forced reconnect
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#run-supervised-for-a-day-with-tight-caps" class="md-nav__link">
-    <span class="md-ellipsis">
-      Run supervised for a day with tight caps
+      4. Run the webhook node
     </span>
   </a>
   
@@ -1197,45 +1107,27 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#stop-loss-enforcement" class="md-nav__link">
+  <a href="#validate-and-observe" class="md-nav__link">
     <span class="md-ellipsis">
-      Stop-loss enforcement
+      Validate and observe
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#kill-switch" class="md-nav__link">
+  <a href="#operating-notes" class="md-nav__link">
     <span class="md-ellipsis">
-      Kill switch
+      Operating notes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#live-promotion" class="md-nav__link">
+  <a href="#troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      Live promotion
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#a-note-on-market-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      A note on market data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#where-to-go-next" class="md-nav__link">
-    <span class="md-ellipsis">
-      Where to go next
+      Troubleshooting
     </span>
   </a>
   
@@ -1256,236 +1148,288 @@
                   
 
 
-<h1 id="trading-setup">Trading Setup<a class="headerlink" href="#trading-setup" title="Permanent link">&para;</a></h1>
-<p>swarmd can connect to an Interactive Brokers (IBKR) account and let agents
-read market data and place orders through a safety layer that enforces caps
-and mandatory stop-losses. This guide walks you through bringing up the
-trading stack against a <strong>paper</strong> (simulated) account, validating it, and the
-discipline required before you ever consider live trading.</p>
-<div class="admonition danger">
-<p class="admonition-title">Read this before you connect a live account</p>
-<p>Autonomous trading places real orders with real money. The setup below is
-deliberately staged: paper first, manual validation second, supervised
-autonomy third, and live only after a long, clean soak. Do not skip ahead.
-Start every deployment in paper mode.</p>
-</div>
+<h1 id="clustering-and-the-dmz-webhook-relay">Clustering and the DMZ Webhook Relay<a class="headerlink" href="#clustering-and-the-dmz-webhook-relay" title="Permanent link">&para;</a></h1>
+<p>swarmd runs as a single all-in-one daemon by default, and that is the right
+shape for almost every deployment. When you need to scale execution
+independently or isolate public webhook ingress in a DMZ, you can split swarmd
+into specialised <strong>node roles</strong> behind a shared database and object store.</p>
+<p>This guide walks through the role model and a complete setup of the most common
+multi-node pattern: a DMZ webhook node that forwards events over mutual-TLS to a
+job tier. For the high-level concept, see
+<a href="../../features/cluster/">Cluster topology and node roles</a>; for every config key,
+see the <a href="../../reference/configuration/">Configuration reference</a>.</p>
 <hr />
-<h2 id="what-the-stack-contains">What the stack contains<a class="headerlink" href="#what-the-stack-contains" title="Permanent link">&para;</a></h2>
-<p>When fully wired, trading runs as a small set of containers alongside the
-swarmd daemon:</p>
+<h2 id="when-to-cluster">When to cluster<a class="headerlink" href="#when-to-cluster" title="Permanent link">&para;</a></h2>
+<p>Split into roles for one of two reasons:</p>
 <ul>
-<li><strong>IB Gateway</strong> — IBKR's connection process, kept logged in and restarted
-  daily.</li>
-<li><strong>Broker sidecar</strong> — talks to IB Gateway and exposes simple read/write
-  endpoints on the loopback interface.</li>
-<li><strong>Broker safety server</strong> — fronts the sidecar with the safety envelope (caps,
-  kill switch, mandatory stops) and is the process agents actually call.</li>
-<li><strong>Technical-analysis helper</strong> — computes indicators (SMA, EMA, RSI, MACD,
-  Bollinger Bands, ATR) for strategy agents.</li>
+<li><strong>Scale the worker tier.</strong> Run several <code>worker</code> nodes behind a shared
+  PostgreSQL and object store so heavy task execution doesn't compete with
+  UI/API traffic. Background singletons (schedulers, pruners) stay single-owner
+  automatically via database leases.</li>
+<li><strong>Isolate webhook ingress.</strong> Put a <code>webhook</code> node in an untrusted network
+  segment. The box exposed to the public internet holds no database handle and
+  no model or broker credentials — it verifies each webhook signature and
+  forwards the verified event inward over mutual-TLS.</li>
 </ul>
-<p>The deployment ships compose files and <code>make</code> targets to bring these up
-together.</p>
+<p>Everything behind the public edge still shares <strong>one</strong> database and <strong>one</strong>
+object store. Clustering scales compute and shrinks the blast radius; it is not
+a multi-region or sharding feature.</p>
 <hr />
-<h2 id="step-1-enable-a-paper-account-at-ibkr">Step 1 — enable a paper account at IBKR<a class="headerlink" href="#step-1-enable-a-paper-account-at-ibkr" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Log in to your IBKR account settings and request a Paper Trading Account.
-   Approval for retail accounts is usually under an hour.</li>
-<li>The paper account shares your live login; a single environment variable
-   selects which session the gateway opens.</li>
-<li><strong>Enable always-on two-factor authentication</strong> in the IBKR mobile app.
-   Without it, the gateway has to re-authenticate daily and will stall waiting
-   for an interactive 2FA prompt that no one is around to answer.</li>
-</ol>
-<hr />
-<h2 id="step-2-stage-credentials">Step 2 — stage credentials<a class="headerlink" href="#step-2-stage-credentials" title="Permanent link">&para;</a></h2>
-<p>Place your IBKR credentials in a secrets file that the stack reads at startup:</p>
-<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config/swarmd/secrets
-cat<span class="w"> </span>&gt;<span class="w"> </span>~/.config/swarmd/secrets/trading.env<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
-<span class="s">IBKR_USERNAME=your_ibkr_username</span>
-<span class="s">IBKR_PASSWORD=your_ibkr_password</span>
-<span class="s">TRADING_MODE=paper</span>
-<span class="s">EOF</span>
-chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>~/.config/swarmd/secrets/trading.env
-</code></pre></div>
-<p>Bring the stack up:</p>
-<div class="highlight"><pre><span></span><code>podman-compose<span class="w"> </span>--env-file<span class="w"> </span>~/.config/swarmd/secrets/trading.env<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-f<span class="w"> </span>deployments/podman/trading.compose.yaml<span class="w"> </span>up<span class="w"> </span>-d
-</code></pre></div>
-<hr />
-<h2 id="step-3-confirm-the-connection">Step 3 — confirm the connection<a class="headerlink" href="#step-3-confirm-the-connection" title="Permanent link">&para;</a></h2>
-<p>Watch the gateway log until login completes, then check the sidecar's health:</p>
-<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>swarmd-ibgateway<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;login&quot;</span>
-
-curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:8889/health<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
-<span class="c1"># Expect: { &quot;ok&quot;: true, &quot;ibkr_connected&quot;: true, &quot;account&quot;: &quot;DU...&quot;, ... }</span>
-</code></pre></div>
-<p>A paper account number always begins with <code>DU</code>. If <code>ibkr_connected</code> stays
-<code>false</code> for more than a few minutes after the gateway reports a completed
-login, the usual cause is an unanswered 2FA prompt — connect to the gateway's
-VNC port to check for a waiting dialog.</p>
-<p>Confirm the safety server is up and exposes its tools:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8788/message<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;jsonrpc&quot;:&quot;2.0&quot;,&quot;id&quot;:1,&quot;method&quot;:&quot;tools/list&quot;}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.result.tools[].name&#39;</span>
-<span class="c1"># Expect: get_account_summary, get_quote, get_historical_bars,</span>
-<span class="c1">#         get_orders, place_order, cancel_order</span>
-</code></pre></div>
-<hr />
-<h2 id="step-4-wire-it-into-a-project">Step 4 — wire it into a project<a class="headerlink" href="#step-4-wire-it-into-a-project" title="Permanent link">&para;</a></h2>
-<p>A project template is provided. Copy it into your deployed configs and edit
-the watchlist and caps:</p>
-<div class="highlight"><pre><span></span><code>cp<span class="w"> </span>configs/projects/trading-paper.yaml.template<span class="w"> </span><span class="se">\</span>
-<span class="w">   </span>~/.config/swarmd/configs/projects/trading-paper.yaml
-<span class="nv">$EDITOR</span><span class="w"> </span>~/.config/swarmd/configs/projects/trading-paper.yaml
-</code></pre></div>
-<p>The daemon picks up the new project automatically on its next config reload.
-The template already points the broker tool at the right loopback address.</p>
-<hr />
-<h2 id="step-5-validate-before-letting-agents-trade">Step 5 — validate before letting agents trade<a class="headerlink" href="#step-5-validate-before-letting-agents-trade" title="Permanent link">&para;</a></h2>
-<p>Your account is connected and the stack is healthy. <strong>Do not enable autonomy
-yet.</strong> Walk this checklist first — it costs an afternoon and rules out failure
-modes that look identical to "broken" once a strategy starts running.</p>
-<h3 id="configure-the-watchlist-and-market-data">Configure the watchlist and market data<a class="headerlink" href="#configure-the-watchlist-and-market-data" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Append to ~/.config/swarmd/secrets/trading.env, then redeploy:</span>
-<span class="nv">IBKR_WATCHLIST</span><span class="o">=</span>AAPL,TSLA,NVDA,SPY,QQQ<span class="w">   </span><span class="c1"># your real watchlist</span>
-<span class="nv">IBKR_READONLY</span><span class="o">=</span><span class="nb">true</span><span class="w">                       </span><span class="c1"># validation only; flip to false later</span>
-</code></pre></div>
-<p>Leave the market-data type unset to use the paper default (delayed data).
-Redeploy with <code>make trading-down &amp;&amp; make trading-up</code>.</p>
-<h3 id="verify-reads-then-verify-writes-are-blocked">Verify reads, then verify writes are blocked<a class="headerlink" href="#verify-reads-then-verify-writes-are-blocked" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Reads should return plausible data</span>
-curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:8889/account/summary<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.cash_usd, .equity_usd&#39;</span>
-curl<span class="w"> </span>-s<span class="w"> </span>http://127.0.0.1:8889/quote/AAPL<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
-
-<span class="c1"># With IBKR_READONLY=true, a write must be refused with HTTP 403</span>
-curl<span class="w"> </span>-sS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://127.0.0.1:8889/orders<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;symbol&quot;:&quot;AAPL&quot;,&quot;action&quot;:&quot;BUY&quot;,&quot;order_type&quot;:&quot;MKT&quot;,&quot;qty&quot;:&quot;1&quot;,&quot;client_tag&quot;:&quot;validate&quot;}&#39;</span>
-<span class="c1"># Expect: {&quot;code&quot;:&quot;readonly&quot;, ...}</span>
-</code></pre></div>
-<h3 id="place-one-tiny-order-by-hand">Place one tiny order by hand<a class="headerlink" href="#place-one-tiny-order-by-hand" title="Permanent link">&para;</a></h3>
-<p>Flip <code>IBKR_READONLY=false</code>, redeploy, and place a single share to confirm the
-full round-trip works — the order fills, shows up in the order list, and a
-far-from-market limit order can be cancelled cleanly. Do this manually before
-any agent ever sees the <code>place_order</code> tool.</p>
-<h3 id="confirm-the-caps-actually-bite">Confirm the caps actually bite<a class="headerlink" href="#confirm-the-caps-actually-bite" title="Permanent link">&para;</a></h3>
-<p>Set deliberately tiny caps on the broker safety server and try to exceed
-them — both a single oversized order and a rapid burst of orders. Each should
-be refused by the safety envelope. These guardrails are what protect you when
-a strategy agent proposes something it shouldn't:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">SWARMD_BROKER_MAX_POSITION_USD</span><span class="o">=</span><span class="m">100</span>
-<span class="nv">SWARMD_BROKER_MAX_DAILY_TURNOVER_USD</span><span class="o">=</span><span class="m">200</span>
-<span class="nv">SWARMD_BROKER_MAX_ORDERS_PER_HOUR</span><span class="o">=</span><span class="m">3</span>
-</code></pre></div>
-<h3 id="survive-a-forced-reconnect">Survive a forced reconnect<a class="headerlink" href="#survive-a-forced-reconnect" title="Permanent link">&para;</a></h3>
-<p>IBKR resets its sessions around midnight. Restart the gateway container and
-confirm the sidecar reconnects and re-subscribes to the watchlist within about
-half a minute — this is the daily-restart simulation.</p>
-<h3 id="run-supervised-for-a-day-with-tight-caps">Run supervised for a day with tight caps<a class="headerlink" href="#run-supervised-for-a-day-with-tight-caps" title="Permanent link">&para;</a></h3>
-<p>Only after every check above passes, enable the autonomy loop in the project
-config (<code>trading.mode: paper</code>, <code>trading.killSwitch: false</code>) with tight caps,
-and review the day's orders and fills at the close. Every fill should have a
-paired stop and there should be no stuck orders. If anything looks wrong,
-freeze and investigate before loosening anything.</p>
-<hr />
-<h2 id="stop-loss-enforcement">Stop-loss enforcement<a class="headerlink" href="#stop-loss-enforcement" title="Permanent link">&para;</a></h2>
-<p>The safety layer enforces stop-losses <strong>deterministically</strong>: no opening order,
-long or short, reaches the broker without a paired protective stop. A strategy
-agent cannot forget one, and a mistaken "close" on a position you don't hold is
-correctly recognized as opening a new position and refused.</p>
-<p>Three settings control the behavior on the broker safety server:</p>
+<h2 id="node-profiles">Node profiles<a class="headerlink" href="#node-profiles" title="Permanent link">&para;</a></h2>
+<p>A node's role is set with <code>node.profile</code>. Each profile is a preset over four
+capabilities; you can override any one capability with <code>node.serve_ui</code>,
+<code>node.serve_api</code>, <code>node.serve_webhooks</code>, or <code>node.run_workers</code>.</p>
 <table>
 <thead>
 <tr>
-<th>Setting</th>
-<th>Default</th>
-<th>Behavior</th>
+<th><code>node.profile</code></th>
+<th>Serves UI</th>
+<th>Serves API</th>
+<th>Serves webhooks</th>
+<th>Runs workers</th>
+<th>Typical use</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>SWARMD_BROKER_REQUIRE_STOP_LOSS</code></td>
-<td><code>true</code></td>
-<td>Refuse opening orders that have no stop available</td>
+<td><code>all</code> (default)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>single-node deployment</td>
 </tr>
 <tr>
-<td><code>SWARMD_BROKER_DEFAULT_STOP_LOSS_PCT</code></td>
-<td><code>8.0</code></td>
-<td>Auto-compute a stop this far on the losing side of entry. Tighten toward 3–5% for low-volatility names; loosen for high-volatility ones</td>
+<td><code>ui</code></td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>front-end tier</td>
 </tr>
 <tr>
-<td><code>stop_loss_price</code> (per order)</td>
-<td>agent-supplied</td>
-<td>An explicit price, which overrides the default percentage</td>
+<td><code>worker</code></td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>job tier (scheduler + executor)</td>
+</tr>
+<tr>
+<td><code>webhook</code></td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>DMZ-isolated webhook relay</td>
 </tr>
 </tbody>
 </table>
-<p>For an explicit stop price, the side must make sense — below entry for a buy,
-above entry for a sell — otherwise the stop would trigger immediately and
-offer no real protection, so it is refused.</p>
-<p>To require an explicit price on every order instead of relying on the
-auto-default, set the default percentage to <code>0</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">SWARMD_BROKER_REQUIRE_STOP_LOSS</span><span class="o">=</span><span class="nb">true</span>
-<span class="nv">SWARMD_BROKER_DEFAULT_STOP_LOSS_PCT</span><span class="o">=</span><span class="m">0</span><span class="w">   </span><span class="c1"># no auto-compute -&gt; strict</span>
+<p>A node that serves webhooks but does not run workers is a <strong>relay node</strong> — that
+is what enables (and requires) the <code>node.relay</code> block in the walkthrough below.</p>
+<hr />
+<h2 id="reference-topology">Reference topology<a class="headerlink" href="#reference-topology" title="Permanent link">&para;</a></h2>
+<p>A three-tier cluster with a DMZ relay. The DMZ tier has no path to the database;
+its only route inward is the mutual-TLS relay.</p>
+<pre class="mermaid"><code>flowchart LR
+    prov[Webhook providers&lt;br/&gt;GitHub / Slack / …]
+
+    subgraph dmz["DMZ network"]
+        wh["webhook node&lt;br/&gt;profile: webhook"]
+    end
+
+    subgraph trusted["Trusted network"]
+        ui["ui node(s)&lt;br/&gt;profile: ui"]
+        wk["worker node(s)&lt;br/&gt;profile: worker&lt;br/&gt;relay ingress listener"]
+        pg[(Database&lt;br/&gt;+ object store)]
+    end
+
+    users[Operators / browsers] --&gt; ui
+    prov --&gt;|"POST /api/v1/webhooks/…"| wh
+    wh --&gt;|"verified event over mTLS"| wk
+    wh -.-&gt;|"by-proxy heartbeat over mTLS"| wk
+    ui --&gt; pg
+    wk --&gt; pg</code></pre>
+<p>The webhook node verifies the provider signature at the public edge, then
+forwards the verified payload over mutual-TLS to the job tier, which re-creates
+the task. Because the DMZ node holds no database, it reports its liveness
+<strong>by proxy</strong> over the same secured channel.</p>
+<hr />
+<h2 id="walkthrough-set-up-a-dmz-webhook-relay">Walkthrough: set up a DMZ webhook relay<a class="headerlink" href="#walkthrough-set-up-a-dmz-webhook-relay" title="Permanent link">&para;</a></h2>
+<p>You configure two sides — the <strong>job tier</strong> (server side of the mTLS seam) and
+the <strong>DMZ webhook node</strong> (client side) — and they must trust the same CA.</p>
+<h3 id="1-generate-the-mutual-tls-material">1. Generate the mutual-TLS material<a class="headerlink" href="#1-generate-the-mutual-tls-material" title="Permanent link">&para;</a></h3>
+<p>The relay is mutual-TLS: the job tier presents a server certificate, the webhook
+node presents a client certificate, and each verifies the other against a shared
+certificate authority. A small self-signed CA is sufficient — this trust chain
+is internal to your cluster and is never seen by webhook providers. Run these in
+<strong>bash</strong> (step 1b uses process substitution).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1a. A private CA for the relay.</span>
+openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">3650</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-keyout<span class="w"> </span>relay-ca.key<span class="w"> </span>-out<span class="w"> </span>relay-ca.crt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=swarmd-relay-ca&quot;</span>
+
+<span class="c1"># 1b. Job-tier SERVER cert. The subjectAltName must match the host the</span>
+<span class="c1">#     webhook node will use in node.relay.upstream (DNS name or IP:&lt;addr&gt;).</span>
+openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-keyout<span class="w"> </span>jobtier.key<span class="w"> </span>-out<span class="w"> </span>jobtier.csr<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=jobtier.internal&quot;</span>
+openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>jobtier.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>jobtier.crt<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-extfile<span class="w"> </span>&lt;<span class="o">(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;subjectAltName=DNS:jobtier.internal&quot;</span><span class="o">)</span>
+
+<span class="c1"># 1c. DMZ webhook node CLIENT cert.</span>
+openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-keyout<span class="w"> </span>dmz-webhook.key<span class="w"> </span>-out<span class="w"> </span>dmz-webhook.csr<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=dmz-webhook-1&quot;</span>
+openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>dmz-webhook.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>dmz-webhook.crt
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Entry and stop are placed in sequence, not atomically</p>
-<p>There is a brief window between an entry filling and its stop being
-submitted. This is acceptable for paper trading and small positions.</p>
-</div>
-<hr />
-<h2 id="kill-switch">Kill switch<a class="headerlink" href="#kill-switch" title="Permanent link">&para;</a></h2>
-<p>If you need autonomous trading to stop, here are the options from fastest and
-most surgical to most authoritative:</p>
-<ol>
-<li><strong>Project level</strong> — set <code>trading.killSwitch: true</code> in the project config.
-   A hot reload picks it up within seconds and refuses all further orders.
-   Orders already open are <em>not</em> cancelled.</li>
-<li><strong>Daemon level</strong> — set <code>trading.live_enabled: false</code> in the daemon config
-   to refuse all live orders immediately, even if a project is in live mode.</li>
-<li><strong>Stack level</strong> — bring the trading containers down. The gateway and
-   sidecar stop; any orders already resting at IBKR remain there.</li>
-<li><strong>Broker level</strong> — log in to IBKR directly and cancel orders and close
-   positions yourself. This is the authoritative stop.</li>
-</ol>
-<p>To clear outstanding orders during normal operation, the sidecar exposes a
-<code>DELETE</code> endpoint keyed on the order's tag; cancels are idempotent, and
-cancelling a parent order also cancels its child stop.</p>
-<hr />
-<h2 id="live-promotion">Live promotion<a class="headerlink" href="#live-promotion" title="Permanent link">&para;</a></h2>
-<p>Going live is mechanically one line of config. <strong>Treat it as the most
-consequential change you will make.</strong> Before flipping it:</p>
-<ul>
-<li>Run continuously in paper for an extended soak (on the order of two weeks).</li>
-<li>Confirm the strategy's quality and verification checks have been clean over
-  that period.</li>
-<li>Start live with very tight caps and hold them there for at least two weeks
-  before raising anything.</li>
-</ul>
-<p>Size every cap — per-position dollars, daily turnover, position count — to the
-<strong>actual capital in the account</strong>, not to defaults or paper figures. Paper
-accounts start with a large simulated balance that bears no relation to a real
-account; re-derive every limit from your real numbers before going live.</p>
-<hr />
-<h2 id="a-note-on-market-data">A note on market data<a class="headerlink" href="#a-note-on-market-data" title="Permanent link">&para;</a></h2>
-<p>A paper account uses delayed market data by default. Some IBKR pre-trade risk
-checks reject orders priced against a delayed feed, which shows up as orders
-that cancel themselves without filling. If you see this, you can have the
-safety layer refuse such orders up front rather than churning through them:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># ~/.config/swarmd/secrets/trading.env</span>
-<span class="nv">SWARMD_BROKER_REFUSE_DELAYED_QUOTES</span><span class="o">=</span><span class="nb">true</span>
+<p>The <code>subjectAltName</code> in step 1b is required, not cosmetic: swarmd matches
+<code>node.relay.upstream</code> against the server certificate's SAN, so a SAN-less
+certificate fails the handshake. The client certificate needs no SAN — it is
+verified by CA chain, not hostname.</p>
+<h3 id="2-configure-the-job-tier-server-side">2. Configure the job tier (server side)<a class="headerlink" href="#2-configure-the-job-tier-server-side" title="Permanent link">&para;</a></h3>
+<p>On each <code>worker</code> (or <code>all</code>) node that should receive relayed webhooks, add a
+<code>relay_ingress</code> block. It binds a <strong>dedicated</strong> mutual-TLS listener, separate
+from the public API port, and accepts only client certificates signed by your
+relay CA.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># job-tier config</span>
+<span class="nt">node</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
+<span class="w">  </span><span class="nt">relay_ingress</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8443&quot;</span><span class="w">                    </span><span class="c1"># mTLS listener for relayed webhooks</span>
+<span class="w">    </span><span class="nt">server_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/jobtier.crt</span>
+<span class="w">    </span><span class="nt">server_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/jobtier.key</span>
+<span class="w">    </span><span class="nt">client_ca</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># only certs it signed are accepted</span>
 </code></pre></div>
-<p>Once you subscribe to real-time market data, set it back to <code>false</code> (the
-default) and confirm a quote reports it is no longer delayed.</p>
-<hr />
-<h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
+<p>All four <code>relay_ingress</code> keys are required together, and the block is only valid
+on a node that runs workers — the daemon refuses to start otherwise.</p>
+<h3 id="3-configure-the-dmz-webhook-node-client-side">3. Configure the DMZ webhook node (client side)<a class="headerlink" href="#3-configure-the-dmz-webhook-node-client-side" title="Permanent link">&para;</a></h3>
+<p>The webhook node is the public edge. Three things matter:</p>
 <ul>
-<li><a href="../workflows-and-llm-controls/">Workflows and LLM controls</a> — configure the
-  strategy agents.</li>
-<li><a href="../cost-and-caching/">Cost and caching</a> — keep model spend predictable.</li>
-<li><a href="../../troubleshooting/">Troubleshooting</a> — when something doesn't come
-  up clean.</li>
+<li><code>node.profile: webhook</code> makes it a relay node.</li>
+<li><code>node.relay.*</code> points it at the job tier's mTLS listener. <strong>All four of
+  <code>upstream</code>, <code>client_cert</code>, <code>client_key</code>, and <code>ca</code> are required</strong> — the daemon
+  will not start without them.</li>
+<li><code>database.driver: sqlite</code>. A webhook node never writes webhook events to the
+  database, but the daemon still opens a database backend at startup. Pointing it
+  at a small local SQLite file keeps the DMZ box free of any database
+  credential; leaving the default (<code>postgres</code>) would make a DMZ node with no
+  route to the database fail to start.</li>
 </ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># DMZ webhook node config</span>
+<span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8080&quot;</span><span class="w">                   </span><span class="c1"># public webhook ingress (front this with TLS)</span>
+
+<span class="nt">node</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">webhook</span>
+<span class="w">  </span><span class="nt">relay</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">upstream</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">https://jobtier.internal:8443</span><span class="w">   </span><span class="c1"># the relay_ingress addr above</span>
+<span class="w">    </span><span class="nt">client_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/dmz-webhook.crt</span>
+<span class="w">    </span><span class="nt">client_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/dmz-webhook.key</span>
+<span class="w">    </span><span class="nt">ca</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># CA that signed jobtier.crt</span>
+<span class="w">    </span><span class="nt">max_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">                    </span><span class="c1"># optional; 0 → 3. Bounded retries before a 5xx to the provider</span>
+<span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">5s</span><span class="w">                   </span><span class="c1"># optional; empty → 5s per attempt</span>
+
+<span class="nt">database</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/relay.db</span><span class="w">    </span><span class="c1"># must be on a writable mount</span>
+</code></pre></div>
+<h3 id="4-run-the-webhook-node">4. Run the webhook node<a class="headerlink" href="#4-run-the-webhook-node" title="Permanent link">&para;</a></h3>
+<p>Use the <code>thin</code> container image for a webhook node — it carries no executor and
+runs unprivileged, which is exactly what you want in a DMZ. Expose only the
+webhook ingress port and put your TLS terminator in front of it; providers post
+to <code>POST /api/v1/webhooks/{…}</code>.</p>
+<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>swarmd-webhook-dmz<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>./dmz-webhook-config.yaml:/etc/swarmd/config.yaml:ro,Z<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>./certs:/etc/swarmd/certs:ro,Z<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>swarmd-dmz-data:/var/lib/swarmd:Z<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-cmd<span class="w"> </span><span class="s1">&#39;wget -qO- http://localhost:8080/livez || exit 1&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-interval<span class="w"> </span>30s<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>swarmd:thin
+</code></pre></div>
+<p>Do not expose the metrics port (<code>9090</code>) publicly, and do not mount a container
+socket — a webhook node never spawns agent containers.</p>
+<hr />
+<h2 id="validate-and-observe">Validate and observe<a class="headerlink" href="#validate-and-observe" title="Permanent link">&para;</a></h2>
+<p>Before starting (or restarting) any node, validate its configuration. The
+cluster feature doctor confirms <code>node.profile</code> is a recognised preset and that
+relay settings are coherent with the resolved role:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
+</code></pre></div>
+<p>Once nodes are running, inspect the fleet from any node with API access:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w">          </span><span class="c1"># live nodes, singleton ownership, version skew</span>
+swarmctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w"> </span>--json<span class="w">   </span><span class="c1"># raw response</span>
+</code></pre></div>
+<p>The same data backs the cluster view in the admin UI. Database-backed nodes
+report themselves on a timer; the DMZ webhook node reports by proxy over the
+relay, and a stale node is aged out automatically. If a running webhook node is
+absent from <code>cluster status</code>, the relay channel — not the node — is usually at
+fault.</p>
+<hr />
+<h2 id="operating-notes">Operating notes<a class="headerlink" href="#operating-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Role and relay changes are restart-gated.</strong> <code>node.profile</code>, <code>node.relay.*</code>,
+  and <code>node.relay_ingress.*</code> are read at startup; editing them takes effect on
+  the next daemon start, not on a config reload. Run the feature doctor, then
+  restart.</li>
+<li><strong>Restart order.</strong> Bring the job tier's relay listener up before the DMZ nodes
+  that forward to it. While the upstream is unreachable, a webhook node reports
+  not-ready on <code>/readyz</code> (so a load balancer holds traffic off it) while staying
+  alive on <code>/livez</code>.</li>
+<li><strong>Backpressure.</strong> <code>node.relay.max_retries</code> bounds retries before the webhook
+  node returns a <code>5xx</code> to the provider, which then redelivers per its own policy.
+  Keep retries small — provider redelivery, not in-process buffering, is the
+  durability layer.</li>
+<li><strong>Certificate rotation.</strong> Rotating the relay CA invalidates every client
+  certificate at once; issue new client certs and roll the DMZ nodes. Because
+  this config is restart-gated, a cert swap is a restart, not a reload.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Webhook node won't start, fails on database connect</td>
+<td><code>database.driver</code> left at the <code>postgres</code> default with no route to the database</td>
+<td>Set <code>database.driver: sqlite</code> and a writable <code>database.path</code>.</td>
+</tr>
+<tr>
+<td>Start-up error: "relay.{…} are all required in webhook relay mode"</td>
+<td>Incomplete <code>node.relay</code> block on a <code>webhook</code> node</td>
+<td>Provide all four of <code>upstream</code>, <code>client_cert</code>, <code>client_key</code>, <code>ca</code>.</td>
+</tr>
+<tr>
+<td>Start-up error: "node.relay is only valid for a webhook node"</td>
+<td><code>relay.*</code> keys on a node that isn't a relay node</td>
+<td>Set <code>node.profile: webhook</code>, or remove the relay keys.</td>
+</tr>
+<tr>
+<td>Relay returns <code>401</code> / TLS handshake failure</td>
+<td>Client cert not signed by the job tier's <code>client_ca</code>, or the server cert SAN doesn't match <code>relay.upstream</code></td>
+<td>Re-issue certs from the shared CA; match the server SAN to the upstream host.</td>
+</tr>
+<tr>
+<td>Webhook node stuck not-ready (<code>/readyz</code> returns 503)</td>
+<td>Job tier relay listener unreachable from the DMZ</td>
+<td>Confirm the <code>relay_ingress</code> listener is up and reachable; check the <code>relay.upstream</code> host and port.</td>
+</tr>
+<tr>
+<td>Webhook node missing from <code>cluster status</code></td>
+<td>By-proxy heartbeat not reaching the job tier</td>
+<td>Verify the relay channel (same checks as the handshake row); the heartbeat uses the same secured path.</td>
+</tr>
+</tbody>
+</table>
 
 
 
