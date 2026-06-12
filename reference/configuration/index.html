@@ -967,6 +967,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    <span class="md-ellipsis">
+      node
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1254,6 +1263,15 @@
   <a href="#voice" class="md-nav__link">
     <span class="md-ellipsis">
       voice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node" class="md-nav__link">
+    <span class="md-ellipsis">
+      node
     </span>
   </a>
   
@@ -2307,6 +2325,93 @@
 <td><code>voice.tts.voice</code></td>
 <td>string</td>
 <td>Absolute path to the TTS voice model.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="node">node<a class="headerlink" href="#node" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>node.profile</code></td>
+<td>string</td>
+<td>Role preset: all|ui|worker|webhook. Default all.</td>
+</tr>
+<tr>
+<td><code>node.serve_ui</code></td>
+<td>bool</td>
+<td>Mount /ui routes.</td>
+</tr>
+<tr>
+<td><code>node.serve_api</code></td>
+<td>bool</td>
+<td>Mount data-plane / control endpoints.</td>
+</tr>
+<tr>
+<td><code>node.serve_webhooks</code></td>
+<td>bool</td>
+<td>Mount public webhook ingress.</td>
+</tr>
+<tr>
+<td><code>node.run_workers</code></td>
+<td>bool</td>
+<td>Run scheduler+executor and leader-elected singletons.</td>
+</tr>
+<tr>
+<td><code>node.relay.upstream</code></td>
+<td>string</td>
+<td>Job-tier internal ingress base URL (https://host:8443).</td>
+</tr>
+<tr>
+<td><code>node.relay.client_cert</code></td>
+<td>string</td>
+<td>PEM client cert for mTLS to the job tier.</td>
+</tr>
+<tr>
+<td><code>node.relay.client_key</code></td>
+<td>string</td>
+<td>PEM client key for mTLS to the job tier.</td>
+</tr>
+<tr>
+<td><code>node.relay.ca</code></td>
+<td>string</td>
+<td>PEM CA bundle that signed the job-tier server cert.</td>
+</tr>
+<tr>
+<td><code>node.relay.max_retries</code></td>
+<td>int</td>
+<td>Bounded relay retries before 5xx to provider. 0 → 3.</td>
+</tr>
+<tr>
+<td><code>node.relay.timeout</code></td>
+<td>string</td>
+<td>Per-relay-attempt timeout. Empty → 5s.</td>
+</tr>
+<tr>
+<td><code>node.relay_ingress.addr</code></td>
+<td>string</td>
+<td>Listen address for the mTLS relay ingress, e.g. :8443.</td>
+</tr>
+<tr>
+<td><code>node.relay_ingress.server_cert</code></td>
+<td>string</td>
+<td>PEM server cert presented to relaying webhook nodes.</td>
+</tr>
+<tr>
+<td><code>node.relay_ingress.server_key</code></td>
+<td>string</td>
+<td>PEM server key for the relay ingress.</td>
+</tr>
+<tr>
+<td><code>node.relay_ingress.client_ca</code></td>
+<td>string</td>
+<td>PEM CA bundle; only client certs it signed are accepted.</td>
 </tr>
 </tbody>
 </table>
