@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/instinct/">
+        <link rel="canonical" href="https://docs.swarmd.dev/features/cluster/">
       
       
-        <link rel="prev" href="../../guides/trading-setup/">
+        <link rel="prev" href="../memory-rag/">
       
       
-        <link rel="next" href="../auth/">
+        <link rel="next" href="../../reference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Instinct layer - swarmd documentation</title>
+        <title>Cluster topology and node roles - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#instinct-layer" class="md-skip">
+        <a href="#cluster-topology-and-node-roles" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instinct layer
+              Cluster topology and node roles
             
           </span>
         </div>
@@ -599,30 +599,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Instinct layer
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../instinct/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -631,35 +611,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      Enabling it
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -711,10 +662,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../cluster/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Cluster topology and node roles
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -723,6 +694,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#node-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Node profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dmz-webhook-relay" class="md-nav__link">
+    <span class="md-ellipsis">
+      DMZ webhook relay
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applying-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying changes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -912,9 +930,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#node-profiles" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Node profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dmz-webhook-relay" class="md-nav__link">
+    <span class="md-ellipsis">
+      DMZ webhook relay
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applying-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying changes
     </span>
   </a>
   
@@ -935,16 +971,86 @@
                   
 
 
-<h1 id="instinct-layer">Instinct layer<a class="headerlink" href="#instinct-layer" title="Permanent link">&para;</a></h1>
-<p>The instinct layer lets swarmd learn confidence-scored remediation and
-quality patterns from past task telemetry, then apply them to new work.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<p>Run the feature doctor to diagnose and enable:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
+<h1 id="cluster-topology-and-node-roles">Cluster topology and node roles<a class="headerlink" href="#cluster-topology-and-node-roles" title="Permanent link">&para;</a></h1>
+<p>swarmd can run as a single all-in-one daemon (the default) or as a
+multi-node cluster where each node takes a specialised <strong>role</strong>. Roles
+let you scale the worker tier independently of the UI/API tier and
+isolate public webhook ingress in a DMZ.</p>
+<h2 id="node-profiles">Node profiles<a class="headerlink" href="#node-profiles" title="Permanent link">&para;</a></h2>
+<p>A node's role is set with the <code>node.profile</code> config key. Each profile
+is a preset over two capabilities — whether the node serves public
+webhook ingress, and whether it runs the scheduler/executor and
+leader-elected background workers:</p>
+<table>
+<thead>
+<tr>
+<th><code>node.profile</code></th>
+<th>Serves UI/API</th>
+<th>Serves webhooks</th>
+<th>Runs workers</th>
+<th>Typical use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>all</code> (default)</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>single-node deployment</td>
+</tr>
+<tr>
+<td><code>ui</code></td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>front-end / API tier</td>
+</tr>
+<tr>
+<td><code>worker</code></td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>job tier (scheduler + executor)</td>
+</tr>
+<tr>
+<td><code>webhook</code></td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>DMZ-isolated webhook relay</td>
+</tr>
+</tbody>
+</table>
+<p>Leave <code>node.profile</code> unset (or <code>all</code>) for a single-node install — that
+is exactly today's behaviour. You can override an individual capability
+on top of a profile with <code>node.serve_webhooks</code> and <code>node.run_workers</code>
+when you need a combination the presets don't cover.</p>
+<h2 id="dmz-webhook-relay">DMZ webhook relay<a class="headerlink" href="#dmz-webhook-relay" title="Permanent link">&para;</a></h2>
+<p>A <code>webhook</code> node is meant to live in an isolated DMZ network. It
+verifies the provider signature on each inbound webhook and then
+forwards the verified event over mutual-TLS to the job tier — it never
+touches Postgres or any LLM/broker credentials, so the DMZ blast radius
+stays minimal.</p>
+<ul>
+<li>On the <strong>webhook</strong> node, set <code>node.relay.upstream</code> to the job tier's
+  mTLS relay address.</li>
+<li>On the <strong>worker</strong> (job tier) node, set <code>node.relay_ingress.addr</code> to
+  the address its mTLS relay listener should bind.</li>
+</ul>
+<p>Relay keys are only coherent with the matching role: <code>node.relay.*</code>
+requires a webhook node (<code>serve_webhooks</code> on, <code>run_workers</code> off), and
+<code>node.relay_ingress.*</code> requires a node that runs workers. The feature
+doctor flags a mismatch rather than starting in an inconsistent state.</p>
+<h2 id="applying-changes">Applying changes<a class="headerlink" href="#applying-changes" title="Permanent link">&para;</a></h2>
+<p>Node role and relay settings are <strong>restart-gated</strong> — changing them
+takes effect on the next daemon start. Use the feature doctor to
+validate a node's configuration before (re)starting it:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
 </code></pre></div>
-<p>This sets the <code>instinct.*</code> config gates and restarts the daemon during an
-idle window. Because it is restart-gated, the doctor refuses to apply while
-tasks are running and waits for an idle window.</p>
+<p>It confirms <code>node.profile</code> is a recognised preset and that any relay
+configuration is coherent with the resolved role, with remediation
+hints for anything that doesn't line up.</p>
 
 
 
