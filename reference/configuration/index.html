@@ -821,6 +821,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steering_notifications_enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      steering_notifications_enabled
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named_secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      named_secrets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#server" class="md-nav__link">
     <span class="md-ellipsis">
       server
@@ -1122,6 +1140,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#steering_notifications_enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      steering_notifications_enabled
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named_secrets" class="md-nav__link">
+    <span class="md-ellipsis">
+      named_secrets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#server" class="md-nav__link">
     <span class="md-ellipsis">
       server
@@ -1338,6 +1374,40 @@
 
 <h1 id="configuration-reference">Configuration reference<a class="headerlink" href="#configuration-reference" title="Permanent link">&para;</a></h1>
 <p>swarmd reads its configuration from <code>config.yaml</code>. The keys below are the customer-facing settings, by dotted YAML path.</p>
+<h2 id="steering_notifications_enabled">steering_notifications_enabled<a class="headerlink" href="#steering_notifications_enabled" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>steering_notifications_enabled</code></td>
+<td>bool</td>
+<td>Push a chat/DM prompt when a task needs operator steering (input/approval). Default true.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="named_secrets">named_secrets<a class="headerlink" href="#named_secrets" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>named_secrets</code></td>
+<td>list</td>
+<td>Per-secret allowlist of env credentials injected into agent containers, scoped by project.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="server">server<a class="headerlink" href="#server" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2098,6 +2168,11 @@
 <td>string</td>
 <td>Rolling window the count is measured over.</td>
 </tr>
+<tr>
+<td><code>autonomy.approval_timeout_hours</code></td>
+<td>int</td>
+<td>Cancel tasks awaiting approval after this many hours (0 = never; default 96).</td>
+</tr>
 </tbody>
 </table>
 <h2 id="telegram">telegram<a class="headerlink" href="#telegram" title="Permanent link">&para;</a></h2>
@@ -2232,6 +2307,16 @@
 <td>bool</td>
 <td>LLM content-class backfill.</td>
 </tr>
+<tr>
+<td><code>memory.prompt_injection_scan</code></td>
+<td>string</td>
+<td>Ingest prompt-injection gate: off (default), detect, or quarantine.</td>
+</tr>
+<tr>
+<td><code>memory.claim_audit_disabled_projects</code></td>
+<td>list</td>
+<td>Project IDs that skip the claim-audit/hallucination ingest gate.</td>
+</tr>
 </tbody>
 </table>
 <h2 id="instinct">instinct<a class="headerlink" href="#instinct" title="Permanent link">&para;</a></h2>
@@ -2288,6 +2373,21 @@
 <td><code>instinct.consumers.memory_hygiene</code></td>
 <td>bool</td>
 <td>Feed retrieval instincts to memory sweepers.</td>
+</tr>
+<tr>
+<td><code>instinct.consumers.auto_apply.enabled</code></td>
+<td>bool</td>
+<td>Promote high-confidence recovery instincts to a prompt-level directive (default off).</td>
+</tr>
+<tr>
+<td><code>instinct.consumers.auto_apply.min_confidence</code></td>
+<td>float</td>
+<td>Confidence floor for auto-apply (default 0.85).</td>
+</tr>
+<tr>
+<td><code>instinct.consumers.auto_apply.allowed_error_classes</code></td>
+<td>list</td>
+<td>Failure classes eligible for auto-apply; empty = all.</td>
 </tr>
 </tbody>
 </table>

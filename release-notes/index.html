@@ -886,6 +886,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202661" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.6.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202660" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.6.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202659" class="md-nav__link">
     <span class="md-ellipsis">
       2026.5.9
@@ -1019,6 +1037,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202661" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.6.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202660" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.6.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202659" class="md-nav__link">
     <span class="md-ellipsis">
       2026.5.9
@@ -1142,6 +1178,65 @@ behavior changes, and notable fixes. Internal-only changes are omitted.</p>
 so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
+</div>
+<hr />
+<h2 id="202661">2026.6.1<a class="headerlink" href="#202661" title="Permanent link">&para;</a></h2>
+<p><strong>A more visual, more analytical control plane.</strong> The web UI's capability tracks
+continue:</p>
+<ul>
+<li><strong>Edit workflows as a graph.</strong> A new graph view (<code>/ui/workflows/{id}/graph</code>)
+  lets you wire steps visually — add/delete nodes, draw success/fail/gate edges,
+  set the entrypoint — with every change validated and hot-reloaded like the
+  form and YAML editors.</li>
+<li><strong>Bulk actions &amp; clone.</strong> Multi-select on the Tasks list (bulk Cancel / Retry /
+  Close) and the Executions list (bulk Cancel); clone a workflow to a new id from
+  the editor.</li>
+<li><strong>Insight area.</strong> A <strong>Trends</strong> page (daily throughput, success rate, judge
+  abstain rate, recovery, and LLM spend) and a <strong>Tool budget</strong> page (actual
+  tool-use vs the configured complexity-tier budget).</li>
+</ul>
+<p>Under the hood: recovery exits are now recorded (a new <code>recovery_events</code> table —
+a one-time additive migration runs on first start), and three observability
+metrics that were design-only are now emitted. Backwards-compatible; restart the
+daemon to pick it up.</p>
+<hr />
+<h2 id="202660">2026.6.0<a class="headerlink" href="#202660" title="Permanent link">&para;</a></h2>
+<p><strong>Fix GitHub issues end-to-end.</strong> Label an issue (or open a pull request) and
+swarmd can plan it, make the change across subtasks, review its own diff, and
+open a <strong>draft pull request</strong> for you to approve — hands-off, with the daemon
+doing the branch push and the review posting. Every automated PR is a draft, so
+nothing merges without you.</p>
+<p>Other highlights:</p>
+<ul>
+<li><strong>Self-improving workflows.</strong> When a workflow starts failing or getting
+  expensive, swarmd can propose a repair, <strong>replay-test it against real past
+  runs</strong>, score it against the current version, and apply it only when you
+  approve — nothing changes on its own.</li>
+<li><strong>The swarm learns from itself.</strong> A new continuous-learning layer mines
+  reusable, confidence-scored fixes from past runs and surfaces them as advice
+  on failed tasks and to the planner. Advisory and opt-in.</li>
+<li><strong>Refreshed control-plane UI.</strong> A new translucent design with icon-rail
+  navigation, first-class Swarms / Workflows / Executions list pages, tidier
+  per-page layouts, and a trading insight dashboard.</li>
+<li><strong>Feature Doctor.</strong> A new command tells you which optional features are
+  enabled, ready, or blocked — and can turn one on for you, with a backup,
+  validation, and automatic rollback if anything is wrong.</li>
+<li><strong>Sign in with GitHub.</strong> Optional GitHub login for the web UI with per-project
+  access scoping, plus the groundwork for single sign-on.</li>
+<li><strong>More model choices.</strong> Free-tier hosted models with automatic fallback, and
+  per-role tool budgets that scale to task complexity so simple tasks stay cheap
+  and hard ones get more room to work.</li>
+<li><strong>Public documentation</strong> is now live at docs.swarmd.dev.</li>
+<li><strong>Safer web fetching.</strong> The research browser follows shortened links (e.g.
+  map short-URLs) to their real destination before applying your host
+  allowlist, and refuses to reach private or loopback network addresses.</li>
+<li><strong>Security &amp; safety hardening.</strong> A broad audit-remediation pass across access
+  controls, the trading safety envelope, and memory-access policy.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Restart after upgrade</p>
+<p>A few of these are read from the daemon config at startup, so restart the
+daemon after upgrading to pick them up.</p>
 </div>
 <hr />
 <h2 id="202659">2026.5.9<a class="headerlink" href="#202659" title="Permanent link">&para;</a></h2>
