@@ -61,6 +61,14 @@
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.swarmd.dev/guides/approvals/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/guides/autonomy/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.swarmd.dev/guides/clustering/</loc>
          <lastmod>2026-06-21</lastmod>
     </url>
@@ -70,6 +78,18 @@
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/cost-and-caching/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/guides/feature-doctor/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/guides/observability/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/guides/recovery/</loc>
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>

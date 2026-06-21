@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/zero-egress/">
+        <link rel="canonical" href="https://docs.swarmd.dev/guides/observability/">
       
       
-        <link rel="prev" href="../memory-rag/">
+        <link rel="prev" href="../cost-and-caching/">
       
       
-        <link rel="next" href="../cluster/">
+        <link rel="next" href="../storage-and-retention/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Zero-egress / local-first execution - swarmd documentation</title>
+        <title>Observability - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zero-egress-local-first-execution" class="md-skip">
+        <a href="#observability" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Zero-egress / local-first execution
+              Observability
             
           </span>
         </div>
@@ -392,6 +392,8 @@
       
   
   
+    
+  
   
   
     
@@ -402,318 +404,6 @@
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../guides/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    Guides
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Guides
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/conversation-channels/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Conversation Channels
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/workflows-and-llm-controls/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Workflows and LLM Controls
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/autonomy/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Autonomy — self-running projects
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/approvals/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Approvals &amp; human-in-the-loop
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/recovery/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Recovering failed work
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/cost-and-caching/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Cost and Caching
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/observability/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Observability
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/storage-and-retention/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Storage and Retention
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/feature-doctor/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The feature doctor
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/clustering/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Clustering and the DMZ Webhook Relay
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/trading-setup/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trading Setup
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
       
         
       
@@ -747,39 +437,49 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
-    Features
+    Guides
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Features
+            Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../blackbox/" class="md-nav__link">
+      <a href="../conversation-channels/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Autonomy Black Box
+    Conversation Channels
   </span>
   
 
@@ -796,11 +496,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../self-healing/" class="md-nav__link">
+      <a href="../workflows-and-llm-controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Self-healing workflow genome
+    Workflows and LLM Controls
   </span>
   
 
@@ -817,11 +517,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../instinct/" class="md-nav__link">
+      <a href="../autonomy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Instinct layer
+    Autonomy — self-running projects
   </span>
   
 
@@ -838,11 +538,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../auth/" class="md-nav__link">
+      <a href="../approvals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Authentication &amp; access control
+    Approvals &amp; human-in-the-loop
   </span>
   
 
@@ -859,11 +559,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory-rag/" class="md-nav__link">
+      <a href="../recovery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Memory &amp; RAG
+    Recovering failed work
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cost-and-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost and Caching
   </span>
   
 
@@ -893,7 +614,7 @@
           
   
   <span class="md-ellipsis">
-    Zero-egress / local-first execution
+    Observability
   </span>
   
 
@@ -904,7 +625,7 @@
         
   
   <span class="md-ellipsis">
-    Zero-egress / local-first execution
+    Observability
   </span>
   
 
@@ -926,28 +647,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#container-hardening" class="md-nav__link">
+  <a href="#the-dashboards" class="md-nav__link">
     <span class="md-ellipsis">
-      Container hardening
+      The dashboards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#home" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#network-modes" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#insight" class="md-nav__link">
     <span class="md-ellipsis">
-      Network modes
+      Insight
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Network modes">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#choosing-modes-per-role" class="md-nav__link">
+  <a href="#health" class="md-nav__link">
     <span class="md-ellipsis">
-      Choosing modes per role
+      Health
     </span>
   </a>
   
@@ -959,18 +689,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#local-first-open-weight-models" class="md-nav__link">
+  <a href="#spend-and-cost-efficiency" class="md-nav__link">
     <span class="md-ellipsis">
-      Local-first / open-weight models
+      Spend and cost-efficiency
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-crosses-which-boundary" class="md-nav__link">
+  <a href="#prometheus-metrics" class="md-nav__link">
     <span class="md-ellipsis">
-      What crosses which boundary
+      Prometheus metrics
     </span>
   </a>
   
@@ -992,7 +722,286 @@
   
   
     <li class="md-nav__item">
-      <a href="../cluster/" class="md-nav__link">
+      <a href="../storage-and-retention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage and Retention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-doctor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The feature doctor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clustering and the DMZ Webhook Relay
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trading-setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trading Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/blackbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy Black Box
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/self-healing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Self-healing workflow genome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/instinct/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instinct layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication &amp; access control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/memory-rag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory &amp; RAG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/zero-egress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1013,7 +1022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../forge/" class="md-nav__link">
+      <a href="../../features/forge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1034,7 +1043,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../companion/" class="md-nav__link">
+      <a href="../../features/companion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1055,7 +1064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../trading-series/" class="md-nav__link">
+      <a href="../../features/trading-series/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1252,28 +1261,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#container-hardening" class="md-nav__link">
+  <a href="#the-dashboards" class="md-nav__link">
     <span class="md-ellipsis">
-      Container hardening
+      The dashboards
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The dashboards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#home" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#network-modes" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#insight" class="md-nav__link">
     <span class="md-ellipsis">
-      Network modes
+      Insight
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Network modes">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#choosing-modes-per-role" class="md-nav__link">
+  <a href="#health" class="md-nav__link">
     <span class="md-ellipsis">
-      Choosing modes per role
+      Health
     </span>
   </a>
   
@@ -1285,18 +1303,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#local-first-open-weight-models" class="md-nav__link">
+  <a href="#spend-and-cost-efficiency" class="md-nav__link">
     <span class="md-ellipsis">
-      Local-first / open-weight models
+      Spend and cost-efficiency
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-crosses-which-boundary" class="md-nav__link">
+  <a href="#prometheus-metrics" class="md-nav__link">
     <span class="md-ellipsis">
-      What crosses which boundary
+      Prometheus metrics
     </span>
   </a>
   
@@ -1317,123 +1335,91 @@
                   
 
 
-<h1 id="zero-egress-local-first-execution">Zero-egress / local-first execution<a class="headerlink" href="#zero-egress-local-first-execution" title="Permanent link">&para;</a></h1>
-<p>swarmd is built to run agents that have <strong>no direct path to the internet</strong>. Each
-agent runs in its own rootless Podman container; in the zero-egress posture that
-container has no network device at all. Anything that genuinely needs to leave
-the host — an LLM completion, an MCP tool call, a broker request — is made by the
-<strong>daemon</strong>, not the agent. The agent asks the daemon over a local socket; the
-daemon is the only process with outbound access.</p>
-<p>This makes swarmd a natural fit for air-gapped and data-sensitive environments,
-especially when paired with self-hosted, open-weight models.</p>
-<h2 id="container-hardening">Container hardening<a class="headerlink" href="#container-hardening" title="Permanent link">&para;</a></h2>
-<p>Every agent container is launched with the same baseline regardless of network
-mode:</p>
+<h1 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h1>
+<p>swarmd is built to run unattended, so it gives you several ways to see what it's
+doing: a set of operator dashboards in the Web UI, and a Prometheus metrics
+endpoint for your own monitoring stack.</p>
+<h2 id="the-dashboards">The dashboards<a class="headerlink" href="#the-dashboards" title="Permanent link">&para;</a></h2>
+<h3 id="home">Home<a class="headerlink" href="#home" title="Permanent link">&para;</a></h3>
+<p>The Web UI landing page (<code>/ui/</code>) is an operator front page of live tiles:
+active tasks (queued, leased, running), active chats, a countdown to the next
+<a href="../autonomy/">autonomy</a> evaluation per project, lifetime cache savings, a memory
+pipeline snapshot, trading safety status, and an <strong>Inbox</strong> tile for anything that
+needs you.</p>
+<h3 id="insight">Insight<a class="headerlink" href="#insight" title="Permanent link">&para;</a></h3>
+<p>The <strong>Insight</strong> area collects the analytical views:</p>
 <ul>
-<li><code>--cap-drop ALL</code> — no Linux capabilities,</li>
-<li><code>--security-opt no-new-privileges</code> — no privilege escalation,</li>
-<li>a user-namespace mapping, and an optional non-root <code>--user</code>,</li>
-<li>a small set of scoped bind mounts (the step's input, output, and workspace);
-  the project's <code>.git</code> is mounted read-only.</li>
+<li><strong>Spend</strong> (<code>/ui/spend</code>) — the cost deep-dive (below).</li>
+<li><strong>Trends</strong> (<code>/ui/insights/trends</code>) — daily throughput and success-rate over a
+  trailing window, plus a recovery-events series when recovery tracking is
+  wired.</li>
+<li><strong>Tool budget</strong> (<code>/ui/insights/tool-budget</code>) — a histogram of how many tool
+  calls executions actually use, plotted against the
+  <a href="../cost-and-caching/#dynamic-per-role-tool-budgets">complexity-tier budget</a>,
+  with mean / P50 / P95. Use it to tune budgets to reality.</li>
+<li><strong>Trading</strong> (<code>/ui/trading</code>) — broker account snapshot, recent trades, and
+  safety events for trading projects.</li>
 </ul>
-<h2 id="network-modes">Network modes<a class="headerlink" href="#network-modes" title="Permanent link">&para;</a></h2>
-<p>A role's network access is one of five modes:</p>
-<table>
-<thead>
-<tr>
-<th>Mode</th>
-<th>What the container gets</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>none</code></td>
-<td>no network device — fully isolated</td>
-</tr>
-<tr>
-<td><code>daemon-only</code></td>
-<td>no network device, <strong>plus</strong> a bind-mounted socket to the local daemon</td>
-</tr>
-<tr>
-<td><code>egress</code></td>
-<td>its own network namespace with outbound internet</td>
-</tr>
-<tr>
-<td><code>host</code></td>
-<td>shares the host network (denied unless explicitly allowed)</td>
-</tr>
-<tr>
-<td><em>(unset)</em></td>
-<td>inherits the daemon-wide default</td>
-</tr>
-</tbody>
-</table>
-<p><strong><code>daemon-only</code> is the zero-egress workhorse.</strong> On rootless Podman there is no
-network setting that reaches the host daemon while blocking the internet, so
-swarmd removes the network device entirely and gives the agent a Unix socket to
-the daemon instead. The daemon rewrites the agent's API, LLM, and memory
-endpoints to that socket, then performs the real outbound calls itself. If no
-daemon socket is configured the mount is simply omitted and the container stays
-fully isolated — it <strong>fails closed</strong>, never open.</p>
-<h3 id="choosing-modes-per-role">Choosing modes per role<a class="headerlink" href="#choosing-modes-per-role" title="Permanent link">&para;</a></h3>
-<p>Set the mode on a swarm role, and the daemon-wide default for everything that
-doesn't override it:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># daemon config</span>
-<span class="nt">runtime</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">default_network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">daemon-only</span><span class="w">      </span><span class="c1"># zero-egress by default</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># a swarm role that genuinely needs to fetch packages</span>
-<span class="nt">roles</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">builder</span>
-<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">egress</span>
-</code></pre></div>
-<p>A typical setup runs reasoning/review roles on <code>daemon-only</code> and grants <code>egress</code>
-only to the few roles that must install dependencies. An invalid
-<code>default_network</code> value <strong>fails closed to <code>daemon-only</code></strong>, so a typo can't
-silently restore egress.</p>
-<p>Two guardrails to know:</p>
+<h3 id="health">Health<a class="headerlink" href="#health" title="Permanent link">&para;</a></h3>
+<p>Admin-gated health tabs under <code>/ui/admin/health/</code> cover the daemon's operational
+state: <strong>leases</strong> (lease status and recent lease transitions — the surface for
+diagnosing stuck or lost work), the stuck-execution <strong>watchdog</strong>, <strong>MCP</strong> server
+reachability, <strong>runtime</strong> probes, and <strong>cluster</strong> leader/heartbeat status.</p>
+<h2 id="spend-and-cost-efficiency">Spend and cost-efficiency<a class="headerlink" href="#spend-and-cost-efficiency" title="Permanent link">&para;</a></h2>
+<p>The spend dashboard (<code>/ui/spend</code>) slices cost by window (24h / 7d / 30d),
+project, source, task, and role+model. Alongside total cost and token counts it
+surfaces a few efficiency signals:</p>
 <ul>
-<li><strong><code>daemon-only</code> requires <code>server.unix_socket</code></strong> to be set (that's the socket
-  the container connects to). A role whose LLM endpoint is a direct external URL
-  must use <code>egress</code>, not <code>daemon-only</code>.</li>
-<li><strong><code>host</code> is denied by default.</strong> Because host networking defeats the sandbox,
-  it only works when the operator sets <code>SWARMD_ALLOW_NETWORK_HOST=1</code> on the
-  daemon — a deliberate host-level trust decision.</li>
+<li><strong>Input ratio</strong> — prompt tokens as a share of total; a persistently high ratio
+  flags context bloat.</li>
+<li><strong>Cache hit ratio</strong> and <strong>dollars saved</strong> — how much
+  <a href="../cost-and-caching/">prompt/embedding caching</a> is actually saving.</li>
+<li><strong>Effective cost per success</strong> and its <strong>drift ratio</strong> — cost per <em>useful</em>
+  result (spend divided by successful outcomes), and how the recent window
+  compares to a baseline. A cheap model that fails often can cost more per
+  success than an expensive one that doesn't; the drift badge (green/amber/red)
+  flags when that's getting worse. See
+  <a href="../cost-and-caching/#effective-cost-per-success">Cost and caching</a>.</li>
 </ul>
-<blockquote>
-<p>The daemon does not force zero-egress on you: with <code>runtime.default_network</code>
-unset, containers fall back to the historical rootless-egress behaviour. The
-zero-egress posture is enabled by setting <code>runtime.default_network:
-daemon-only</code> (which the shipped configuration template does).</p>
-</blockquote>
-<h2 id="local-first-open-weight-models">Local-first / open-weight models<a class="headerlink" href="#local-first-open-weight-models" title="Permanent link">&para;</a></h2>
-<p>Because the agent's LLM endpoint is plain OpenAI-compatible HTTP, pointing swarmd
-at a self-hosted model — Ollama on a LAN host, vLLM, or any compatible endpoint —
-is configuration only:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">agent_llm</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://192.168.10.20:11434/v1&quot;</span><span class="w">   </span><span class="c1"># e.g. Ollama on the LAN</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen3.6:35b&quot;</span>
-<span class="w">    </span><span class="nt">context_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">262144</span>
+<p>From the CLI, <code>swarmctl cache-stats</code> reports cache effectiveness. (Note:
+<code>swarmctl cpc</code> is the cross-project-call ledger, not a cost command — there is no
+<code>swarmctl spend</code>.)</p>
+<h2 id="prometheus-metrics">Prometheus metrics<a class="headerlink" href="#prometheus-metrics" title="Permanent link">&para;</a></h2>
+<p>swarmd exposes Prometheus metrics at <strong><code>/metrics</code></strong>. Enable the dedicated metrics
+server and point your scraper at it:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">metrics</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:9090&quot;</span><span class="w">            </span><span class="c1"># dedicated metrics listener; scrape http://&lt;host&gt;:9090/metrics</span>
+<span class="w">  </span><span class="nt">require_admin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># when true (with auth on), the main-port /metrics needs a token</span>
+<span class="w">  </span><span class="c1"># scrape_token: &quot;…&quot;      # a read-only credential accepted alongside the admin key</span>
 </code></pre></div>
-<p>Any field left empty under <code>runtime.agent_llm</code> falls back to the daemon's
-<code>chat.*</code> settings, so a single <code>chat:</code> section is enough when agents share the
-daemon's model. Individual roles can override the model with a <code>model:</code> key. In a
-<code>daemon-only</code> deployment these calls are made by the daemon, so the model
-endpoint only has to be reachable from the daemon host — never from the agent
-containers.</p>
-<h2 id="what-crosses-which-boundary">What crosses which boundary<a class="headerlink" href="#what-crosses-which-boundary" title="Permanent link">&para;</a></h2>
-<p>In the zero-egress posture:</p>
+<p><code>/metrics</code> is also mounted on the main API port. When you run with
+<a href="../../features/auth/">authentication</a> on and set <code>require_admin: true</code>, the
+main-port endpoint requires the admin key or a dedicated scrape token; the
+separate <code>metrics.addr</code> listener is the intended scrape target — bind it to a
+trusted interface.</p>
+<p>The exported metrics cover, in plain terms:</p>
 <ul>
-<li><strong>Out of the container:</strong> nothing over the network (there is no network
-  device). The only channel is the local socket to the daemon, and filesystem
-  access is limited to the step's scoped mounts.</li>
-<li><strong>Out of the daemon:</strong> all real egress — LLM completions, MCP tool calls,
-  broker/external API requests — performed by the daemon on the host.</li>
+<li><strong>Task and execution lifecycle</strong> — active, started, completed, failed,
+  cancelled, retried counts, and durations.</li>
+<li><strong>Queue, scheduling, and leases</strong> — queue depth by status, how long tasks wait
+  before running, leases acquired and expired, and recoveries of expired leases.</li>
+<li><strong>LLM cost and tokens</strong> — dollar spend per project and per model, prompt and
+  completion tokens, tool-calling iterations, and cache savings.</li>
+<li><strong>Model quality</strong> — per role and model: success rate, effective cost per
+  success, and rates of parse failures, schema violations, refusals, and
+  degenerate loops.</li>
+<li><strong>Tool calls, autonomy, and cross-project orchestration</strong> — tool invocation
+  counts, autonomy approval resolutions and configured caps, and cross-project
+  call and spawn counts.</li>
+<li><strong>Trading</strong> — safety-envelope events, orders and fills ingested, per project.</li>
+<li><strong>HTTP and process</strong> — request counts, durations, in-flight requests, plus
+  standard Go/process collectors.</li>
 </ul>
-<p>The orchestrator holds the credentials and the network reach; the agent runtime
-does not.</p>
+<p>OpenTelemetry tracing can be enabled alongside metrics with <code>tracing.enabled</code> and
+<code>tracing.endpoint</code>.</p>
+<p>See the <a href="../../reference/configuration/">Configuration reference</a> for every
+<code>metrics.*</code> key and default.</p>
 
 
 

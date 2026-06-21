@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/zero-egress/">
+        <link rel="canonical" href="https://docs.swarmd.dev/guides/recovery/">
       
       
-        <link rel="prev" href="../memory-rag/">
+        <link rel="prev" href="../approvals/">
       
       
-        <link rel="next" href="../cluster/">
+        <link rel="next" href="../cost-and-caching/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Zero-egress / local-first execution - swarmd documentation</title>
+        <title>Recovering failed work - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#zero-egress-local-first-execution" class="md-skip">
+        <a href="#recovering-failed-work" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Zero-egress / local-first execution
+              Recovering failed work
             
           </span>
         </div>
@@ -392,6 +392,8 @@
       
   
   
+    
+  
   
   
     
@@ -402,318 +404,6 @@
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../guides/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    Guides
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Guides
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/conversation-channels/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Conversation Channels
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/workflows-and-llm-controls/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Workflows and LLM Controls
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/autonomy/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Autonomy — self-running projects
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/approvals/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Approvals &amp; human-in-the-loop
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/recovery/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Recovering failed work
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/cost-and-caching/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Cost and Caching
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/observability/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Observability
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/storage-and-retention/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Storage and Retention
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/feature-doctor/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The feature doctor
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/clustering/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Clustering and the DMZ Webhook Relay
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/trading-setup/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trading Setup
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
       
         
       
@@ -747,39 +437,49 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
   
   <span class="md-ellipsis">
-    Features
+    Guides
   </span>
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Features
+            Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
               
+            
+              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="../blackbox/" class="md-nav__link">
+      <a href="../conversation-channels/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Autonomy Black Box
+    Conversation Channels
   </span>
   
 
@@ -796,11 +496,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../self-healing/" class="md-nav__link">
+      <a href="../workflows-and-llm-controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Self-healing workflow genome
+    Workflows and LLM Controls
   </span>
   
 
@@ -817,11 +517,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../instinct/" class="md-nav__link">
+      <a href="../autonomy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Instinct layer
+    Autonomy — self-running projects
   </span>
   
 
@@ -838,32 +538,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../auth/" class="md-nav__link">
+      <a href="../approvals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Authentication &amp; access control
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../memory-rag/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Memory &amp; RAG
+    Approvals &amp; human-in-the-loop
   </span>
   
 
@@ -893,7 +572,7 @@
           
   
   <span class="md-ellipsis">
-    Zero-egress / local-first execution
+    Recovering failed work
   </span>
   
 
@@ -904,7 +583,7 @@
         
   
   <span class="md-ellipsis">
-    Zero-egress / local-first execution
+    Recovering failed work
   </span>
   
 
@@ -926,51 +605,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#container-hardening" class="md-nav__link">
+  <a href="#understand-it-first" class="md-nav__link">
     <span class="md-ellipsis">
-      Container hardening
+      Understand it first
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#network-modes" class="md-nav__link">
+  <a href="#retry-the-whole-task" class="md-nav__link">
     <span class="md-ellipsis">
-      Network modes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Network modes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#choosing-modes-per-role" class="md-nav__link">
-    <span class="md-ellipsis">
-      Choosing modes per role
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#local-first-open-weight-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Local-first / open-weight models
+      Retry the whole task
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-crosses-which-boundary" class="md-nav__link">
+  <a href="#re-run-from-a-step" class="md-nav__link">
     <span class="md-ellipsis">
-      What crosses which boundary
+      Re-run from a step
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structured recovery
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-an-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing an approach
     </span>
   </a>
   
@@ -992,7 +665,328 @@
   
   
     <li class="md-nav__item">
-      <a href="../cluster/" class="md-nav__link">
+      <a href="../cost-and-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost and Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../storage-and-retention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage and Retention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-doctor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The feature doctor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clustering and the DMZ Webhook Relay
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trading-setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trading Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Features
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Features
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/blackbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy Black Box
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/self-healing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Self-healing workflow genome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/instinct/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instinct layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/auth/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Authentication &amp; access control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/memory-rag/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Memory &amp; RAG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/zero-egress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1013,7 +1007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../forge/" class="md-nav__link">
+      <a href="../../features/forge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1034,7 +1028,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../companion/" class="md-nav__link">
+      <a href="../../features/companion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1055,7 +1049,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../trading-series/" class="md-nav__link">
+      <a href="../../features/trading-series/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1252,51 +1246,45 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#container-hardening" class="md-nav__link">
+  <a href="#understand-it-first" class="md-nav__link">
     <span class="md-ellipsis">
-      Container hardening
+      Understand it first
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#network-modes" class="md-nav__link">
+  <a href="#retry-the-whole-task" class="md-nav__link">
     <span class="md-ellipsis">
-      Network modes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Network modes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#choosing-modes-per-role" class="md-nav__link">
-    <span class="md-ellipsis">
-      Choosing modes per role
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#local-first-open-weight-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Local-first / open-weight models
+      Retry the whole task
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-crosses-which-boundary" class="md-nav__link">
+  <a href="#re-run-from-a-step" class="md-nav__link">
     <span class="md-ellipsis">
-      What crosses which boundary
+      Re-run from a step
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-recovery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structured recovery
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-an-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing an approach
     </span>
   </a>
   
@@ -1317,123 +1305,90 @@
                   
 
 
-<h1 id="zero-egress-local-first-execution">Zero-egress / local-first execution<a class="headerlink" href="#zero-egress-local-first-execution" title="Permanent link">&para;</a></h1>
-<p>swarmd is built to run agents that have <strong>no direct path to the internet</strong>. Each
-agent runs in its own rootless Podman container; in the zero-egress posture that
-container has no network device at all. Anything that genuinely needs to leave
-the host — an LLM completion, an MCP tool call, a broker request — is made by the
-<strong>daemon</strong>, not the agent. The agent asks the daemon over a local socket; the
-daemon is the only process with outbound access.</p>
-<p>This makes swarmd a natural fit for air-gapped and data-sensitive environments,
-especially when paired with self-hosted, open-weight models.</p>
-<h2 id="container-hardening">Container hardening<a class="headerlink" href="#container-hardening" title="Permanent link">&para;</a></h2>
-<p>Every agent container is launched with the same baseline regardless of network
-mode:</p>
+<h1 id="recovering-failed-work">Recovering failed work<a class="headerlink" href="#recovering-failed-work" title="Permanent link">&para;</a></h1>
+<p>When a task fails, you rarely want to start over from scratch. swarmd gives you
+graded ways to recover — re-run the whole task, re-run from a specific step, or
+apply a structured fix and retry — plus a plain-language explanation of what went
+wrong to decide between them.</p>
+<h2 id="understand-it-first">Understand it first<a class="headerlink" href="#understand-it-first" title="Permanent link">&para;</a></h2>
+<p>Before retrying, get an explanation of the failure:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>explain<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
+</code></pre></div>
+<p>This produces an operator-friendly summary of what happened — the entry point
+from a failure to a recovery decision. For the complete event-by-event record
+behind it, see the <a href="../../features/blackbox/">Autonomy Black Box</a>.</p>
+<h2 id="retry-the-whole-task">Retry the whole task<a class="headerlink" href="#retry-the-whole-task" title="Permanent link">&para;</a></h2>
+<p>The simplest recovery re-queues the task and runs it again from the first step:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
+<span class="c1"># start its attempt counter over as well:</span>
+swarmctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--reset-attempts
+</code></pre></div>
+<p>A fresh execution runs the workflow from the top. Use this when the failure was
+transient (a flaky upstream, a rate limit) or when nothing about the run is worth
+keeping.</p>
+<h2 id="re-run-from-a-step">Re-run from a step<a class="headerlink" href="#re-run-from-a-step" title="Permanent link">&para;</a></h2>
+<p>When the early steps were fine and only a later step went wrong, you can <strong>rerun
+from that step</strong> instead of repeating the good work. On a failed (terminal)
+execution's detail page in the Web UI, choose a completed step and <strong>Rerun from
+step</strong>: swarmd rewinds the execution to that point — keeping the upstream steps'
+results and artifacts — and runs forward again.</p>
+<p>Two things to know:</p>
 <ul>
-<li><code>--cap-drop ALL</code> — no Linux capabilities,</li>
-<li><code>--security-opt no-new-privileges</code> — no privilege escalation,</li>
-<li>a user-namespace mapping, and an optional non-root <code>--user</code>,</li>
-<li>a small set of scoped bind mounts (the step's input, output, and workspace);
-  the project's <code>.git</code> is mounted read-only.</li>
+<li>It <strong>rewinds the same execution</strong> rather than cloning a new one, so the
+  execution's URL and audit history are preserved in place.</li>
+<li>swarmd warns you when an upstream step had <strong>external side effects</strong> (for
+  example, a posted PR review, content indexed into memory, or a spawned
+  cross-project task). Those effects are <em>not</em> replayed, so the upstream world
+  may already reflect the first run — rerun from a step that's safe to treat as
+  the new starting point.</li>
 </ul>
-<h2 id="network-modes">Network modes<a class="headerlink" href="#network-modes" title="Permanent link">&para;</a></h2>
-<p>A role's network access is one of five modes:</p>
+<p>Rerun-from-step is a Web UI action; the CLI's <code>swarmctl execution</code> command is for
+inspecting executions (<code>list</code>, <code>inspect</code>), not rerunning them.</p>
+<h2 id="structured-recovery">Structured recovery<a class="headerlink" href="#structured-recovery" title="Permanent link">&para;</a></h2>
+<p>When a step fails into recovery, the lead can offer <strong>structured recovery
+options</strong> rather than just retrying blindly. You'll see these as choices on the
+failed task — and approving one makes swarmd apply it before retrying:</p>
 <table>
 <thead>
 <tr>
-<th>Mode</th>
-<th>What the container gets</th>
+<th>Action</th>
+<th>What it does</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>none</code></td>
-<td>no network device — fully isolated</td>
+<td><code>retry</code></td>
+<td>retry the failed step as-is</td>
 </tr>
 <tr>
-<td><code>daemon-only</code></td>
-<td>no network device, <strong>plus</strong> a bind-mounted socket to the local daemon</td>
+<td><code>skip</code></td>
+<td>skip the failed step and continue</td>
 </tr>
 <tr>
-<td><code>egress</code></td>
-<td>its own network namespace with outbound internet</td>
+<td><code>model_fallback</code></td>
+<td>retry with each role switched to its configured fallback model</td>
 </tr>
 <tr>
-<td><code>host</code></td>
-<td>shares the host network (denied unless explicitly allowed)</td>
-</tr>
-<tr>
-<td><em>(unset)</em></td>
-<td>inherits the daemon-wide default</td>
+<td><code>reroute_workflow</code></td>
+<td>re-run on a different workflow (bounded by the project's allowed candidates)</td>
 </tr>
 </tbody>
 </table>
-<p><strong><code>daemon-only</code> is the zero-egress workhorse.</strong> On rootless Podman there is no
-network setting that reaches the host daemon while blocking the internet, so
-swarmd removes the network device entirely and gives the agent a Unix socket to
-the daemon instead. The daemon rewrites the agent's API, LLM, and memory
-endpoints to that socket, then performs the real outbound calls itself. If no
-daemon socket is configured the mount is simply omitted and the container stays
-fully isolated — it <strong>fails closed</strong>, never open.</p>
-<h3 id="choosing-modes-per-role">Choosing modes per role<a class="headerlink" href="#choosing-modes-per-role" title="Permanent link">&para;</a></h3>
-<p>Set the mode on a swarm role, and the daemon-wide default for everything that
-doesn't override it:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># daemon config</span>
-<span class="nt">runtime</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">default_network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">daemon-only</span><span class="w">      </span><span class="c1"># zero-egress by default</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># a swarm role that genuinely needs to fetch packages</span>
-<span class="nt">roles</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">builder</span>
-<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">egress</span>
-</code></pre></div>
-<p>A typical setup runs reasoning/review roles on <code>daemon-only</code> and grants <code>egress</code>
-only to the few roles that must install dependencies. An invalid
-<code>default_network</code> value <strong>fails closed to <code>daemon-only</code></strong>, so a typo can't
-silently restore egress.</p>
-<p>Two guardrails to know:</p>
+<p>These are <strong>operator-gated</strong> — swarmd proposes, you choose. A malformed or
+unrecognised action safely degrades to a plain retry hint rather than doing
+something unexpected. The failed-task page also offers a per-failure-class
+action card (for example, "requeue" for a rate-limited task, "review project
+budget" for a budget failure, "inspect audit trail" for a suspected leak) plus a
+universal <strong>steer + retry</strong> that lets you add a correcting instruction before the
+next attempt.</p>
+<h2 id="choosing-an-approach">Choosing an approach<a class="headerlink" href="#choosing-an-approach" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><code>daemon-only</code> requires <code>server.unix_socket</code></strong> to be set (that's the socket
-  the container connects to). A role whose LLM endpoint is a direct external URL
-  must use <code>egress</code>, not <code>daemon-only</code>.</li>
-<li><strong><code>host</code> is denied by default.</strong> Because host networking defeats the sandbox,
-  it only works when the operator sets <code>SWARMD_ALLOW_NETWORK_HOST=1</code> on the
-  daemon — a deliberate host-level trust decision.</li>
+<li>Transient failure, nothing to keep → <strong>retry the whole task</strong>.</li>
+<li>Good work early, one late step wrong → <strong>rerun from that step</strong>.</li>
+<li>A model misbehaved or the workflow was a poor fit → <strong>structured recovery</strong>
+  (<code>model_fallback</code> / <code>reroute_workflow</code>).</li>
+<li>Not sure → run <code>swarmctl task explain</code> first.</li>
 </ul>
-<blockquote>
-<p>The daemon does not force zero-egress on you: with <code>runtime.default_network</code>
-unset, containers fall back to the historical rootless-egress behaviour. The
-zero-egress posture is enabled by setting <code>runtime.default_network:
-daemon-only</code> (which the shipped configuration template does).</p>
-</blockquote>
-<h2 id="local-first-open-weight-models">Local-first / open-weight models<a class="headerlink" href="#local-first-open-weight-models" title="Permanent link">&para;</a></h2>
-<p>Because the agent's LLM endpoint is plain OpenAI-compatible HTTP, pointing swarmd
-at a self-hosted model — Ollama on a LAN host, vLLM, or any compatible endpoint —
-is configuration only:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">agent_llm</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://192.168.10.20:11434/v1&quot;</span><span class="w">   </span><span class="c1"># e.g. Ollama on the LAN</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen3.6:35b&quot;</span>
-<span class="w">    </span><span class="nt">context_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">262144</span>
-</code></pre></div>
-<p>Any field left empty under <code>runtime.agent_llm</code> falls back to the daemon's
-<code>chat.*</code> settings, so a single <code>chat:</code> section is enough when agents share the
-daemon's model. Individual roles can override the model with a <code>model:</code> key. In a
-<code>daemon-only</code> deployment these calls are made by the daemon, so the model
-endpoint only has to be reachable from the daemon host — never from the agent
-containers.</p>
-<h2 id="what-crosses-which-boundary">What crosses which boundary<a class="headerlink" href="#what-crosses-which-boundary" title="Permanent link">&para;</a></h2>
-<p>In the zero-egress posture:</p>
-<ul>
-<li><strong>Out of the container:</strong> nothing over the network (there is no network
-  device). The only channel is the local socket to the daemon, and filesystem
-  access is limited to the step's scoped mounts.</li>
-<li><strong>Out of the daemon:</strong> all real egress — LLM completions, MCP tool calls,
-  broker/external API requests — performed by the daemon on the host.</li>
-</ul>
-<p>The orchestrator holds the credentials and the network reach; the agent runtime
-does not.</p>
 
 
 

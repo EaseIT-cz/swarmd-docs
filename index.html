@@ -238,6 +238,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="." class="md-nav__link md-nav__link--active">
         
   
@@ -247,6 +258,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start here
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#find-your-way-around" class="md-nav__link">
+    <span class="md-ellipsis">
+      Find your way around
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -421,6 +478,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -513,6 +580,69 @@
   
   
     <li class="md-nav__item">
+      <a href="guides/autonomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy — self-running projects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/approvals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Approvals &amp; human-in-the-loop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/recovery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recovering failed work
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="guides/cost-and-caching/" class="md-nav__link">
         
   
@@ -534,11 +664,53 @@
   
   
     <li class="md-nav__item">
+      <a href="guides/observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="guides/storage-and-retention/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Storage and Retention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="guides/feature-doctor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The feature doctor
   </span>
   
 
@@ -1045,6 +1217,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#start-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start here
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#find-your-way-around" class="md-nav__link">
+    <span class="md-ellipsis">
+      Find your way around
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1059,14 +1266,56 @@
 
 
 <h1 id="swarmd">swarmd<a class="headerlink" href="#swarmd" title="Permanent link">&para;</a></h1>
-<p>swarmd is an asynchronous multi-swarm orchestration daemon for local agent
-runtimes. This site documents how to install, configure, and use every
-swarmd feature.</p>
+<p>swarmd is an asynchronous, <strong>local-first</strong> orchestration daemon for teams of AI
+agents. You define projects, each backed by a swarm of agents and one or more
+workflows; you submit tasks (or let a project create its own); swarmd queues
+them, runs each agent in its own isolated container, and persists every result.
+Work runs continuously in the background — you submit and walk away, then come
+back for the output.</p>
+<p>The daemon runs on your own infrastructure. Agents run with <strong>no direct network
+egress</strong> by default — the daemon makes the outbound calls — so swarmd suits
+data-sensitive and air-gapped environments, including with self-hosted,
+open-weight models.</p>
+<h2 id="start-here">Start here<a class="headerlink" href="#start-here" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><a href="getting-started/">Getting Started</a></strong> — install and run your first project.</li>
-<li><strong><a href="concepts/">Concepts</a></strong> — projects, swarms, workflows, tasks, delegation, memory.</li>
-<li><strong><a href="guides/">Guides</a></strong> — task-focused how-tos.</li>
-<li><strong><a href="features/instinct/">Features</a></strong> — opt-in capabilities and how to enable them.</li>
+<li><strong><a href="getting-started/">Getting Started</a></strong> — install the daemon, create
+  your first project, and run a task end to end.</li>
+<li><strong><a href="concepts/">Concepts</a></strong> — projects, swarms, roles, workflows, tasks,
+  delegation, and memory — and the <a href="concepts/architecture/">architecture</a>
+  behind them.</li>
+</ul>
+<h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Runs agent teams asynchronously</strong> — durable queues, isolated per-agent
+  containers, and structured <a href="guides/recovery/">recovery</a> when a step fails.</li>
+<li><strong>Runs itself when you want it to</strong> — <a href="guides/autonomy/">autonomy</a> lets a
+  project pursue a standing goal on a schedule, with budgets, rate limits, and
+  <a href="guides/approvals/">approval gates</a> keeping it in bounds.</li>
+<li><strong>Keeps work auditable</strong> — the <a href="features/blackbox/">Autonomy Black Box</a> gives
+  every task a single replayable trace, and the
+  <a href="features/self-healing/">self-healing genome</a> proposes and trials workflow
+  repairs for operator-gated promotion.</li>
+<li><strong>Learns from its history</strong> — the <a href="features/instinct/">instinct layer</a> mines
+  past runs into advisory, confidence-scored patterns.</li>
+<li><strong>Connects to where people work</strong> — Telegram, Slack, email, and
+  <a href="features/forge/">GitHub automation</a> via the
+  <a href="guides/conversation-channels/">conversation channels</a>, plus a
+  <a href="features/companion/">Claude Code companion</a>.</li>
+<li><strong>Governs cost and identity</strong> — hard per-project spend caps and dynamic tool
+  budgets (<a href="guides/cost-and-caching/">cost and caching</a>), a policy-aware
+  <a href="features/memory-rag/">memory firewall</a>, and
+  <a href="features/auth/">authentication with role-based access</a>.</li>
+</ul>
+<h2 id="find-your-way-around">Find your way around<a class="headerlink" href="#find-your-way-around" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong><a href="features/blackbox/">Features</a></strong> — the capabilities above, and how to
+  enable them.</li>
+<li><strong><a href="guides/">Guides</a></strong> — task-focused how-tos for running swarmd day to
+  day.</li>
+<li><strong><a href="reference/">Reference</a></strong> — every <a href="reference/configuration/">configuration key</a>
+  and <a href="reference/swarmctl/"><code>swarmctl</code> command</a>.</li>
+<li><strong><a href="troubleshooting/">Troubleshooting</a></strong> — when something won't start or
+  a task gets stuck.</li>
 </ul>
 
 
