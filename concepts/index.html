@@ -14,7 +14,7 @@
         <link rel="prev" href="../getting-started/">
       
       
-        <link rel="next" href="../guides/">
+        <link rel="next" href="architecture/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -317,6 +317,8 @@
           
         
       
+        
+      
     
     
       
@@ -344,6 +346,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link md-nav__link--active" for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
@@ -353,6 +360,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -582,6 +610,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -622,6 +660,48 @@
   
   
     <li class="md-nav__item">
+      <a href="../features/blackbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy Black Box
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/self-healing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Self-healing workflow genome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../features/instinct/" class="md-nav__link">
         
   
@@ -647,7 +727,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication
+    Authentication &amp; access control
   </span>
   
 
@@ -685,11 +765,74 @@
   
   
     <li class="md-nav__item">
+      <a href="../features/zero-egress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../features/cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Cluster topology and node roles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/forge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Forge — GitHub automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/companion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Companion plugin
   </span>
   
 
@@ -1036,7 +1179,9 @@
 on your behalf. A handful of ideas explain almost everything you will do
 with it. This page defines them and shows how they fit together. Once they
 click, the <a href="../guides/">guides</a> and
-<a href="../reference/">reference</a> are straightforward.</p>
+<a href="../reference/">reference</a> are straightforward. For the system shape
+behind these ideas — control plane vs data plane, the isolation boundary, and
+multi-swarm vs multi-node — see <a href="architecture/">Architecture</a>.</p>
 <h2 id="the-mental-model">The mental model<a class="headerlink" href="#the-mental-model" title="Permanent link">&para;</a></h2>
 <p>You can read the whole system in one sentence:</p>
 <blockquote>

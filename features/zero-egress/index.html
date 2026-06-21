@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/instinct/">
+        <link rel="canonical" href="https://docs.swarmd.dev/features/zero-egress/">
       
       
-        <link rel="prev" href="../self-healing/">
+        <link rel="prev" href="../memory-rag/">
       
       
-        <link rel="next" href="../auth/">
+        <link rel="next" href="../cluster/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Instinct layer - swarmd documentation</title>
+        <title>Zero-egress / local-first execution - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#instinct-layer" class="md-skip">
+        <a href="#zero-egress-local-first-execution" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instinct layer
+              Zero-egress / local-first execution
             
           </span>
         </div>
@@ -699,30 +699,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Instinct layer
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../instinct/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -731,86 +711,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
-    <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      Enabling it
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
-    <span class="md-ellipsis">
-      Inspecting what it learned
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -862,10 +762,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../zero-egress/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -874,6 +794,77 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#container-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      Container hardening
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network modes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#choosing-modes-per-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choosing modes per role
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#local-first-open-weight-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local-first / open-weight models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-crosses-which-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      What crosses which boundary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1146,19 +1137,28 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
+  <a href="#container-hardening" class="md-nav__link">
     <span class="md-ellipsis">
-      How it learns
+      Container hardening
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="How it learns">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network modes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network modes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
+  <a href="#choosing-modes-per-role" class="md-nav__link">
     <span class="md-ellipsis">
-      Confidence and decay
+      Choosing modes per role
     </span>
   </a>
   
@@ -1170,36 +1170,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
+  <a href="#local-first-open-weight-models" class="md-nav__link">
     <span class="md-ellipsis">
-      What consumes instincts
+      Local-first / open-weight models
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#what-crosses-which-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
-    <span class="md-ellipsis">
-      Inspecting what it learned
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
+      What crosses which boundary
     </span>
   </a>
   
@@ -1220,164 +1202,123 @@
                   
 
 
-<h1 id="instinct-layer">Instinct layer<a class="headerlink" href="#instinct-layer" title="Permanent link">&para;</a></h1>
-<p>The instinct layer lets swarmd learn from its own history. It mines the
-telemetry every task already produces, distils recurring patterns into
-confidence-scored <strong>instincts</strong> — "in situation T, action A held up" — and
-makes those instincts available as <em>evidence</em> to the parts of swarmd that
-decide how the next task runs.</p>
-<p>The defining rule: <strong>instincts are advisory. Nothing mutates silently.</strong> An
-instinct can raise the confidence of a workflow proposal an operator is already
-reviewing, or surface a remediation hint on a failed task — but it never edits a
-prompt, swaps a model, deletes a memory, or promotes a workflow on its own.
-Every behaviour-affecting decision still passes through the same operator and
-review gates it always did. With the layer disabled (the default), behaviour is
-unchanged.</p>
-<h2 id="how-it-learns">How it learns<a class="headerlink" href="#how-it-learns" title="Permanent link">&para;</a></h2>
-<p>A background worker runs on a cadence (30 minutes by default) and reads the
-<strong>audit spine</strong> — the step outcomes, tool-call log, and memory-retrieval log
-that swarmd writes for every task. Deterministic extractors turn finalised
-outcomes into atomic patterns; only genuinely ambiguous clusters fall through to
-a cheap distillation model. Each pattern is deduplicated by a canonical trigger
-key and scored.</p>
-<h3 id="confidence-and-decay">Confidence and decay<a class="headerlink" href="#confidence-and-decay" title="Permanent link">&para;</a></h3>
-<p>An instinct's confidence is a <strong>Wilson lower bound</strong> on its success rate
-(so a pattern seen 3 times is trusted far less than one seen 300 times),
-multiplied by a <strong>recency decay</strong> with a 30-day half-life (so a pattern that
-stops recurring fades rather than lingering forever). An instinct moves through
-states as the evidence accumulates:</p>
-<table>
-<thead>
-<tr>
-<th>State</th>
-<th>Reached when</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>candidate</code></td>
-<td>freshly mined; not yet trusted</td>
-</tr>
-<tr>
-<td><code>active</code></td>
-<td>confidence ≥ 0.6 and seen at least 3 times</td>
-</tr>
-<tr>
-<td><code>promoted</code></td>
-<td>holds across ≥ 2 projects at confidence ≥ 0.8 (becomes a global prior)</td>
-</tr>
-<tr>
-<td><code>retired</code></td>
-<td>confidence falls below 0.2 (sticky — stays retired)</td>
-</tr>
-</tbody>
-</table>
-<p>These thresholds are tunable (see <a href="#configuration">Configuration</a>).</p>
-<h2 id="what-consumes-instincts">What consumes instincts<a class="headerlink" href="#what-consumes-instincts" title="Permanent link">&para;</a></h2>
-<p>Four consumers read instincts, each independently switchable and each strictly
-advisory:</p>
+<h1 id="zero-egress-local-first-execution">Zero-egress / local-first execution<a class="headerlink" href="#zero-egress-local-first-execution" title="Permanent link">&para;</a></h1>
+<p>swarmd is built to run agents that have <strong>no direct path to the internet</strong>. Each
+agent runs in its own rootless Podman container; in the zero-egress posture that
+container has no network device at all. Anything that genuinely needs to leave
+the host — an LLM completion, an MCP tool call, a broker request — is made by the
+<strong>daemon</strong>, not the agent. The agent asks the daemon over a local socket; the
+daemon is the only process with outbound access.</p>
+<p>This makes swarmd a natural fit for air-gapped and data-sensitive environments,
+especially when paired with self-hosted, open-weight models.</p>
+<h2 id="container-hardening">Container hardening<a class="headerlink" href="#container-hardening" title="Permanent link">&para;</a></h2>
+<p>Every agent container is launched with the same baseline regardless of network
+mode:</p>
 <ul>
-<li><strong>Failure-class playbooks</strong> — when a task fails, high-confidence remediation
-  instincts for that failure class are surfaced on the task's detail page and
-  offered to the lead as recovery <em>context</em>. The operator's recovery-approval
-  gate is unchanged.</li>
-<li><strong>Architect evidence priors</strong> — when the workflow architect proposes a change,
-  matching instincts act as priors. They can only nudge the proposal's
-  confidence <em>up</em> toward the strongest supporting evidence (never above what the
-  model itself reported, never widening the edit's scope); a rejected proposal is
-  written back as contrary evidence.</li>
-<li><strong>Memory hygiene</strong> — instincts suggest which memory scopes to boost and which
-  chunks are prune candidates. The consolidation sweeper <em>surfaces</em> these; it
-  never deletes on their say-so, and firewall-sensitive chunks are screened out.</li>
-<li><strong>Tool-budget tiers</strong> — when a planner gives no explicit complexity verdict,
-  a learned tier can fill the gap. An explicit verdict always wins, and the
-  configured budget caps still bound the result.</li>
+<li><code>--cap-drop ALL</code> — no Linux capabilities,</li>
+<li><code>--security-opt no-new-privileges</code> — no privilege escalation,</li>
+<li>a user-namespace mapping, and an optional non-root <code>--user</code>,</li>
+<li>a small set of scoped bind mounts (the step's input, output, and workspace);
+  the project's <code>.git</code> is mounted read-only.</li>
 </ul>
-<p>There is an optional <code>auto_apply</code> mode (off by default, gated by its own
-confidence floor) that changes only how <em>strongly</em> a recovery remediation is
-presented to the lead — it does not bypass the approval gate.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<p>Run the feature doctor to diagnose prerequisites and enable:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
-</code></pre></div>
-<p>This sets <code>instinct.enabled</code> plus the consumer gates and restarts the daemon
-during an idle window. Because it is restart-gated, the doctor refuses to apply
-while tasks are running and waits for an idle window. (The tool-budget and
-<code>auto_apply</code> consumers stay manually opt-in.)</p>
-<h2 id="inspecting-what-it-learned">Inspecting what it learned<a class="headerlink" href="#inspecting-what-it-learned" title="Permanent link">&para;</a></h2>
-<p>Everything the layer knows is browsable. Use the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>instinct<span class="w"> </span>list<span class="w"> </span>--domain<span class="w"> </span>recovery<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">0</span>.8
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>show<span class="w"> </span>&lt;instinct_id&gt;
-swarmctl<span class="w"> </span>instinct<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-o<span class="w"> </span>instincts.json<span class="w">        </span><span class="c1"># filtered snapshot</span>
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>retire<span class="w"> </span>&lt;instinct_id&gt;<span class="w">            </span><span class="c1"># advisory; the row stays for audit</span>
-</code></pre></div>
-<p><code>list</code> filters by <code>--domain</code>, <code>--scope</code>, <code>--project</code>, <code>--status</code>, and
-<code>--min-confidence</code>. The same inventory is available as a read-only browser at
-<code>/ui/admin/instincts</code>, and failed tasks show their learned remediations inline
-on the task detail page. All admin surfaces require an admin-scoped key.</p>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>The layer is configured under the <code>instinct</code> block. The most useful keys:</p>
+<h2 id="network-modes">Network modes<a class="headerlink" href="#network-modes" title="Permanent link">&para;</a></h2>
+<p>A role's network access is one of five modes:</p>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Default</th>
-<th>Meaning</th>
+<th>Mode</th>
+<th>What the container gets</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>instinct.enabled</code></td>
-<td><code>false</code></td>
-<td>master switch</td>
+<td><code>none</code></td>
+<td>no network device — fully isolated</td>
 </tr>
 <tr>
-<td><code>instinct.cadence_seconds</code></td>
-<td><code>1800</code></td>
-<td>how often the miner runs</td>
+<td><code>daemon-only</code></td>
+<td>no network device, <strong>plus</strong> a bind-mounted socket to the local daemon</td>
 </tr>
 <tr>
-<td><code>instinct.min_support</code></td>
-<td><code>3</code></td>
-<td>observations before a pattern can leave <code>candidate</code></td>
+<td><code>egress</code></td>
+<td>its own network namespace with outbound internet</td>
 </tr>
 <tr>
-<td><code>instinct.active_confidence</code></td>
-<td><code>0.6</code></td>
-<td>promotion-to-<code>active</code> threshold</td>
+<td><code>host</code></td>
+<td>shares the host network (denied unless explicitly allowed)</td>
 </tr>
 <tr>
-<td><code>instinct.promote_confidence</code></td>
-<td><code>0.8</code></td>
-<td>cross-project global-promotion threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_projects</code></td>
-<td><code>2</code></td>
-<td>projects a pattern must hold across to go global</td>
-</tr>
-<tr>
-<td><code>instinct.retire_floor</code></td>
-<td><code>0.2</code></td>
-<td>confidence below which an instinct retires</td>
-</tr>
-<tr>
-<td><code>instinct.decay_halflife_days</code></td>
-<td><code>30</code></td>
-<td>recency-decay half-life</td>
-</tr>
-<tr>
-<td><code>instinct.model</code></td>
-<td><code>chat.model</code></td>
-<td>distillation model for ambiguous clusters</td>
+<td><em>(unset)</em></td>
+<td>inherits the daemon-wide default</td>
 </tr>
 </tbody>
 </table>
-<p>The four consumers are toggled under <code>instinct.consumers</code>:
-<code>failure_playbooks</code>, <code>architect_priors</code>, <code>memory_hygiene</code>,
-<code>application_feedback</code>, and <code>tool_budget</code>. The optional auto-apply mode lives
-under <code>instinct.consumers.auto_apply</code> (<code>enabled</code>, <code>min_confidence</code>,
-<code>allowed_error_classes</code>).</p>
+<p><strong><code>daemon-only</code> is the zero-egress workhorse.</strong> On rootless Podman there is no
+network setting that reaches the host daemon while blocking the internet, so
+swarmd removes the network device entirely and gives the agent a Unix socket to
+the daemon instead. The daemon rewrites the agent's API, LLM, and memory
+endpoints to that socket, then performs the real outbound calls itself. If no
+daemon socket is configured the mount is simply omitted and the container stays
+fully isolated — it <strong>fails closed</strong>, never open.</p>
+<h3 id="choosing-modes-per-role">Choosing modes per role<a class="headerlink" href="#choosing-modes-per-role" title="Permanent link">&para;</a></h3>
+<p>Set the mode on a swarm role, and the daemon-wide default for everything that
+doesn't override it:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># daemon config</span>
+<span class="nt">runtime</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default_network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">daemon-only</span><span class="w">      </span><span class="c1"># zero-egress by default</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># a swarm role that genuinely needs to fetch packages</span>
+<span class="nt">roles</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">builder</span>
+<span class="w">    </span><span class="nt">runtime</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">network</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">egress</span>
+</code></pre></div>
+<p>A typical setup runs reasoning/review roles on <code>daemon-only</code> and grants <code>egress</code>
+only to the few roles that must install dependencies. An invalid
+<code>default_network</code> value <strong>fails closed to <code>daemon-only</code></strong>, so a typo can't
+silently restore egress.</p>
+<p>Two guardrails to know:</p>
+<ul>
+<li><strong><code>daemon-only</code> requires <code>server.unix_socket</code></strong> to be set (that's the socket
+  the container connects to). A role whose LLM endpoint is a direct external URL
+  must use <code>egress</code>, not <code>daemon-only</code>.</li>
+<li><strong><code>host</code> is denied by default.</strong> Because host networking defeats the sandbox,
+  it only works when the operator sets <code>SWARMD_ALLOW_NETWORK_HOST=1</code> on the
+  daemon — a deliberate host-level trust decision.</li>
+</ul>
+<blockquote>
+<p>The daemon does not force zero-egress on you: with <code>runtime.default_network</code>
+unset, containers fall back to the historical rootless-egress behaviour. The
+zero-egress posture is enabled by setting <code>runtime.default_network:
+daemon-only</code> (which the shipped configuration template does).</p>
+</blockquote>
+<h2 id="local-first-open-weight-models">Local-first / open-weight models<a class="headerlink" href="#local-first-open-weight-models" title="Permanent link">&para;</a></h2>
+<p>Because the agent's LLM endpoint is plain OpenAI-compatible HTTP, pointing swarmd
+at a self-hosted model — Ollama on a LAN host, vLLM, or any compatible endpoint —
+is configuration only:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">agent_llm</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://192.168.10.20:11434/v1&quot;</span><span class="w">   </span><span class="c1"># e.g. Ollama on the LAN</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;qwen3.6:35b&quot;</span>
+<span class="w">    </span><span class="nt">context_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">262144</span>
+</code></pre></div>
+<p>Any field left empty under <code>runtime.agent_llm</code> falls back to the daemon's
+<code>chat.*</code> settings, so a single <code>chat:</code> section is enough when agents share the
+daemon's model. Individual roles can override the model with a <code>model:</code> key. In a
+<code>daemon-only</code> deployment these calls are made by the daemon, so the model
+endpoint only has to be reachable from the daemon host — never from the agent
+containers.</p>
+<h2 id="what-crosses-which-boundary">What crosses which boundary<a class="headerlink" href="#what-crosses-which-boundary" title="Permanent link">&para;</a></h2>
+<p>In the zero-egress posture:</p>
+<ul>
+<li><strong>Out of the container:</strong> nothing over the network (there is no network
+  device). The only channel is the local socket to the daemon, and filesystem
+  access is limited to the step's scoped mounts.</li>
+<li><strong>Out of the daemon:</strong> all real egress — LLM completions, MCP tool calls,
+  broker/external API requests — performed by the daemon on the host.</li>
+</ul>
+<p>The orchestrator holds the credentials and the network reach; the agent runtime
+does not.</p>
 
 
 

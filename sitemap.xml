@@ -9,11 +9,27 @@
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.swarmd.dev/concepts/architecture/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.swarmd.dev/features/auth/</loc>
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.swarmd.dev/features/blackbox/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.swarmd.dev/features/cluster/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/features/companion/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/features/forge/</loc>
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>
@@ -25,7 +41,15 @@
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>
+         <loc>https://docs.swarmd.dev/features/self-healing/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
          <loc>https://docs.swarmd.dev/features/trading-series/</loc>
+         <lastmod>2026-06-21</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.swarmd.dev/features/zero-egress/</loc>
          <lastmod>2026-06-21</lastmod>
     </url>
     <url>

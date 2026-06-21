@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/instinct/">
+        <link rel="canonical" href="https://docs.swarmd.dev/features/forge/">
       
       
-        <link rel="prev" href="../self-healing/">
+        <link rel="prev" href="../cluster/">
       
       
-        <link rel="next" href="../auth/">
+        <link rel="next" href="../companion/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Instinct layer - swarmd documentation</title>
+        <title>Forge — GitHub automation - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#instinct-layer" class="md-skip">
+        <a href="#forge-github-automation" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instinct layer
+              Forge — GitHub automation
             
           </span>
         </div>
@@ -699,30 +699,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Instinct layer
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../instinct/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -731,86 +711,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
-    <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      Enabling it
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
-    <span class="md-ellipsis">
-      Inspecting what it learned
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -904,10 +804,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../forge/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Forge — GitHub automation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -916,6 +836,80 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-credential-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      The credential model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-it-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting it up
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#review-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review behaviour
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conversational-replies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conversational replies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-and-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes and limits
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1146,60 +1140,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
+  <a href="#what-it-does" class="md-nav__link">
     <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
+      What it does
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#the-credential-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      The credential model
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
+  <a href="#setting-it-up" class="md-nav__link">
     <span class="md-ellipsis">
-      Inspecting what it learned
+      Setting it up
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#review-behaviour" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Review behaviour
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conversational-replies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conversational replies
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes-and-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes and limits
     </span>
   </a>
   
@@ -1220,164 +1208,94 @@
                   
 
 
-<h1 id="instinct-layer">Instinct layer<a class="headerlink" href="#instinct-layer" title="Permanent link">&para;</a></h1>
-<p>The instinct layer lets swarmd learn from its own history. It mines the
-telemetry every task already produces, distils recurring patterns into
-confidence-scored <strong>instincts</strong> — "in situation T, action A held up" — and
-makes those instincts available as <em>evidence</em> to the parts of swarmd that
-decide how the next task runs.</p>
-<p>The defining rule: <strong>instincts are advisory. Nothing mutates silently.</strong> An
-instinct can raise the confidence of a workflow proposal an operator is already
-reviewing, or surface a remediation hint on a failed task — but it never edits a
-prompt, swaps a model, deletes a memory, or promotes a workflow on its own.
-Every behaviour-affecting decision still passes through the same operator and
-review gates it always did. With the layer disabled (the default), behaviour is
-unchanged.</p>
-<h2 id="how-it-learns">How it learns<a class="headerlink" href="#how-it-learns" title="Permanent link">&para;</a></h2>
-<p>A background worker runs on a cadence (30 minutes by default) and reads the
-<strong>audit spine</strong> — the step outcomes, tool-call log, and memory-retrieval log
-that swarmd writes for every task. Deterministic extractors turn finalised
-outcomes into atomic patterns; only genuinely ambiguous clusters fall through to
-a cheap distillation model. Each pattern is deduplicated by a canonical trigger
-key and scored.</p>
-<h3 id="confidence-and-decay">Confidence and decay<a class="headerlink" href="#confidence-and-decay" title="Permanent link">&para;</a></h3>
-<p>An instinct's confidence is a <strong>Wilson lower bound</strong> on its success rate
-(so a pattern seen 3 times is trusted far less than one seen 300 times),
-multiplied by a <strong>recency decay</strong> with a 30-day half-life (so a pattern that
-stops recurring fades rather than lingering forever). An instinct moves through
-states as the evidence accumulates:</p>
-<table>
-<thead>
-<tr>
-<th>State</th>
-<th>Reached when</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>candidate</code></td>
-<td>freshly mined; not yet trusted</td>
-</tr>
-<tr>
-<td><code>active</code></td>
-<td>confidence ≥ 0.6 and seen at least 3 times</td>
-</tr>
-<tr>
-<td><code>promoted</code></td>
-<td>holds across ≥ 2 projects at confidence ≥ 0.8 (becomes a global prior)</td>
-</tr>
-<tr>
-<td><code>retired</code></td>
-<td>confidence falls below 0.2 (sticky — stays retired)</td>
-</tr>
-</tbody>
-</table>
-<p>These thresholds are tunable (see <a href="#configuration">Configuration</a>).</p>
-<h2 id="what-consumes-instincts">What consumes instincts<a class="headerlink" href="#what-consumes-instincts" title="Permanent link">&para;</a></h2>
-<p>Four consumers read instincts, each independently switchable and each strictly
-advisory:</p>
+<h1 id="forge-github-automation">Forge — GitHub automation<a class="headerlink" href="#forge-github-automation" title="Permanent link">&para;</a></h1>
+<p>Forge connects a swarmd project to a GitHub repository so that <strong>labelling an
+issue opens a pull request, and opening a pull request gets a review</strong> — done by
+your swarm, on your infrastructure. The defining property is the credential
+model: <strong>the daemon owns the push, and the agent never holds a credential.</strong></p>
+<h2 id="what-it-does">What it does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
+<p>Forge classifies inbound GitHub events deterministically (no LLM router decides
+what to do) and drives two main flows:</p>
 <ul>
-<li><strong>Failure-class playbooks</strong> — when a task fails, high-confidence remediation
-  instincts for that failure class are surfaced on the task's detail page and
-  offered to the lead as recovery <em>context</em>. The operator's recovery-approval
-  gate is unchanged.</li>
-<li><strong>Architect evidence priors</strong> — when the workflow architect proposes a change,
-  matching instincts act as priors. They can only nudge the proposal's
-  confidence <em>up</em> toward the strongest supporting evidence (never above what the
-  model itself reported, never widening the edit's scope); a rejected proposal is
-  written back as contrary evidence.</li>
-<li><strong>Memory hygiene</strong> — instincts suggest which memory scopes to boost and which
-  chunks are prune candidates. The consolidation sweeper <em>surfaces</em> these; it
-  never deletes on their say-so, and firewall-sensitive chunks are screened out.</li>
-<li><strong>Tool-budget tiers</strong> — when a planner gives no explicit complexity verdict,
-  a learned tier can fill the gap. An explicit verdict always wins, and the
-  configured budget caps still bound the result.</li>
+<li><strong>Issue labelled → pull request.</strong> Label an issue <code>bug</code> and the swarm fixes it
+  on a <code>fix/issue-&lt;n&gt;</code> branch; label it <code>enhancement</code> / <code>feature</code> /
+  <code>feature-request</code> and it takes a first cut on a <code>feat/issue-&lt;n&gt;</code> branch. Either
+  way the daemon opens the PR (titled <code>Fix #&lt;n&gt;: …</code> or <code>Implement #&lt;n&gt;: …</code>,
+  closing the issue). <strong>Every automated PR is opened as a draft</strong> — a human marks
+  it ready.</li>
+<li><strong>Pull request opened → review.</strong> When a PR is opened, reopened, or marked
+  ready for review, the daemon fetches the diff, a reviewer agent reads it, and
+  the daemon posts the review back through GitHub's review API.</li>
 </ul>
-<p>There is an optional <code>auto_apply</code> mode (off by default, gated by its own
-confidence floor) that changes only how <em>strongly</em> a recovery remediation is
-presented to the lead — it does not bypass the approval gate.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<p>Run the feature doctor to diagnose prerequisites and enable:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
+<p>A bare issue with no label is ignored — only a <em>labelled</em> issue is actionable.</p>
+<h2 id="the-credential-model">The credential model<a class="headerlink" href="#the-credential-model" title="Permanent link">&para;</a></h2>
+<p>This is the part that matters for security review:</p>
+<ul>
+<li>The GitHub App private key lives <strong>only on the daemon's filesystem</strong>. It is
+  read once at startup and never leaves the daemon process.</li>
+<li>Outbound calls use a <strong>short-lived installation token</strong> the daemon mints on
+  demand and caches in memory for a few minutes.</li>
+<li>The <strong>push</strong> hands that token to <code>git</code> through an in-process credential header
+  — never on the command line (so it can't be seen in the process list), never
+  in the remote URL, and never written to on-disk git config. Pushes are
+  non-forced and idempotent: an up-to-date branch is a no-op, a diverged branch
+  is rejected.</li>
+<li>The agent only edits files in its workspace. The project's <code>.git</code> directory is
+  mounted <strong>read-only</strong> into the agent container, so the agent <em>cannot</em> commit,
+  push, or run <code>gh</code> — the entire mutation path is deterministic and daemon-side.</li>
+</ul>
+<p>The result: a compromised or confused agent has no path to your repository's
+write credentials, because it never has them.</p>
+<h2 id="setting-it-up">Setting it up<a class="headerlink" href="#setting-it-up" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Create a GitHub App</strong> and download its private key (PEM). Note the App ID.</li>
+<li><strong>Grant permissions:</strong> Contents (read &amp; write — verified at daemon startup),
+   Issues (read &amp; write), Pull requests (read &amp; write), and Metadata (read).</li>
+<li><strong>Subscribe to webhook events:</strong> <code>issues</code>, <code>pull_request</code>, and (for <code>@swarmd</code>
+   mention replies) <code>issue_comment</code>.</li>
+<li><strong>Point the webhook</strong> at your daemon's signed webhook endpoint,
+   <code>POST /api/v1/webhooks/{projectId}/{source}</code>, and set a webhook secret. Forge
+   verifies every delivery's <code>X-Hub-Signature-256</code> HMAC; the secret is supplied
+   to the daemon by environment-variable <em>name</em>, never written in plain YAML.</li>
+<li><strong>Install the App</strong> on your repositories and record the installation ID.</li>
+<li><strong>Configure the project.</strong> Under the project's <code>forge</code> block:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="nt">forge</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github</span>
+<span class="w">  </span><span class="nt">github</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">app_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
+<span class="w">    </span><span class="nt">installation_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;78901234&quot;</span>
+<span class="w">    </span><span class="nt">private_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/secrets/forge-app.pem</span>
+<span class="w">    </span><span class="c1"># api_base_url: https://github.example.com/api/v3   # GitHub Enterprise only</span>
 </code></pre></div>
-<p>This sets <code>instinct.enabled</code> plus the consumer gates and restarts the daemon
-during an idle window. Because it is restart-gated, the doctor refuses to apply
-while tasks are running and waits for an idle window. (The tool-budget and
-<code>auto_apply</code> consumers stay manually opt-in.)</p>
-<h2 id="inspecting-what-it-learned">Inspecting what it learned<a class="headerlink" href="#inspecting-what-it-learned" title="Permanent link">&para;</a></h2>
-<p>Everything the layer knows is browsable. Use the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>instinct<span class="w"> </span>list<span class="w"> </span>--domain<span class="w"> </span>recovery<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">0</span>.8
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>show<span class="w"> </span>&lt;instinct_id&gt;
-swarmctl<span class="w"> </span>instinct<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-o<span class="w"> </span>instincts.json<span class="w">        </span><span class="c1"># filtered snapshot</span>
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>retire<span class="w"> </span>&lt;instinct_id&gt;<span class="w">            </span><span class="c1"># advisory; the row stays for audit</span>
-</code></pre></div>
-<p><code>list</code> filters by <code>--domain</code>, <code>--scope</code>, <code>--project</code>, <code>--status</code>, and
-<code>--min-confidence</code>. The same inventory is available as a read-only browser at
-<code>/ui/admin/instincts</code>, and failed tasks show their learned remediations inline
-on the task detail page. All admin surfaces require an admin-scoped key.</p>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>The layer is configured under the <code>instinct</code> block. The most useful keys:</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>instinct.enabled</code></td>
-<td><code>false</code></td>
-<td>master switch</td>
-</tr>
-<tr>
-<td><code>instinct.cadence_seconds</code></td>
-<td><code>1800</code></td>
-<td>how often the miner runs</td>
-</tr>
-<tr>
-<td><code>instinct.min_support</code></td>
-<td><code>3</code></td>
-<td>observations before a pattern can leave <code>candidate</code></td>
-</tr>
-<tr>
-<td><code>instinct.active_confidence</code></td>
-<td><code>0.6</code></td>
-<td>promotion-to-<code>active</code> threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_confidence</code></td>
-<td><code>0.8</code></td>
-<td>cross-project global-promotion threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_projects</code></td>
-<td><code>2</code></td>
-<td>projects a pattern must hold across to go global</td>
-</tr>
-<tr>
-<td><code>instinct.retire_floor</code></td>
-<td><code>0.2</code></td>
-<td>confidence below which an instinct retires</td>
-</tr>
-<tr>
-<td><code>instinct.decay_halflife_days</code></td>
-<td><code>30</code></td>
-<td>recency-decay half-life</td>
-</tr>
-<tr>
-<td><code>instinct.model</code></td>
-<td><code>chat.model</code></td>
-<td>distillation model for ambiguous clusters</td>
-</tr>
-</tbody>
-</table>
-<p>The four consumers are toggled under <code>instinct.consumers</code>:
-<code>failure_playbooks</code>, <code>architect_priors</code>, <code>memory_hygiene</code>,
-<code>application_feedback</code>, and <code>tool_budget</code>. The optional auto-apply mode lives
-under <code>instinct.consumers.auto_apply</code> (<code>enabled</code>, <code>min_confidence</code>,
-<code>allowed_error_classes</code>).</p>
+<p>Webhook sources route by the classified job: change-request (PR) events go to
+   the review workflow, everything else to the issue workflow. Set
+   <code>require_forge_event: true</code> on the source to drop deliveries that aren't
+   actionable.</p>
+<p>At startup the daemon verifies it can actually push for each Forge-configured
+project and warns you if it can't — so a misconfigured key surfaces immediately,
+not on the first issue.</p>
+<h2 id="review-behaviour">Review behaviour<a class="headerlink" href="#review-behaviour" title="Permanent link">&para;</a></h2>
+<p>By default a posted review is a non-gating comment, even when the reviewer
+approves. Set <code>gating_reviews: true</code> on the review step to turn the reviewer's
+verdict into a real GitHub APPROVE / REQUEST_CHANGES. (A review that would
+approve the App's <em>own</em> PR is automatically downgraded to a comment, since GitHub
+won't let an author approve their own pull request.)</p>
+<h2 id="conversational-replies">Conversational replies<a class="headerlink" href="#conversational-replies" title="Permanent link">&para;</a></h2>
+<p>A separate GitHub App <em>channel</em> handles <code>@swarmd</code> mentions in issue comments:
+an allowlisted user mentioning <code>@swarmd</code> routes through swarmd and gets a reply
+posted as an issue comment. This is the chat surface; the deterministic flows
+above are the automation surface.</p>
+<h2 id="notes-and-limits">Notes and limits<a class="headerlink" href="#notes-and-limits" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Automated PRs are always <strong>drafts</strong> — promotion to ready is a human action.</li>
+<li>Re-running a flow is idempotent: it matches the deterministic branch name and
+  only short-circuits on an <em>open</em> PR (a closed or merged one yields a fresh PR).</li>
+<li>Provider support is GitHub today; the provider interface is built to be
+  provider-neutral. Per-installation rate-limit buckets and PR inline
+  (per-line) review comments are not yet implemented — reviews are posted at the
+  PR level.</li>
+</ul>
 
 
 

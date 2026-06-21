@@ -22,7 +22,7 @@
     
     
       
-        <title>Authentication - swarmd documentation</title>
+        <title>Authentication & access control - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#authentication" class="md-skip">
+        <a href="#authentication-access-control" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Authentication
+              Authentication &amp; access control
             
           </span>
         </div>
@@ -315,6 +315,8 @@
           
         
       
+        
+      
     
     
       
@@ -342,6 +344,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
@@ -351,6 +358,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -582,6 +610,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -614,6 +652,48 @@
             Features
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blackbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy Black Box
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../self-healing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Self-healing workflow genome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -656,7 +736,7 @@
           
   
   <span class="md-ellipsis">
-    Authentication
+    Authentication &amp; access control
   </span>
   
 
@@ -667,7 +747,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication
+    Authentication &amp; access control
   </span>
   
 
@@ -689,9 +769,69 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#turning-auth-on" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Turning auth on
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ways-to-authenticate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to authenticate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ways to authenticate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-project-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-project API keys
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-groups-and-project-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles, groups, and project scope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#break-glass-admin-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Break-glass admin access
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration reference
     </span>
   </a>
   
@@ -734,11 +874,74 @@
   
   
     <li class="md-nav__item">
+      <a href="../zero-egress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Cluster topology and node roles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Forge — GitHub automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../companion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Companion plugin
   </span>
   
 
@@ -952,9 +1155,69 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#turning-auth-on" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Turning auth on
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ways-to-authenticate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to authenticate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ways to authenticate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-project-api-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-project API keys
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roles-groups-and-project-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Roles, groups, and project scope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#break-glass-admin-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Break-glass admin access
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#audit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audit
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration reference
     </span>
   </a>
   
@@ -975,14 +1238,123 @@
                   
 
 
-<h1 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h1>
-<p>swarmd's control-plane API and UI can require an API/admin key for access.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
+<h1 id="authentication-access-control">Authentication &amp; access control<a class="headerlink" href="#authentication-access-control" title="Permanent link">&para;</a></h1>
+<p>swarmd's control-plane API and UI can require authentication, and once a user is
+authenticated their <strong>role</strong> and <strong>project scope</strong> decide what they can see and
+do. This page covers turning auth on, the ways a request can be authenticated,
+and the role/group model behind access control.</p>
+<h2 id="turning-auth-on">Turning auth on<a class="headerlink" href="#turning-auth-on" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>auth
 </code></pre></div>
-<p>This turns on <code>api.auth_enabled</code> and requires the daemon to be restarted.
-Have your admin key ready before enabling — once on, unauthenticated
-requests to control-plane routes are rejected.</p>
+<p>This sets <code>api.auth_enabled</code> and restarts the daemon. <strong>Have an admin key in
+place before you enable it</strong> — once on, unauthenticated requests to control-plane
+routes are rejected, and an admin key is your way back in.</p>
+<p>To roll it out cautiously, <code>api.auth_dry_run</code> evaluates and logs what <em>would</em>
+happen on each request without actually enforcing — useful for confirming your
+keys and groups are right before you flip enforcement on.</p>
+<h2 id="ways-to-authenticate">Ways to authenticate<a class="headerlink" href="#ways-to-authenticate" title="Permanent link">&para;</a></h2>
+<p>Requests are checked against an ordered chain of backends; the first one that
+recognises a credential wins, and the chain <strong>fails closed</strong> on any unexpected
+error. The shipped backends:</p>
+<ul>
+<li><strong>API keys</strong> — static keys from config, and per-project database-backed keys
+  (see below).</li>
+<li><strong>Browser sign-in (SSO)</strong> — GitHub OAuth. A user clicks "Sign in with GitHub",
+  and swarmd creates a session cookie. An optional GitHub-organisation
+  requirement gates who may sign in.</li>
+<li><strong>Break-glass admin keys</strong> — always-on key access for operators, so an
+  identity-provider outage can never lock you out.</li>
+<li><strong>Webhook signatures</strong> — HMAC verification for inbound webhooks.</li>
+</ul>
+<blockquote>
+<p>Browser SSO ships with GitHub today. The backend is built around a provider
+interface so additional identity providers can slot in behind the same
+session and role machinery later.</p>
+</blockquote>
+<h3 id="per-project-api-keys">Per-project API keys<a class="headerlink" href="#per-project-api-keys" title="Permanent link">&para;</a></h3>
+<p>Issue scoped keys bound to a single project. Each key is stored hashed, carries
+its own project, and can be limited to specific workflows:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--name<span class="w"> </span>ci-bot<span class="w"> </span>--expires<span class="w"> </span>90d
+swarmctl<span class="w"> </span>key<span class="w"> </span>list<span class="w">   </span>--project<span class="w"> </span>research-desk
+swarmctl<span class="w"> </span>key<span class="w"> </span>rotate<span class="w"> </span>&lt;keyID&gt;<span class="w"> </span>--project<span class="w"> </span>research-desk
+swarmctl<span class="w"> </span>key<span class="w"> </span>revoke<span class="w"> </span>&lt;keyID&gt;<span class="w"> </span>--project<span class="w"> </span>research-desk
+</code></pre></div>
+<p>A per-project key can't be repointed at another project by a request header — its
+project is fixed at creation, which is what makes it safe to hand to an external
+caller.</p>
+<h2 id="roles-groups-and-project-scope">Roles, groups, and project scope<a class="headerlink" href="#roles-groups-and-project-scope" title="Permanent link">&para;</a></h2>
+<p>Identities resolve to a <strong>principal</strong> with a role and a set of projects:</p>
+<ul>
+<li><strong>Roles.</strong> There are two — <code>admin</code> (instance-wide) and <code>user</code> (project-scoped).</li>
+<li><strong>Groups.</strong> Users belong to groups; a group carries a role and a set of
+  projects. Membership in any admin-role group makes a user an admin with access
+  to everything. Otherwise a user's accessible projects are the union of their
+  groups' projects.</li>
+<li><strong>Project scope enforcement.</strong> A user's project set is stamped onto every
+  request and checked by the same guard that prevents cross-project access. A
+  freshly signed-in user who belongs to no group is <em>authenticated but sees
+  nothing</em> — every project-scoped route returns <code>403</code> until they're added to a
+  group.</li>
+</ul>
+<p>The first admins are bootstrapped from configuration (<code>auth.bootstrap_admins</code>),
+so there's always a way in on a fresh install. Users are provisioned
+automatically on first sign-in.</p>
+<h2 id="break-glass-admin-access">Break-glass admin access<a class="headerlink" href="#break-glass-admin-access" title="Permanent link">&para;</a></h2>
+<p>Admin access is governed by the <code>admin</code> config block:</p>
+<ul>
+<li><code>admin.enabled</code> turns the admin surface on. When it's off, <code>/ui/admin/*</code> URLs
+  return <code>404</code> (not <code>403</code>) so they don't even reveal their existence to probes.</li>
+<li><code>admin.allowed_keys</code> is the key-based break-glass path — admin keys are
+  compared in constant time and keep working alongside SSO-based admins, so an
+  identity-provider outage never locks the operator out.</li>
+</ul>
+<h2 id="audit">Audit<a class="headerlink" href="#audit" title="Permanent link">&para;</a></h2>
+<p>Every admin-initiated mutation — config edits, integration changes, danger-zone
+confirmations — writes an audit row before it returns, so the trail survives even
+a crash mid-change. Review it at <code>/ui/admin/audit</code>.</p>
+<h2 id="configuration-reference">Configuration reference<a class="headerlink" href="#configuration-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>api.auth_enabled</code></td>
+<td>require authentication on control-plane routes</td>
+</tr>
+<tr>
+<td><code>api.auth_dry_run</code></td>
+<td>evaluate + log auth without enforcing</td>
+</tr>
+<tr>
+<td><code>auth.bootstrap_admins</code></td>
+<td>identities seeded into the first admin group (<code>channel:external_id</code>)</td>
+</tr>
+<tr>
+<td><code>auth.external_base_url</code></td>
+<td>public base URL, required when a sign-in provider is set</td>
+</tr>
+<tr>
+<td><code>auth.session.lifetime</code> / <code>auth.session.idle_timeout</code></td>
+<td>session expiry controls</td>
+</tr>
+<tr>
+<td><code>auth.providers.github.client_id</code> / <code>client_secret_file</code></td>
+<td>GitHub OAuth credentials</td>
+</tr>
+<tr>
+<td><code>auth.providers.github.org</code></td>
+<td>restrict sign-in to a GitHub organisation</td>
+</tr>
+<tr>
+<td><code>admin.enabled</code> / <code>admin.allowed_keys</code></td>
+<td>admin surface + break-glass keys</td>
+</tr>
+</tbody>
+</table>
 
 
 

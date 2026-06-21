@@ -14,7 +14,7 @@
         <link rel="prev" href="../auth/">
       
       
-        <link rel="next" href="../cluster/">
+        <link rel="next" href="../zero-egress/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -315,6 +315,8 @@
           
         
       
+        
+      
     
     
       
@@ -342,6 +344,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
@@ -351,6 +358,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -582,6 +610,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -622,6 +660,48 @@
   
   
     <li class="md-nav__item">
+      <a href="../blackbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy Black Box
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../self-healing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Self-healing workflow genome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../instinct/" class="md-nav__link">
         
   
@@ -647,7 +727,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication
+    Authentication &amp; access control
   </span>
   
 
@@ -710,18 +790,84 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#enabling-recall-and-caches" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Enabling recall and caches
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enabling recall and caches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-memory-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      The memory firewall
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The memory firewall">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-chunk-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-chunk policy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforcement-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enforcement modes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keeping-secrets-out-of-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keeping secrets out of memory
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#audit-and-compliance-export" class="md-nav__link">
     <span class="md-ellipsis">
-      Prerequisites
+      Audit and compliance export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration reference
     </span>
   </a>
   
@@ -743,11 +889,74 @@
   
   
     <li class="md-nav__item">
+      <a href="../zero-egress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Cluster topology and node roles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Forge — GitHub automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../companion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Companion plugin
   </span>
   
 
@@ -961,18 +1170,84 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#enabling-recall-and-caches" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Enabling recall and caches
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enabling recall and caches">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-memory-firewall" class="md-nav__link">
+    <span class="md-ellipsis">
+      The memory firewall
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The memory firewall">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-chunk-policy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-chunk policy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enforcement-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enforcement modes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keeping-secrets-out-of-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Keeping secrets out of memory
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#audit-and-compliance-export" class="md-nav__link">
     <span class="md-ellipsis">
-      Prerequisites
+      Audit and compliance export
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration reference
     </span>
   </a>
   
@@ -995,19 +1270,136 @@
 
 <h1 id="memory-rag">Memory &amp; RAG<a class="headerlink" href="#memory-rag" title="Permanent link">&para;</a></h1>
 <p>swarmd can consolidate and semantically recall project memory so agents
-carry context forward across tasks, with caches that cut cost and latency.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
+carry context forward across tasks, with caches that cut cost and latency.
+A <strong>policy-aware firewall</strong> governs what may enter that memory and what may be
+read back out.</p>
+<h2 id="enabling-recall-and-caches">Enabling recall and caches<a class="headerlink" href="#enabling-recall-and-caches" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>memory-rag
 </code></pre></div>
 <p>This enables the <code>memory.*</code> gates — LLM consolidation, response cache, and
 embedding cache — and restarts the daemon during an idle window.</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
 <p>The doctor checks that the embedding model is actually reachable. When
 <code>memory.embedding_endpoint</code> is set, it probes that endpoint directly (the
 endpoint embeddings really use — typically a local Ollama / TEI server),
 not the chat-provider model catalog. If no embedding endpoint is
 configured, embeddings fall back to the agent/chat endpoint and the chat
 catalog is checked instead.</p>
+<h2 id="the-memory-firewall">The memory firewall<a class="headerlink" href="#the-memory-firewall" title="Permanent link">&para;</a></h2>
+<p>The firewall is a deterministic, in-process check on the recall path — no LLM,
+no extra database round-trips. It runs independently of the <code>memory-rag</code> feature
+above and is <strong>on by default in advisory mode</strong>, so you get an audit trail from
+day one without changing behaviour.</p>
+<h3 id="per-chunk-policy">Per-chunk policy<a class="headerlink" href="#per-chunk-policy" title="Permanent link">&para;</a></h3>
+<p>Every memory chunk carries a policy with several dimensions, all of which must
+be satisfied for a chunk to be served:</p>
+<ul>
+<li><strong>Sensitivity tier</strong> — <code>public</code>, <code>internal</code> (default), <code>confidential</code>, or
+  <code>restricted</code>. A <code>restricted</code> chunk is only served to a request that carries an
+  operator identity, so anonymous, autonomy-driven recalls can't read it.</li>
+<li><strong>Expiry</strong> — a chunk past its expiry is blocked.</li>
+<li><strong>Tenant</strong> — a tenant-tagged chunk is only served to a matching tenant.</li>
+<li><strong>Permitted roles</strong> — which roles may read the chunk.</li>
+<li><strong>Allowed purposes</strong> — <code>operational</code> (default), <code>training_data</code>,
+  <code>audit_review</code>, or <code>compliance_export</code>.</li>
+</ul>
+<p>When a chunk is refused, the decision is one of a small set of reasons
+(<code>block_expired</code>, <code>block_tenant_mismatch</code>, <code>block_role_not_permitted</code>,
+<code>block_purpose_not_allowed</code>, <code>block_sensitivity_tier</code>) — recorded for audit and
+usable as a filter when you review evaluations.</p>
+<p>Chunks classified as credentials are forced to <code>restricted</code> even if pasted by an
+operator, and chunks whose content was refuted by validation are made
+unreadable — so a known-bad or sensitive chunk can't leak through a permissive
+default.</p>
+<h3 id="enforcement-modes">Enforcement modes<a class="headerlink" href="#enforcement-modes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>off</code></td>
+<td>evaluate and audit only; blocked chunks still surface</td>
+</tr>
+<tr>
+<td><code>advisory</code> <em>(default)</em></td>
+<td>blocked chunks still surface, each tagged with a policy warning</td>
+</tr>
+<tr>
+<td><code>enforce</code></td>
+<td>blocked chunks are dropped from results entirely</td>
+</tr>
+</tbody>
+</table>
+<p>The mode is resolved per request: a project-level <code>firewall.mode</code> override wins,
+then the <code>SWARMD_MEMORY_FIREWALL_MODE</code> daemon environment variable, then the
+<code>advisory</code> default. An unrecognised value safely coerces to <code>advisory</code>. Run in
+<code>advisory</code> first to see what <em>would</em> be blocked, then move to <code>enforce</code> once the
+policy is right.</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>mode<span class="w">                       </span><span class="c1"># show the active mode</span>
+swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>set-policy<span class="w"> </span>&lt;chunk_id&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sensitivity<span class="w"> </span>confidential<span class="w"> </span>--permitted-roles<span class="w"> </span>reviewer,lead
+</code></pre></div>
+<h2 id="keeping-secrets-out-of-memory">Keeping secrets out of memory<a class="headerlink" href="#keeping-secrets-out-of-memory" title="Permanent link">&para;</a></h2>
+<p>Two ingest-side gates protect memory at write time:</p>
+<ul>
+<li><strong>Deny patterns</strong> — <code>memory.deny_patterns</code> is a list of literal substrings
+  (matched verbatim, so there's no regular-expression risk). A matching deposit
+  is routed to quarantine for operator review rather than admitted. The list is
+  hot-reloadable — editing it takes effect without a daemon restart.</li>
+<li><strong>Secret scanning</strong> — content is scanned for credentials on the way in, and
+  for memory the scan <strong>cannot be downgraded to a no-op</strong>: a detected secret is
+  redacted (e.g. <code>[REDACTED:openai_key]</code>), and a deposit that's mostly secret is
+  rejected outright rather than stored as a husk. The escape hatch
+  <code>SWARMD_ALLOW_UNSCANNED_MEMORY</code> exists for deliberate, audited exceptions.</li>
+</ul>
+<h2 id="audit-and-compliance-export">Audit and compliance export<a class="headerlink" href="#audit-and-compliance-export" title="Permanent link">&para;</a></h2>
+<p>Every recall decision — in every mode, including <code>off</code> — writes an audit row
+recording the chunk, the requesting role and purpose, the decision, and a digest
+of the policy that was in force. Recalled chunks also carry a policy proof so a
+workflow that cites a chunk can show it was allowed to.</p>
+<p>Review and export evaluations:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--since<span class="w"> </span><span class="m">2026</span>-06-01
+swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--csv<span class="w"> </span>&gt;<span class="w"> </span>compliance.csv
+</code></pre></div>
+<p>The CSV export streams RFC 4180 output over a 30-day window by default — suitable
+for a compliance hand-off.</p>
+<p>Two admin UI surfaces complement the CLI (don't confuse them):</p>
+<ul>
+<li><code>/ui/admin/memory/firewall</code> — the firewall's policy evaluations, plus
+  per-chunk policy detail and editing.</li>
+<li><code>/ui/admin/memory-audit</code> — the broader retrieval and ingest audit log.</li>
+</ul>
+<h2 id="configuration-reference">Configuration reference<a class="headerlink" href="#configuration-reference" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key / variable</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>memory.deny_patterns</code></td>
+<td>substring deny-list; matches go to quarantine (hot-reloadable)</td>
+</tr>
+<tr>
+<td><code>firewall.mode</code> <em>(per project)</em></td>
+<td><code>off</code> / <code>advisory</code> / <code>enforce</code>, overrides the daemon default</td>
+</tr>
+<tr>
+<td><code>SWARMD_MEMORY_FIREWALL_MODE</code></td>
+<td>daemon-level enforcement mode</td>
+</tr>
+<tr>
+<td><code>SWARMD_ALLOW_UNSCANNED_MEMORY</code></td>
+<td>audited escape hatch for the secret-scan clamp</td>
+</tr>
+</tbody>
+</table>
 
 
 

@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/instinct/">
+        <link rel="canonical" href="https://docs.swarmd.dev/concepts/architecture/">
       
       
-        <link rel="prev" href="../self-healing/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../auth/">
+        <link rel="next" href="../../guides/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Instinct layer - swarmd documentation</title>
+        <title>Architecture - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#instinct-layer" class="md-skip">
+        <a href="#architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instinct layer
+              Architecture
             
           </span>
         </div>
@@ -306,6 +306,8 @@
       
   
   
+    
+  
   
   
     
@@ -325,16 +327,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../concepts/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -351,7 +353,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Concepts
@@ -364,10 +366,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../concepts/architecture/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -376,6 +398,62 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-object-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      The object model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-plane-vs-data-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      Control plane vs data plane
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-isolation-boundary" class="md-nav__link">
+    <span class="md-ellipsis">
+      The isolation boundary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-swarm-vs-multi-node" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-swarm vs multi-node
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -593,10 +671,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -628,11 +704,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -646,7 +722,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Features
@@ -660,7 +736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../blackbox/" class="md-nav__link">
+      <a href="../../features/blackbox/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -681,7 +757,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../self-healing/" class="md-nav__link">
+      <a href="../../features/self-healing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -699,30 +775,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Instinct layer
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../features/instinct/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -731,86 +787,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
-    <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      Enabling it
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
-    <span class="md-ellipsis">
-      Inspecting what it learned
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -823,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../auth/" class="md-nav__link">
+      <a href="../../features/auth/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -844,7 +820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../memory-rag/" class="md-nav__link">
+      <a href="../../features/memory-rag/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -865,7 +841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zero-egress/" class="md-nav__link">
+      <a href="../../features/zero-egress/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -886,7 +862,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../cluster/" class="md-nav__link">
+      <a href="../../features/cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -907,7 +883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../forge/" class="md-nav__link">
+      <a href="../../features/forge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -928,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../companion/" class="md-nav__link">
+      <a href="../../features/companion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -949,7 +925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../trading-series/" class="md-nav__link">
+      <a href="../../features/trading-series/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1146,60 +1122,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
+  <a href="#the-object-model" class="md-nav__link">
     <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
+      The object model
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#control-plane-vs-data-plane" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Control plane vs data plane
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
+  <a href="#the-isolation-boundary" class="md-nav__link">
     <span class="md-ellipsis">
-      Inspecting what it learned
+      The isolation boundary
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#multi-swarm-vs-multi-node" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Multi-swarm vs multi-node
     </span>
   </a>
   
@@ -1220,164 +1172,85 @@
                   
 
 
-<h1 id="instinct-layer">Instinct layer<a class="headerlink" href="#instinct-layer" title="Permanent link">&para;</a></h1>
-<p>The instinct layer lets swarmd learn from its own history. It mines the
-telemetry every task already produces, distils recurring patterns into
-confidence-scored <strong>instincts</strong> — "in situation T, action A held up" — and
-makes those instincts available as <em>evidence</em> to the parts of swarmd that
-decide how the next task runs.</p>
-<p>The defining rule: <strong>instincts are advisory. Nothing mutates silently.</strong> An
-instinct can raise the confidence of a workflow proposal an operator is already
-reviewing, or surface a remediation hint on a failed task — but it never edits a
-prompt, swaps a model, deletes a memory, or promotes a workflow on its own.
-Every behaviour-affecting decision still passes through the same operator and
-review gates it always did. With the layer disabled (the default), behaviour is
-unchanged.</p>
-<h2 id="how-it-learns">How it learns<a class="headerlink" href="#how-it-learns" title="Permanent link">&para;</a></h2>
-<p>A background worker runs on a cadence (30 minutes by default) and reads the
-<strong>audit spine</strong> — the step outcomes, tool-call log, and memory-retrieval log
-that swarmd writes for every task. Deterministic extractors turn finalised
-outcomes into atomic patterns; only genuinely ambiguous clusters fall through to
-a cheap distillation model. Each pattern is deduplicated by a canonical trigger
-key and scored.</p>
-<h3 id="confidence-and-decay">Confidence and decay<a class="headerlink" href="#confidence-and-decay" title="Permanent link">&para;</a></h3>
-<p>An instinct's confidence is a <strong>Wilson lower bound</strong> on its success rate
-(so a pattern seen 3 times is trusted far less than one seen 300 times),
-multiplied by a <strong>recency decay</strong> with a 30-day half-life (so a pattern that
-stops recurring fades rather than lingering forever). An instinct moves through
-states as the evidence accumulates:</p>
-<table>
-<thead>
-<tr>
-<th>State</th>
-<th>Reached when</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>candidate</code></td>
-<td>freshly mined; not yet trusted</td>
-</tr>
-<tr>
-<td><code>active</code></td>
-<td>confidence ≥ 0.6 and seen at least 3 times</td>
-</tr>
-<tr>
-<td><code>promoted</code></td>
-<td>holds across ≥ 2 projects at confidence ≥ 0.8 (becomes a global prior)</td>
-</tr>
-<tr>
-<td><code>retired</code></td>
-<td>confidence falls below 0.2 (sticky — stays retired)</td>
-</tr>
-</tbody>
-</table>
-<p>These thresholds are tunable (see <a href="#configuration">Configuration</a>).</p>
-<h2 id="what-consumes-instincts">What consumes instincts<a class="headerlink" href="#what-consumes-instincts" title="Permanent link">&para;</a></h2>
-<p>Four consumers read instincts, each independently switchable and each strictly
-advisory:</p>
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<p>The <a href="../">Concepts</a> page introduces the nouns — projects, swarms, roles,
+workflows, tasks. This page steps back to the system shape: how those objects
+nest, where the <strong>control plane</strong> ends and the <strong>data plane</strong> begins, where the
+isolation boundary sits, and what "multiple swarms" actually means.</p>
+<h2 id="the-object-model">The object model<a class="headerlink" href="#the-object-model" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>graph TD
+    Host[swarmd daemon] --&gt; P1[Project]
+    Host --&gt; P2[Project ...]
+    P1 --&gt; S[Swarm · 1 per project]
+    P1 --&gt; W[Workflows · 1 or more]
+    S --&gt; R1[Role]
+    S --&gt; R2[Role ...]
+    W --&gt; T[Task]
+    T --&gt; E[Execution · one attempt]
+    E --&gt; C[Agent container · per step]</code></pre>
 <ul>
-<li><strong>Failure-class playbooks</strong> — when a task fails, high-confidence remediation
-  instincts for that failure class are surfaced on the task's detail page and
-  offered to the lead as recovery <em>context</em>. The operator's recovery-approval
-  gate is unchanged.</li>
-<li><strong>Architect evidence priors</strong> — when the workflow architect proposes a change,
-  matching instincts act as priors. They can only nudge the proposal's
-  confidence <em>up</em> toward the strongest supporting evidence (never above what the
-  model itself reported, never widening the edit's scope); a rejected proposal is
-  written back as contrary evidence.</li>
-<li><strong>Memory hygiene</strong> — instincts suggest which memory scopes to boost and which
-  chunks are prune candidates. The consolidation sweeper <em>surfaces</em> these; it
-  never deletes on their say-so, and firewall-sensitive chunks are screened out.</li>
-<li><strong>Tool-budget tiers</strong> — when a planner gives no explicit complexity verdict,
-  a learned tier can fill the gap. An explicit verdict always wins, and the
-  configured budget caps still bound the result.</li>
+<li>A <strong>project</strong> is the top-level isolation unit. It owns a queue, a swarm,
+  one or more workflows, its memory, and its policies. A daemon runs many
+  projects side by side.</li>
+<li>A project references <strong>exactly one swarm</strong> — its team of agent <strong>roles</strong> — and
+  <strong>one or more workflows</strong>. (One swarm, many workflows: that's the cardinality
+  to remember.)</li>
+<li>A <strong>role</strong> is one specialist agent: its runtime policy (ephemeral or warm),
+  container image and limits, model, and permissions.</li>
+<li>A <strong>workflow</strong> is a versioned graph of steps; each agent step is assigned a
+  role.</li>
+<li>A <strong>task</strong> is a unit of work submitted to a project; an <strong>execution</strong> is one
+  runtime attempt of its workflow (a retry is a new execution). Each step runs in
+  its own agent container.</li>
 </ul>
-<p>There is an optional <code>auto_apply</code> mode (off by default, gated by its own
-confidence floor) that changes only how <em>strongly</em> a recovery remediation is
-presented to the lead — it does not bypass the approval gate.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<p>Run the feature doctor to diagnose prerequisites and enable:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
-</code></pre></div>
-<p>This sets <code>instinct.enabled</code> plus the consumer gates and restarts the daemon
-during an idle window. Because it is restart-gated, the doctor refuses to apply
-while tasks are running and waits for an idle window. (The tool-budget and
-<code>auto_apply</code> consumers stay manually opt-in.)</p>
-<h2 id="inspecting-what-it-learned">Inspecting what it learned<a class="headerlink" href="#inspecting-what-it-learned" title="Permanent link">&para;</a></h2>
-<p>Everything the layer knows is browsable. Use the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>instinct<span class="w"> </span>list<span class="w"> </span>--domain<span class="w"> </span>recovery<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">0</span>.8
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>show<span class="w"> </span>&lt;instinct_id&gt;
-swarmctl<span class="w"> </span>instinct<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-o<span class="w"> </span>instincts.json<span class="w">        </span><span class="c1"># filtered snapshot</span>
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>retire<span class="w"> </span>&lt;instinct_id&gt;<span class="w">            </span><span class="c1"># advisory; the row stays for audit</span>
-</code></pre></div>
-<p><code>list</code> filters by <code>--domain</code>, <code>--scope</code>, <code>--project</code>, <code>--status</code>, and
-<code>--min-confidence</code>. The same inventory is available as a read-only browser at
-<code>/ui/admin/instincts</code>, and failed tasks show their learned remediations inline
-on the task detail page. All admin surfaces require an admin-scoped key.</p>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>The layer is configured under the <code>instinct</code> block. The most useful keys:</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Default</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>instinct.enabled</code></td>
-<td><code>false</code></td>
-<td>master switch</td>
-</tr>
-<tr>
-<td><code>instinct.cadence_seconds</code></td>
-<td><code>1800</code></td>
-<td>how often the miner runs</td>
-</tr>
-<tr>
-<td><code>instinct.min_support</code></td>
-<td><code>3</code></td>
-<td>observations before a pattern can leave <code>candidate</code></td>
-</tr>
-<tr>
-<td><code>instinct.active_confidence</code></td>
-<td><code>0.6</code></td>
-<td>promotion-to-<code>active</code> threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_confidence</code></td>
-<td><code>0.8</code></td>
-<td>cross-project global-promotion threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_projects</code></td>
-<td><code>2</code></td>
-<td>projects a pattern must hold across to go global</td>
-</tr>
-<tr>
-<td><code>instinct.retire_floor</code></td>
-<td><code>0.2</code></td>
-<td>confidence below which an instinct retires</td>
-</tr>
-<tr>
-<td><code>instinct.decay_halflife_days</code></td>
-<td><code>30</code></td>
-<td>recency-decay half-life</td>
-</tr>
-<tr>
-<td><code>instinct.model</code></td>
-<td><code>chat.model</code></td>
-<td>distillation model for ambiguous clusters</td>
-</tr>
-</tbody>
-</table>
-<p>The four consumers are toggled under <code>instinct.consumers</code>:
-<code>failure_playbooks</code>, <code>architect_priors</code>, <code>memory_hygiene</code>,
-<code>application_feedback</code>, and <code>tool_budget</code>. The optional auto-apply mode lives
-under <code>instinct.consumers.auto_apply</code> (<code>enabled</code>, <code>min_confidence</code>,
-<code>allowed_error_classes</code>).</p>
+<h2 id="control-plane-vs-data-plane">Control plane vs data plane<a class="headerlink" href="#control-plane-vs-data-plane" title="Permanent link">&para;</a></h2>
+<p>swarmd separates the surfaces that <em>change how the system behaves</em> from the path
+that <em>runs the work</em>:</p>
+<ul>
+<li><strong>Control plane</strong> — the operator surfaces: the <code>swarmctl</code> CLI, the web UI, and
+  the registries that hold your project / swarm / workflow definitions, plus
+  policy and queue controls. This is where you change behaviour.</li>
+<li><strong>Data plane</strong> — the execution path: the task-ingestion API, the queue and
+  scheduler, the executor and its agent runtime, the delegation engine, and the
+  durable state behind them. This is where work flows, asynchronously.</li>
+</ul>
+<p>The control plane decides <em>what should happen</em>; the data plane <em>makes it happen</em>.
+They share the same database and object store but have distinct
+responsibilities, which is also what lets you split them across machines (below).</p>
+<h2 id="the-isolation-boundary">The isolation boundary<a class="headerlink" href="#the-isolation-boundary" title="Permanent link">&para;</a></h2>
+<p>The boundary that matters for a security review runs between the orchestrator
+and the agents:</p>
+<ul>
+<li>The <strong>orchestrator</strong> (control + data plane) holds the database connection and
+  every credential — model keys, broker keys, integration tokens.</li>
+<li>Each <strong>agent</strong> runs in its own rootless container with a per-role network
+  policy that <strong>defaults to no direct egress</strong> (see
+  <a href="../../features/zero-egress/">Zero-egress execution</a>). The agent edits files in
+  a scoped workspace; it does not get host access or credentials unless a role is
+  explicitly granted them.</li>
+<li>The <strong>project</strong> is the logical isolation unit: separate queue, memory,
+  artifacts, and policy. Projects never see each other's work except through
+  explicit cross-project steps (<code>call_project</code>, <code>spawn_project</code>, <code>a2a_call</code>),
+  which are the only path across the project boundary.</li>
+</ul>
+<h2 id="multi-swarm-vs-multi-node">Multi-swarm vs multi-node<a class="headerlink" href="#multi-swarm-vs-multi-node" title="Permanent link">&para;</a></h2>
+<p>These are two different axes, and it's worth keeping them straight:</p>
+<ul>
+<li><strong>Multi-swarm (logical).</strong> One daemon coordinates many project swarms at once —
+  each project has its own swarm of roles, isolated from the others. "Multiple
+  swarms" means multiple agent teams on one daemon. A single project does not run
+  several swarms simultaneously; it has one swarm and as many workflows as it
+  needs.</li>
+<li><strong>Multi-node (physical).</strong> One logical deployment can be spread across machines
+  by giving each node a role — UI/API tier, worker tier, or a DMZ-isolated
+  webhook relay — all sharing one database and object store. This scales the
+  worker tier and isolates public ingress. See
+  <a href="../../features/cluster/">Cluster topology and node roles</a>.</li>
+</ul>
+<p>The two are orthogonal: multi-swarm is <em>how many agent teams the orchestrator
+coordinates</em>; multi-node is <em>how many machines that one orchestrator runs on</em>.
+Neither is multi-tenant SaaS, sharding, or multi-region — swarmd today is a
+single logical orchestrator that you can scale out across nodes.</p>
 
 
 

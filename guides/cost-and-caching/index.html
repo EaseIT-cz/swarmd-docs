@@ -315,6 +315,8 @@
           
         
       
+        
+      
     
     
       
@@ -342,6 +344,11 @@
 
             </a>
             
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
           </div>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
@@ -351,6 +358,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
           </ul>
@@ -585,6 +613,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#hard-spend-caps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hard spend caps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-per-role-tool-budgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic per-role tool budgets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#effective-cost-per-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effective cost per success
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-to-go-next" class="md-nav__link">
     <span class="md-ellipsis">
       Where to go next
@@ -691,6 +746,16 @@
       
         
       
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
       
@@ -731,6 +796,48 @@
   
   
     <li class="md-nav__item">
+      <a href="../../features/blackbox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy Black Box
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/self-healing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Self-healing workflow genome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../features/instinct/" class="md-nav__link">
         
   
@@ -756,7 +863,7 @@
         
   
   <span class="md-ellipsis">
-    Authentication
+    Authentication &amp; access control
   </span>
   
 
@@ -794,11 +901,74 @@
   
   
     <li class="md-nav__item">
+      <a href="../../features/zero-egress/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Zero-egress / local-first execution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../features/cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Cluster topology and node roles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/forge/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Forge — GitHub automation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/companion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Companion plugin
   </span>
   
 
@@ -1072,6 +1242,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#hard-spend-caps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hard spend caps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-per-role-tool-budgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic per-role tool budgets
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#effective-cost-per-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Effective cost per success
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-to-go-next" class="md-nav__link">
     <span class="md-ellipsis">
       Where to go next
@@ -1098,10 +1295,12 @@
 <h1 id="cost-and-caching">Cost and Caching<a class="headerlink" href="#cost-and-caching" title="Permanent link">&para;</a></h1>
 <p>swarmd routes a lot of traffic to language-model providers, and that traffic
 is the single biggest line item in most deployments. This guide covers the
-controls that keep that cost predictable: prompt caching, an embedding cache,
-memory consolidation tiers, per-project API keys, and rate limits.</p>
-<p>All of the settings here live in your daemon config
-(<code>~/.config/swarmd/swarmd.yaml</code>). A few can also be set per project. See
+controls that keep that cost predictable: hard per-project spend caps, dynamic
+per-role tool budgets, an effective-cost-per-success signal, prompt caching, an
+embedding cache, memory consolidation tiers, per-project API keys, and rate
+limits.</p>
+<p>Most of the settings here live in your daemon config
+(<code>~/.config/swarmd/swarmd.yaml</code>); spend caps are set per project. See
 <a href="../../reference/configuration/">Configuration reference</a> for the full list of
 keys and defaults.</p>
 <hr />
@@ -1254,6 +1453,91 @@ you need one.</p>
 <p>The per-project task-creation limiter warns as you approach the cap (logged
 and surfaced in the UI) and only blocks once you exceed it, so you get a heads
 up before requests start failing.</p>
+<hr />
+<h2 id="hard-spend-caps">Hard spend caps<a class="headerlink" href="#hard-spend-caps" title="Permanent link">&para;</a></h2>
+<p>The strongest cost control is a per-project USD cap. Caps are set in the
+<strong>project</strong> configuration (not the daemon config) under a <code>budget</code> block, with
+separate soft and hard limits on daily and monthly spend:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">budget</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">daily_soft_usd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15.0</span>
+<span class="w">  </span><span class="nt">daily_hard_usd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25.0</span>
+<span class="w">  </span><span class="nt">monthly_hard_usd</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">400.0</span>
+<span class="w">  </span><span class="nt">timezone</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Europe/Prague&quot;</span><span class="w">     </span><span class="c1"># when the daily/monthly windows reset</span>
+</code></pre></div>
+<ul>
+<li>A <strong>soft</strong> cap is advisory: tasks keep running, but swarmd logs the breach and
+  raises an operator alert.</li>
+<li>A <strong>hard</strong> cap is enforced: once the project's committed plus in-flight spend
+  would exceed it, new tasks are <strong>refused with <code>429 BUDGET_EXCEEDED</code></strong>. The cap
+  is enforced identically across every way a task can be created — the API, the
+  dispatcher, and autonomy — so a project can't slip past it through a side door.</li>
+</ul>
+<p>A zero on any dimension means "no cap" for that dimension. Set the <code>timezone</code> to
+your billing locale so daily and monthly windows reset when you expect. Caps are
+editable from the project's config page in the UI.</p>
+<hr />
+<h2 id="dynamic-per-role-tool-budgets">Dynamic per-role tool budgets<a class="headerlink" href="#dynamic-per-role-tool-budgets" title="Permanent link">&para;</a></h2>
+<p>Each role runs with a ceiling on how many tool-calling iterations a task may use.
+Dynamic tool budgets scale that ceiling by the <strong>complexity</strong> of the task, so a
+trivial task doesn't get the same loop budget as an open-ended one:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">tool_budget</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">              </span><span class="c1"># default false → roles use their static budget unchanged</span>
+<span class="w">  </span><span class="nt">max_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span><span class="w">            </span><span class="c1"># hard ceiling on any scale factor</span>
+<span class="w">  </span><span class="nt">autonomy_max_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.5</span><span class="w">   </span><span class="c1"># tighter ceiling for unattended tasks</span>
+<span class="w">  </span><span class="nt">min_step_timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300</span>
+</code></pre></div>
+<p>When enabled, the role's configured budget is treated as the <strong><code>complex</code> (1.0×)</strong>
+anchor, and the planner's complexity verdict scales it:</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Factor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trivial</code></td>
+<td>0.25×</td>
+</tr>
+<tr>
+<td><code>standard</code></td>
+<td>0.5×</td>
+</tr>
+<tr>
+<td><code>complex</code></td>
+<td>1.0×</td>
+</tr>
+<tr>
+<td><code>open_ended</code></td>
+<td>2.0×</td>
+</tr>
+</tbody>
+</table>
+<p>Two safety properties worth knowing: an absent or unrecognised verdict resolves
+to <strong>1.0×</strong> (never a silent downscale — only an explicit <code>trivial</code>/<code>standard</code>
+verdict reduces the budget), and the same factor scales the coupled step timeout.
+The optional learned-budget signal from the <a href="../../features/instinct/">instinct layer</a>
+is <strong>advisory and off by default</strong> — it never changes a budget on its own.</p>
+<div class="admonition note">
+<p class="admonition-title">Recalibration when you first enable it</p>
+<p><code>standard</code> was previously the 1.0× reference; it is now 0.5×. Turning the
+feature on therefore <em>halves</em> the budget for tasks the planner rates
+<code>standard</code>. That's intended (most tasks are small), but expect the change in
+behaviour the first time you enable it.</p>
+</div>
+<hr />
+<h2 id="effective-cost-per-success">Effective cost per success<a class="headerlink" href="#effective-cost-per-success" title="Permanent link">&para;</a></h2>
+<p>Raw spend doesn't tell you whether money is being <em>wasted</em> — a workflow that
+fails half its runs costs far more per useful result than its sticker price.
+swarmd tracks an <strong>effective cost per success</strong> (cost divided by successful
+outcomes) per role and model, and surfaces a drift ratio that compares the last
+24 hours to a 7-day baseline.</p>
+<p>The spend dashboard at <code>/ui/spend</code> shows the drift ratio as a coloured badge per
+role/model (green below 1, amber 1–2, red above 2), and the project detail page
+carries a 24-hour cost-per-success summary. A drift monitor can also alert when
+the ratio crosses a threshold — see the <code>effective_cost.*</code> keys in the
+<a href="../../reference/configuration/">Configuration reference</a>.</p>
 <hr />
 <h2 id="where-to-go-next">Where to go next<a class="headerlink" href="#where-to-go-next" title="Permanent link">&para;</a></h2>
 <ul>

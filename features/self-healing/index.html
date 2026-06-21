@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/instinct/">
+        <link rel="canonical" href="https://docs.swarmd.dev/features/self-healing/">
       
       
-        <link rel="prev" href="../self-healing/">
+        <link rel="prev" href="../blackbox/">
       
       
-        <link rel="next" href="../auth/">
+        <link rel="next" href="../instinct/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Instinct layer - swarmd documentation</title>
+        <title>Self-healing workflow genome - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#instinct-layer" class="md-skip">
+        <a href="#self-healing-workflow-genome" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Instinct layer
+              Self-healing workflow genome
             
           </span>
         </div>
@@ -678,27 +678,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../self-healing/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Self-healing workflow genome
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -715,7 +694,7 @@
           
   
   <span class="md-ellipsis">
-    Instinct layer
+    Self-healing workflow genome
   </span>
   
 
@@ -726,7 +705,7 @@
         
   
   <span class="md-ellipsis">
-    Instinct layer
+    Self-healing workflow genome
   </span>
   
 
@@ -748,60 +727,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
+  <a href="#the-loop" class="md-nav__link">
     <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
+      The loop
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#detection" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Detection
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
+  <a href="#candidate-generation" class="md-nav__link">
     <span class="md-ellipsis">
-      Inspecting what it learned
+      Candidate generation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#proving-a-repair-trials-and-the-scorecard" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Proving a repair: trials and the scorecard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promotion-is-always-yours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Promotion is always yours
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kill-switches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kill switches
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-find-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to find it
     </span>
   </a>
   
@@ -811,6 +793,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instinct/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Instinct layer
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1146,60 +1149,63 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-learns" class="md-nav__link">
+  <a href="#the-loop" class="md-nav__link">
     <span class="md-ellipsis">
-      How it learns
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="How it learns">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#confidence-and-decay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Confidence and decay
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-consumes-instincts" class="md-nav__link">
-    <span class="md-ellipsis">
-      What consumes instincts
+      The loop
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#detection" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Detection
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#inspecting-what-it-learned" class="md-nav__link">
+  <a href="#candidate-generation" class="md-nav__link">
     <span class="md-ellipsis">
-      Inspecting what it learned
+      Candidate generation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#proving-a-repair-trials-and-the-scorecard" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration
+      Proving a repair: trials and the scorecard
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#promotion-is-always-yours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Promotion is always yours
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kill-switches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kill switches
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-find-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Where to find it
     </span>
   </a>
   
@@ -1220,164 +1226,165 @@
                   
 
 
-<h1 id="instinct-layer">Instinct layer<a class="headerlink" href="#instinct-layer" title="Permanent link">&para;</a></h1>
-<p>The instinct layer lets swarmd learn from its own history. It mines the
-telemetry every task already produces, distils recurring patterns into
-confidence-scored <strong>instincts</strong> — "in situation T, action A held up" — and
-makes those instincts available as <em>evidence</em> to the parts of swarmd that
-decide how the next task runs.</p>
-<p>The defining rule: <strong>instincts are advisory. Nothing mutates silently.</strong> An
-instinct can raise the confidence of a workflow proposal an operator is already
-reviewing, or surface a remediation hint on a failed task — but it never edits a
-prompt, swaps a model, deletes a memory, or promotes a workflow on its own.
-Every behaviour-affecting decision still passes through the same operator and
-review gates it always did. With the layer disabled (the default), behaviour is
-unchanged.</p>
-<h2 id="how-it-learns">How it learns<a class="headerlink" href="#how-it-learns" title="Permanent link">&para;</a></h2>
-<p>A background worker runs on a cadence (30 minutes by default) and reads the
-<strong>audit spine</strong> — the step outcomes, tool-call log, and memory-retrieval log
-that swarmd writes for every task. Deterministic extractors turn finalised
-outcomes into atomic patterns; only genuinely ambiguous clusters fall through to
-a cheap distillation model. Each pattern is deduplicated by a canonical trigger
-key and scored.</p>
-<h3 id="confidence-and-decay">Confidence and decay<a class="headerlink" href="#confidence-and-decay" title="Permanent link">&para;</a></h3>
-<p>An instinct's confidence is a <strong>Wilson lower bound</strong> on its success rate
-(so a pattern seen 3 times is trusted far less than one seen 300 times),
-multiplied by a <strong>recency decay</strong> with a 30-day half-life (so a pattern that
-stops recurring fades rather than lingering forever). An instinct moves through
-states as the evidence accumulates:</p>
+<h1 id="self-healing-workflow-genome">Self-healing workflow genome<a class="headerlink" href="#self-healing-workflow-genome" title="Permanent link">&para;</a></h1>
+<p>Workflows drift. A model changes, an upstream API gets slower, a prompt that
+used to work starts failing — and the failure rate or cost of a workflow creeps
+up. The self-healing genome is the loop that <strong>notices the regression, proposes
+a repair, proves the repair against the runs that actually failed, and asks you
+to promote it.</strong> Nothing it produces reaches production without an operator
+clicking <em>promote</em>.</p>
+<p>It is built on the <a href="../blackbox/">Autonomy Black Box</a>: the detector reads the
+same telemetry, and the "prove it" step is a counterfactual replay over recorded
+evidence. Everything here is admin-gated.</p>
+<h2 id="the-loop">The loop<a class="headerlink" href="#the-loop" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>detect → generate candidate → trial (replay vs recorded failures) → scorecard → operator promotes
+  ▲ automatic              ▲ operator-initiated, everything downstream is too
+</code></pre></div>
+<ol>
+<li><strong>Detect</strong> — a background sweeper compares each workflow's recent behaviour
+   to its own baseline and opens a <em>trigger</em> when it regresses.</li>
+<li><strong>Generate a candidate</strong> — <em>you</em> click "generate candidate" on a trigger.
+   swarmd tries deterministic repair recipes first, then falls back to the
+   workflow architect.</li>
+<li><strong>Trial</strong> — run the candidate against the recorded failures, with all
+   real-world side effects blocked.</li>
+<li><strong>Scorecard</strong> — a pure comparison gate scores the candidate against the
+   baseline and marks it passed or failed.</li>
+<li><strong>Promote</strong> — <em>you</em> promote a passing candidate; only then is the workflow
+   change written, validated, committed, and hot-reloaded.</li>
+</ol>
+<p>The detector is the <strong>only</strong> automatic component, and it only writes triggers —
+it never generates or promotes anything.</p>
+<h2 id="detection">Detection<a class="headerlink" href="#detection" title="Permanent link">&para;</a></h2>
+<p>The sweeper runs hourly. For every workflow with at least 10 runs in both
+windows, it compares the <strong>last 24 hours</strong> against a <strong>7-day baseline</strong> and opens
+a trigger when a metric regresses past its threshold:</p>
 <table>
 <thead>
 <tr>
-<th>State</th>
-<th>Reached when</th>
+<th>Trigger class</th>
+<th>Fires when</th>
+<th>Default threshold</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>candidate</code></td>
-<td>freshly mined; not yet trusted</td>
+<td><code>failure_rate_spike</code></td>
+<td>failure rate rises</td>
+<td>+25% relative</td>
 </tr>
 <tr>
-<td><code>active</code></td>
-<td>confidence ≥ 0.6 and seen at least 3 times</td>
-</tr>
-<tr>
-<td><code>promoted</code></td>
-<td>holds across ≥ 2 projects at confidence ≥ 0.8 (becomes a global prior)</td>
-</tr>
-<tr>
-<td><code>retired</code></td>
-<td>confidence falls below 0.2 (sticky — stays retired)</td>
+<td><code>cost_regression</code></td>
+<td>average cost per run rises</td>
+<td>+40% relative</td>
 </tr>
 </tbody>
 </table>
-<p>These thresholds are tunable (see <a href="#configuration">Configuration</a>).</p>
-<h2 id="what-consumes-instincts">What consumes instincts<a class="headerlink" href="#what-consumes-instincts" title="Permanent link">&para;</a></h2>
-<p>Four consumers read instincts, each independently switchable and each strictly
-advisory:</p>
+<p>Each trigger captures up to five <strong>evidence executions</strong> (failed first, then
+most expensive) — these are the runs a repair has to prove itself against. Only
+one trigger stays open per (project, workflow, class) at a time, so a persistent
+regression doesn't spam the list.</p>
+<p>Browse and triage triggers:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>list<span class="w"> </span>--status<span class="w"> </span>open
+swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>dismiss<span class="w"> </span>&lt;trigger_id&gt;<span class="w">          </span><span class="c1"># accept it / not actionable</span>
+swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>generate-candidate<span class="w"> </span>&lt;trigger_id&gt;
+</code></pre></div>
+<p>You can tune thresholds or temporarily mute a noisy workflow per tuple:</p>
+<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>override<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--project<span class="w"> </span>P<span class="w"> </span>--workflow<span class="w"> </span>W<span class="w"> </span>--class<span class="w"> </span>cost_regression<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--threshold-pct<span class="w"> </span><span class="m">60</span><span class="w"> </span>--mute-hours<span class="w"> </span><span class="m">48</span>
+</code></pre></div>
+<h2 id="candidate-generation">Candidate generation<a class="headerlink" href="#candidate-generation" title="Permanent link">&para;</a></h2>
+<p>When you ask a trigger to generate a candidate, swarmd first tries <strong>deterministic
+recipes</strong> — currently a retry-budget adjustment and a verifier-insertion step —
+because a known-good structural fix is cheaper and more predictable than asking a
+model. If no recipe applies, it falls back to the workflow architect, which
+proposes a structural change from the trigger's evidence. If the architect
+judges no change is warranted, that's reported plainly, not as an error.</p>
+<p>Candidate generation is <strong>always operator-initiated</strong>. The detector never
+proposes.</p>
+<h2 id="proving-a-repair-trials-and-the-scorecard">Proving a repair: trials and the scorecard<a class="headerlink" href="#proving-a-repair-trials-and-the-scorecard" title="Permanent link">&para;</a></h2>
+<p>A candidate is a proposed new version of the workflow. Before it can be promoted
+it has to be <em>tried</em> — and there are two trial modes:</p>
 <ul>
-<li><strong>Failure-class playbooks</strong> — when a task fails, high-confidence remediation
-  instincts for that failure class are surfaced on the task's detail page and
-  offered to the lead as recovery <em>context</em>. The operator's recovery-approval
-  gate is unchanged.</li>
-<li><strong>Architect evidence priors</strong> — when the workflow architect proposes a change,
-  matching instincts act as priors. They can only nudge the proposal's
-  confidence <em>up</em> toward the strongest supporting evidence (never above what the
-  model itself reported, never widening the edit's scope); a rejected proposal is
-  written back as contrary evidence.</li>
-<li><strong>Memory hygiene</strong> — instincts suggest which memory scopes to boost and which
-  chunks are prune candidates. The consolidation sweeper <em>surfaces</em> these; it
-  never deletes on their say-so, and firewall-sensitive chunks are screened out.</li>
-<li><strong>Tool-budget tiers</strong> — when a planner gives no explicit complexity verdict,
-  a learned tier can fill the gap. An explicit verdict always wins, and the
-  configured budget caps still bound the result.</li>
+<li><strong>Static</strong> — checks the candidate's shape and policy only. Useful as a quick
+  sanity pass, but <strong>not sufficient for promotion</strong>.</li>
+<li><strong>Replay</strong> — re-runs the trigger's recorded evidence executions through the
+  candidate workflow, using the Black Box replay engine so every side-effecting
+  tool is stubbed. This is the real test: does the candidate actually do better
+  on the runs that failed?</li>
 </ul>
-<p>There is an optional <code>auto_apply</code> mode (off by default, gated by its own
-confidence floor) that changes only how <em>strongly</em> a recovery remediation is
-presented to the lead — it does not bypass the approval gate.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<p>Run the feature doctor to diagnose prerequisites and enable:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
-</code></pre></div>
-<p>This sets <code>instinct.enabled</code> plus the consumer gates and restarts the daemon
-during an idle window. Because it is restart-gated, the doctor refuses to apply
-while tasks are running and waits for an idle window. (The tool-budget and
-<code>auto_apply</code> consumers stay manually opt-in.)</p>
-<h2 id="inspecting-what-it-learned">Inspecting what it learned<a class="headerlink" href="#inspecting-what-it-learned" title="Permanent link">&para;</a></h2>
-<p>Everything the layer knows is browsable. Use the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>instinct<span class="w"> </span>list<span class="w"> </span>--domain<span class="w"> </span>recovery<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">0</span>.8
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>show<span class="w"> </span>&lt;instinct_id&gt;
-swarmctl<span class="w"> </span>instinct<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-o<span class="w"> </span>instincts.json<span class="w">        </span><span class="c1"># filtered snapshot</span>
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>retire<span class="w"> </span>&lt;instinct_id&gt;<span class="w">            </span><span class="c1"># advisory; the row stays for audit</span>
-</code></pre></div>
-<p><code>list</code> filters by <code>--domain</code>, <code>--scope</code>, <code>--project</code>, <code>--status</code>, and
-<code>--min-confidence</code>. The same inventory is available as a read-only browser at
-<code>/ui/admin/instincts</code>, and failed tasks show their learned remediations inline
-on the task detail page. All admin surfaces require an admin-scoped key.</p>
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>The layer is configured under the <code>instinct</code> block. The most useful keys:</p>
+<p>The <strong>scorecard</strong> then compares the candidate's trial against the baseline. The
+default gate requires the candidate to not regress on any axis:</p>
+<ul>
+<li>success rate must not drop,</li>
+<li>cost must stay within +10%,</li>
+<li>latency must stay within +10%,</li>
+<li>hallucination and verifier-failure counts must not increase.</li>
+</ul>
+<p>The scorecard <strong>only scores</strong> — it never promotes.</p>
+<h2 id="promotion-is-always-yours">Promotion is always yours<a class="headerlink" href="#promotion-is-always-yours" title="Permanent link">&para;</a></h2>
+<p>You promote a passing candidate from the <strong>Candidates</strong> tab at
+<code>/ui/admin/blackbox/candidates</code>, which shows the diff, the motivation, the
+evidence links, and the scorecard. Promotion:</p>
+<ul>
+<li>refuses any candidate that hasn't reached a passing trial;</li>
+<li><strong>requires a replay-gated pass</strong> — a static-only pass is deliberately not
+  promotable;</li>
+<li>applies the change through the normal workflow path (write the workflow
+  definition, validate it, commit it, hot-reload it), stamping who promoted it
+  and when.</li>
+</ul>
+<p>There is no background promotion loop anywhere in the system. If you never click
+promote, nothing changes.</p>
+<h2 id="kill-switches">Kill switches<a class="headerlink" href="#kill-switches" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Key</th>
-<th>Default</th>
-<th>Meaning</th>
+<th>Control</th>
+<th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>instinct.enabled</code></td>
-<td><code>false</code></td>
-<td>master switch</td>
+<td><code>SWARMD_ARCHITECT_PAUSED</code></td>
+<td>pauses architect-based candidate generation (the detector keeps writing triggers; deterministic recipes still apply)</td>
 </tr>
 <tr>
-<td><code>instinct.cadence_seconds</code></td>
-<td><code>1800</code></td>
-<td>how often the miner runs</td>
+<td><code>SWARMD_ARCHITECT_DISABLED_KINDS</code></td>
+<td>refuses specific proposal kinds</td>
 </tr>
 <tr>
-<td><code>instinct.min_support</code></td>
-<td><code>3</code></td>
-<td>observations before a pattern can leave <code>candidate</code></td>
-</tr>
-<tr>
-<td><code>instinct.active_confidence</code></td>
-<td><code>0.6</code></td>
-<td>promotion-to-<code>active</code> threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_confidence</code></td>
-<td><code>0.8</code></td>
-<td>cross-project global-promotion threshold</td>
-</tr>
-<tr>
-<td><code>instinct.promote_projects</code></td>
-<td><code>2</code></td>
-<td>projects a pattern must hold across to go global</td>
-</tr>
-<tr>
-<td><code>instinct.retire_floor</code></td>
-<td><code>0.2</code></td>
-<td>confidence below which an instinct retires</td>
-</tr>
-<tr>
-<td><code>instinct.decay_halflife_days</code></td>
-<td><code>30</code></td>
-<td>recency-decay half-life</td>
-</tr>
-<tr>
-<td><code>instinct.model</code></td>
-<td><code>chat.model</code></td>
-<td>distillation model for ambiguous clusters</td>
+<td><code>swarmctl blackbox override set … --mute-hours</code></td>
+<td>silences detection for one (project, workflow, class) tuple</td>
 </tr>
 </tbody>
 </table>
-<p>The four consumers are toggled under <code>instinct.consumers</code>:
-<code>failure_playbooks</code>, <code>architect_priors</code>, <code>memory_hygiene</code>,
-<code>application_feedback</code>, and <code>tool_budget</code>. The optional auto-apply mode lives
-under <code>instinct.consumers.auto_apply</code> (<code>enabled</code>, <code>min_confidence</code>,
-<code>allowed_error_classes</code>).</p>
+<h2 id="where-to-find-it">Where to find it<a class="headerlink" href="#where-to-find-it" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CLI</td>
+<td><code>swarmctl blackbox trigger {list, dismiss, bulk-dismiss, generate-candidate}</code> and <code>swarmctl blackbox override {list, set, delete}</code></td>
+</tr>
+<tr>
+<td>Web UI</td>
+<td><code>/ui/admin/blackbox</code> — <strong>Triggers</strong>, <strong>Candidates</strong>, <strong>Overrides</strong> tabs</td>
+</tr>
+<tr>
+<td>API</td>
+<td><code>/api/v1/admin/workflow-healing/*</code> (admin-scoped key required)</td>
+</tr>
+</tbody>
+</table>
+<p>Detection currently covers the failure-rate and cost regression classes; the
+trace and replay foundation it builds on is described in the
+<a href="../blackbox/">Autonomy Black Box</a> page.</p>
 
 
 
