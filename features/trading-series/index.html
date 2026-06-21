@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/features/memory-rag/">
+        <link rel="canonical" href="https://docs.swarmd.dev/features/trading-series/">
       
       
-        <link rel="prev" href="../auth/">
+        <link rel="prev" href="../cluster/">
       
       
-        <link rel="next" href="../cluster/">
+        <link rel="next" href="../../reference/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Memory & RAG - swarmd documentation</title>
+        <title>Trading time-series integrity - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#memory-rag" class="md-skip">
+        <a href="#trading-time-series-integrity" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Memory &amp; RAG
+              Trading time-series integrity
             
           </span>
         </div>
@@ -661,30 +661,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Memory &amp; RAG
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../memory-rag/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -693,44 +673,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
-    <span class="md-ellipsis">
-      Enabling it
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -761,10 +703,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../trading-series/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Trading time-series integrity
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -773,6 +735,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it checks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to read it
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does not do
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -961,18 +970,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#what-it-checks" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      What it checks
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#how-to-read-it" class="md-nav__link">
     <span class="md-ellipsis">
-      Prerequisites
+      How to read it
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-does-not-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it does not do
     </span>
   </a>
   
@@ -993,21 +1011,45 @@
                   
 
 
-<h1 id="memory-rag">Memory &amp; RAG<a class="headerlink" href="#memory-rag" title="Permanent link">&para;</a></h1>
-<p>swarmd can consolidate and semantically recall project memory so agents
-carry context forward across tasks, with caches that cut cost and latency.</p>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>memory-rag
-</code></pre></div>
-<p>This enables the <code>memory.*</code> gates — LLM consolidation, response cache, and
-embedding cache — and restarts the daemon during an idle window.</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
-<p>The doctor checks that the embedding model is actually reachable. When
-<code>memory.embedding_endpoint</code> is set, it probes that endpoint directly (the
-endpoint embeddings really use — typically a local Ollama / TEI server),
-not the chat-provider model catalog. If no embedding endpoint is
-configured, embeddings fall back to the agent/chat endpoint and the chat
-catalog is checked instead.</p>
+<h1 id="trading-time-series-integrity">Trading time-series integrity<a class="headerlink" href="#trading-time-series-integrity" title="Permanent link">&para;</a></h1>
+<p>When a project trades, swarmd samples the broker account every few
+minutes and stores an equity/cash/realized-P&amp;L snapshot. Those snapshots
+power the performance charts and the soak metrics on the trading
+dashboard — so if the sampler stalls or records bad values, the numbers
+you see can silently drift from reality.</p>
+<p>The <strong>trading-series</strong> health check validates that snapshot series for
+every trading-enabled project and reports any anomalies on the feature
+doctor, rather than letting you trust a stale or broken series.</p>
+<h2 id="what-it-checks">What it checks<a class="headerlink" href="#what-it-checks" title="Permanent link">&para;</a></h2>
+<p>For each project that has a <code>broker</code> MCP server configured, over the
+last seven days of snapshots:</p>
+<ul>
+<li><strong>Cadence gaps</strong> — a stretch <em>during market hours</em> where no snapshot was
+  recorded for far longer than the sampling interval (usually the sampler or
+  the broker connection was down). Overnight and weekend gaps, when the market
+  is closed and the broker runs its daily maintenance, are expected and not
+  flagged.</li>
+<li><strong>Duplicate timestamps</strong> — two snapshots stamped at the same instant,
+  which points at a double-write.</li>
+<li><strong>Staleness</strong> — the most recent snapshot is older than expected, so
+  the dashboard is showing data that is no longer fresh.</li>
+<li><strong>Implausible values</strong> — equity or cash that is negative, not a
+  number, or absurdly large (typically a unit error).</li>
+</ul>
+<h2 id="how-to-read-it">How to read it<a class="headerlink" href="#how-to-read-it" title="Permanent link">&para;</a></h2>
+<p>The check appears in the feature doctor as <strong>Trading time-series
+integrity</strong>. A healthy series reports <code>ok</code>; any anomaly moves it to
+<code>degraded</code> with a short summary naming the affected projects and the
+anomaly types. The per-project, per-anomaly counts are also exported as
+the <code>swarmd_trading_series_anomalies</code> metric (a value of <code>0</code> means that
+anomaly is currently clear).</p>
+<p>A <code>degraded</code> result is a prompt to look at the equity sampler and the
+broker connection — a gappy or stale series almost always means one of
+those was unavailable for a while.</p>
+<h2 id="what-it-does-not-do">What it does not do<a class="headerlink" href="#what-it-does-not-do" title="Permanent link">&para;</a></h2>
+<p>The check reads only swarmd's stored data; it does not call the live
+broker. Comparing the stored series against the broker's live account in
+real time is a separate, future capability.</p>
 
 
 
