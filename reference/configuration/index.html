@@ -1206,6 +1206,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#tool_budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      tool_budget
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      blackbox
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#secrets" class="md-nav__link">
     <span class="md-ellipsis">
       secrets
@@ -1537,6 +1555,24 @@
   <a href="#effective_cost" class="md-nav__link">
     <span class="md-ellipsis">
       effective_cost
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tool_budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      tool_budget
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blackbox" class="md-nav__link">
+    <span class="md-ellipsis">
+      blackbox
     </span>
   </a>
   
@@ -2113,6 +2149,60 @@
 <td><code>effective_cost.ratio_threshold</code></td>
 <td>float</td>
 <td>Current/baseline cost ratio that triggers an alert.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tool_budget">tool_budget<a class="headerlink" href="#tool_budget" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tool_budget.enabled</code></td>
+<td>bool</td>
+<td>Scale each role's tool-iteration budget by task complexity. Off = roles use their static budget unchanged.</td>
+</tr>
+<tr>
+<td><code>tool_budget.factors</code></td>
+<td>map</td>
+<td>Tier → multiplier overrides (trivial / standard / complex / open_ended).</td>
+</tr>
+<tr>
+<td><code>tool_budget.max_factor</code></td>
+<td>float</td>
+<td>Hard ceiling on any scale factor (default 2.0).</td>
+</tr>
+<tr>
+<td><code>tool_budget.autonomy_max_factor</code></td>
+<td>float</td>
+<td>Tighter ceiling for unattended autonomous tasks (default 1.5).</td>
+</tr>
+<tr>
+<td><code>tool_budget.min_step_timeout_seconds</code></td>
+<td>int</td>
+<td>Floor for the coupled step-timeout scaling (default 300).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="blackbox">blackbox<a class="headerlink" href="#blackbox" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>blackbox.replay_safe_tools</code></td>
+<td>list</td>
+<td>Allow-list of read-only/idempotent tools that may run live during a counterfactual replay. Deny-by-default: everything else is stubbed. Empty falls back to the built-in default.</td>
 </tr>
 </tbody>
 </table>
