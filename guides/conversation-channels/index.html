@@ -423,8 +423,6 @@
       
         
       
-        
-      
     
     
       
@@ -895,27 +893,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../trading-setup/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trading Setup
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -931,8 +908,6 @@
   
     
     
-      
-        
       
         
       
@@ -1165,27 +1140,6 @@
   
   <span class="md-ellipsis">
     Companion plugin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../features/trading-series/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trading time-series integrity
   </span>
   
 
@@ -1573,7 +1527,8 @@
 <p>Conversation channels let people reach swarmd from the tools they already use.
 Connect a channel and inbound messages turn into tasks or chat turns, while
 swarmd's replies flow back out the same way they came in. swarmd ships four
-channels: <strong>GitHub</strong>, <strong>Slack</strong>, <strong>email</strong>, and <strong>voice messages</strong>.</p>
+channels: <strong>GitHub</strong>, <strong>Slack</strong>, <strong>email</strong>, and <strong>voice messages</strong>
+(experimental).</p>
 <p>You configure each channel per project, in that project's YAML file. After you
 change a channel's settings, reload the project configuration — you do not need
 to take the whole service down to pick up new channels.</p>
@@ -1758,6 +1713,13 @@ valid if you only want it to act on incoming mail.</p>
 </ul>
 <hr />
 <h2 id="voice-messages">Voice messages<a class="headerlink" href="#voice-messages" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Experimental</p>
+<p>Voice messages are an <strong>experimental</strong> feature. The transcription/synthesis
+pipeline and its configuration may change between releases, and quality
+depends on your chosen STT/TTS models. Use it for evaluation rather than
+production-critical conversations for now.</p>
+</div>
 <p>The voice channel adds spoken conversation to Telegram and Slack. When someone
 sends a voice message, swarmd transcribes it, treats the transcript as a normal
 message, and — if the conversation started in voice — speaks its reply back.</p>

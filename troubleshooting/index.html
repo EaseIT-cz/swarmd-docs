@@ -421,8 +421,6 @@
       
         
       
-        
-      
     
     
       
@@ -676,27 +674,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../guides/trading-setup/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trading Setup
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -712,8 +689,6 @@
   
     
     
-      
-        
       
         
       
@@ -946,27 +921,6 @@
   
   <span class="md-ellipsis">
     Companion plugin
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../features/trading-series/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Trading time-series integrity
   </span>
   
 
@@ -2043,10 +1997,9 @@ climbing unexpectedly:</p>
 <p>If you run the optional trading capability and orders are refused or never
 placed, the cause is usually a safety rule doing its job: out-of-hours ticks,
 stop-loss bounds, daily-loss limits, or an unreachable broker connection all
-cause swarmd to skip a trade deliberately. See
-<a href="../guides/trading-setup/">Trading setup</a> for the safety controls and how to
-tune them, and confirm your broker connection and market-data entitlements are
-active.</p>
+cause swarmd to skip a trade deliberately. Review the trading safety controls
+(out-of-hours guards, stop-loss and daily-loss bounds) and confirm your broker
+connection and market-data entitlements are active.</p>
 <h2 id="still-stuck">Still stuck?<a class="headerlink" href="#still-stuck" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Re-run <code>swarmctl doctor</code> and read every warning, not just the failures.</li>

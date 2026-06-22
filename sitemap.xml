@@ -2,126 +2,118 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.swarmd.dev/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/concepts/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/concepts/architecture/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/auth/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/blackbox/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/cluster/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/companion/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/forge/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/instinct/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/memory-rag/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/self-healing/</loc>
-         <lastmod>2026-06-21</lastmod>
-    </url>
-    <url>
-         <loc>https://docs.swarmd.dev/features/trading-series/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/features/zero-egress/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/getting-started/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/approvals/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/autonomy/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/clustering/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/conversation-channels/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/cost-and-caching/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/feature-doctor/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/observability/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/recovery/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/storage-and-retention/</loc>
-         <lastmod>2026-06-21</lastmod>
-    </url>
-    <url>
-         <loc>https://docs.swarmd.dev/guides/trading-setup/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/guides/workflows-and-llm-controls/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/reference/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/reference/configuration/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/reference/swarmctl/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/release-notes/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
     <url>
          <loc>https://docs.swarmd.dev/troubleshooting/</loc>
-         <lastmod>2026-06-21</lastmod>
+         <lastmod>2026-06-22</lastmod>
     </url>
 </urlset>
