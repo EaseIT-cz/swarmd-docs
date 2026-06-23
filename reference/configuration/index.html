@@ -1237,15 +1237,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trading" class="md-nav__link">
-    <span class="md-ellipsis">
-      trading
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#chat" class="md-nav__link">
     <span class="md-ellipsis">
       chat
@@ -1577,15 +1568,6 @@
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       api
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#trading" class="md-nav__link">
-    <span class="md-ellipsis">
-      trading
     </span>
   </a>
   
@@ -2385,58 +2367,6 @@
 <td><code>api.rate_limit.per_ip.trusted_proxies</code></td>
 <td>list</td>
 <td>Deprecated: use server.real_ip.trusted_proxies. CIDRs/IPs trusted to set X-Forwarded-For.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="trading">trading<a class="headerlink" href="#trading" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>trading.auth.enabled</code></td>
-<td>bool</td>
-<td>Require a valid HMAC signature on the broker-to-daemon trading-channel endpoints.</td>
-</tr>
-<tr>
-<td><code>trading.auth.secret</code></td>
-<td>string</td>
-<td>Shared HMAC secret for trading-channel auth (prefer secret_file).</td>
-</tr>
-<tr>
-<td><code>trading.auth.secret_file</code></td>
-<td>string</td>
-<td>Path to the trading HMAC secret (preferred over inline secret).</td>
-</tr>
-<tr>
-<td><code>trading.auth.clock_skew</code></td>
-<td>string</td>
-<td>Trading-auth timestamp freshness window (default 5m).</td>
-</tr>
-<tr>
-<td><code>trading.cross_check.enabled</code></td>
-<td>bool</td>
-<td>Run the periodic broker-vs-swarmd equity cross-checker.</td>
-</tr>
-<tr>
-<td><code>trading.cross_check.interval</code></td>
-<td>string</td>
-<td>Equity cross-check cadence (default 15m).</td>
-</tr>
-<tr>
-<td><code>trading.cross_check.tolerance_pct</code></td>
-<td>float</td>
-<td>Equity drift tolerance in percent (default 1.0).</td>
-</tr>
-<tr>
-<td><code>trading.cross_check.max_snapshot_age</code></td>
-<td>string</td>
-<td>Snapshot staleness bound (default 15m).</td>
 </tr>
 </tbody>
 </table>
