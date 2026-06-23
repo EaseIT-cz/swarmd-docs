@@ -1183,24 +1183,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool_budget" class="md-nav__link">
-    <span class="md-ellipsis">
-      tool_budget
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackbox" class="md-nav__link">
-    <span class="md-ellipsis">
-      blackbox
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#secrets" class="md-nav__link">
     <span class="md-ellipsis">
       secrets
@@ -1249,6 +1231,15 @@
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       api
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trading" class="md-nav__link">
+    <span class="md-ellipsis">
+      trading
     </span>
   </a>
   
@@ -1538,24 +1529,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#tool_budget" class="md-nav__link">
-    <span class="md-ellipsis">
-      tool_budget
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#blackbox" class="md-nav__link">
-    <span class="md-ellipsis">
-      blackbox
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#secrets" class="md-nav__link">
     <span class="md-ellipsis">
       secrets
@@ -1604,6 +1577,15 @@
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       api
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trading" class="md-nav__link">
+    <span class="md-ellipsis">
+      trading
     </span>
   </a>
   
@@ -1797,6 +1779,26 @@
 <td><code>server.unix_socket</code></td>
 <td>string</td>
 <td>Optional Unix socket path the API is also served on, alongside the TCP address. Required for zero-egress agents.</td>
+</tr>
+<tr>
+<td><code>server.real_ip.enabled</code></td>
+<td>bool</td>
+<td>Honour the trusted client-IP header from trusted_proxies. Off ⇒ always key on RemoteAddr.</td>
+</tr>
+<tr>
+<td><code>server.real_ip.trusted_proxies</code></td>
+<td>list</td>
+<td>CIDRs/IPs trusted to set the real-IP header. List ONLY the cloudflared host.</td>
+</tr>
+<tr>
+<td><code>server.real_ip.header</code></td>
+<td>string</td>
+<td>Trusted client-IP header. Default CF-Connecting-IP.</td>
+</tr>
+<tr>
+<td><code>server.public_base_url</code></td>
+<td>string</td>
+<td>Public origin (scheme://host[:port]) for git clone/push HTTPS URLs; used only to render the clone URL on the project page.</td>
 </tr>
 </tbody>
 </table>
@@ -2129,60 +2131,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="tool_budget">tool_budget<a class="headerlink" href="#tool_budget" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>tool_budget.enabled</code></td>
-<td>bool</td>
-<td>Scale each role's tool-iteration budget by task complexity. Off = roles use their static budget unchanged.</td>
-</tr>
-<tr>
-<td><code>tool_budget.factors</code></td>
-<td>map</td>
-<td>Tier → multiplier overrides (trivial / standard / complex / open_ended).</td>
-</tr>
-<tr>
-<td><code>tool_budget.max_factor</code></td>
-<td>float</td>
-<td>Hard ceiling on any scale factor (default 2.0).</td>
-</tr>
-<tr>
-<td><code>tool_budget.autonomy_max_factor</code></td>
-<td>float</td>
-<td>Tighter ceiling for unattended autonomous tasks (default 1.5).</td>
-</tr>
-<tr>
-<td><code>tool_budget.min_step_timeout_seconds</code></td>
-<td>int</td>
-<td>Floor for the coupled step-timeout scaling (default 300).</td>
-</tr>
-</tbody>
-</table>
-<h2 id="blackbox">blackbox<a class="headerlink" href="#blackbox" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>blackbox.replay_safe_tools</code></td>
-<td>list</td>
-<td>Allow-list of read-only/idempotent tools that may run live during a counterfactual replay. Deny-by-default: everything else is stubbed. Empty falls back to the built-in default.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="secrets">secrets<a class="headerlink" href="#secrets" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2326,6 +2274,76 @@
 <td>string</td>
 <td>Log format (e.g. json, text).</td>
 </tr>
+<tr>
+<td><code>logging.forward.enabled</code></td>
+<td>bool</td>
+<td>Enable centralised log forwarding to remote sinks.</td>
+</tr>
+<tr>
+<td><code>logging.forward.scopes</code></td>
+<td>list</td>
+<td>Allowlist of log categories to forward. Empty ships all scopes.</td>
+</tr>
+<tr>
+<td><code>logging.forward.queue_size</code></td>
+<td>int</td>
+<td>Bounded forward queue size; overflow is dropped + counted.</td>
+</tr>
+<tr>
+<td><code>logging.forward.batch_size</code></td>
+<td>int</td>
+<td>Max events per shipped batch.</td>
+</tr>
+<tr>
+<td><code>logging.forward.flush_interval</code></td>
+<td>string</td>
+<td>Max time a partial batch waits before shipping (e.g. 5s).</td>
+</tr>
+<tr>
+<td><code>logging.forward.http.enabled</code></td>
+<td>bool</td>
+<td>Enable the HTTP webhook log sink.</td>
+</tr>
+<tr>
+<td><code>logging.forward.http.url</code></td>
+<td>string</td>
+<td>Collector ingest URL the HTTP sink POSTs NDJSON to.</td>
+</tr>
+<tr>
+<td><code>logging.forward.http.bearer_token_env</code></td>
+<td>string</td>
+<td>Env-var NAME holding the HTTP sink bearer token (never the token itself).</td>
+</tr>
+<tr>
+<td><code>logging.forward.http.timeout</code></td>
+<td>string</td>
+<td>Per-request HTTP sink timeout (e.g. 5s).</td>
+</tr>
+<tr>
+<td><code>logging.forward.http.max_retries</code></td>
+<td>int</td>
+<td>Max HTTP sink retries on 5xx/transport error.</td>
+</tr>
+<tr>
+<td><code>logging.forward.syslog.enabled</code></td>
+<td>bool</td>
+<td>Enable the syslog log sink.</td>
+</tr>
+<tr>
+<td><code>logging.forward.syslog.address</code></td>
+<td>string</td>
+<td>host:port of the syslog collector.</td>
+</tr>
+<tr>
+<td><code>logging.forward.syslog.protocol</code></td>
+<td>string</td>
+<td>Syslog transport: udp | tcp | tls.</td>
+</tr>
+<tr>
+<td><code>logging.forward.syslog.ca_file</code></td>
+<td>string</td>
+<td>Optional PEM CA bundle for syslog tls (system roots otherwise).</td>
+</tr>
 </tbody>
 </table>
 <h2 id="api">api<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
@@ -2366,7 +2384,59 @@
 <tr>
 <td><code>api.rate_limit.per_ip.trusted_proxies</code></td>
 <td>list</td>
-<td>CIDRs/IPs trusted to set X-Forwarded-For.</td>
+<td>Deprecated: use server.real_ip.trusted_proxies. CIDRs/IPs trusted to set X-Forwarded-For.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="trading">trading<a class="headerlink" href="#trading" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>trading.auth.enabled</code></td>
+<td>bool</td>
+<td>Require a valid HMAC signature on the broker-to-daemon trading-channel endpoints.</td>
+</tr>
+<tr>
+<td><code>trading.auth.secret</code></td>
+<td>string</td>
+<td>Shared HMAC secret for trading-channel auth (prefer secret_file).</td>
+</tr>
+<tr>
+<td><code>trading.auth.secret_file</code></td>
+<td>string</td>
+<td>Path to the trading HMAC secret (preferred over inline secret).</td>
+</tr>
+<tr>
+<td><code>trading.auth.clock_skew</code></td>
+<td>string</td>
+<td>Trading-auth timestamp freshness window (default 5m).</td>
+</tr>
+<tr>
+<td><code>trading.cross_check.enabled</code></td>
+<td>bool</td>
+<td>Run the periodic broker-vs-swarmd equity cross-checker.</td>
+</tr>
+<tr>
+<td><code>trading.cross_check.interval</code></td>
+<td>string</td>
+<td>Equity cross-check cadence (default 15m).</td>
+</tr>
+<tr>
+<td><code>trading.cross_check.tolerance_pct</code></td>
+<td>float</td>
+<td>Equity drift tolerance in percent (default 1.0).</td>
+</tr>
+<tr>
+<td><code>trading.cross_check.max_snapshot_age</code></td>
+<td>string</td>
+<td>Snapshot staleness bound (default 15m).</td>
 </tr>
 </tbody>
 </table>
@@ -2794,6 +2864,11 @@
 <td>Feed retrieval instincts to memory sweepers.</td>
 </tr>
 <tr>
+<td><code>instinct.consumers.tool_budget</code></td>
+<td>bool</td>
+<td>Let learned budget instincts fill an absent complexity tier (default off).</td>
+</tr>
+<tr>
 <td><code>instinct.consumers.auto_apply.enabled</code></td>
 <td>bool</td>
 <td>Promote high-confidence recovery instincts to a prompt-level directive (default off).</td>
@@ -2802,6 +2877,11 @@
 <td><code>instinct.consumers.auto_apply.min_confidence</code></td>
 <td>float</td>
 <td>Confidence floor for auto-apply (default 0.85).</td>
+</tr>
+<tr>
+<td><code>instinct.consumers.auto_apply.min_clean_support</code></td>
+<td>int</td>
+<td>Min clean (zero-contradiction) supports for auto-apply; 0 = off.</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.auto_apply.allowed_error_classes</code></td>
@@ -2854,6 +2934,16 @@
 <td><code>auth.providers.github.org</code></td>
 <td>string</td>
 <td>Restrict/soft-gate login to a GitHub org.</td>
+</tr>
+<tr>
+<td><code>auth.providers.github.org_member_role</code></td>
+<td>string</td>
+<td>Auto-grant role for GitHub org members on login: empty (default, no auto-grant), 'user', or 'admin'. Requires 'org' set.</td>
+</tr>
+<tr>
+<td><code>auth.providers.github.org_member_projects</code></td>
+<td>list</td>
+<td>Projects an auto-granted org member (user role) receives; '*' = all projects.</td>
 </tr>
 </tbody>
 </table>

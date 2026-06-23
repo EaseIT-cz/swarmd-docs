@@ -3306,7 +3306,8 @@ overwrite semantics, etc).</p>
   eval_suite_lint       Parse configs/evals/*.json; flag suites with missing/incompatible project/workflow/swarm
   database_schema       Verify expected tables and indexes exist (incl. 2026.4.11+ additions)
   orphan_fk_rows        Detect orphan rows in audit / llm_usage / watchers referencing missing tasks
-  orphan_worktrees      .worktrees/ subdirs with no matching live task</p>
+  orphan_worktrees      .worktrees/ subdirs with no matching live task
+  config_crlf           Config files with CRLF line endings (UI YAML-writer drift); --fix normalizes to LF</p>
 <p>Runtime:
   podman_config         Check podman availability and rootless configuration
   agent_images          Verify agent images referenced in swarm configs are available
@@ -3318,6 +3319,12 @@ overwrite semantics, etc).</p>
   api_key_strength      Detect weak / placeholder API keys
   secrets_permissions   Secrets files/dirs with world-readable permissions
   config_secret_hygiene Config.yaml plaintext secrets or loose permissions (recommends ${ENV_VAR})</p>
+<p>Models:
+  model_health          Role-pinned models with high recent failure rate or
+                        degenerate output; RECOMMENDS the role's modelFallback
+                        (diagnostic only — never auto-switches a model)
+  model_route_coverage  Role-pinned models that don't resolve to a chat
+                        model_route prefix or are missing from pricing.yaml</p>
 <p>Cost &amp; budget:
   pricing_coverage      Models in swarm configs missing from pricing.yaml
   autonomy_budget_guard Autonomy-enabled projects with no hard $ cap
@@ -3909,7 +3916,7 @@ the raw key later.</p>
 </tbody>
 </table>
 <h2 id="swarmctl-key-update">swarmctl key update<a class="headerlink" href="#swarmctl-key-update" title="Permanent link">&para;</a></h2>
-<p>Update an existing key's allowed_workflows list</p>
+<p>Update an existing key's allowed_workflows list or push capability</p>
 <p>Add, remove, or replace workflows on a key's allowed_workflows
 list without minting a new secret. Three modes, mutually exclusive
 per invocation:</p>
@@ -3917,6 +3924,9 @@ per invocation:</p>
   --remove-workflow X[,Y]   drop X (and Y) from the current list
   --set-workflows X,Y,Z     replace the list wholesale; pass '' to
                             mean "every workflow the project permits"</p>
+<p>To flip git-push access on a key use one of the mutually exclusive flags:</p>
+<p>--allow-push              grant git-push access over HTTPS
+  --disallow-push           revoke git-push access</p>
 <p>Add / remove modes fetch the current list, mutate, and PUT the
 result — last writer wins on concurrent edits. Set mode is the
 raw PUT.</p>
@@ -3924,7 +3934,9 @@ raw PUT.</p>
   swarmctl key update -p my-project --add-workflow=rag-ingest <keyID>
   swarmctl key update -p my-project --remove-workflow=doc-review <keyID>
   swarmctl key update -p my-project --set-workflows=research-gather,rag-ingest <keyID>
-  swarmctl key update -p my-project --set-workflows='' <keyID>   # = every project workflow</p>
+  swarmctl key update -p my-project --set-workflows='' <keyID>   # = every project workflow
+  swarmctl key update -p my-project --allow-push <keyID>
+  swarmctl key update -p my-project --disallow-push <keyID></p>
 <div class="highlight"><pre><span></span><code>swarmctl key update &lt;keyID&gt; [flags]
 </code></pre></div>
 <table>
@@ -3940,6 +3952,16 @@ raw PUT.</p>
 <td><code>--add-workflow</code></td>
 <td><code>[]</code></td>
 <td>Workflow ID(s) to append to allowed_workflows. Repeatable / comma-separated.</td>
+</tr>
+<tr>
+<td><code>--allow-push</code></td>
+<td><code>false</code></td>
+<td>Grant git-push access over HTTPS to this key.</td>
+</tr>
+<tr>
+<td><code>--disallow-push</code></td>
+<td><code>false</code></td>
+<td>Revoke git-push access over HTTPS from this key.</td>
 </tr>
 <tr>
 <td><code>--json</code></td>
