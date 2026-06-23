@@ -1460,8 +1460,8 @@ new behavior; those are called out below.</p>
 <h2 id="202661">2026.6.1<a class="headerlink" href="#202661" title="Permanent link">&para;</a></h2>
 <p><strong>A more visual control plane, safer to expose and support.</strong> This release
 consolidates a large body of work: the web UI's capability tracks, a
-security/operability hardening pass, git-over-HTTPS workspace access, content
-provenance, and a trading P&amp;L tracker.</p>
+security/operability hardening pass, git-over-HTTPS workspace access, and
+content provenance.</p>
 <ul>
 <li><strong>Edit workflows as a graph.</strong> A new graph view (<code>/ui/workflows/{id}/graph</code>)
   lets you wire steps visually — add/delete nodes, draw success/fail/gate edges,
@@ -1499,10 +1499,6 @@ provenance, and a trading P&amp;L tracker.</p>
   content is first-party (produced by swarmd) or third-party, so swarmd's own
   output is no longer over-redacted while untrusted content and secrets still
   are.</li>
-<li><strong>Trading P&amp;L tracker.</strong> <code>/ui/trading</code> now leads with a performance panel —
-  FIFO round-trip P&amp;L, per-symbol breakdown, and an equity curve — and a new
-  <code>trading-series</code> doctor check validates the trading time series for gaps and
-  anomalies (quietly ignoring overnight and weekend market closures).</li>
 <li><strong>Structured recovery steering.</strong> When a step fails, the lead can be offered a
   typed recovery decision — re-route the workflow, fall back to a role's
   configured model, retry, or skip — and successful recoveries are recorded so
@@ -1520,8 +1516,6 @@ provenance, and a trading P&amp;L tracker.</p>
   heartbeat/relay logging and metrics, a probe library driven by an
   expected-endpoints config, and an opt-in, leader-gated endpoint monitor with
   operator alerting.</li>
-<li><strong>Trading endpoint hardening.</strong> The internal trading endpoints gain HMAC
-  authentication (fail-closed) and per-project rate limiting.</li>
 </ul>
 <p>Notable fixes: a <strong>graceful restart no longer fails in-flight work</strong> and
 <strong>bounded graceful shutdown</strong> force-closes stuck connections so a long-lived
@@ -1538,9 +1532,9 @@ observability metrics are emitted.</p>
 <p class="admonition-title">Upgrade</p>
 <p>Restart the daemon to pick up the new behavior. Add <code>TimeoutStopSec=90s</code> to
 the systemd unit so the bounded shutdown has room to drain. Log forwarding,
-the support report, real-IP resolution, git-over-HTTPS workspace access, and
-the trading HMAC are all opt-in — existing deployments are unaffected until
-you configure them.</p>
+the support report, real-IP resolution, and git-over-HTTPS workspace access
+are all opt-in — existing deployments are unaffected until you configure
+them.</p>
 </div>
 <hr />
 <h2 id="202660">2026.6.0<a class="headerlink" href="#202660" title="Permanent link">&para;</a></h2>
@@ -1559,8 +1553,8 @@ nothing merges without you.</p>
   reusable, confidence-scored fixes from past runs and surfaces them as advice
   on failed tasks and to the planner. Advisory and opt-in.</li>
 <li><strong>Refreshed control-plane UI.</strong> A new translucent design with icon-rail
-  navigation, first-class Swarms / Workflows / Executions list pages, tidier
-  per-page layouts, and a trading insight dashboard.</li>
+  navigation, first-class Swarms / Workflows / Executions list pages, and
+  tidier per-page layouts.</li>
 <li><strong>Feature Doctor.</strong> A new command tells you which optional features are
   enabled, ready, or blocked — and can turn one on for you, with a backup,
   validation, and automatic rollback if anything is wrong.</li>
@@ -1574,7 +1568,7 @@ nothing merges without you.</p>
   map short-URLs) to their real destination before applying your host
   allowlist, and refuses to reach private or loopback network addresses.</li>
 <li><strong>Security &amp; safety hardening.</strong> A broad audit-remediation pass across access
-  controls, the trading safety envelope, and memory-access policy.</li>
+  controls and memory-access policy.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Restart after upgrade</p>
@@ -1699,29 +1693,22 @@ swarmctl<span class="w"> </span>memory<span class="w"> </span>prune-candidates<s
 rebuild it to pick up this release's runtime improvements.</p>
 </div>
 <h2 id="202653">2026.5.3<a class="headerlink" href="#202653" title="Permanent link">&para;</a></h2>
-<p>A trading-reliability and output-correctness release.</p>
+<p>A reliability and output-correctness release.</p>
 <ul>
 <li><strong>Declarative output schemas.</strong> Agent roles can declare the exact shape of
   their output in one place, eliminating a whole class of "valid output, wrong
   shape" failures. <code>swarmctl doctor</code> flags mismatches before they cause a
   failed run.</li>
-<li><strong>Trading safety controls</strong>, including stop-loss bounds, a daily-loss circuit
-  breaker, and a market-hours guard that skips ticks outside regular trading
-  hours (saving the cost of pointless out-of-hours runs).</li>
 <li><strong>Security hardening</strong> across container isolation, secret detection, webhook
   authentication, and API input validation.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Upgrade</p>
-<p>Restart the daemon to activate the new schema enforcement and trading
-settings. Review your trading caps — the new limits ship with conservative
-defaults you may want to tune.</p>
+<p>Restart the daemon to activate the new schema enforcement.</p>
 </div>
 <h2 id="202652">2026.5.2<a class="headerlink" href="#202652" title="Permanent link">&para;</a></h2>
-<p>A trading reliability and observability release.</p>
+<p>A reliability and observability release.</p>
 <ul>
-<li><strong>Atomic bracket orders</strong> close the window where an entry order could fill
-  before its protective stop was placed.</li>
 <li><strong>Per-task post-mortem explainer.</strong> Failed tasks now include a plain-language
   paragraph explaining why they failed, alongside the step outcomes and audit
   trail.</li>
@@ -1729,10 +1716,6 @@ defaults you may want to tune.</p>
   and closing a cross-project access path.</li>
 </ul>
 <h2 id="202651">2026.5.1<a class="headerlink" href="#202651" title="Permanent link">&para;</a></h2>
-<p>The first <strong>autonomous trading</strong> capability: an end-to-end broker integration
-with position-aware stop-loss enforcement, technical-analysis indicators, and a
-news/fundamentals source, wired into a strategist → risk-officer → executor
-workflow.</p>
 <p>Cancelled tasks now show their accumulated LLM cost in the UI, and autonomy's
 duplicate-suppression now matches by topic similarity rather than exact text.</p>
 <h2 id="202650">2026.5.0<a class="headerlink" href="#202650" title="Permanent link">&para;</a></h2>

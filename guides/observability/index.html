@@ -1344,8 +1344,7 @@ endpoint for your own monitoring stack.</p>
 <p>The Web UI landing page (<code>/ui/</code>) is an operator front page of live tiles:
 active tasks (queued, leased, running), active chats, a countdown to the next
 <a href="../autonomy/">autonomy</a> evaluation per project, lifetime cache savings, a memory
-pipeline snapshot, trading safety status, and an <strong>Inbox</strong> tile for anything that
-needs you.</p>
+pipeline snapshot, and an <strong>Inbox</strong> tile for anything that needs you.</p>
 <h3 id="insight">Insight<a class="headerlink" href="#insight" title="Permanent link">&para;</a></h3>
 <p>The <strong>Insight</strong> area collects the analytical views:</p>
 <ul>
@@ -1357,8 +1356,6 @@ needs you.</p>
   calls executions actually use, plotted against the
   <a href="../cost-and-caching/#dynamic-per-role-tool-budgets">complexity-tier budget</a>,
   with mean / P50 / P95. Use it to tune budgets to reality.</li>
-<li><strong>Trading</strong> (<code>/ui/trading</code>) — broker account snapshot, recent trades, and
-  safety events for trading projects.</li>
 </ul>
 <h3 id="health">Health<a class="headerlink" href="#health" title="Permanent link">&para;</a></h3>
 <p>Admin-gated health tabs under <code>/ui/admin/health/</code> cover the daemon's operational
@@ -1412,7 +1409,6 @@ trusted interface.</p>
 <li><strong>Tool calls, autonomy, and cross-project orchestration</strong> — tool invocation
   counts, autonomy approval resolutions and configured caps, and cross-project
   call and spawn counts.</li>
-<li><strong>Trading</strong> — safety-envelope events, orders and fills ingested, per project.</li>
 <li><strong>HTTP and process</strong> — request counts, durations, in-flight requests, plus
   standard Go/process collectors.</li>
 </ul>

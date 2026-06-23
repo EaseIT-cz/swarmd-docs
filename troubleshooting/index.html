@@ -1397,15 +1397,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trading-setup-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      Trading setup issues
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#still-stuck" class="md-nav__link">
     <span class="md-ellipsis">
       Still stuck?
@@ -1721,15 +1712,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#trading-setup-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      Trading setup issues
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#still-stuck" class="md-nav__link">
     <span class="md-ellipsis">
       Still stuck?
@@ -2039,13 +2021,6 @@ climbing unexpectedly:</p>
 <li>Set soft and hard budget limits so runaway loops are stopped automatically.</li>
 </ul>
 <p>See <a href="../guides/cost-and-caching/">Cost and caching</a> for the full picture.</p>
-<h2 id="trading-setup-issues">Trading setup issues<a class="headerlink" href="#trading-setup-issues" title="Permanent link">&para;</a></h2>
-<p>If you run the optional trading capability and orders are refused or never
-placed, the cause is usually a safety rule doing its job: out-of-hours ticks,
-stop-loss bounds, daily-loss limits, or an unreachable broker connection all
-cause swarmd to skip a trade deliberately. Review the trading safety controls
-(out-of-hours guards, stop-loss and daily-loss bounds) and confirm your broker
-connection and market-data entitlements are active.</p>
 <h2 id="still-stuck">Still stuck?<a class="headerlink" href="#still-stuck" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Re-run <code>swarmctl doctor</code> and read every warning, not just the failures.</li>
