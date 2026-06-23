@@ -2442,6 +2442,26 @@
 <td>Sub-provider used when no route matches. Required for router.</td>
 </tr>
 <tr>
+<td><code>chat.router.claude_cli.effort_level</code></td>
+<td>string</td>
+<td>CLI reasoning effort: low|medium|high|xhigh|max (default low); honored by claude-cli, ignored by codex-cli.</td>
+</tr>
+<tr>
+<td><code>chat.router.claude_subscription.thinking_budget</code></td>
+<td>int</td>
+<td>Anthropic extended-thinking budget_tokens; 0 disables (router subprovider).</td>
+</tr>
+<tr>
+<td><code>chat.router.codex_cli.effort_level</code></td>
+<td>string</td>
+<td>CLI reasoning effort: low|medium|high|xhigh|max (default low); honored by claude-cli, ignored by codex-cli.</td>
+</tr>
+<tr>
+<td><code>chat.router.codex_subscription.effort_level</code></td>
+<td>string</td>
+<td>Codex reasoning effort: low|medium|high (empty = omit).</td>
+</tr>
+<tr>
 <td><code>chat.router.http.enabled</code></td>
 <td>bool</td>
 <td>Enable the OpenAI-compatible sub-provider.</td>
@@ -2580,16 +2600,6 @@
 <td><code>chat.max_tokens</code></td>
 <td>int</td>
 <td>Max output tokens per call.</td>
-</tr>
-<tr>
-<td><code>chat.thinking_enabled</code></td>
-<td>bool</td>
-<td>Enable extended thinking / reasoning.</td>
-</tr>
-<tr>
-<td><code>chat.thinking_budget</code></td>
-<td>int</td>
-<td>Max thinking tokens when enabled.</td>
 </tr>
 <tr>
 <td><code>chat.prompt_cache_mode</code></td>
