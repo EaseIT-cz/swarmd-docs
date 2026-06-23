@@ -419,6 +419,8 @@
       
         
       
+        
+      
     
     
       
@@ -495,6 +497,27 @@
   
   <span class="md-ellipsis">
     Workflows and LLM Controls
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/mcp-tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connect Your Tools (MCP)
   </span>
   
 
@@ -1117,15 +1140,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#202662" class="md-nav__link">
-    <span class="md-ellipsis">
-      2026.6.2
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#202661" class="md-nav__link">
     <span class="md-ellipsis">
       2026.6.1
@@ -1277,15 +1291,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#202662" class="md-nav__link">
-    <span class="md-ellipsis">
-      2026.6.2
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#202661" class="md-nav__link">
     <span class="md-ellipsis">
       2026.6.1
@@ -1429,11 +1434,30 @@ before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
 <hr />
-<h2 id="202662">2026.6.2<a class="headerlink" href="#202662" title="Permanent link">&para;</a></h2>
-<p><strong>Security, operability, and resilience.</strong> This release makes swarmd safe to put
-behind a reverse proxy, easier to support in the field, and steadier under
-restarts:</p>
+<h2 id="202661">2026.6.1<a class="headerlink" href="#202661" title="Permanent link">&para;</a></h2>
+<p><strong>A more visual control plane, safer to expose and support.</strong> This release
+consolidates a large body of work: the web UI's capability tracks, a
+security/operability hardening pass, git-over-HTTPS workspace access, content
+provenance, and a trading P&amp;L tracker.</p>
 <ul>
+<li><strong>Edit workflows as a graph.</strong> A new graph view (<code>/ui/workflows/{id}/graph</code>)
+  lets you wire steps visually — add/delete nodes, draw success/fail/gate edges,
+  set the entrypoint — with every change validated and hot-reloaded like the
+  form and YAML editors.</li>
+<li><strong>Bulk actions &amp; clone.</strong> Multi-select on the Tasks list (bulk Cancel / Retry /
+  Close) and the Executions list (bulk Cancel); clone a workflow to a new id from
+  the editor.</li>
+<li><strong>Insight area.</strong> A <strong>Trends</strong> page (daily throughput, success rate, judge
+  abstain rate, recovery, and LLM spend) and a <strong>Tool budget</strong> page (actual
+  tool-use vs the configured complexity-tier budget, now with advisory
+  over/under-provisioning flags).</li>
+<li><strong>Clone and push to a project workspace over HTTPS.</strong> A project's git-backed
+  workspace can be cloned and pushed to with a per-project API key — no shell on
+  the box. Exposure is opt-in per project (<code>Project.Git.Enabled</code> +
+  <code>server.public_base_url</code>); push requires a key issued with <code>--allow-push</code>
+  (keys are read-only by default) and is blocked while a task holds the
+  workspace, so a push can't race a running job. Manage it from the new project
+  Git-access panel or <code>swarmctl key --allow-push</code>.</li>
 <li><strong>Centralised log forwarding.</strong> A new subsystem ships swarmd's structured logs
   and audit events to an external HTTP webhook (bearer-token) and/or syslog (TLS
   with a pinned CA). Forwarding is scope-filtered, best-effort, and never blocks
@@ -1448,6 +1472,14 @@ restarts:</p>
   diagnostic archive — lifecycle, audit, LLM usage, conversation, container and
   daemon logs, redacted config, a doctor diagnosis, and version/health — so you
   no longer hand-assemble evidence for a support thread.</li>
+<li><strong>Smarter content redaction.</strong> The output guard now knows whether scanned
+  content is first-party (produced by swarmd) or third-party, so swarmd's own
+  output is no longer over-redacted while untrusted content and secrets still
+  are.</li>
+<li><strong>Trading P&amp;L tracker.</strong> <code>/ui/trading</code> now leads with a performance panel —
+  FIFO round-trip P&amp;L, per-symbol breakdown, and an equity curve — and a new
+  <code>trading-series</code> doctor check validates the trading time series for gaps and
+  anomalies (quietly ignoring overnight and weekend market closures).</li>
 <li><strong>Structured recovery steering.</strong> When a step fails, the lead can be offered a
   typed recovery decision — re-route the workflow, fall back to a role's
   configured model, retry, or skip — and successful recoveries are recorded so
@@ -1458,8 +1490,9 @@ restarts:</p>
 <li><strong>More <code>swarmctl doctor</code> checks.</strong> <code>model_health</code> (flags a model that is
   failing or returning degenerate output and recommends its fallback),
   <code>config_crlf</code> (detects — and with <code>--fix</code> repairs — CRLF line endings that
-  cause phantom config drift), and <code>model_route_coverage</code> (every role's model
-  resolves to a route and has pricing).</li>
+  cause phantom config drift), <code>model_route_coverage</code> (every role's model
+  resolves to a route and has pricing), and <code>scraper_profile_freshness</code> (warns
+  on stale scraper login sessions).</li>
 <li><strong>Clustering / fleet visibility.</strong> Lightweight multi-node awareness:
   heartbeat/relay logging and metrics, a probe library driven by an
   expected-endpoints config, and an opt-in, leader-gated endpoint monitor with
@@ -1467,40 +1500,25 @@ restarts:</p>
 <li><strong>Trading endpoint hardening.</strong> The internal trading endpoints gain HMAC
   authentication (fail-closed) and per-project rate limiting.</li>
 </ul>
-<p>Notable fixes: <strong>bounded graceful shutdown</strong> force-closes stuck connections so a
-long-lived chat request can no longer hang a restart into a <code>SIGABRT</code> (pair with
+<p>Notable fixes: a <strong>graceful restart no longer fails in-flight work</strong> and
+<strong>bounded graceful shutdown</strong> force-closes stuck connections so a long-lived
+chat request can no longer hang a restart into a <code>SIGABRT</code> (pair with
 <code>TimeoutStopSec=90s</code>); the Bedrock adapter recovers SDK panics on
 cancel-during-shutdown; document extraction is hardened against zip-bombs, XXE,
 and OCR hangs; schema-config saves normalise CRLF→LF (with a CI gate) to stop
-phantom config drift; and the multi-step "file does not exist" artifact-handoff
-bug is resolved with store-backed staging and an end-to-end regression guard.</p>
+phantom config drift; the multi-step "file does not exist" artifact-handoff bug
+is resolved with store-backed staging and an end-to-end regression guard; and
+first-eval-after-reload chat no longer emits a spurious "LLM error". Under the
+hood, recovery exits are now recorded and several previously design-only
+observability metrics are emitted.</p>
 <div class="admonition note">
 <p class="admonition-title">Upgrade</p>
-<p>Add <code>TimeoutStopSec=90s</code> to the systemd unit so the bounded shutdown has
-room to drain. Log forwarding, the support report, real-IP resolution, and
+<p>Restart the daemon to pick up the new behavior. Add <code>TimeoutStopSec=90s</code> to
+the systemd unit so the bounded shutdown has room to drain. Log forwarding,
+the support report, real-IP resolution, git-over-HTTPS workspace access, and
 the trading HMAC are all opt-in — existing deployments are unaffected until
 you configure them.</p>
 </div>
-<hr />
-<h2 id="202661">2026.6.1<a class="headerlink" href="#202661" title="Permanent link">&para;</a></h2>
-<p><strong>A more visual, more analytical control plane.</strong> The web UI's capability tracks
-continue:</p>
-<ul>
-<li><strong>Edit workflows as a graph.</strong> A new graph view (<code>/ui/workflows/{id}/graph</code>)
-  lets you wire steps visually — add/delete nodes, draw success/fail/gate edges,
-  set the entrypoint — with every change validated and hot-reloaded like the
-  form and YAML editors.</li>
-<li><strong>Bulk actions &amp; clone.</strong> Multi-select on the Tasks list (bulk Cancel / Retry /
-  Close) and the Executions list (bulk Cancel); clone a workflow to a new id from
-  the editor.</li>
-<li><strong>Insight area.</strong> A <strong>Trends</strong> page (daily throughput, success rate, judge
-  abstain rate, recovery, and LLM spend) and a <strong>Tool budget</strong> page (actual
-  tool-use vs the configured complexity-tier budget).</li>
-</ul>
-<p>Under the hood: recovery exits are now recorded (a new <code>recovery_events</code> table —
-a one-time additive migration runs on first start), and three observability
-metrics that were design-only are now emitted. Backwards-compatible; restart the
-daemon to pick it up.</p>
 <hr />
 <h2 id="202660">2026.6.0<a class="headerlink" href="#202660" title="Permanent link">&para;</a></h2>
 <p><strong>Fix GitHub issues end-to-end.</strong> Label an issue (or open a pull request) and
