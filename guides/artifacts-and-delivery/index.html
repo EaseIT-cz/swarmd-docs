@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/guides/autonomy/">
+        <link rel="canonical" href="https://docs.swarmd.dev/guides/artifacts-and-delivery/">
       
       
-        <link rel="prev" href="../artifacts-and-delivery/">
+        <link rel="prev" href="../mcp-tools/">
       
       
-        <link rel="next" href="../approvals/">
+        <link rel="next" href="../autonomy/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Autonomy — self-running projects - swarmd documentation</title>
+        <title>Artifacts & Outbound File Delivery - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#autonomy-self-running-projects" class="md-skip">
+        <a href="#artifacts-outbound-file-delivery" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Autonomy — self-running projects
+              Artifacts &amp; Outbound File Delivery
             
           </span>
         </div>
@@ -537,27 +537,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../artifacts-and-delivery/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Artifacts &amp; Outbound File Delivery
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -574,7 +553,7 @@
           
   
   <span class="md-ellipsis">
-    Autonomy — self-running projects
+    Artifacts &amp; Outbound File Delivery
   </span>
   
 
@@ -585,7 +564,7 @@
         
   
   <span class="md-ellipsis">
-    Autonomy — self-running projects
+    Artifacts &amp; Outbound File Delivery
   </span>
   
 
@@ -607,36 +586,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-works" class="md-nav__link">
+  <a href="#rendering-a-document-on-the-fly" class="md-nav__link">
     <span class="md-ellipsis">
-      How it works
+      Rendering a document on the fly
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#delivering-a-tasks-artifact" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Delivering a task's artifact
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#staying-in-control" class="md-nav__link">
+  <a href="#where-files-go" class="md-nav__link">
     <span class="md-ellipsis">
-      Staying in control
+      Where files go
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#watching-it" class="md-nav__link">
+  <a href="#configuring-email-delivery" class="md-nav__link">
     <span class="md-ellipsis">
-      Watching it
+      Configuring email delivery
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it together
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-plain-text-email-not-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending plain text email (not a file)
     </span>
   </a>
   
@@ -646,6 +643,27 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autonomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy — self-running projects
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1237,36 +1255,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#how-it-works" class="md-nav__link">
+  <a href="#rendering-a-document-on-the-fly" class="md-nav__link">
     <span class="md-ellipsis">
-      How it works
+      Rendering a document on the fly
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#enabling-it" class="md-nav__link">
+  <a href="#delivering-a-tasks-artifact" class="md-nav__link">
     <span class="md-ellipsis">
-      Enabling it
+      Delivering a task's artifact
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#staying-in-control" class="md-nav__link">
+  <a href="#where-files-go" class="md-nav__link">
     <span class="md-ellipsis">
-      Staying in control
+      Where files go
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#watching-it" class="md-nav__link">
+  <a href="#configuring-email-delivery" class="md-nav__link">
     <span class="md-ellipsis">
-      Watching it
+      Configuring email delivery
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-it-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it together
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sending-plain-text-email-not-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending plain text email (not a file)
     </span>
   </a>
   
@@ -1287,132 +1323,145 @@
                   
 
 
-<h1 id="autonomy-self-running-projects">Autonomy — self-running projects<a class="headerlink" href="#autonomy-self-running-projects" title="Permanent link">&para;</a></h1>
-<p>Most projects run tasks you submit. An <strong>autonomous</strong> project also runs tasks
-<em>it decides to create</em> — on an interval, toward a standing goal. It's how you
-turn swarmd from "do this when I ask" into "keep this running and tell me when
-something needs me."</p>
-<p>Autonomy is <strong>off by default</strong>. A project with autonomy disabled never starts an
-evaluation loop, so turning it on is an explicit, per-project decision.</p>
-<h2 id="how-it-works">How it works<a class="headerlink" href="#how-it-works" title="Permanent link">&para;</a></h2>
-<p>When a project has autonomy enabled, the daemon runs one evaluation loop for it.
-On each tick it looks at the project's goal and current state and decides whether
-to create a task. There are three decision modes:</p>
-<table>
-<thead>
-<tr>
-<th><code>autonomy.mode</code></th>
-<th>What fires each tick</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>llm</code> <em>(default)</em></td>
-<td>a lead model is given the goal and project state and decides whether to create a task (and what), or to do nothing</td>
-</tr>
-<tr>
-<td><code>cron</code></td>
-<td>the goal text is fired verbatim as the task prompt every tick — a deterministic time-driven loop</td>
-</tr>
-<tr>
-<td><code>backlog</code></td>
-<td>the first unchecked <code>- [ ]</code> item from a backlog file is fired, then ticked off</td>
-</tr>
-</tbody>
-</table>
-<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
-<p>Autonomy is configured per project under an <code>autonomy</code> block:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">autonomy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">llm</span>
-<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Scan</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">configured</span><span class="nv"> </span><span class="s">feeds</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">open</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">digest</span><span class="nv"> </span><span class="s">task</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">material</span><span class="nv"> </span><span class="s">lands.&quot;</span>
-<span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;30m&quot;</span><span class="w">        </span><span class="c1"># must carry a unit (&quot;30m&quot;, &quot;60s&quot;) — a bare number falls back to 5m</span>
-<span class="w">  </span><span class="nt">maxTasksPerHour</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">         </span><span class="c1"># 0 = unlimited</span>
-<span class="w">  </span><span class="nt">requireApproval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># true parks created tasks for operator approval</span>
-</code></pre></div>
-<p>Useful keys:</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>autonomy.enabled</code></td>
-<td>master switch for the project (default <code>false</code>)</td>
-</tr>
-<tr>
-<td><code>autonomy.goal</code></td>
-<td>the standing objective (required for <code>llm</code>/<code>cron</code>)</td>
-</tr>
-<tr>
-<td><code>autonomy.mode</code></td>
-<td><code>llm</code> / <code>cron</code> / <code>backlog</code></td>
-</tr>
-<tr>
-<td><code>autonomy.pollInterval</code></td>
-<td>tick cadence (Go duration; default <code>5m</code>)</td>
-</tr>
-<tr>
-<td><code>autonomy.maxTasksPerHour</code></td>
-<td>per-hour cap on self-created tasks</td>
-</tr>
-<tr>
-<td><code>autonomy.allowedTaskTypes</code></td>
-<td>restrict what task types autonomy may create</td>
-</tr>
-<tr>
-<td><code>autonomy.requireApproval</code></td>
-<td>create tasks as awaiting-approval instead of queued</td>
-</tr>
-<tr>
-<td><code>autonomy.duplicateWindow</code></td>
-<td>how long a completed task suppresses an identical one (default <code>24h</code>; <code>0</code> for cron-style)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="staying-in-control">Staying in control<a class="headerlink" href="#staying-in-control" title="Permanent link">&para;</a></h2>
-<p>Autonomous work runs inside the same guardrails as everything else, and a few
-that are specific to it. On each tick, <em>before</em> any model cost is incurred, the
-loop checks — in order — the per-hour task cap, the shared rate limits, and the
-project's <a href="../cost-and-caching/#hard-spend-caps">spend caps</a> (a hard-cap breach
-skips the tick entirely). It also <strong>won't schedule on top of in-flight work</strong>:
-if the project already has a queued or running task, the tick is skipped. And it
-<strong>deduplicates</strong> — an identical prompt that recently completed (within the
-duplicate window) won't be created again, so a steady loop doesn't pile up
-copies.</p>
-<p>Additional bounds worth knowing:</p>
+<h1 id="artifacts-outbound-file-delivery">Artifacts &amp; Outbound File Delivery<a class="headerlink" href="#artifacts-outbound-file-delivery" title="Permanent link">&para;</a></h1>
+<p>When a swarmd agent produces something a person actually wants to <em>keep</em> — a
+report, a CV, a patch, a generated PDF — you want the <strong>file</strong>, not a wall of
+text pasted into the chat. swarmd has two built-in tools for that:</p>
 <ul>
-<li><strong>Approval gate.</strong> With <code>requireApproval: true</code>, every autonomously created
-  task lands in an awaiting-approval state and runs only once you approve it
-  (see <a href="../approvals/">Approvals</a>). Stale approvals are auto-cancelled after a
-  configurable window (<code>autonomy.approval_timeout_hours</code>, default 96).</li>
-<li><strong>Tighter tool budget.</strong> When <a href="../cost-and-caching/#dynamic-per-role-tool-budgets">dynamic tool budgets</a>
-  are enabled, unattended autonomous tasks are held to the tighter
-  <code>tool_budget.autonomy_max_factor</code> ceiling rather than the operator ceiling.</li>
-<li><strong>Circuit breaker.</strong> A daemon-level breaker
-  (<code>autonomy.circuit_breaker.*</code>) automatically disables a project's autonomy if
-  it sees sustained failures, and alerts you.</li>
+<li><strong><code>render_document</code></strong> — turn markdown into a real <code>.md</code>, <code>.html</code>, or <code>.pdf</code>
+  file and deliver it.</li>
+<li><strong><code>send_artifact</code></strong> — deliver a file a completed task already produced.</li>
 </ul>
-<p>To stop autonomy, set <code>autonomy.enabled: false</code> (or toggle it from the project
-page in the UI) — the loop is cancelled.</p>
-<h2 id="watching-it">Watching it<a class="headerlink" href="#watching-it" title="Permanent link">&para;</a></h2>
-<p>Every evaluation — whether it created a task or not — is recorded with an
-outcome (created, no-action, rate-limited, budget-blocked, duplicate, and so
-on). Inspect the audit trail and a rollup from the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>autonomy<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--limit<span class="w"> </span><span class="m">50</span>
-swarmctl<span class="w"> </span>autonomy<span class="w"> </span>summary<span class="w">     </span>--project<span class="w"> </span>my-project<span class="w"> </span>--hours<span class="w"> </span><span class="m">24</span>
-</code></pre></div>
-<p>The project's home page shows a <strong>countdown to the next autonomy tick</strong> and the
-last evaluation's outcome, and the dashboard surfaces a next-evaluation tile
-across all autonomous projects plus a count of tasks awaiting approval.</p>
+<p>Both deliver to <strong>wherever the conversation is happening</strong> — the file lands in
+the same Telegram chat or email thread the request came in on. You never name a
+recipient; the destination is bound to the conversation.</p>
+<h2 id="rendering-a-document-on-the-fly">Rendering a document on the fly<a class="headerlink" href="#rendering-a-document-on-the-fly" title="Permanent link">&para;</a></h2>
+<p><code>render_document</code> converts markdown you (or the agent) supply into one or more
+formats and sends each file back to the chat. It runs deterministically on the
+daemon host — no agent container, no extra model call.</p>
+<p>Parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>content</code></td>
+<td>yes</td>
+<td>The markdown source, rendered verbatim.</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>yes</td>
+<td>Base filename, no extension (e.g. <code>quarterly-report</code>).</td>
+</tr>
+<tr>
+<td><code>formats</code></td>
+<td>no</td>
+<td>Any of <code>md</code>, <code>html</code>, <code>pdf</code>. Defaults to all three.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong><code>md</code></strong> is always available — it's the source written to a file.</li>
+<li><strong><code>html</code></strong> is produced with <code>pandoc</code>. If pandoc isn't on the host it falls
+  back to a bundled renderer, and as a last resort to a plain unstyled wrapper,
+  so an HTML file is always delivered.</li>
+<li><strong><code>pdf</code></strong> is produced with <code>pandoc</code> + <code>weasyprint</code>. Both must be available
+  (directly on the host, or via the bundled agent image). If neither path can
+  render a PDF, the failure is reported plainly rather than silently dropped.</li>
+</ul>
+<p>Rendered files are <strong>transient</strong>: they're streamed straight to the chat and not
+kept in long-term storage. Use <code>render_document</code> for "make me this document
+now"; use <code>send_artifact</code> (below) for "give me the file that task produced."</p>
+<h2 id="delivering-a-tasks-artifact">Delivering a task's artifact<a class="headerlink" href="#delivering-a-tasks-artifact" title="Permanent link">&para;</a></h2>
+<p><code>send_artifact</code> retrieves a file a completed task wrote to its output and
+delivers it as a download.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>task_id</code></td>
+<td>yes</td>
+<td>The task whose output you want delivered.</td>
+</tr>
+<tr>
+<td><code>artifact_name</code></td>
+<td>no</td>
+<td>A specific artifact; omit to send the task's first output artifact.</td>
+</tr>
+</tbody>
+</table>
+<p>Two safeguards are worth knowing:</p>
+<ul>
+<li><strong>Project scope is enforced.</strong> A conversation pinned to one project can only
+  retrieve that project's artifacts — you can't pull another project's files by
+  guessing a task id.</li>
+<li><strong>Only operator-facing outputs are eligible.</strong> Selection is bounded to a
+  task's published output artifacts; internal scratch and debug files can never
+  be sent.</li>
+</ul>
+<h2 id="where-files-go">Where files go<a class="headerlink" href="#where-files-go" title="Permanent link">&para;</a></h2>
+<p>File delivery is bound to the channel the conversation started on:</p>
+<ul>
+<li><strong>Telegram</strong> — delivered as a document upload (up to <strong>50 MiB</strong> per file).</li>
+<li><strong>Email</strong> — delivered as an attachment on a reply in the same thread
+  (<code>multipart/mixed</code>, with the body always listing the files produced).</li>
+</ul>
 <blockquote>
-<p>The <code>swarmctl autonomy</code> commands are read-only audit views. Enable or disable
-autonomy through the project's configuration or the Web UI — there is no
-<code>swarmctl autonomy enable</code> command.</p>
+<p><strong>Slack is not a file-delivery target</strong> for these tools today. A request on a
+channel with no file surface simply doesn't expose <code>render_document</code> /
+<code>send_artifact</code>.</p>
 </blockquote>
+<p>Email also enforces a per-message attachment size cap (configurable, below):
+over-cap attachments are <strong>skipped and logged, but the reply is still sent</strong> —
+with the body listing the files — so the recipient is never left with nothing.</p>
+<h2 id="configuring-email-delivery">Configuring email delivery<a class="headerlink" href="#configuring-email-delivery" title="Permanent link">&para;</a></h2>
+<p>File delivery over Telegram works as soon as the bot is connected. Email
+delivery needs outbound SMTP configured on the project's <code>email</code> block:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">email</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">smtp_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;smtp.example.com&quot;</span>
+<span class="w">  </span><span class="nt">smtp_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">587</span>
+<span class="w">  </span><span class="nt">smtp_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;assistant@example.com&quot;</span>
+<span class="w">  </span><span class="nt">smtp_password_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ASSISTANT_SMTP_PASSWORD&quot;</span><span class="w">   </span><span class="c1"># value read from this env var</span>
+<span class="w">  </span><span class="nt">from_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;assistant@example.com&quot;</span>
+<span class="w">  </span><span class="c1"># Per-message attachment cap in bytes; 0 = unlimited. 25 MiB shown.</span>
+<span class="w">  </span><span class="nt">attachment_size_cap_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26214400</span>
+</code></pre></div>
+<p>Without <code>smtp_host</code> + <code>from_address</code>, the email delivery path is disabled (the
+tools still work on Telegram). The password is taken from the named environment
+variable, never stored inline.</p>
+<h2 id="putting-it-together">Putting it together<a class="headerlink" href="#putting-it-together" title="Permanent link">&para;</a></h2>
+<p>The agent reaches for these tools when a user asks for the artifact itself —
+"send me the CV", "share the report as a PDF", "email me the document". You can
+make that the default behaviour for a project by allow-listing the tool and
+nudging the model in its system prefix:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allowedTools</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">send_artifact</span>
+<span class="w">    </span><span class="c1"># render_document, file_*, memory_*, tool_search are built in</span>
+
+<span class="nt">chat</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">system_prefix</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">When asked for a document (a CV, a planning doc, an article, a report),</span>
+<span class="w">    </span><span class="no">ALWAYS use send_artifact (or render_document for fresh markdown) to deliver</span>
+<span class="w">    </span><span class="no">the file. Do not paste the document body into the chat.</span>
+</code></pre></div>
+<h2 id="sending-plain-text-email-not-a-file">Sending plain text email (not a file)<a class="headerlink" href="#sending-plain-text-email-not-a-file" title="Permanent link">&para;</a></h2>
+<p>If you want the agent to <strong>email someone text</strong> rather than deliver a file,
+that's a separate tool, <code>send_email</code>, which composes a fresh message
+(<code>to</code>, <code>subject</code>, <code>body</code>, optional <code>in_reply_to</code>). It carries no attachment —
+reach for <code>send_artifact</code> / <code>render_document</code> when a file is the point.</p>
 
 
 
