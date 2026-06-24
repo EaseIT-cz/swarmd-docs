@@ -2794,6 +2794,31 @@
 <td>Hard cap on retrieval rounds (&lt;=1 = single shot; 0 = default 3).</td>
 </tr>
 <tr>
+<td><code>memory.reranker.enabled</code></td>
+<td>bool</td>
+<td>LLM-rerank context-assembly recall (the pre-delegation hint) and activate scored-sufficiency. Adds one LLM call (seconds) to that path only; the interactive memory_search tool and companion recall stay fast RRF.</td>
+</tr>
+<tr>
+<td><code>memory.reranker.model</code></td>
+<td>string</td>
+<td>Reranker model id; small OSS recommended. Empty = chat router default (often overkill).</td>
+</tr>
+<tr>
+<td><code>memory.reranker.max_candidates</code></td>
+<td>int</td>
+<td>Top-K results scored per recall (0 = default 20).</td>
+</tr>
+<tr>
+<td><code>memory.reranker.timeout_seconds</code></td>
+<td>int</td>
+<td>Per-recall rerank timeout in seconds (0 = default 15).</td>
+</tr>
+<tr>
+<td><code>memory.reranker.max_snippet_bytes</code></td>
+<td>int</td>
+<td>Per-candidate snippet sent to the reranker (0 = default 600).</td>
+</tr>
+<tr>
 <td><code>memory.embedding_model</code></td>
 <td>string</td>
 <td>Embedding model name. Required when enabled.</td>

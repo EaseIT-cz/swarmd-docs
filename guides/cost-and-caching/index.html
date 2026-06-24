@@ -739,6 +739,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recall-reranking-quality-vs-latency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recall reranking (quality vs. latency)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#per-project-api-keys" class="md-nav__link">
     <span class="md-ellipsis">
       Per-project API keys
@@ -1408,6 +1417,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recall-reranking-quality-vs-latency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recall reranking (quality vs. latency)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#per-project-api-keys" class="md-nav__link">
     <span class="md-ellipsis">
       Per-project API keys
@@ -1565,6 +1583,37 @@ common way to run up an unexpected bill.</p>
 <p>You can read the latest gist for a project from the CLI:</p>
 <div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>gist<span class="w"> </span>&lt;project-id&gt;
 </code></pre></div>
+<hr />
+<h2 id="recall-reranking-quality-vs-latency">Recall reranking (quality vs. latency)<a class="headerlink" href="#recall-reranking-quality-vs-latency" title="Permanent link">&para;</a></h2>
+<p>By default, memory recall ranks results with a fast vector + keyword blend (no
+model call). You can optionally add an <strong>LLM reranker</strong> that re-scores the top
+candidates by relevance — it produces sharper ordering, and it is what makes
+<strong>scored-sufficiency</strong> retrieval (widen-and-retry until enough genuinely
+relevant hits) meaningful.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">memory</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">reranker</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                    </span><span class="c1"># default false</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openai.gpt-oss-20b-1:0&quot;</span><span class="w">  </span><span class="c1"># keep it small and fast</span>
+<span class="w">    </span><span class="nt">max_candidates</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20</span><span class="w">               </span><span class="c1"># how many hits the model scores</span>
+<span class="w">    </span><span class="nt">timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span><span class="w">               </span><span class="c1"># degrade to the fast ranking past this</span>
+<span class="w">  </span><span class="nt">sufficiency</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">                    </span><span class="c1"># widen-and-retry; only active with the reranker</span>
+<span class="w">    </span><span class="nt">min_high_rel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="w">    </span><span class="nt">score_floor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
+<span class="w">    </span><span class="nt">max_rounds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Reranking adds seconds — it is scoped on purpose</p>
+<p>The reranker is <strong>one extra LLM call per recall</strong>, and on a small model
+that is still a few seconds. To keep interactive use snappy, reranking is
+applied <strong>only to the non-interactive context-assembly path</strong> (the
+pre-delegation recall hint). The interactive surfaces — the agent's
+<code>memory_search</code> tool and the <code>recall</code> command — deliberately stay on the
+fast ranking and never pay this cost. If a rerank call exceeds
+<code>timeout_seconds</code> it falls back to the fast ranking; results are never
+dropped. Keep <code>model</code> small and watch recall latency; lower
+<code>max_candidates</code> or set <code>enabled: false</code> if it bites.</p>
+</div>
 <hr />
 <h2 id="per-project-api-keys">Per-project API keys<a class="headerlink" href="#per-project-api-keys" title="Permanent link">&para;</a></h2>
 <p>API keys let you attribute traffic — and therefore cost — to the right
