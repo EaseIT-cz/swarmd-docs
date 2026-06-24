@@ -427,6 +427,10 @@
       
         
       
+        
+      
+        
+      
     
     
       
@@ -582,6 +586,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/cross-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cross-project orchestration &amp; agent federation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/approvals/" class="md-nav__link">
         
   
@@ -629,6 +654,27 @@
   
   <span class="md-ellipsis">
     Cost and Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/secrets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Named secrets
   </span>
   
 
@@ -2582,6 +2628,16 @@
 <td>Soft token budget for history trimming.</td>
 </tr>
 <tr>
+<td><code>chat.compaction.enabled</code></td>
+<td>bool</td>
+<td>Summarize overflow turns into a topic gist instead of dropping them.</td>
+</tr>
+<tr>
+<td><code>chat.compaction.max_gist_terms</code></td>
+<td>int</td>
+<td>Topics retained in the compaction gist (0 = default 24).</td>
+</tr>
+<tr>
 <td><code>chat.max_tool_iterations</code></td>
 <td>int</td>
 <td>Tool-call loop cap per dispatcher turn.</td>
@@ -2716,6 +2772,26 @@
 <td><code>memory.enabled</code></td>
 <td>bool</td>
 <td>Activate the memory subsystem.</td>
+</tr>
+<tr>
+<td><code>memory.sufficiency.enabled</code></td>
+<td>bool</td>
+<td>Widen-and-retry recall when too few high-relevance hits (requires the reranker).</td>
+</tr>
+<tr>
+<td><code>memory.sufficiency.min_high_rel</code></td>
+<td>int</td>
+<td>Hits at/above score_floor that count as 'enough' (0 = default 3).</td>
+</tr>
+<tr>
+<td><code>memory.sufficiency.score_floor</code></td>
+<td>float</td>
+<td>Absolute reranker relevance floor in [0,1] (0 = default 0.6).</td>
+</tr>
+<tr>
+<td><code>memory.sufficiency.max_rounds</code></td>
+<td>int</td>
+<td>Hard cap on retrieval rounds (&lt;=1 = single shot; 0 = default 3).</td>
 </tr>
 <tr>
 <td><code>memory.embedding_model</code></td>

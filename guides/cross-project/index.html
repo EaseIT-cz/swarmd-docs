@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.swarmd.dev/guides/clustering/">
+        <link rel="canonical" href="https://docs.swarmd.dev/guides/cross-project/">
       
       
-        <link rel="prev" href="../evals/">
+        <link rel="prev" href="../autonomy/">
       
       
-        <link rel="next" href="../../features/blackbox/">
+        <link rel="next" href="../approvals/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Clustering and the DMZ Webhook Relay - swarmd documentation</title>
+        <title>Cross-project orchestration & agent federation - swarmd documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#clustering-and-the-dmz-webhook-relay" class="md-skip">
+        <a href="#cross-project-orchestration-agent-federation" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Clustering and the DMZ Webhook Relay
+              Cross-project orchestration &amp; agent federation
             
           </span>
         </div>
@@ -585,10 +585,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../cross-project/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Cross-project orchestration &amp; agent federation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -597,6 +617,110 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-cross-project-calls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling cross-project calls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#call_project-invoke-another-projects-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      call_project: invoke another project's workflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="call_project: invoke another project's workflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#who-may-call-whom-allowlists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Who may call whom (allowlists)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#depth-and-cycle-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      Depth and cycle safety
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spawn_project-create-a-new-project-on-demand" class="md-nav__link">
+    <span class="md-ellipsis">
+      spawn_project: create a new project on demand
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a2a-federation-calling-remote-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      A2A federation: calling remote agents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A2A federation: calling remote agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exposing-your-own-agents-inbound-a2a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exposing your own agents (inbound A2A)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -774,30 +898,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Clustering and the DMZ Webhook Relay
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -806,131 +910,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#when-to-cluster" class="md-nav__link">
-    <span class="md-ellipsis">
-      When to cluster
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#node-profiles" class="md-nav__link">
-    <span class="md-ellipsis">
-      Node profiles
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference-topology" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference topology
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#walkthrough-set-up-a-dmz-webhook-relay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Walkthrough: set up a DMZ webhook relay
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Walkthrough: set up a DMZ webhook relay">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-generate-the-mutual-tls-material" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Generate the mutual-TLS material
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-configure-the-job-tier-server-side" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Configure the job tier (server side)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-configure-the-dmz-webhook-node-client-side" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Configure the DMZ webhook node (client side)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-run-the-webhook-node" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Run the webhook node
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#validate-and-observe" class="md-nav__link">
-    <span class="md-ellipsis">
-      Validate and observe
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#operating-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Operating notes
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      Troubleshooting
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1375,73 +1354,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#when-to-cluster" class="md-nav__link">
+  <a href="#enabling-cross-project-calls" class="md-nav__link">
     <span class="md-ellipsis">
-      When to cluster
+      Enabling cross-project calls
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#node-profiles" class="md-nav__link">
+  <a href="#call_project-invoke-another-projects-workflow" class="md-nav__link">
     <span class="md-ellipsis">
-      Node profiles
+      call_project: invoke another project's workflow
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#reference-topology" class="md-nav__link">
-    <span class="md-ellipsis">
-      Reference topology
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#walkthrough-set-up-a-dmz-webhook-relay" class="md-nav__link">
-    <span class="md-ellipsis">
-      Walkthrough: set up a DMZ webhook relay
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Walkthrough: set up a DMZ webhook relay">
+    <nav class="md-nav" aria-label="call_project: invoke another project's workflow">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-generate-the-mutual-tls-material" class="md-nav__link">
+  <a href="#who-may-call-whom-allowlists" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Generate the mutual-TLS material
+      Who may call whom (allowlists)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-configure-the-job-tier-server-side" class="md-nav__link">
+  <a href="#depth-and-cycle-safety" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Configure the job tier (server side)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-configure-the-dmz-webhook-node-client-side" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Configure the DMZ webhook node (client side)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-run-the-webhook-node" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Run the webhook node
+      Depth and cycle safety
     </span>
   </a>
   
@@ -1453,20 +1396,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#validate-and-observe" class="md-nav__link">
+  <a href="#spawn_project-create-a-new-project-on-demand" class="md-nav__link">
     <span class="md-ellipsis">
-      Validate and observe
+      spawn_project: create a new project on demand
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#operating-notes" class="md-nav__link">
+  <a href="#a2a-federation-calling-remote-agents" class="md-nav__link">
     <span class="md-ellipsis">
-      Operating notes
+      A2A federation: calling remote agents
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="A2A federation: calling remote agents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exposing-your-own-agents-inbound-a2a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exposing your own agents (inbound A2A)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1494,301 +1452,174 @@
                   
 
 
-<h1 id="clustering-and-the-dmz-webhook-relay">Clustering and the DMZ Webhook Relay<a class="headerlink" href="#clustering-and-the-dmz-webhook-relay" title="Permanent link">&para;</a></h1>
-<p>swarmd runs as a single all-in-one daemon by default, and that is the right
-shape for almost every deployment. When you need to scale execution
-independently or isolate public webhook ingress in a DMZ, you can split swarmd
-into specialised <strong>node roles</strong> behind a shared database and object store.</p>
-<p>This guide walks through the role model and a complete setup of the most common
-multi-node pattern: a DMZ webhook node that forwards events over mutual-TLS to a
-job tier. For the high-level concept, see
-<a href="../../features/cluster/">Cluster topology and node roles</a>; for every config key,
-see the <a href="../../reference/configuration/">Configuration reference</a>.</p>
-<hr />
-<h2 id="when-to-cluster">When to cluster<a class="headerlink" href="#when-to-cluster" title="Permanent link">&para;</a></h2>
-<p>Split into roles for one of two reasons:</p>
-<ul>
-<li><strong>Scale the worker tier.</strong> Run several <code>worker</code> nodes behind a shared
-  PostgreSQL and object store so heavy task execution doesn't compete with
-  UI/API traffic. Background singletons (schedulers, pruners) stay single-owner
-  automatically via database leases.</li>
-<li><strong>Isolate webhook ingress.</strong> Put a <code>webhook</code> node in an untrusted network
-  segment. The box exposed to the public internet holds no database handle and
-  no model or broker credentials — it verifies each webhook signature and
-  forwards the verified event inward over mutual-TLS.</li>
-</ul>
-<p>Everything behind the public edge still shares <strong>one</strong> database and <strong>one</strong>
-object store. Clustering scales compute and shrinks the blast radius; it is not
-a multi-region or sharding feature.</p>
-<hr />
-<h2 id="node-profiles">Node profiles<a class="headerlink" href="#node-profiles" title="Permanent link">&para;</a></h2>
-<p>A node's role is set with <code>node.profile</code>. Each profile is a preset over four
-capabilities; you can override any one capability with <code>node.serve_ui</code>,
-<code>node.serve_api</code>, <code>node.serve_webhooks</code>, or <code>node.run_workers</code>.</p>
+<h1 id="cross-project-orchestration-agent-federation">Cross-project orchestration &amp; agent federation<a class="headerlink" href="#cross-project-orchestration-agent-federation" title="Permanent link">&para;</a></h1>
+<p>A workflow in one project can hand work to another project, stand up a brand
+new project on demand, or call a remote swarmd-compatible agent over the open
+<strong>A2A</strong> (agent-to-agent) protocol. This guide covers all three: <code>call_project</code>,
+<code>spawn_project</code>, and <code>a2a_call</code>.</p>
+<h2 id="enabling-cross-project-calls">Enabling cross-project calls<a class="headerlink" href="#enabling-cross-project-calls" title="Permanent link">&para;</a></h2>
+<p><code>call_project</code> and <code>spawn_project</code> are <strong>off by default</strong> and require Postgres
+(they persist call lineage and spawn records, which the SQLite backend can't
+provide). Turn them on with:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">SWARMD_INTER_PROJECT_ENABLED</span><span class="o">=</span><span class="nb">true</span>
+</code></pre></div>
+<p>With the flag off, both step types fail fast — route their <code>on_fail</code> branch so
+a workflow degrades gracefully rather than erroring out. <code>a2a_call</code> is governed
+separately (see <a href="#a2a-federation-calling-remote-agents">A2A federation</a> below).</p>
+<h2 id="call_project-invoke-another-projects-workflow"><code>call_project</code>: invoke another project's workflow<a class="headerlink" href="#call_project-invoke-another-projects-workflow" title="Permanent link">&para;</a></h2>
+<p><code>call_project</code> is a workflow <strong>step type</strong>. The caller blocks until the callee
+workflow reaches a terminal state, then continues with the callee's result
+available to later steps.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">enrich</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">call_project</span>
+<span class="w">  </span><span class="nt">target_project</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">research-desk</span>
+<span class="w">  </span><span class="nt">target_workflow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">summarize</span>
+<span class="w">  </span><span class="nt">payload</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${outputs.fetch.url}&quot;</span><span class="w">      </span><span class="c1"># interpolate an earlier step&#39;s output</span>
+<span class="w">  </span><span class="nt">expect</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">summary-v1</span><span class="w">               </span><span class="c1"># optional result-schema check</span>
+<span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span><span class="w">                        </span><span class="c1"># optional</span>
+<span class="w">  </span><span class="nt">cancel_on_timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">            </span><span class="c1"># optional; cancel the callee if it overruns</span>
+<span class="w">  </span><span class="nt">on_success</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">publish</span>
+<span class="w">  </span><span class="nt">on_fail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">handle-error</span>
+</code></pre></div>
+<p><code>payload</code> values support <code>${outputs.&lt;step-id&gt;.&lt;field&gt;}</code> interpolation from
+earlier steps in the calling workflow.</p>
+<h3 id="who-may-call-whom-allowlists">Who may call whom (allowlists)<a class="headerlink" href="#who-may-call-whom-allowlists" title="Permanent link">&para;</a></h3>
+<p>Cross-project calls are governed by <strong>two</strong> allowlists in project YAML — one on
+each side:</p>
 <table>
 <thead>
 <tr>
-<th><code>node.profile</code></th>
-<th>Serves UI</th>
-<th>Serves API</th>
-<th>Serves webhooks</th>
-<th>Runs workers</th>
-<th>Typical use</th>
+<th>Field</th>
+<th>Side</th>
+<th>Meaning</th>
+<th>Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>all</code> (default)</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>single-node deployment</td>
+<td><code>canCallProjects</code></td>
+<td>caller</td>
+<td>Outbound allowlist — this project may call only these projects.</td>
+<td>empty = may call any project</td>
 </tr>
 <tr>
-<td><code>ui</code></td>
-<td>yes</td>
-<td>no</td>
-<td>no</td>
-<td>no</td>
-<td>front-end tier</td>
-</tr>
-<tr>
-<td><code>worker</code></td>
-<td>no</td>
-<td>yes</td>
-<td>no</td>
-<td>yes</td>
-<td>job tier (scheduler + executor)</td>
-</tr>
-<tr>
-<td><code>webhook</code></td>
-<td>no</td>
-<td>no</td>
-<td>yes</td>
-<td>no</td>
-<td>DMZ-isolated webhook relay</td>
+<td><code>acceptCallsFrom</code></td>
+<td>callee</td>
+<td>Inbound allowlist — accept calls only from these projects (supports <code>team-*</code> / <code>*</code> globs).</td>
+<td>empty = <strong>refuse all</strong></td>
 </tr>
 </tbody>
 </table>
-<p>A node that serves webhooks but does not run workers is a <strong>relay node</strong> — that
-is what enables (and requires) the <code>node.relay</code> block in the walkthrough below.</p>
-<hr />
-<h2 id="reference-topology">Reference topology<a class="headerlink" href="#reference-topology" title="Permanent link">&para;</a></h2>
-<p>A three-tier cluster with a DMZ relay. The DMZ tier has no path to the database;
-its only route inward is the mutual-TLS relay.</p>
-<pre class="mermaid"><code>flowchart LR
-    prov[Webhook providers&lt;br/&gt;GitHub / Slack / …]
-
-    subgraph dmz["DMZ network"]
-        wh["webhook node&lt;br/&gt;profile: webhook"]
-    end
-
-    subgraph trusted["Trusted network"]
-        ui["ui node(s)&lt;br/&gt;profile: ui"]
-        wk["worker node(s)&lt;br/&gt;profile: worker&lt;br/&gt;relay ingress listener"]
-        pg[(Database&lt;br/&gt;+ object store)]
-    end
-
-    users[Operators / browsers] --&gt; ui
-    prov --&gt;|"POST /api/v1/webhooks/…"| wh
-    wh --&gt;|"verified event over mTLS"| wk
-    wh -.-&gt;|"by-proxy heartbeat over mTLS"| wk
-    ui --&gt; pg
-    wk --&gt; pg</code></pre>
-<p>The webhook node verifies the provider signature at the public edge, then
-forwards the verified payload over mutual-TLS to the job tier, which re-creates
-the task. Because the DMZ node holds no database, it reports its liveness
-<strong>by proxy</strong> over the same secured channel.</p>
-<hr />
-<h2 id="walkthrough-set-up-a-dmz-webhook-relay">Walkthrough: set up a DMZ webhook relay<a class="headerlink" href="#walkthrough-set-up-a-dmz-webhook-relay" title="Permanent link">&para;</a></h2>
-<p>You configure two sides — the <strong>job tier</strong> (server side of the mTLS seam) and
-the <strong>DMZ webhook node</strong> (client side) — and they must trust the same CA.</p>
-<h3 id="1-generate-the-mutual-tls-material">1. Generate the mutual-TLS material<a class="headerlink" href="#1-generate-the-mutual-tls-material" title="Permanent link">&para;</a></h3>
-<p>The relay is mutual-TLS: the job tier presents a server certificate, the webhook
-node presents a client certificate, and each verifies the other against a shared
-certificate authority. A small self-signed CA is sufficient — this trust chain
-is internal to your cluster and is never seen by webhook providers. Run these in
-<strong>bash</strong> (step 1b uses process substitution).</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 1a. A private CA for the relay.</span>
-openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">3650</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-keyout<span class="w"> </span>relay-ca.key<span class="w"> </span>-out<span class="w"> </span>relay-ca.crt<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=swarmd-relay-ca&quot;</span>
-
-<span class="c1"># 1b. Job-tier SERVER cert. The subjectAltName must match the host the</span>
-<span class="c1">#     webhook node will use in node.relay.upstream (DNS name or IP:&lt;addr&gt;).</span>
-openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-keyout<span class="w"> </span>jobtier.key<span class="w"> </span>-out<span class="w"> </span>jobtier.csr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=jobtier.internal&quot;</span>
-openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>jobtier.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>jobtier.crt<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-extfile<span class="w"> </span>&lt;<span class="o">(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;subjectAltName=DNS:jobtier.internal&quot;</span><span class="o">)</span>
-
-<span class="c1"># 1c. DMZ webhook node CLIENT cert.</span>
-openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-keyout<span class="w"> </span>dmz-webhook.key<span class="w"> </span>-out<span class="w"> </span>dmz-webhook.csr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=dmz-webhook-1&quot;</span>
-openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>dmz-webhook.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>dmz-webhook.crt
+<p>The callee side is <strong>closed by default</strong>: a project accepts no inbound calls
+until it lists the callers it trusts. So both projects must opt in — the caller
+(unless it allows all) and, always, the callee:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># research-desk project — allow the reporting project to call it</span>
+<span class="nt">acceptCallsFrom</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reporting</span>
 </code></pre></div>
-<p>The <code>subjectAltName</code> in step 1b is required, not cosmetic: swarmd matches
-<code>node.relay.upstream</code> against the server certificate's SAN, so a SAN-less
-certificate fails the handshake. The client certificate needs no SAN — it is
-verified by CA chain, not hostname.</p>
-<h3 id="2-configure-the-job-tier-server-side">2. Configure the job tier (server side)<a class="headerlink" href="#2-configure-the-job-tier-server-side" title="Permanent link">&para;</a></h3>
-<p>On each <code>worker</code> (or <code>all</code>) node that should receive relayed webhooks, add a
-<code>relay_ingress</code> block. It binds a <strong>dedicated</strong> mutual-TLS listener, separate
-from the public API port, and accepts only client certificates signed by your
-relay CA.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># job-tier config</span>
-<span class="nt">node</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
-<span class="w">  </span><span class="nt">relay_ingress</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8443&quot;</span><span class="w">                    </span><span class="c1"># mTLS listener for relayed webhooks</span>
-<span class="w">    </span><span class="nt">server_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/jobtier.crt</span>
-<span class="w">    </span><span class="nt">server_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/jobtier.key</span>
-<span class="w">    </span><span class="nt">client_ca</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># only certs it signed are accepted</span>
-</code></pre></div>
-<p>All four <code>relay_ingress</code> keys are required together, and the block is only valid
-on a node that runs workers — the daemon refuses to start otherwise.</p>
-<h3 id="3-configure-the-dmz-webhook-node-client-side">3. Configure the DMZ webhook node (client side)<a class="headerlink" href="#3-configure-the-dmz-webhook-node-client-side" title="Permanent link">&para;</a></h3>
-<p>The webhook node is the public edge. Four things matter:</p>
+<h3 id="depth-and-cycle-safety">Depth and cycle safety<a class="headerlink" href="#depth-and-cycle-safety" title="Permanent link">&para;</a></h3>
+<p>Call chains are bounded so a misconfigured graph can't recurse forever:</p>
 <ul>
-<li><code>node.profile: webhook</code> makes it a relay node.</li>
-<li><code>node.relay.*</code> points it at the job tier's mTLS listener. <strong>All four of
-  <code>upstream</code>, <code>client_cert</code>, <code>client_key</code>, and <code>ca</code> are required</strong> — the daemon
-  will not start without them.</li>
-<li><code>database.driver: sqlite</code>. A webhook node never writes webhook events to the
-  database, but the daemon still opens a database backend at startup. Pointing it
-  at a small local SQLite file keeps the DMZ box free of any database
-  credential; leaving the default (<code>postgres</code>) would make a DMZ node with no
-  route to the database fail to start.</li>
-<li><code>api.auth_enabled: false</code>. API authentication is <strong>on by default</strong>, and when it
-  is on the daemon requires <code>api.api_keys</code> — so a config without keys fails to
-  start. A webhook node serves no bearer-authenticated API (only HMAC-verified
-  webhook ingress), so turn auth off here rather than placing an API key on the
-  public box. Keep your API keys on the UI/job tier, where the API is served.</li>
+<li><strong>Depth cap</strong> — <code>maxCallDepth</code> per project (default <strong>8</strong>). A call that would
+  push the chain past the cap is refused with <code>DEPTH_EXCEEDED</code>.</li>
+<li><strong>Cycle detection</strong> — a project that is already an ancestor of the current
+  call chain cannot be called again; the attempt is refused with
+  <code>CYCLE_DETECTED</code>.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1"># DMZ webhook node config</span>
-<span class="nt">server</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8080&quot;</span><span class="w">                   </span><span class="c1"># public webhook ingress (front this with TLS)</span>
-
-<span class="nt">node</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">webhook</span>
-<span class="w">  </span><span class="nt">relay</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">upstream</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">https://jobtier.internal:8443</span><span class="w">   </span><span class="c1"># the relay_ingress addr above</span>
-<span class="w">    </span><span class="nt">client_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/dmz-webhook.crt</span>
-<span class="w">    </span><span class="nt">client_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/dmz-webhook.key</span>
-<span class="w">    </span><span class="nt">ca</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># CA that signed jobtier.crt</span>
-<span class="w">    </span><span class="nt">max_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">                    </span><span class="c1"># optional; 0 → 3. Bounded retries before a 5xx to the provider</span>
-<span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">5s</span><span class="w">                   </span><span class="c1"># optional; empty → 5s per attempt</span>
-
-<span class="nt">database</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
-<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/relay.db</span><span class="w">    </span><span class="c1"># must be on a writable mount</span>
-
-<span class="nt">api</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                 </span><span class="c1"># no bearer-auth API on a webhook node; ingress is HMAC-verified</span>
+<p>Both refusals are written to the audit log, so you can see exactly which call
+was blocked and why.</p>
+<h2 id="spawn_project-create-a-new-project-on-demand"><code>spawn_project</code>: create a new project on demand<a class="headerlink" href="#spawn_project-create-a-new-project-on-demand" title="Permanent link">&para;</a></h2>
+<p><code>spawn_project</code> instantiates a fresh project from a registered template and,
+optionally, kicks off its first task:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">onboard</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">spawn_project</span>
+<span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer-workspace</span>
+<span class="w">  </span><span class="nt">params</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">acme-corp</span>
+<span class="w">  </span><span class="nt">initial_task</span><span class="p">:</span><span class="w">                       </span><span class="c1"># optional</span>
+<span class="w">    </span><span class="nt">workflow</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bootstrap</span>
+<span class="w">    </span><span class="nt">payload</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">tier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+<span class="w">  </span><span class="nt">on_success</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notify</span>
+<span class="w">  </span><span class="nt">on_fail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">handle-error</span>
 </code></pre></div>
-<h3 id="4-run-the-webhook-node">4. Run the webhook node<a class="headerlink" href="#4-run-the-webhook-node" title="Permanent link">&para;</a></h3>
-<p>Use the <code>thin</code> container image for a webhook node — it carries no executor and
-runs unprivileged, which is exactly what you want in a DMZ. Expose only the
-webhook ingress port and put your TLS terminator in front of it; providers post
-to <code>POST /api/v1/webhooks/{…}</code>.</p>
-<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>swarmd-webhook-dmz<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>./dmz-webhook-config.yaml:/etc/swarmd/config.yaml:ro,Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>./certs:/etc/swarmd/certs:ro,Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>swarmd-dmz-data:/var/lib/swarmd:Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--health-cmd<span class="w"> </span><span class="s1">&#39;wget -qO- http://localhost:8080/livez || exit 1&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--health-interval<span class="w"> </span>30s<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>swarmd:thin
+<p>Spawning is gated per project by <code>allowSpawn</code>, which is <strong>closed by default</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">allowSpawn</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">templates</span><span class="p">:</span><span class="w">                          </span><span class="c1"># empty = no spawns allowed</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">customer-workspace</span>
+<span class="w">  </span><span class="nt">maxSpawnsPerDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 </code></pre></div>
-<p>Do not expose the metrics port (<code>9090</code>) publicly, and do not mount a container
-socket — a webhook node never spawns agent containers.</p>
-<hr />
-<h2 id="validate-and-observe">Validate and observe<a class="headerlink" href="#validate-and-observe" title="Permanent link">&para;</a></h2>
-<p>Before starting (or restarting) any node, validate its configuration. The
-cluster feature doctor confirms <code>node.profile</code> is a recognised preset and that
-relay settings are coherent with the resolved role:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
+<p>For safety, a freshly spawned project <strong>cannot</strong> pre-authorize its spawner in
+<code>acceptCallsFrom</code> at spawn time — consent to receive calls must be granted
+explicitly afterward, so spawning can't be used to bypass the inbound allowlist.</p>
+<h2 id="a2a-federation-calling-remote-agents">A2A federation: calling remote agents<a class="headerlink" href="#a2a-federation-calling-remote-agents" title="Permanent link">&para;</a></h2>
+<p>The A2A step talks to any agent that speaks the A2A protocol — another swarmd
+instance, or a third-party agent — over HTTP + SSE. Unlike <code>call_project</code>, it is
+not bound by the inter-project flag; it's available wherever the A2A handler is
+enabled.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">delegate-remote</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">a2a_call</span>
+<span class="w">  </span><span class="nt">agent_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://partner.example.com/a2a/v1/agents/research/summarize</span>
+<span class="w">  </span><span class="nt">prompt</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Summarize</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">attached</span><span class="nv"> </span><span class="s">filing</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">five</span><span class="nv"> </span><span class="s">bullet</span><span class="nv"> </span><span class="s">points.&quot;</span>
+<span class="w">  </span><span class="nt">api_key_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">PARTNER_A2A_KEY</span><span class="w">        </span><span class="c1"># optional; sent as the auth header</span>
+<span class="w">  </span><span class="nt">timeout</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span><span class="w">                         </span><span class="c1"># optional (default 5m)</span>
+<span class="w">  </span><span class="nt">on_success</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">publish</span>
+<span class="w">  </span><span class="nt">on_fail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">handle-error</span>
 </code></pre></div>
-<p>Once nodes are running, inspect the fleet from any node with API access:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w">          </span><span class="c1"># live nodes, singleton ownership, version skew</span>
-swarmctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w"> </span>--json<span class="w">   </span><span class="c1"># raw response</span>
-</code></pre></div>
-<p>The same data backs the cluster view in the admin UI. Database-backed nodes
-report themselves on a timer; the DMZ webhook node reports by proxy over the
-relay, and a stale node is aged out automatically. If a running webhook node is
-absent from <code>cluster status</code>, the relay channel — not the node — is usually at
-fault.</p>
-<hr />
-<h2 id="operating-notes">Operating notes<a class="headerlink" href="#operating-notes" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Role and relay changes are restart-gated.</strong> <code>node.profile</code>, <code>node.relay.*</code>,
-  and <code>node.relay_ingress.*</code> are read at startup; editing them takes effect on
-  the next daemon start, not on a config reload. Run the feature doctor, then
-  restart.</li>
-<li><strong>Restart order.</strong> Bring the job tier's relay listener up before the DMZ nodes
-  that forward to it. While the upstream is unreachable, a webhook node reports
-  not-ready on <code>/readyz</code> (so a load balancer holds traffic off it) while staying
-  alive on <code>/livez</code>.</li>
-<li><strong>Backpressure.</strong> <code>node.relay.max_retries</code> bounds retries before the webhook
-  node returns a <code>5xx</code> to the provider, which then redelivers per its own policy.
-  Keep retries small — provider redelivery, not in-process buffering, is the
-  durability layer.</li>
-<li><strong>Certificate rotation.</strong> Rotating the relay CA invalidates every client
-  certificate at once; issue new client certs and roll the DMZ nodes. Because
-  this config is restart-gated, a cert swap is a restart, not a reload.</li>
-</ul>
-<hr />
+<p>The step POSTs the prompt to the agent's <code>tasks</code> endpoint, then streams the
+agent's progress over SSE until it reaches a terminal state. A stream that goes
+idle for 90s is treated as a failure.</p>
+<h3 id="exposing-your-own-agents-inbound-a2a">Exposing your own agents (inbound A2A)<a class="headerlink" href="#exposing-your-own-agents-inbound-a2a" title="Permanent link">&para;</a></h3>
+<p>When the A2A handler is enabled, each project+workflow is published as an
+addressable agent:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Auth</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /.well-known/agent.json</code></td>
+<td>public</td>
+<td>Index of available agent cards.</td>
+</tr>
+<tr>
+<td><code>GET /a2a/v1/agents/&lt;project&gt;/&lt;workflow&gt;/card</code></td>
+<td>public</td>
+<td>One agent's capability card.</td>
+</tr>
+<tr>
+<td><code>POST /a2a/v1/agents/&lt;project&gt;/&lt;workflow&gt;/tasks</code></td>
+<td>key</td>
+<td>Submit a task to the agent.</td>
+</tr>
+<tr>
+<td><code>GET /a2a/v1/agents/&lt;project&gt;/&lt;workflow&gt;/tasks/{id}</code></td>
+<td>key</td>
+<td>Stream task progress (SSE).</td>
+</tr>
+</tbody>
+</table>
+<p>Point the <code>api_key_env</code> of a remote caller at a key scoped to the callee
+project. A few protocol features are intentionally not wired yet: result-schema
+validation against <code>expect</code>, and <code>input-required</code> prompts (currently treated as
+a failed task rather than a checkpoint).</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Symptom</th>
-<th>Likely cause</th>
-<th>Fix</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Won't start: "api.api_keys is required when api.auth_enabled is true"</td>
-<td>API auth is on by default and a webhook node has no <code>api_keys</code></td>
-<td>Set <code>api.auth_enabled: false</code> on the webhook node; keep API keys on the UI/job tier.</td>
-</tr>
-<tr>
-<td>Webhook node won't start, fails on database connect</td>
-<td><code>database.driver</code> left at the <code>postgres</code> default with no route to the database</td>
-<td>Set <code>database.driver: sqlite</code> and a writable <code>database.path</code>.</td>
-</tr>
-<tr>
-<td>Start-up error: "relay.{…} are all required in webhook relay mode"</td>
-<td>Incomplete <code>node.relay</code> block on a <code>webhook</code> node</td>
-<td>Provide all four of <code>upstream</code>, <code>client_cert</code>, <code>client_key</code>, <code>ca</code>.</td>
-</tr>
-<tr>
-<td>Start-up error: "node.relay is only valid for a webhook node"</td>
-<td><code>relay.*</code> keys on a node that isn't a relay node</td>
-<td>Set <code>node.profile: webhook</code>, or remove the relay keys.</td>
-</tr>
-<tr>
-<td>Relay returns <code>401</code> / TLS handshake failure</td>
-<td>Client cert not signed by the job tier's <code>client_ca</code>, or the server cert SAN doesn't match <code>relay.upstream</code></td>
-<td>Re-issue certs from the shared CA; match the server SAN to the upstream host.</td>
-</tr>
-<tr>
-<td>Webhook node stuck not-ready (<code>/readyz</code> returns 503)</td>
-<td>Job tier relay listener unreachable from the DMZ</td>
-<td>Confirm the <code>relay_ingress</code> listener is up and reachable; check the <code>relay.upstream</code> host and port.</td>
-</tr>
-<tr>
-<td>Webhook node missing from <code>cluster status</code></td>
-<td>By-proxy heartbeat not reaching the job tier</td>
-<td>Verify the relay channel (same checks as the handshake row); the heartbeat uses the same secured path.</td>
-</tr>
-</tbody>
-</table>
+<ul>
+<li><strong>Step fails immediately with "disabled"</strong> — set
+  <code>SWARMD_INTER_PROJECT_ENABLED=true</code> and confirm you're on Postgres.</li>
+<li><strong><code>CYCLE_DETECTED</code> / <code>DEPTH_EXCEEDED</code></strong> — inspect the call chain; raise
+  <code>maxCallDepth</code> only if the depth is legitimate, never to mask a cycle.</li>
+<li><strong>Callee refuses the call</strong> — add the caller to the callee's
+  <code>acceptCallsFrom</code> (it's closed by default).</li>
+<li><strong>Spawn refused</strong> — add the template to the spawner's <code>allowSpawn.templates</code>
+  and check <code>maxSpawnsPerDay</code>.</li>
+</ul>
 
 
 
