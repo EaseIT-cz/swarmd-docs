@@ -1385,9 +1385,10 @@ guide assumes <code>swarmd</code> and <code>swarmctl</code> are on your <code>PA
 <div class="highlight"><pre><span></span><code>swarmd<span class="w"> </span>--version
 swarmctl<span class="w"> </span>version
 </code></pre></div>
-<p>The current released baseline is <strong>2026.6.0</strong>; building from the latest
-<code>main</code> may report a newer version. See the
-<a href="../release-notes/">Release notes</a> for what each release adds.</p>
+<p><code>swarmd --version</code> reports the build you are running; building from the
+latest <code>main</code> may report a newer version than the most recent tagged
+release. See the <a href="../release-notes/">Release notes</a> for what each
+release adds.</p>
 <h2 id="point-swarmd-at-a-database">Point swarmd at a database<a class="headerlink" href="#point-swarmd-at-a-database" title="Permanent link">&para;</a></h2>
 <p>swarmd reads its database connection from configuration or environment
 variables. The quickest path is environment variables:</p>
