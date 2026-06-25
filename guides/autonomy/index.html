@@ -1218,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1359,7 +1359,7 @@
 <h1 id="autonomy-self-running-projects">Autonomy — self-running projects<a class="headerlink" href="#autonomy-self-running-projects" title="Permanent link">&para;</a></h1>
 <p>Most projects run tasks you submit. An <strong>autonomous</strong> project also runs tasks
 <em>it decides to create</em> — on an interval, toward a standing goal. It's how you
-turn swarmd from "do this when I ask" into "keep this running and tell me when
+turn vornik from "do this when I ask" into "keep this running and tell me when
 something needs me."</p>
 <p>Autonomy is <strong>off by default</strong>. A project with autonomy disabled never starts an
 evaluation loop, so turning it on is an explicit, per-project decision.</p>
@@ -1471,16 +1471,16 @@ page in the UI) — the loop is cancelled.</p>
 <p>Every evaluation — whether it created a task or not — is recorded with an
 outcome (created, no-action, rate-limited, budget-blocked, duplicate, and so
 on). Inspect the audit trail and a rollup from the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>autonomy<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--limit<span class="w"> </span><span class="m">50</span>
-swarmctl<span class="w"> </span>autonomy<span class="w"> </span>summary<span class="w">     </span>--project<span class="w"> </span>my-project<span class="w"> </span>--hours<span class="w"> </span><span class="m">24</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>autonomy<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--limit<span class="w"> </span><span class="m">50</span>
+vornikctl<span class="w"> </span>autonomy<span class="w"> </span>summary<span class="w">     </span>--project<span class="w"> </span>my-project<span class="w"> </span>--hours<span class="w"> </span><span class="m">24</span>
 </code></pre></div>
 <p>The project's home page shows a <strong>countdown to the next autonomy tick</strong> and the
 last evaluation's outcome, and the dashboard surfaces a next-evaluation tile
 across all autonomous projects plus a count of tasks awaiting approval.</p>
 <blockquote>
-<p>The <code>swarmctl autonomy</code> commands are read-only audit views. Enable or disable
+<p>The <code>vornikctl autonomy</code> commands are read-only audit views. Enable or disable
 autonomy through the project's configuration or the Web UI — there is no
-<code>swarmctl autonomy enable</code> command.</p>
+<code>vornikctl autonomy enable</code> command.</p>
 </blockquote>
 
 

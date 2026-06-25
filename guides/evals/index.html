@@ -1227,7 +1227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1377,11 +1377,11 @@
 <h1 id="evals-repeatable-swarm-tests">Evals: repeatable swarm tests<a class="headerlink" href="#evals-repeatable-swarm-tests" title="Permanent link">&para;</a></h1>
 <p>An <strong>eval suite</strong> is a set of tasks with pass/fail checks that you run on
 demand — a regression test for a swarm's behaviour. You author the suite once,
-then <code>swarmctl eval run</code> submits every case, waits for it to finish, checks
+then <code>vornikctl eval run</code> submits every case, waits for it to finish, checks
 each result against your predicates, and prints a scoreboard. It exits non-zero
 if any case fails, so you can wire it into CI.</p>
 <h2 id="running-a-suite">Running a suite<a class="headerlink" href="#running-a-suite" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>run<span class="w"> </span>&lt;swarm&gt;<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span><span class="nb">eval</span><span class="w"> </span>run<span class="w"> </span>&lt;swarm&gt;<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
 </code></pre></div>
 <p>The positional argument is the swarm id; it also names the default suite file
 (<code>configs/evals/&lt;swarm&gt;.json</code>) and seeds a stable per-case idempotency key, so
@@ -1479,8 +1479,8 @@ every one must pass:</p>
   ✗ rejects-empty-diff [COMPLETED] (task_…) — expected approved=false
   ✓ small-edit [COMPLETED] (task_…) — ok
 </code></pre></div>
-<p>swarmd remembers each run's per-case verdicts (under your local state
-directory, e.g. <code>$HOME/.local/state/swarmd/evals/&lt;swarm&gt;.json</code>) and diffs the
+<p>vornik remembers each run's per-case verdicts (under your local state
+directory, e.g. <code>$HOME/.local/state/vornik/evals/&lt;swarm&gt;.json</code>) and diffs the
 next run against it. The scoreboard then calls out:</p>
 <ul>
 <li><strong>Regressions</strong> — cases that passed last time and fail now.</li>
@@ -1513,7 +1513,7 @@ has nothing to compare against.</p>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Save it as <code>configs/evals/my-swarm.json</code> and run <code>swarmctl eval run my-swarm
+<p>Save it as <code>configs/evals/my-swarm.json</code> and run <code>vornikctl eval run my-swarm
 -p my-project</code>. Add <code>--json</code> and check the exit code (or the <code>regressed</code> array)
 from CI to gate a deploy on the swarm still behaving.</p>
 

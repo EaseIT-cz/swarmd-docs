@@ -1218,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1357,7 +1357,7 @@
 
 
 <h1 id="approvals-human-in-the-loop">Approvals &amp; human-in-the-loop<a class="headerlink" href="#approvals-human-in-the-loop" title="Permanent link">&para;</a></h1>
-<p>swarmd is built to run unattended, but you decide where a human has to step in.
+<p>vornik is built to run unattended, but you decide where a human has to step in.
 There are two distinct gates — one inside a workflow, one at the point an
 autonomous task is created — plus a way for an agent to stop and ask you a
 question mid-run. All of them surface in one place: the operator <strong>Inbox</strong>.</p>
@@ -1397,14 +1397,14 @@ forever.</p>
 or information from you — it emits a <strong>checkpoint</strong> and the task enters an
 <em>awaiting-input</em> state. A decision checkpoint presents options as buttons; an
 open question waits for your answer. Reply from the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>answer<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>answer<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--checkpoint<span class="w"> </span>&lt;checkpointId&gt;<span class="w"> </span>--choice<span class="w"> </span><span class="s2">&quot;Option A&quot;</span>
 <span class="c1"># or provide free-text:</span>
-swarmctl<span class="w"> </span>task<span class="w"> </span>answer<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
+vornikctl<span class="w"> </span>task<span class="w"> </span>answer<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--checkpoint<span class="w"> </span>&lt;checkpointId&gt;<span class="w"> </span>--content<span class="w"> </span><span class="s2">&quot;Use the staging bucket, not prod.&quot;</span>
 </code></pre></div>
-<p>You can also steer a running task with <code>swarmctl task directive</code>, pause/resume
-it, or amend its brief — see the <a href="../../reference/swarmctl/">swarmctl reference</a>.</p>
+<p>You can also steer a running task with <code>vornikctl task directive</code>, pause/resume
+it, or amend its brief — see the <a href="../../reference/vornikctl/">vornikctl reference</a>.</p>
 <h2 id="acting-on-approvals">Acting on approvals<a class="headerlink" href="#acting-on-approvals" title="Permanent link">&para;</a></h2>
 <p>Approvals and questions are actioned in the Web UI, where they're collected in
 the <strong>Inbox</strong> ("what needs me") — ranked so the things blocking work come first:
@@ -1413,8 +1413,8 @@ to the task, where the <strong>Approve</strong> / <strong>Reject</strong> button
 tasks) and the <strong>Answer</strong> action (for checkpoints) live.</p>
 <blockquote>
 <p>Approving or rejecting a <em>task</em> is a Web UI action (or a steering reply from a
-connected chat channel) — there is no <code>swarmctl approve</code> command for tasks.
-(<code>swarmctl workflow-proposals approve</code> is a different feature — it approves
+connected chat channel) — there is no <code>vornikctl approve</code> command for tasks.
+(<code>vornikctl workflow-proposals approve</code> is a different feature — it approves
 architect-proposed workflow changes, not tasks.)</p>
 </blockquote>
 <p>When a task does fail, see <a href="../recovery/">Recovering failed work</a> for retrying,

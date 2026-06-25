@@ -1142,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/swarmctl/" class="md-nav__link">
+      <a href="../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1230,9 +1230,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-swarmd-does" class="md-nav__link">
+  <a href="#what-vornik-does" class="md-nav__link">
     <span class="md-ellipsis">
-      What swarmd does
+      What vornik does
     </span>
   </a>
   
@@ -1257,9 +1257,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#point-swarmd-at-a-database" class="md-nav__link">
+  <a href="#point-vornik-at-a-database" class="md-nav__link">
     <span class="md-ellipsis">
-      Point swarmd at a database
+      Point vornik at a database
     </span>
   </a>
   
@@ -1335,21 +1335,21 @@
 
 
 <h1 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h1>
-<p>This guide takes you from a fresh machine to a running swarmd daemon with
+<p>This guide takes you from a fresh machine to a running vornik daemon with
 your first project, then submits and watches a task run end to end. It
-assumes no prior swarmd knowledge — if a term is unfamiliar, the
+assumes no prior vornik knowledge — if a term is unfamiliar, the
 <a href="../concepts/">Concepts</a> page explains the vocabulary.</p>
-<h2 id="what-swarmd-does">What swarmd does<a class="headerlink" href="#what-swarmd-does" title="Permanent link">&para;</a></h2>
-<p>swarmd is an asynchronous orchestration daemon. You define <strong>projects</strong>,
+<h2 id="what-vornik-does">What vornik does<a class="headerlink" href="#what-vornik-does" title="Permanent link">&para;</a></h2>
+<p>vornik is an asynchronous orchestration daemon. You define <strong>projects</strong>,
 each backed by a <strong>swarm</strong> of agents and one or more <strong>workflows</strong>. You
-submit <strong>tasks</strong>; swarmd queues them, starts the agents in isolated local
+submit <strong>tasks</strong>; vornik queues them, starts the agents in isolated local
 containers, runs them through the workflow, and persists the results. Work
 runs continuously in the background — you submit and walk away, then come
 back for the output.</p>
 <p>You can drive it from the CLI, the HTTP API, the Web UI, or a connected
 conversation channel (a Telegram bot or email). Around the core,
 recent releases add operability and resilience features you will meet later
-in the docs — a one-command redacted support bundle, expanded <code>swarmctl
+in the docs — a one-command redacted support bundle, expanded <code>vornikctl
 doctor</code> checks, centralised log forwarding, structured recovery for failed
 steps, and a bounded graceful shutdown — plus security hardening for running
 the daemon behind a reverse proxy. None of that is needed to get started; the
@@ -1357,57 +1357,57 @@ defaults are safe and local-first.</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Go 1.25+</strong> — to build the daemon and CLI from source.</li>
-<li><strong>Podman</strong> (rootless recommended) — swarmd runs every agent in its own
+<li><strong>Podman</strong> (rootless recommended) — vornik runs every agent in its own
   Podman container for isolation. Docker is not used.</li>
-<li><strong>PostgreSQL</strong> — swarmd keeps all durable state (queues, tasks,
+<li><strong>PostgreSQL</strong> — vornik keeps all durable state (queues, tasks,
   executions, artifacts, memory) in PostgreSQL so work survives restarts.</li>
 <li><strong>Make</strong> — convenience build targets.</li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>swarmd is <strong>local-first</strong>: the daemon and all agent containers run on
+<p>vornik is <strong>local-first</strong>: the daemon and all agent containers run on
 the same host. There is no cloud service to sign up for.</p>
 </div>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <p>Build the two binaries from source:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># The daemon</span>
-go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>bin/swarmd<span class="w"> </span>./cmd/swarmd
+go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>bin/vornik<span class="w"> </span>./cmd/vornik
 
 <span class="c1"># The control CLI</span>
-go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>bin/swarmctl<span class="w"> </span>./cmd/swarmctl
+go<span class="w"> </span>build<span class="w"> </span>-o<span class="w"> </span>bin/vornikctl<span class="w"> </span>./cmd/vornikctl
 </code></pre></div>
 <p>Or use the Make target, which produces the same binaries:</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span>build
 </code></pre></div>
 <p>Put <code>bin/</code> on your <code>PATH</code> (or call the binaries by path). The rest of this
-guide assumes <code>swarmd</code> and <code>swarmctl</code> are on your <code>PATH</code>.</p>
+guide assumes <code>vornik</code> and <code>vornikctl</code> are on your <code>PATH</code>.</p>
 <p>Confirm the build:</p>
-<div class="highlight"><pre><span></span><code>swarmd<span class="w"> </span>--version
-swarmctl<span class="w"> </span>version
+<div class="highlight"><pre><span></span><code>vornik<span class="w"> </span>--version
+vornikctl<span class="w"> </span>version
 </code></pre></div>
-<p><code>swarmd --version</code> reports the build you are running; building from the
+<p><code>vornik --version</code> reports the build you are running; building from the
 latest <code>main</code> may report a newer version than the most recent tagged
 release. See the <a href="../release-notes/">Release notes</a> for what each
 release adds.</p>
-<h2 id="point-swarmd-at-a-database">Point swarmd at a database<a class="headerlink" href="#point-swarmd-at-a-database" title="Permanent link">&para;</a></h2>
-<p>swarmd reads its database connection from configuration or environment
+<h2 id="point-vornik-at-a-database">Point vornik at a database<a class="headerlink" href="#point-vornik-at-a-database" title="Permanent link">&para;</a></h2>
+<p>vornik reads its database connection from configuration or environment
 variables. The quickest path is environment variables:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_DATABASE_HOST</span><span class="o">=</span>localhost
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_DATABASE_PORT</span><span class="o">=</span><span class="m">5432</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_DATABASE_NAME</span><span class="o">=</span>swarmd
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_DATABASE_USER</span><span class="o">=</span>swarmd
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_DATABASE_PASSWORD</span><span class="o">=</span>swarmd
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_DATABASE_HOST</span><span class="o">=</span>localhost
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_DATABASE_PORT</span><span class="o">=</span><span class="m">5432</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_DATABASE_NAME</span><span class="o">=</span>vornik
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_DATABASE_USER</span><span class="o">=</span>vornik
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_DATABASE_PASSWORD</span><span class="o">=</span>vornik
 </code></pre></div>
-<p>swarmd creates and migrates its schema on first start, so an empty
+<p>vornik creates and migrates its schema on first start, so an empty
 database is all you need. For a full list of settings and the YAML
 equivalent, see the <a href="../reference/configuration/">Configuration reference</a>.</p>
 <h2 id="start-the-daemon">Start the daemon<a class="headerlink" href="#start-the-daemon" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>swarmd
+<div class="highlight"><pre><span></span><code>vornik
 </code></pre></div>
-<p>With no flags, swarmd looks for configuration in this order: the <code>--config</code>
-flag, the <code>SWARMD_CONFIG</code> environment variable, <code>./swarmd.yaml</code>, then
-<code>/etc/swarmd/swarmd.yaml</code>. To run with an explicit file:</p>
-<div class="highlight"><pre><span></span><code>swarmd<span class="w"> </span>--config<span class="w"> </span>/path/to/swarmd.yaml
+<p>With no flags, vornik looks for configuration in this order: the <code>--config</code>
+flag, the <code>VORNIK_CONFIG</code> environment variable, <code>./vornik.yaml</code>, then
+<code>/etc/vornik/vornik.yaml</code>. To run with an explicit file:</p>
+<div class="highlight"><pre><span></span><code>vornik<span class="w"> </span>--config<span class="w"> </span>/path/to/vornik.yaml
 </code></pre></div>
 <p>Once it is up, the daemon serves a Web UI and an HTTP API (default
 <code>:8080</code>). Check it is ready before submitting work:</p>
@@ -1422,17 +1422,17 @@ reachable. A <code>503</code> lists which check is failing — see
 generate it from a built-in preset. The <code>research</code> preset (a lead plus a
 researcher and a writer) is a good fit for digest, scan, and
 summary-style work:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>init<span class="w"> </span>swarm<span class="w"> </span>my-swarm<span class="w"> </span>--template<span class="w"> </span>research
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>init<span class="w"> </span>swarm<span class="w"> </span>my-swarm<span class="w"> </span>--template<span class="w"> </span>research
 </code></pre></div>
 <p>To see every preset and a one-line description of each:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>init<span class="w"> </span>swarm<span class="w"> </span>--list
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>init<span class="w"> </span>swarm<span class="w"> </span>--list
 </code></pre></div>
 <p>This writes a <code>SWARM.md</code> file into your <code>configs/swarms/</code> directory and
 validates it against the registry before saving.</p>
 <h2 id="create-your-first-project">Create your first project<a class="headerlink" href="#create-your-first-project" title="Permanent link">&para;</a></h2>
 <p>Generate a project that uses the swarm you just created and the built-in
 <code>adaptive</code> workflow:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>init<span class="w"> </span>project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>init<span class="w"> </span>project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--display-name<span class="w"> </span><span class="s2">&quot;My First Project&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--swarm<span class="w"> </span>my-swarm<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--workflow<span class="w"> </span>adaptive
@@ -1449,17 +1449,17 @@ at <code>/ui/projects/new</code> for a gallery of templates, or
 project, swarm, and workflow for you.</p>
 </div>
 <p>Confirm the daemon has loaded your project:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>project<span class="w"> </span>list
-swarmctl<span class="w"> </span>project<span class="w"> </span>show<span class="w"> </span>my-project
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>project<span class="w"> </span>list
+vornikctl<span class="w"> </span>project<span class="w"> </span>show<span class="w"> </span>my-project
 </code></pre></div>
 <h2 id="submit-your-first-task">Submit your first task<a class="headerlink" href="#submit-your-first-task" title="Permanent link">&para;</a></h2>
 <p>Now submit a task. The <code>--prompt</code> flag is the simplest way to describe the
 work:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--prompt<span class="w"> </span><span class="s2">&quot;Summarise the key themes in the attached notes.&quot;</span>
 </code></pre></div>
-<p>The command returns a task ID. swarmd has queued the task; the scheduler
+<p>The command returns a task ID. vornik has queued the task; the scheduler
 will pick it up, start the agents, and run them through the project's
 workflow.</p>
 <p>Useful options:</p>
@@ -1472,22 +1472,22 @@ workflow.</p>
 <li><code>--attach &lt;file&gt;</code> — attach a file as an input; it is snapshotted and
   extracted into project memory so agents can read it.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>submit<span class="w"> </span>-p<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>submit<span class="w"> </span>-p<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--prompt<span class="w"> </span><span class="s2">&quot;Review this report and list open risks.&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--attach<span class="w"> </span>report.pdf<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--priority<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
 <h2 id="watch-it-run">Watch it run<a class="headerlink" href="#watch-it-run" title="Permanent link">&para;</a></h2>
 <p>List the tasks in your project, optionally filtered by status:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>my-project
-swarmctl<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--status<span class="w"> </span>RUNNING
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>my-project
+vornikctl<span class="w"> </span>task<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--status<span class="w"> </span>RUNNING
 </code></pre></div>
 <p>Inspect a single task — its status, workflow, and timestamps:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>get<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>get<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
 </code></pre></div>
 <p>Follow the live logs while it runs, or read the result excerpt once it has
 finished:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>tail<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--follow
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>tail<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--follow
 </code></pre></div>
 <p>A task moves through <code>PENDING</code> → <code>QUEUED</code> → <code>RUNNING</code> and ends in
 <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code>. When it completes, any files the
@@ -1501,7 +1501,7 @@ the API and Web UI.</p>
   <a href="../guides/workflows-and-llm-controls/">workflows and LLM controls</a> and
   <a href="../guides/conversation-channels/">conversation channels</a>.</li>
 <li><strong><a href="../reference/configuration/">Configuration reference</a></strong> and the
-  <strong><a href="../reference/swarmctl/">swarmctl reference</a></strong> — every setting and
+  <strong><a href="../reference/vornikctl/">vornikctl reference</a></strong> — every setting and
   command.</li>
 <li><strong><a href="../troubleshooting/">Troubleshooting</a></strong> — when something does
   not start or a task gets stuck.</li>

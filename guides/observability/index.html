@@ -1242,7 +1242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1405,7 +1405,7 @@
 
 
 <h1 id="observability">Observability<a class="headerlink" href="#observability" title="Permanent link">&para;</a></h1>
-<p>swarmd is built to run unattended, so it gives you several ways to see what it's
+<p>vornik is built to run unattended, so it gives you several ways to see what it's
 doing: a set of operator dashboards in the Web UI, and a Prometheus metrics
 endpoint for your own monitoring stack.</p>
 <h2 id="the-dashboards">The dashboards<a class="headerlink" href="#the-dashboards" title="Permanent link">&para;</a></h2>
@@ -1447,11 +1447,11 @@ surfaces a few efficiency signals:</p>
   flags when that's getting worse. See
   <a href="../cost-and-caching/#effective-cost-per-success">Cost and caching</a>.</li>
 </ul>
-<p>From the CLI, <code>swarmctl cache-stats</code> reports cache effectiveness. (Note:
-<code>swarmctl cpc</code> is the cross-project-call ledger, not a cost command — there is no
-<code>swarmctl spend</code>.)</p>
+<p>From the CLI, <code>vornikctl cache-stats</code> reports cache effectiveness. (Note:
+<code>vornikctl cpc</code> is the cross-project-call ledger, not a cost command — there is no
+<code>vornikctl spend</code>.)</p>
 <h2 id="prometheus-metrics">Prometheus metrics<a class="headerlink" href="#prometheus-metrics" title="Permanent link">&para;</a></h2>
-<p>swarmd exposes Prometheus metrics at <strong><code>/metrics</code></strong>. Enable the dedicated metrics
+<p>vornik exposes Prometheus metrics at <strong><code>/metrics</code></strong>. Enable the dedicated metrics
 server and point your scraper at it:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">metrics</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>

@@ -1218,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1363,7 +1363,7 @@ nest, where the <strong>control plane</strong> ends and the <strong>data plane</
 isolation boundary sits, and what "multiple swarms" actually means.</p>
 <h2 id="the-object-model">The object model<a class="headerlink" href="#the-object-model" title="Permanent link">&para;</a></h2>
 <pre class="mermaid"><code>graph TD
-    Host[swarmd daemon] --&gt; P1[Project]
+    Host[vornik daemon] --&gt; P1[Project]
     Host --&gt; P2[Project ...]
     P1 --&gt; S[Swarm · 1 per project]
     P1 --&gt; W[Workflows · 1 or more]
@@ -1388,10 +1388,10 @@ isolation boundary sits, and what "multiple swarms" actually means.</p>
   its own agent container.</li>
 </ul>
 <h2 id="control-plane-vs-data-plane">Control plane vs data plane<a class="headerlink" href="#control-plane-vs-data-plane" title="Permanent link">&para;</a></h2>
-<p>swarmd separates the surfaces that <em>change how the system behaves</em> from the path
+<p>vornik separates the surfaces that <em>change how the system behaves</em> from the path
 that <em>runs the work</em>:</p>
 <ul>
-<li><strong>Control plane</strong> — the operator surfaces: the <code>swarmctl</code> CLI, the web UI, and
+<li><strong>Control plane</strong> — the operator surfaces: the <code>vornikctl</code> CLI, the web UI, and
   the registries that hold your project / swarm / workflow definitions, plus
   policy and queue controls. This is where you change behaviour.</li>
 <li><strong>Data plane</strong> — the execution path: the task-ingestion API, the queue and
@@ -1433,7 +1433,7 @@ and the agents:</p>
 </ul>
 <p>The two are orthogonal: multi-swarm is <em>how many agent teams the orchestrator
 coordinates</em>; multi-node is <em>how many machines that one orchestrator runs on</em>.
-Neither is multi-tenant SaaS, sharding, or multi-region — swarmd today is a
+Neither is multi-tenant SaaS, sharding, or multi-region — vornik today is a
 single logical orchestrator that you can scale out across nodes.</p>
 
 

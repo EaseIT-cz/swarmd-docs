@@ -1359,7 +1359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1639,9 +1639,9 @@
 
 
 <h1 id="conversation-channels">Conversation Channels<a class="headerlink" href="#conversation-channels" title="Permanent link">&para;</a></h1>
-<p>Conversation channels let people reach swarmd from the tools they already use.
+<p>Conversation channels let people reach vornik from the tools they already use.
 Connect a channel and inbound messages turn into tasks or chat turns, while
-swarmd's replies flow back out the same way they came in. swarmd ships four
+vornik's replies flow back out the same way they came in. vornik ships four
 channels: <strong>GitHub</strong>, <strong>Slack</strong>, <strong>email</strong>, and <strong>voice messages</strong>
 (experimental).</p>
 <p>You configure each channel per project, in that project's YAML file. After you
@@ -1659,7 +1659,7 @@ to take the whole service down to pick up new channels.</p>
   before going to production.</li>
 <li><strong>Routing is automatic.</strong> A single channel connection can serve several
   projects when the upstream service gives a stable identifier (a GitHub
-  installation, a Slack workspace, an email login). swarmd routes each inbound
+  installation, a Slack workspace, an email login). vornik routes each inbound
   message to the right project for you.</li>
 </ul>
 <div class="admonition tip">
@@ -1669,68 +1669,68 @@ places you expect. Loosen it once you have confirmed the flow works.</p>
 </div>
 <hr />
 <h2 id="github">GitHub<a class="headerlink" href="#github" title="Permanent link">&para;</a></h2>
-<p>The GitHub channel lets swarmd respond to issues and pull requests in the
+<p>The GitHub channel lets vornik respond to issues and pull requests in the
 repositories you choose. It can:</p>
 <ul>
 <li>Open a task when an issue gets a label you have nominated.</li>
 <li>Open a review task when a pull request is opened.</li>
-<li>Reply when someone mentions <code>@swarmd</code> on an issue or pull request.</li>
+<li>Reply when someone mentions <code>@vornik</code> on an issue or pull request.</li>
 </ul>
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create a GitHub App in your organization's settings.</li>
-<li>Point the App's webhook URL at your swarmd host's GitHub webhook endpoint
+<li>Point the App's webhook URL at your vornik host's GitHub webhook endpoint
    (<code>/api/v1/github-app/webhook</code>).</li>
 <li>Generate a webhook secret, download the App's private key, and note the App
    ID and installation ID.</li>
 <li>Subscribe the App to issue, issue-comment, pull-request, and
    pull-request-review-comment events.</li>
 <li>Grant the installation read and write access to issues and pull requests on
-   every repository you want swarmd to handle.</li>
+   every repository you want vornik to handle.</li>
 </ol>
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">github_app</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">app_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1234567</span>
 <span class="w">  </span><span class="nt">private_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/github-app.pem</span>
 <span class="w">  </span><span class="nt">installation_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">89012345</span>
-<span class="w">  </span><span class="nt">webhook_secret_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SWARMD_GITHUB_APP_WEBHOOK_SECRET</span>
+<span class="w">  </span><span class="nt">webhook_secret_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_GITHUB_APP_WEBHOOK_SECRET</span>
 <span class="w">  </span><span class="nt">repo_allowlist</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;your-org/your-repo&quot;</span>
 <span class="w">  </span><span class="nt">task_labels</span><span class="p">:</span><span class="w">        </span><span class="c1"># labels that create a task (the label name becomes the task type)</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;swarmd&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;vornik&quot;</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;research&quot;</span>
 <span class="w">  </span><span class="nt">pr_review_labels</span><span class="p">:</span><span class="w">   </span><span class="c1"># leave empty to review every opened PR</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;needs-review&quot;</span>
-<span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span><span class="w">   </span><span class="c1"># GitHub login names allowed to trigger swarmd</span>
+<span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span><span class="w">   </span><span class="c1"># GitHub login names allowed to trigger vornik</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;your-github-login&quot;</span>
 </code></pre></div>
-<p>Supply the webhook secret in the environment before starting swarmd:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_GITHUB_APP_WEBHOOK_SECRET</span><span class="o">=</span><span class="s2">&quot;your-webhook-secret&quot;</span>
+<p>Supply the webhook secret in the environment before starting vornik:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_GITHUB_APP_WEBHOOK_SECRET</span><span class="o">=</span><span class="s2">&quot;your-webhook-secret&quot;</span>
 </code></pre></div>
-<p>A webhook secret and a non-empty <code>repo_allowlist</code> are the minimum for swarmd to
+<p>A webhook secret and a non-empty <code>repo_allowlist</code> are the minimum for vornik to
 <em>receive</em> events. To let it <em>reply</em>, also set <code>app_id</code>, <code>private_key_path</code>, and
 <code>installation_id</code>.</p>
 <h3 id="good-to-know">Good to know<a class="headerlink" href="#good-to-know" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Label matching is <strong>case-sensitive</strong> — GitHub keeps your label's exact
-  casing, so <code>Swarmd</code> and <code>swarmd</code> are different.</li>
+  casing, so <code>Vornik</code> and <code>vornik</code> are different.</li>
 <li>An empty <code>pr_review_labels</code> means <em>every</em> opened pull request creates a review
   task. List specific labels to require at least one of them.</li>
 <li><code>sender_allowlist</code> matches GitHub usernames, including bots. If you want a bot
-  to be able to trigger swarmd, add it explicitly.</li>
+  to be able to trigger vornik, add it explicitly.</li>
 <li>If you are testing by re-sending a webhook, change the delivery so it looks
-  new — swarmd deduplicates redelivered events so it never double-comments.</li>
+  new — vornik deduplicates redelivered events so it never double-comments.</li>
 </ul>
 <hr />
 <h2 id="slack">Slack<a class="headerlink" href="#slack" title="Permanent link">&para;</a></h2>
-<p>The Slack channel lets swarmd answer in direct messages, when it is
+<p>The Slack channel lets vornik answer in direct messages, when it is
 <code>@</code>-mentioned in a channel, or when it is mentioned in a public channel it has
 been allowed into.</p>
 <h3 id="setup_1">Setup<a class="headerlink" href="#setup_1" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create a Slack App at <a href="https://api.slack.com/apps">https://api.slack.com/apps</a>.</li>
-<li>Enable the <strong>Events API</strong> and set the request URL to your swarmd host's Slack
-   webhook endpoint (<code>/api/v1/slack/webhook</code>). swarmd answers Slack's
+<li>Enable the <strong>Events API</strong> and set the request URL to your vornik host's Slack
+   webhook endpoint (<code>/api/v1/slack/webhook</code>). vornik answers Slack's
    verification challenge automatically the first time.</li>
 <li>Subscribe the bot to the <code>app_mention</code>, <code>message.im</code>, and <code>message.channels</code>
    events.</li>
@@ -1742,19 +1742,19 @@ been allowed into.</p>
 <h3 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">slack</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">team_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;T01234567&quot;</span>
-<span class="w">  </span><span class="nt">signing_secret_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SWARMD_SLACK_SIGNING_SECRET</span>
-<span class="w">  </span><span class="nt">bot_token_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SWARMD_SLACK_BOT_TOKEN</span>
+<span class="w">  </span><span class="nt">signing_secret_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_SLACK_SIGNING_SECRET</span>
+<span class="w">  </span><span class="nt">bot_token_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_SLACK_BOT_TOKEN</span>
 <span class="w">  </span><span class="nt">channel_allowlist</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;C0ABCDEF12&quot;</span>
 <span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;U0AAAAAAA&quot;</span>
 </code></pre></div>
-<p>Supply the secrets in the environment before starting swarmd:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_SLACK_SIGNING_SECRET</span><span class="o">=</span><span class="s2">&quot;your-signing-secret&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_SLACK_BOT_TOKEN</span><span class="o">=</span><span class="s2">&quot;xoxb-...&quot;</span>
+<p>Supply the secrets in the environment before starting vornik:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_SIGNING_SECRET</span><span class="o">=</span><span class="s2">&quot;your-signing-secret&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_BOT_TOKEN</span><span class="o">=</span><span class="s2">&quot;xoxb-...&quot;</span>
 </code></pre></div>
 <p>A signing secret and <code>team_id</code> are the minimum to receive events; the bot token
-is what lets swarmd reply.</p>
+is what lets vornik reply.</p>
 <h3 id="good-to-know_1">Good to know<a class="headerlink" href="#good-to-know_1" title="Permanent link">&para;</a></h3>
 <ul>
 <li>An empty <code>channel_allowlist</code> accepts <strong>every</strong> channel in the workspace.
@@ -1764,12 +1764,12 @@ is what lets swarmd reply.</p>
   standard replay defense. If valid messages get rejected, check that your
   server's clock is in sync.</li>
 <li>Slack limits how fast a bot can post (roughly one message per second per
-  channel). swarmd respects this automatically and waits when Slack asks it to.</li>
+  channel). vornik respects this automatically and waits when Slack asks it to.</li>
 </ul>
 <hr />
 <h2 id="email">Email<a class="headerlink" href="#email" title="Permanent link">&para;</a></h2>
 <p>The email channel reads inbound mail over IMAP and replies over SMTP, so anyone
-can interact with swarmd just by sending it a message. It handles multipart and
+can interact with vornik just by sending it a message. It handles multipart and
 HTML mail, decodes international character sets, and saves attachments as task
 artifacts.</p>
 <h3 id="setup_2">Setup<a class="headerlink" href="#setup_2" title="Permanent link">&para;</a></h3>
@@ -1779,7 +1779,7 @@ For Gmail, for example:</p>
 <li>Turn on two-factor authentication for the account.</li>
 <li>Create an App Password and use it for both IMAP and SMTP.</li>
 <li>Use <code>imap.gmail.com:993</code> (TLS) and <code>smtp.gmail.com:587</code> (STARTTLS).</li>
-<li>If you want swarmd to read from a folder other than <code>INBOX</code>, create it first
+<li>If you want vornik to read from a folder other than <code>INBOX</code>, create it first
    and set <code>imap_mailbox</code>.</li>
 </ol>
 <h3 id="configuration_2">Configuration<a class="headerlink" href="#configuration_2" title="Permanent link">&para;</a></h3>
@@ -1787,12 +1787,12 @@ For Gmail, for example:</p>
 <span class="w">  </span><span class="nt">imap_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">imap.gmail.com</span>
 <span class="w">  </span><span class="nt">imap_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">993</span>
 <span class="w">  </span><span class="nt">imap_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assistant@example.com</span>
-<span class="w">  </span><span class="nt">imap_password_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SWARMD_ASSISTANT_IMAP_PASSWORD</span>
+<span class="w">  </span><span class="nt">imap_password_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_ASSISTANT_IMAP_PASSWORD</span>
 <span class="w">  </span><span class="nt">imap_mailbox</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;INBOX&quot;</span>
 <span class="w">  </span><span class="nt">smtp_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smtp.gmail.com</span>
 <span class="w">  </span><span class="nt">smtp_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">587</span>
 <span class="w">  </span><span class="nt">smtp_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assistant@example.com</span>
-<span class="w">  </span><span class="nt">smtp_password_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SWARMD_ASSISTANT_SMTP_PASSWORD</span>
+<span class="w">  </span><span class="nt">smtp_password_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_ASSISTANT_SMTP_PASSWORD</span>
 <span class="w">  </span><span class="nt">from_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Assistant</span><span class="nv"> </span><span class="s">&lt;assistant@example.com&gt;&quot;</span>
 <span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;you@example.com&quot;</span>
@@ -1801,12 +1801,12 @@ For Gmail, for example:</p>
 <span class="w">  </span><span class="nt">attachment_size_cap_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26214400</span><span class="w">   </span><span class="c1"># 25 MiB</span>
 <span class="w">  </span><span class="nt">attachment_store_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/email-attachments</span>
 </code></pre></div>
-<p>Supply the credentials in the environment before starting swarmd:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_ASSISTANT_IMAP_PASSWORD</span><span class="o">=</span><span class="s2">&quot;your-imap-password&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_ASSISTANT_SMTP_PASSWORD</span><span class="o">=</span><span class="s2">&quot;your-smtp-password&quot;</span>
+<p>Supply the credentials in the environment before starting vornik:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_ASSISTANT_IMAP_PASSWORD</span><span class="o">=</span><span class="s2">&quot;your-imap-password&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_ASSISTANT_SMTP_PASSWORD</span><span class="o">=</span><span class="s2">&quot;your-smtp-password&quot;</span>
 </code></pre></div>
 <p>The IMAP host, username, and password are the minimum to receive mail. Add the
-SMTP block and <code>from_address</code> to let swarmd reply; an inbound-only setup is
+SMTP block and <code>from_address</code> to let vornik reply; an inbound-only setup is
 valid if you only want it to act on incoming mail.</p>
 <h3 id="good-to-know_2">Good to know<a class="headerlink" href="#good-to-know_2" title="Permanent link">&para;</a></h3>
 <ul>
@@ -1836,12 +1836,12 @@ depends on your chosen STT/TTS models. Use it for evaluation rather than
 production-critical conversations for now.</p>
 </div>
 <p>The voice channel adds spoken conversation to Telegram and Slack. When someone
-sends a voice message, swarmd transcribes it, treats the transcript as a normal
+sends a voice message, vornik transcribes it, treats the transcript as a normal
 message, and — if the conversation started in voice — speaks its reply back.</p>
-<p>A conversation's "voice mode" is sticky: once someone speaks, swarmd keeps
+<p>A conversation's "voice mode" is sticky: once someone speaks, vornik keeps
 replying with audio until the next message comes in as text.</p>
 <p>The current release uses local, open-weight speech engines that run on the same
-host as swarmd:</p>
+host as vornik:</p>
 <ul>
 <li><strong>Speech-to-text:</strong> <a href="https://github.com/ggerganov/whisper.cpp">whisper.cpp</a>
   with a Whisper model file.</li>
@@ -1868,14 +1868,14 @@ configuration at them.</p>
 <span class="w">    </span><span class="nt">speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
 <span class="w">    </span><span class="nt">max_text_runes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1500</span>
 </code></pre></div>
-<p>You can configure <code>stt</code> alone (swarmd transcribes incoming audio and replies
-with text) or <code>tts</code> alone (swarmd reads its replies aloud) — you do not need
+<p>You can configure <code>stt</code> alone (vornik transcribes incoming audio and replies
+with text) or <code>tts</code> alone (vornik reads its replies aloud) — you do not need
 both.</p>
 <h3 id="good-to-know_3">Good to know<a class="headerlink" href="#good-to-know_3" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>max_text_runes</code> caps how much text gets spoken (1500 is about 90 seconds).
   Telegram limits voice messages to 60 seconds, so set this to suit your
-  channel; swarmd trims overly long replies rather than failing silently.</li>
+  channel; vornik trims overly long replies rather than failing silently.</li>
 <li>Your <code>ffmpeg</code> must be built with Opus support for Telegram audio and AAC for
   Slack audio. A minimal build may be missing these.</li>
 <li>Use the smallest Whisper model that is accurate enough for you. On a machine
@@ -1885,8 +1885,8 @@ both.</p>
 </ul>
 <hr />
 <h2 id="a-note-on-history-and-replies">A note on history and replies<a class="headerlink" href="#a-note-on-history-and-replies" title="Permanent link">&para;</a></h2>
-<p>Conversation history belongs to the conversation, not to the channel, so swarmd
-remembers context across messages even if a channel reconnects. swarmd sends one
+<p>Conversation history belongs to the conversation, not to the channel, so vornik
+remembers context across messages even if a channel reconnects. vornik sends one
 complete reply per turn rather than streaming it word by word (live typing
 indicators are specific to the Telegram and web chat experiences).</p>
 <p>For tuning the model behavior and safety controls that sit behind every reply,

@@ -1245,7 +1245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1428,7 +1428,7 @@ evidence. Everything here is admin-gated.</p>
 <li><strong>Detect</strong> — a background sweeper compares each workflow's recent behaviour
    to its own baseline and opens a <em>trigger</em> when it regresses.</li>
 <li><strong>Generate a candidate</strong> — <em>you</em> click "generate candidate" on a trigger.
-   swarmd tries deterministic repair recipes first, then falls back to the
+   vornik tries deterministic repair recipes first, then falls back to the
    workflow architect.</li>
 <li><strong>Trial</strong> — run the candidate against the recorded failures, with all
    real-world side effects blocked.</li>
@@ -1469,16 +1469,16 @@ most expensive) — these are the runs a repair has to prove itself against. Onl
 one trigger stays open per (project, workflow, class) at a time, so a persistent
 regression doesn't spam the list.</p>
 <p>Browse and triage triggers:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>list<span class="w"> </span>--status<span class="w"> </span>open
-swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>dismiss<span class="w"> </span>&lt;trigger_id&gt;<span class="w">          </span><span class="c1"># accept it / not actionable</span>
-swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>generate-candidate<span class="w"> </span>&lt;trigger_id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>list<span class="w"> </span>--status<span class="w"> </span>open
+vornikctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>dismiss<span class="w"> </span>&lt;trigger_id&gt;<span class="w">          </span><span class="c1"># accept it / not actionable</span>
+vornikctl<span class="w"> </span>blackbox<span class="w"> </span>trigger<span class="w"> </span>generate-candidate<span class="w"> </span>&lt;trigger_id&gt;
 </code></pre></div>
 <p>You can tune thresholds or temporarily mute a noisy workflow per tuple:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>override<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--project<span class="w"> </span>P<span class="w"> </span>--workflow<span class="w"> </span>W<span class="w"> </span>--class<span class="w"> </span>cost_regression<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>blackbox<span class="w"> </span>override<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--project<span class="w"> </span>P<span class="w"> </span>--workflow<span class="w"> </span>W<span class="w"> </span>--class<span class="w"> </span>cost_regression<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--threshold-pct<span class="w"> </span><span class="m">60</span><span class="w"> </span>--mute-hours<span class="w"> </span><span class="m">48</span>
 </code></pre></div>
 <h2 id="candidate-generation">Candidate generation<a class="headerlink" href="#candidate-generation" title="Permanent link">&para;</a></h2>
-<p>When you ask a trigger to generate a candidate, swarmd first tries <strong>deterministic
+<p>When you ask a trigger to generate a candidate, vornik first tries <strong>deterministic
 recipes</strong> — currently a retry-budget adjustment and a verifier-insertion step —
 because a known-good structural fix is cheaper and more predictable than asking a
 model. If no recipe applies, it falls back to the workflow architect, which
@@ -1530,15 +1530,15 @@ promote, nothing changes.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>SWARMD_ARCHITECT_PAUSED</code></td>
+<td><code>VORNIK_ARCHITECT_PAUSED</code></td>
 <td>pauses architect-based candidate generation (the detector keeps writing triggers; deterministic recipes still apply)</td>
 </tr>
 <tr>
-<td><code>SWARMD_ARCHITECT_DISABLED_KINDS</code></td>
+<td><code>VORNIK_ARCHITECT_DISABLED_KINDS</code></td>
 <td>refuses specific proposal kinds</td>
 </tr>
 <tr>
-<td><code>swarmctl blackbox override set … --mute-hours</code></td>
+<td><code>vornikctl blackbox override set … --mute-hours</code></td>
 <td>silences detection for one (project, workflow, class) tuple</td>
 </tr>
 </tbody>
@@ -1554,7 +1554,7 @@ promote, nothing changes.</p>
 <tbody>
 <tr>
 <td>CLI</td>
-<td><code>swarmctl blackbox trigger {list, dismiss, bulk-dismiss, generate-candidate}</code> and <code>swarmctl blackbox override {list, set, delete}</code></td>
+<td><code>vornikctl blackbox trigger {list, dismiss, bulk-dismiss, generate-candidate}</code> and <code>vornikctl blackbox override {list, set, delete}</code></td>
 </tr>
 <tr>
 <td>Web UI</td>

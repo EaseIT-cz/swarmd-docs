@@ -1287,7 +1287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1495,14 +1495,14 @@
 
 
 <h1 id="cost-and-caching">Cost and Caching<a class="headerlink" href="#cost-and-caching" title="Permanent link">&para;</a></h1>
-<p>swarmd routes a lot of traffic to language-model providers, and that traffic
+<p>vornik routes a lot of traffic to language-model providers, and that traffic
 is the single biggest line item in most deployments. This guide covers the
 controls that keep that cost predictable: hard per-project spend caps, dynamic
 per-role tool budgets, an effective-cost-per-success signal, prompt caching, an
 embedding cache, memory consolidation tiers, per-project API keys, and rate
 limits.</p>
 <p>Most of the settings here live in your daemon config
-(<code>~/.config/swarmd/swarmd.yaml</code>); spend caps are set per project. See
+(<code>~/.config/vornik/vornik.yaml</code>); spend caps are set per project. See
 <a href="../../reference/configuration/">Configuration reference</a> for the full list of
 keys and defaults.</p>
 <hr />
@@ -1556,7 +1556,7 @@ of paying for the same embedding twice.</p>
 </ul>
 <hr />
 <h2 id="memory-consolidation-tiers">Memory consolidation tiers<a class="headerlink" href="#memory-consolidation-tiers" title="Permanent link">&para;</a></h2>
-<p>swarmd periodically summarizes each project's memory into a short "gist" so
+<p>vornik periodically summarizes each project's memory into a short "gist" so
 agents can orient quickly without re-reading everything. There are two tiers,
 and they have very different cost profiles.</p>
 <ul>
@@ -1581,7 +1581,7 @@ analysis, so a compact open-weight model produces results indistinguishable
 from a large one at a fraction of the cost. Picking a large model here is a
 common way to run up an unexpected bill.</p>
 <p>You can read the latest gist for a project from the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>gist<span class="w"> </span>&lt;project-id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>memory<span class="w"> </span>gist<span class="w"> </span>&lt;project-id&gt;
 </code></pre></div>
 <hr />
 <h2 id="recall-reranking-quality-vs-latency">Recall reranking (quality vs. latency)<a class="headerlink" href="#recall-reranking-quality-vs-latency" title="Permanent link">&para;</a></h2>
@@ -1623,25 +1623,25 @@ everything else.</p>
 authoritative target for cost accounting, so spend always lands on the right
 ledger regardless of how the caller is configured.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Mint a key (the secret is shown once - capture it immediately)</span>
-swarmctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>personal-assistant<span class="w"> </span>--name<span class="w"> </span><span class="s2">&quot;ha-loop&quot;</span><span class="w"> </span>--expires<span class="w"> </span>90d
+vornikctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>personal-assistant<span class="w"> </span>--name<span class="w"> </span><span class="s2">&quot;ha-loop&quot;</span><span class="w"> </span>--expires<span class="w"> </span>90d
 
 <span class="c1"># Mint a key with no expiry</span>
-swarmctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>personal-assistant<span class="w"> </span>--name<span class="w"> </span><span class="s2">&quot;scripts&quot;</span>
+vornikctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>personal-assistant<span class="w"> </span>--name<span class="w"> </span><span class="s2">&quot;scripts&quot;</span>
 
 <span class="c1"># List active keys (secrets are never shown again)</span>
-swarmctl<span class="w"> </span>key<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>personal-assistant
+vornikctl<span class="w"> </span>key<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>personal-assistant
 
 <span class="c1"># Rotate (issue a new secret, revoke the old key)</span>
-swarmctl<span class="w"> </span>key<span class="w"> </span>rotate<span class="w"> </span>&lt;key-id&gt;<span class="w"> </span>--project<span class="w"> </span>personal-assistant
+vornikctl<span class="w"> </span>key<span class="w"> </span>rotate<span class="w"> </span>&lt;key-id&gt;<span class="w"> </span>--project<span class="w"> </span>personal-assistant
 
 <span class="c1"># Revoke</span>
-swarmctl<span class="w"> </span>key<span class="w"> </span>revoke<span class="w"> </span>&lt;key-id&gt;<span class="w"> </span>--project<span class="w"> </span>personal-assistant
+vornikctl<span class="w"> </span>key<span class="w"> </span>revoke<span class="w"> </span>&lt;key-id&gt;<span class="w"> </span>--project<span class="w"> </span>personal-assistant
 </code></pre></div>
 <p><code>--expires</code> accepts a timestamp or a duration such as <code>30d</code>, <code>6m</code>, or <code>1y</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">The secret is shown only once</p>
-<p><code>swarmctl key create</code> and <code>swarmctl key rotate</code> print the raw secret a
-single time. swarmd stores only a hash, so it cannot show it again. Save
+<p><code>vornikctl key create</code> and <code>vornikctl key rotate</code> print the raw secret a
+single time. vornik stores only a hash, so it cannot show it again. Save
 it to your secret store right away.</p>
 </div>
 <p>Rotation issues a fresh secret and revokes the old one immediately. Any client
@@ -1679,7 +1679,7 @@ you need one.</p>
 <ul>
 <li>Setting either <code>rps</code> or <code>burst</code> to <code>0</code> disables the per-IP layer entirely —
   both must be non-zero for it to enforce anything.</li>
-<li>If swarmd sits behind a reverse proxy or load balancer, list the proxy's
+<li>If vornik sits behind a reverse proxy or load balancer, list the proxy's
   address ranges in <code>trusted_proxies</code>. Otherwise every request appears to come
   from the proxy and the per-IP limiter cannot tell clients apart.</li>
 </ul>
@@ -1698,7 +1698,7 @@ separate soft and hard limits on daily and monthly spend:</p>
 <span class="w">  </span><span class="nt">timezone</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Europe/Prague&quot;</span><span class="w">     </span><span class="c1"># when the daily/monthly windows reset</span>
 </code></pre></div>
 <ul>
-<li>A <strong>soft</strong> cap is advisory: tasks keep running, but swarmd logs the breach and
+<li>A <strong>soft</strong> cap is advisory: tasks keep running, but vornik logs the breach and
   raises an operator alert.</li>
 <li>A <strong>hard</strong> cap is enforced: once the project's committed plus in-flight spend
   would exceed it, new tasks are <strong>refused with <code>429 BUDGET_EXCEEDED</code></strong>. The cap
@@ -1763,7 +1763,7 @@ behaviour the first time you enable it.</p>
 <h2 id="effective-cost-per-success">Effective cost per success<a class="headerlink" href="#effective-cost-per-success" title="Permanent link">&para;</a></h2>
 <p>Raw spend doesn't tell you whether money is being <em>wasted</em> — a workflow that
 fails half its runs costs far more per useful result than its sticker price.
-swarmd tracks an <strong>effective cost per success</strong> (cost divided by successful
+vornik tracks an <strong>effective cost per success</strong> (cost divided by successful
 outcomes) per role and model, and surfaces a drift ratio that compares the last
 24 hours to a 7-day baseline.</p>
 <p>The spend dashboard at <code>/ui/spend</code> shows the drift ratio as a coloured badge per

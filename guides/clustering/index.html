@@ -1287,7 +1287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1495,9 +1495,9 @@
 
 
 <h1 id="clustering-and-the-dmz-webhook-relay">Clustering and the DMZ Webhook Relay<a class="headerlink" href="#clustering-and-the-dmz-webhook-relay" title="Permanent link">&para;</a></h1>
-<p>swarmd runs as a single all-in-one daemon by default, and that is the right
+<p>vornik runs as a single all-in-one daemon by default, and that is the right
 shape for almost every deployment. When you need to scale execution
-independently or isolate public webhook ingress in a DMZ, you can split swarmd
+independently or isolate public webhook ingress in a DMZ, you can split vornik
 into specialised <strong>node roles</strong> behind a shared database and object store.</p>
 <p>This guide walks through the role model and a complete setup of the most common
 multi-node pattern: a DMZ webhook node that forwards events over mutual-TLS to a
@@ -1613,7 +1613,7 @@ is internal to your cluster and is never seen by webhook providers. Run these in
 <div class="highlight"><pre><span></span><code><span class="c1"># 1a. A private CA for the relay.</span>
 openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">3650</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-keyout<span class="w"> </span>relay-ca.key<span class="w"> </span>-out<span class="w"> </span>relay-ca.crt<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=swarmd-relay-ca&quot;</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=vornik-relay-ca&quot;</span>
 
 <span class="c1"># 1b. Job-tier SERVER cert. The subjectAltName must match the host the</span>
 <span class="c1">#     webhook node will use in node.relay.upstream (DNS name or IP:&lt;addr&gt;).</span>
@@ -1631,7 +1631,7 @@ openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"
 openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>dmz-webhook.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>dmz-webhook.crt
 </code></pre></div>
-<p>The <code>subjectAltName</code> in step 1b is required, not cosmetic: swarmd matches
+<p>The <code>subjectAltName</code> in step 1b is required, not cosmetic: vornik matches
 <code>node.relay.upstream</code> against the server certificate's SAN, so a SAN-less
 certificate fails the handshake. The client certificate needs no SAN — it is
 verified by CA chain, not hostname.</p>
@@ -1645,9 +1645,9 @@ relay CA.</p>
 <span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
 <span class="w">  </span><span class="nt">relay_ingress</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8443&quot;</span><span class="w">                    </span><span class="c1"># mTLS listener for relayed webhooks</span>
-<span class="w">    </span><span class="nt">server_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/jobtier.crt</span>
-<span class="w">    </span><span class="nt">server_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/jobtier.key</span>
-<span class="w">    </span><span class="nt">client_ca</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># only certs it signed are accepted</span>
+<span class="w">    </span><span class="nt">server_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/jobtier.crt</span>
+<span class="w">    </span><span class="nt">server_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/jobtier.key</span>
+<span class="w">    </span><span class="nt">client_ca</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># only certs it signed are accepted</span>
 </code></pre></div>
 <p>All four <code>relay_ingress</code> keys are required together, and the block is only valid
 on a node that runs workers — the daemon refuses to start otherwise.</p>
@@ -1677,15 +1677,15 @@ on a node that runs workers — the daemon refuses to start otherwise.</p>
 <span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">webhook</span>
 <span class="w">  </span><span class="nt">relay</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">upstream</span><span class="p">:</span><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">https://jobtier.internal:8443</span><span class="w">   </span><span class="c1"># the relay_ingress addr above</span>
-<span class="w">    </span><span class="nt">client_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/dmz-webhook.crt</span>
-<span class="w">    </span><span class="nt">client_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/dmz-webhook.key</span>
-<span class="w">    </span><span class="nt">ca</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># CA that signed jobtier.crt</span>
+<span class="w">    </span><span class="nt">client_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/dmz-webhook.crt</span>
+<span class="w">    </span><span class="nt">client_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/dmz-webhook.key</span>
+<span class="w">    </span><span class="nt">ca</span><span class="p">:</span><span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># CA that signed jobtier.crt</span>
 <span class="w">    </span><span class="nt">max_retries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">                    </span><span class="c1"># optional; 0 → 3. Bounded retries before a 5xx to the provider</span>
 <span class="w">    </span><span class="nt">timeout</span><span class="p">:</span><span class="w">     </span><span class="l l-Scalar l-Scalar-Plain">5s</span><span class="w">                   </span><span class="c1"># optional; empty → 5s per attempt</span>
 
 <span class="nt">database</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite</span>
-<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/relay.db</span><span class="w">    </span><span class="c1"># must be on a writable mount</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/vornik/relay.db</span><span class="w">    </span><span class="c1"># must be on a writable mount</span>
 
 <span class="nt">api</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">auth_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">                 </span><span class="c1"># no bearer-auth API on a webhook node; ingress is HMAC-verified</span>
@@ -1695,14 +1695,14 @@ on a node that runs workers — the daemon refuses to start otherwise.</p>
 runs unprivileged, which is exactly what you want in a DMZ. Expose only the
 webhook ingress port and put your TLS terminator in front of it; providers post
 to <code>POST /api/v1/webhooks/{…}</code>.</p>
-<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>swarmd-webhook-dmz<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>podman<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>vornik-webhook-dmz<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>./dmz-webhook-config.yaml:/etc/swarmd/config.yaml:ro,Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>./certs:/etc/swarmd/certs:ro,Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-v<span class="w"> </span>swarmd-dmz-data:/var/lib/swarmd:Z<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>./dmz-webhook-config.yaml:/etc/vornik/config.yaml:ro,Z<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>./certs:/etc/vornik/certs:ro,Z<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-v<span class="w"> </span>vornik-dmz-data:/var/lib/vornik:Z<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--health-cmd<span class="w"> </span><span class="s1">&#39;wget -qO- http://localhost:8080/livez || exit 1&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--health-interval<span class="w"> </span>30s<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>swarmd:thin
+<span class="w">  </span>vornik:thin
 </code></pre></div>
 <p>Do not expose the metrics port (<code>9090</code>) publicly, and do not mount a container
 socket — a webhook node never spawns agent containers.</p>
@@ -1711,11 +1711,11 @@ socket — a webhook node never spawns agent containers.</p>
 <p>Before starting (or restarting) any node, validate its configuration. The
 cluster feature doctor confirms <code>node.profile</code> is a recognised preset and that
 relay settings are coherent with the resolved role:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
 </code></pre></div>
 <p>Once nodes are running, inspect the fleet from any node with API access:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w">          </span><span class="c1"># live nodes, singleton ownership, version skew</span>
-swarmctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w"> </span>--json<span class="w">   </span><span class="c1"># raw response</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w">          </span><span class="c1"># live nodes, singleton ownership, version skew</span>
+vornikctl<span class="w"> </span>cluster<span class="w"> </span>status<span class="w"> </span>--json<span class="w">   </span><span class="c1"># raw response</span>
 </code></pre></div>
 <p>The same data backs the cluster view in the admin UI. Database-backed nodes
 report themselves on a timer; the DMZ webhook node reports by proxy over the

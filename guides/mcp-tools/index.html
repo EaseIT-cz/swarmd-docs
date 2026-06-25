@@ -1227,7 +1227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1375,7 +1375,7 @@
 
 
 <h1 id="connect-your-tools-mcp">Connect Your Tools (MCP)<a class="headerlink" href="#connect-your-tools-mcp" title="Permanent link">&para;</a></h1>
-<p>swarmd gives a project its capabilities through <strong>MCP servers</strong> — external
+<p>vornik gives a project its capabilities through <strong>MCP servers</strong> — external
 processes (or HTTP endpoints) that expose <strong>tools</strong> a model can call: fetch a
 web page, place a broker order, query a database, and so on. This guide covers
 the three things you do to wire tools into a project safely:</p>
@@ -1384,7 +1384,7 @@ the three things you do to wire tools into a project safely:</p>
 <li><strong>Restrict</strong> each server to an explicit set of tools.</li>
 <li><strong>Throttle</strong> individual tools so a runaway loop can't hammer them.</li>
 </ol>
-<p>It finishes with the <code>swarmctl mcp</code> commands for inspecting what a project can
+<p>It finishes with the <code>vornikctl mcp</code> commands for inspecting what a project can
 actually see and calling a tool by hand while debugging.</p>
 <p>Tools are scoped <strong>per project</strong>: a server you declare in one project is not
 visible to another. There is also a daemon-level server inventory (see
@@ -1410,7 +1410,7 @@ MCP server:</p>
 <ul>
 <li><strong><code>stdio</code></strong> — the daemon launches <code>command</code> (with <code>args</code>) as a child process
   and speaks MCP over its stdin/stdout. Use this for tools you ship alongside
-  swarmd. <code>env</code> values support <code>${VAR}</code> expansion from the daemon's own
+  vornik. <code>env</code> values support <code>${VAR}</code> expansion from the daemon's own
   environment, so secrets stay out of the project file.</li>
 <li><strong><code>sse</code></strong> — the daemon connects to a long-running server at <code>url</code> over HTTP.
   Use this for tools that run as their own service.</li>
@@ -1434,13 +1434,13 @@ you want to narrow that to the tools the project actually needs. Add
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cancel_order&quot;</span>
 </code></pre></div>
 <p>An empty or omitted <code>allowed_tools</code> means "expose all tools." When it's set,
-swarmd enforces it in two places:</p>
+vornik enforces it in two places:</p>
 <ul>
 <li><strong>The catalog the model sees is filtered.</strong> Only the allow-listed tools are
   advertised to the model, so it never learns the others exist. A smaller, more
   focused tool list also makes the model more reliable.</li>
 <li><strong>Calls are checked again at invocation time.</strong> Even if a model hallucinates
-  a tool name that isn't in the catalog, swarmd rejects the call <em>before</em> it
+  a tool name that isn't in the catalog, vornik rejects the call <em>before</em> it
   reaches the server — so a tool the server would happily run under a broad
   credential can never be reached just because the model guessed its name.</li>
 </ul>
@@ -1448,7 +1448,7 @@ swarmd enforces it in two places:</p>
 both a safety boundary and a reliability win.</p>
 <h2 id="throttling-tools-with-toolratelimits">Throttling tools with <code>toolRateLimits</code><a class="headerlink" href="#throttling-tools-with-toolratelimits" title="Permanent link">&para;</a></h2>
 <p>Some tools are expensive or sensitive — placing orders, scraping the web. Give
-them an in-daemon ceiling so swarmd degrades gracefully instead of leaning on
+them an in-daemon ceiling so vornik degrades gracefully instead of leaning on
 the upstream server to push back. Add a <code>toolRateLimits</code> map to the <code>mcp</code>
 block:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
@@ -1484,21 +1484,21 @@ entry to take effect; a zero or negative value disables it.</p>
    that name; entries that match this way share one bucket.</li>
 <li><strong>No entry</strong> — the tool is unlimited.</li>
 </ol>
-<p>When a bucket is drained, swarmd refuses the call locally (it never reaches the
+<p>When a bucket is drained, vornik refuses the call locally (it never reaches the
 server) and returns a rate-limit error carrying a <code>Retry-After</code> hint, rounded
 up to whole seconds. The agent recognizes that error and backs off rather than
 amplifying the burst.</p>
 <h2 id="inspecting-from-the-cli">Inspecting from the CLI<a class="headerlink" href="#inspecting-from-the-cli" title="Permanent link">&para;</a></h2>
-<p><code>swarmctl mcp</code> lets you see exactly what a project can reach and call a tool by
+<p><code>vornikctl mcp</code> lets you see exactly what a project can reach and call a tool by
 hand — invaluable when a tool isn't behaving as expected.</p>
 <p><strong>List the tools a project's servers advertise</strong> (after <code>allowed_tools</code>
 filtering — this is what the model actually sees):</p>
-<div class="highlight"><pre><span></span><code>swarmctl mcp tools -p acme
+<div class="highlight"><pre><span></span><code>vornikctl mcp tools -p acme
 </code></pre></div>
 <p><code>-p/--project</code> is required. Add <code>--json</code> for machine-readable output. The table
 shows each tool and its description.</p>
 <p><strong>List the daemon-level server inventory</strong>, with reachability and tool counts:</p>
-<div class="highlight"><pre><span></span><code>swarmctl mcp servers
+<div class="highlight"><pre><span></span><code>vornikctl mcp servers
 </code></pre></div>
 <p>This is daemon-scoped (there is no <code>--project</code> flag); it reports each server's
 transport, whether it's <code>reachable</code>, how many tools it advertises, and its
@@ -1507,7 +1507,7 @@ available to a project — grant access by adding it to that project's
 <code>mcp.servers</code>.</p>
 <p><strong>Call a tool directly</strong>, skipping the model — the fastest way to confirm a
 tool works and check its arguments:</p>
-<div class="highlight"><pre><span></span><code>swarmctl mcp call -p acme --tool mcp__scraper__web_fetch \
+<div class="highlight"><pre><span></span><code>vornikctl mcp call -p acme --tool mcp__scraper__web_fetch \
     --args &#39;{&quot;url&quot;:&quot;https://example.com&quot;,&quot;text_only&quot;:true,&quot;max_bytes&quot;:2000}&#39;
 </code></pre></div>
 <p><code>--project</code> and <code>--tool</code> are required. The tool name is the fully qualified

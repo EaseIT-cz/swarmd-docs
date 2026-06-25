@@ -1209,7 +1209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1339,7 +1339,7 @@
 
 
 <h1 id="the-feature-doctor">The feature doctor<a class="headerlink" href="#the-feature-doctor" title="Permanent link">&para;</a></h1>
-<p>Several of swarmd's capabilities — <a href="../../features/memory-rag/">memory &amp; RAG</a>,
+<p>Several of vornik's capabilities — <a href="../../features/memory-rag/">memory &amp; RAG</a>,
 <a href="../../features/auth/">authentication</a>, the <a href="../../features/instinct/">instinct layer</a>,
 <a href="../../features/cluster/">clustering</a> — are opt-in and gated behind config flags.
 The <strong>feature doctor</strong> is the single tool for diagnosing and turning them on
@@ -1348,7 +1348,7 @@ prerequisites right.</p>
 <h2 id="diagnosing">Diagnosing<a class="headerlink" href="#diagnosing" title="Permanent link">&para;</a></h2>
 <p>To see the state of a feature — whether its gates are set, whether its
 prerequisites are met, and what's left to do:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>&lt;feature-id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>&lt;feature-id&gt;
 </code></pre></div>
 <p>Each feature reports its gates (the config keys that enable it) and runs
 <strong>prerequisite checks</strong> — for example, memory &amp; RAG probes that an embedding
@@ -1357,7 +1357,7 @@ before you lock the door behind you. The doctor tells you what's missing and how
 to fix it rather than failing cryptically at runtime.</p>
 <h2 id="enabling">Enabling<a class="headerlink" href="#enabling" title="Permanent link">&para;</a></h2>
 <p>To apply a feature's gates and bring it up:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>&lt;feature-id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>&lt;feature-id&gt;
 </code></pre></div>
 <p>This sets the feature's config gates for you. Two behaviours make this safe:</p>
 <ul>

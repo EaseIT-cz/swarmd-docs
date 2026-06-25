@@ -1227,7 +1227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1375,22 +1375,22 @@
 
 
 <h1 id="recovering-failed-work">Recovering failed work<a class="headerlink" href="#recovering-failed-work" title="Permanent link">&para;</a></h1>
-<p>When a task fails, you rarely want to start over from scratch. swarmd gives you
+<p>When a task fails, you rarely want to start over from scratch. vornik gives you
 graded ways to recover — re-run the whole task, re-run from a specific step, or
 apply a structured fix and retry — plus a plain-language explanation of what went
 wrong to decide between them.</p>
 <h2 id="understand-it-first">Understand it first<a class="headerlink" href="#understand-it-first" title="Permanent link">&para;</a></h2>
 <p>Before retrying, get an explanation of the failure:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>explain<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>explain<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
 </code></pre></div>
 <p>This produces an operator-friendly summary of what happened — the entry point
 from a failure to a recovery decision. For the complete event-by-event record
 behind it, see the <a href="../../features/blackbox/">Autonomy Black Box</a>.</p>
 <h2 id="retry-the-whole-task">Retry the whole task<a class="headerlink" href="#retry-the-whole-task" title="Permanent link">&para;</a></h2>
 <p>The simplest recovery re-queues the task and runs it again from the first step:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project
 <span class="c1"># start its attempt counter over as well:</span>
-swarmctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--reset-attempts
+vornikctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span>--reset-attempts
 </code></pre></div>
 <p>A fresh execution runs the workflow from the top. Use this when the failure was
 transient (a flaky upstream, a rate limit) or when nothing about the run is worth
@@ -1399,24 +1399,24 @@ keeping.</p>
 <p>When the early steps were fine and only a later step went wrong, you can <strong>rerun
 from that step</strong> instead of repeating the good work. On a failed (terminal)
 execution's detail page in the Web UI, choose a completed step and <strong>Rerun from
-step</strong>: swarmd rewinds the execution to that point — keeping the upstream steps'
+step</strong>: vornik rewinds the execution to that point — keeping the upstream steps'
 results and artifacts — and runs forward again.</p>
 <p>Two things to know:</p>
 <ul>
 <li>It <strong>rewinds the same execution</strong> rather than cloning a new one, so the
   execution's URL and audit history are preserved in place.</li>
-<li>swarmd warns you when an upstream step had <strong>external side effects</strong> (for
+<li>vornik warns you when an upstream step had <strong>external side effects</strong> (for
   example, a posted PR review, content indexed into memory, or a spawned
   cross-project task). Those effects are <em>not</em> replayed, so the upstream world
   may already reflect the first run — rerun from a step that's safe to treat as
   the new starting point.</li>
 </ul>
-<p>Rerun-from-step is a Web UI action; the CLI's <code>swarmctl execution</code> command is for
+<p>Rerun-from-step is a Web UI action; the CLI's <code>vornikctl execution</code> command is for
 inspecting executions (<code>list</code>, <code>inspect</code>), not rerunning them.</p>
 <h2 id="structured-recovery">Structured recovery<a class="headerlink" href="#structured-recovery" title="Permanent link">&para;</a></h2>
 <p>When a step fails into recovery, the lead can offer <strong>structured recovery
 options</strong> rather than just retrying blindly. You'll see these as choices on the
-failed task — and approving one makes swarmd apply it before retrying:</p>
+failed task — and approving one makes vornik apply it before retrying:</p>
 <table>
 <thead>
 <tr>
@@ -1443,7 +1443,7 @@ failed task — and approving one makes swarmd apply it before retrying:</p>
 </tr>
 </tbody>
 </table>
-<p>These are <strong>operator-gated</strong> — swarmd proposes, you choose. A malformed or
+<p>These are <strong>operator-gated</strong> — vornik proposes, you choose. A malformed or
 unrecognised action safely degrades to a plain retry hint rather than doing
 something unexpected. The failed-task page also offers a per-failure-class
 action card (for example, "requeue" for a rate-limited task, "review project
@@ -1456,7 +1456,7 @@ next attempt.</p>
 <li>Good work early, one late step wrong → <strong>rerun from that step</strong>.</li>
 <li>A model misbehaved or the workflow was a poor fit → <strong>structured recovery</strong>
   (<code>model_fallback</code> / <code>reroute_workflow</code>).</li>
-<li>Not sure → run <code>swarmctl task explain</code> first.</li>
+<li>Not sure → run <code>vornikctl task explain</code> first.</li>
 </ul>
 
 

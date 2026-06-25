@@ -1293,7 +1293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1507,33 +1507,33 @@
 
 
 <h1 id="storage-and-retention">Storage and Retention<a class="headerlink" href="#storage-and-retention" title="Permanent link">&para;</a></h1>
-<p>swarmd produces two kinds of data that grow over time: <strong>artifacts</strong> (files
+<p>vornik produces two kinds of data that grow over time: <strong>artifacts</strong> (files
 agents read and write) and <strong>operational history</strong> (task records, execution
 logs, cost rows). This guide covers where artifacts live, how to keep history
 from growing without bound, and how to back up and restore a deployment.</p>
 <p>All settings here live in your daemon config
-(<code>~/.config/swarmd/swarmd.yaml</code>). See
+(<code>~/.config/vornik/vornik.yaml</code>). See
 <a href="../../reference/configuration/">Configuration reference</a> for the full key
 list.</p>
 <hr />
 <h2 id="artifact-storage">Artifact storage<a class="headerlink" href="#artifact-storage" title="Permanent link">&para;</a></h2>
-<p>By default swarmd stores artifacts on the local filesystem. You can instead
+<p>By default vornik stores artifacts on the local filesystem. You can instead
 point it at an S3-compatible object store — AWS S3, MinIO, or Ceph RGW — which
 is the better choice for durability and for deployments that may scale beyond
 a single host.</p>
 <h3 id="filesystem-default">Filesystem (default)<a class="headerlink" href="#filesystem-default" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">artifacts_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/artifacts</span>
+<span class="w">  </span><span class="nt">artifacts_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/vornik/artifacts</span>
 <span class="w">  </span><span class="c1"># backend: &quot;filesystem&quot;   # default; may be omitted</span>
 </code></pre></div>
 <h3 id="aws-s3">AWS S3<a class="headerlink" href="#aws-s3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">artifacts_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/artifacts</span><span class="w">   </span><span class="c1"># still used for staging</span>
+<span class="w">  </span><span class="nt">artifacts_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/vornik/artifacts</span><span class="w">   </span><span class="c1"># still used for staging</span>
 <span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s3&quot;</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;us-east-1&quot;</span>
-<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;swarmd-prod-artifacts&quot;</span>
-<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;swarmd/prod&quot;</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vornik-prod-artifacts&quot;</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vornik/prod&quot;</span>
 <span class="w">    </span><span class="c1"># Leave endpoint and credentials empty to use the AWS SDK&#39;s</span>
 <span class="w">    </span><span class="c1"># default resolver and credential chain (IAM role, ~/.aws, env).</span>
 </code></pre></div>
@@ -1543,12 +1543,12 @@ under an instance profile that grants only the permissions it needs:
 bucket and its contents.</p>
 <h3 id="minio-local-development">MinIO (local development)<a class="headerlink" href="#minio-local-development" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">artifacts_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/swarmd/artifacts</span>
+<span class="w">  </span><span class="nt">artifacts_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/var/lib/vornik/artifacts</span>
 <span class="w">  </span><span class="nt">backend</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;s3&quot;</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://localhost:9000&quot;</span>
 <span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;us-east-1&quot;</span><span class="w">          </span><span class="c1"># MinIO accepts any non-empty value</span>
-<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;swarmd-dev&quot;</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;vornik-dev&quot;</span>
 <span class="w">    </span><span class="nt">access_key_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;minioadmin&quot;</span>
 <span class="w">    </span><span class="nt">secret_access_key</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;minioadmin&quot;</span>
 <span class="w">    </span><span class="nt">use_path_style</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">         </span><span class="c1"># required for MinIO</span>
@@ -1557,12 +1557,12 @@ bucket and its contents.</p>
 <h3 id="credentials-via-environment">Credentials via environment<a class="headerlink" href="#credentials-via-environment" title="Permanent link">&para;</a></h3>
 <p>You can leave the credential fields blank in YAML and supply them via
 environment variables instead — the recommended pattern for production:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_STORAGE_S3_ACCESS_KEY_ID</span><span class="o">=</span><span class="s2">&quot;AKIAIOSFODNN7EXAMPLE&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_STORAGE_S3_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s2">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_STORAGE_S3_ACCESS_KEY_ID</span><span class="o">=</span><span class="s2">&quot;AKIAIOSFODNN7EXAMPLE&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_STORAGE_S3_SECRET_ACCESS_KEY</span><span class="o">=</span><span class="s2">&quot;wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY&quot;</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Create the bucket first, and mind TLS</p>
-<p>swarmd does not create buckets for you. The bucket must exist before the
+<p>vornik does not create buckets for you. The bucket must exist before the
 daemon starts, or boot fails with a clear <code>bucket not found</code> error.
 Versioning, object lock, and lifecycle policies are yours to configure and
 are recommended for production.</p>
@@ -1605,45 +1605,45 @@ billing while trimming chat sooner:</p>
 <p>The minimum effective retention is one day. Setting a field to <code>0</code> means
 "inherit the default," not "delete immediately."</p>
 <h3 id="previewing-and-applying">Previewing and applying<a class="headerlink" href="#previewing-and-applying" title="Permanent link">&para;</a></h3>
-<p><code>swarmctl retention</code> runs in preview mode by default — it shows what <em>would</em>
+<p><code>vornikctl retention</code> runs in preview mode by default — it shows what <em>would</em>
 be pruned without deleting anything. Add <code>--apply</code> to actually delete.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Preview across every project (no deletes)</span>
-swarmctl<span class="w"> </span>retention
+vornikctl<span class="w"> </span>retention
 
 <span class="c1"># Preview a single project</span>
-swarmctl<span class="w"> </span>retention<span class="w"> </span>--project<span class="w"> </span>personal-assistant
+vornikctl<span class="w"> </span>retention<span class="w"> </span>--project<span class="w"> </span>personal-assistant
 
 <span class="c1"># Actually prune</span>
-swarmctl<span class="w"> </span>retention<span class="w"> </span>--project<span class="w"> </span>personal-assistant<span class="w"> </span>--apply
+vornikctl<span class="w"> </span>retention<span class="w"> </span>--project<span class="w"> </span>personal-assistant<span class="w"> </span>--apply
 
 <span class="c1"># Machine-readable output</span>
-swarmctl<span class="w"> </span>retention<span class="w"> </span>--json
+vornikctl<span class="w"> </span>retention<span class="w"> </span>--json
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Artifact pruning is permanent</p>
 <p>Pruning artifacts removes both the database record and the underlying file
-(or object, on S3). It cannot be undone from within swarmd — recovery
+(or object, on S3). It cannot be undone from within vornik — recovery
 means restoring from a backup. Run a preview first.</p>
 </div>
 <hr />
 <h2 id="backup-and-restore">Backup and restore<a class="headerlink" href="#backup-and-restore" title="Permanent link">&para;</a></h2>
-<p><code>swarmctl backup</code> captures a complete snapshot you can restore later.</p>
+<p><code>vornikctl backup</code> captures a complete snapshot you can restore later.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Auto-named archive in the current directory</span>
-swarmctl<span class="w"> </span>backup
+vornikctl<span class="w"> </span>backup
 
 <span class="c1"># Explicit output path</span>
-swarmctl<span class="w"> </span>backup<span class="w"> </span>--out<span class="w"> </span>/backups/swarmd-2026-05-19.tar.gz
+vornikctl<span class="w"> </span>backup<span class="w"> </span>--out<span class="w"> </span>/backups/vornik-2026-05-19.tar.gz
 </code></pre></div>
 <p>The archive contains a full database dump, every artifact file (for the
 filesystem backend), and all project workspaces.</p>
 <div class="admonition note">
 <p class="admonition-title">S3 backends are backed up separately</p>
-<p>If you use the S3 artifact backend, <code>swarmctl backup</code> does <strong>not</strong> copy
+<p>If you use the S3 artifact backend, <code>vornikctl backup</code> does <strong>not</strong> copy
 your S3 objects — back the bucket up with native S3 tooling (for example,
 <code>aws s3 sync</code>). The database dump and workspaces are still captured.</p>
 </div>
 <p>To restore, stop the daemon first, then:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>restore<span class="w"> </span>--from<span class="w"> </span>/backups/swarmd-2026-05-19.tar.gz<span class="w"> </span>--force
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>restore<span class="w"> </span>--from<span class="w"> </span>/backups/vornik-2026-05-19.tar.gz<span class="w"> </span>--force
 </code></pre></div>
 <p>The restore runs as a single transaction: it either imports completely or
 rolls back cleanly, never leaving a half-applied database.</p>
@@ -1663,18 +1663,18 @@ daemon, not a way to skip doing so.</p>
 <hr />
 <h2 id="context-budget-and-tier">Context budget and tier<a class="headerlink" href="#context-budget-and-tier" title="Permanent link">&para;</a></h2>
 <p>Separate from disk storage, each chat session has a token budget — the model's
-context window. As a conversation fills that budget, swarmd progressively
+context window. As a conversation fills that budget, vornik progressively
 tightens how many tools it exposes per turn, recovering prompt space exactly
 when it matters. This keeps long conversations working instead of failing once
 they approach the window limit.</p>
-<p>This behavior only turns on when you tell swarmd how large the context window
+<p>This behavior only turns on when you tell vornik how large the context window
 is:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">chat</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># Set to your model&#39;s context window in tokens to enable tier-aware</span>
 <span class="w">  </span><span class="c1"># tool management. 0 (the default) leaves it off.</span>
 <span class="w">  </span><span class="nt">context_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200000</span>
 </code></pre></div>
-<p>With this set, chat replies carry an <code>X-Swarmd-Context-Tier</code> header
+<p>With this set, chat replies carry an <code>X-Vornik-Context-Tier</code> header
 (<code>peak</code>, <code>good</code>, <code>degrading</code>, or <code>poor</code>) that the UI uses to colour the
 session's context badge so you can see at a glance how much headroom remains.</p>
 <p>If you want guaranteed full-tool turns, either raise the budget or shorten the

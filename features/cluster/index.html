@@ -1218,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1357,7 +1357,7 @@
 
 
 <h1 id="cluster-topology-and-node-roles">Cluster topology and node roles<a class="headerlink" href="#cluster-topology-and-node-roles" title="Permanent link">&para;</a></h1>
-<p>swarmd can run as a single all-in-one daemon (the default) or as a
+<p>vornik can run as a single all-in-one daemon (the default) or as a
 multi-node cluster where each node takes a specialised <strong>role</strong>. Roles
 let you scale the worker tier independently of the UI/API tier and
 isolate public webhook ingress in a DMZ.</p>
@@ -1431,7 +1431,7 @@ doctor flags a mismatch rather than starting in an inconsistent state.</p>
 <p>Node role and relay settings are <strong>restart-gated</strong> — changing them
 takes effect on the next daemon start. Use the feature doctor to
 validate a node's configuration before (re)starting it:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span>cluster
 </code></pre></div>
 <p>It confirms <code>node.profile</code> is a recognised preset and that any relay
 configuration is coherent with the resolved role, with remediation

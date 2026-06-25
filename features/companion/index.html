@@ -1218,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1357,15 +1357,15 @@
 
 
 <h1 id="companion-plugin">Companion plugin<a class="headerlink" href="#companion-plugin" title="Permanent link">&para;</a></h1>
-<p>The swarmd <strong>companion</strong> is a Claude Code plugin that connects your editor
-session to a running swarmd daemon. It gives you two things without leaving
+<p>The vornik <strong>companion</strong> is a Claude Code plugin that connects your editor
+session to a running vornik daemon. It gives you two things without leaving
 Claude Code:</p>
 <ul>
-<li><strong>Project memory</strong> — semantically recall what swarmd knows about the repo
+<li><strong>Project memory</strong> — semantically recall what vornik knows about the repo
   you're in, and deposit notes back into that memory.</li>
 <li><strong>Async delegation</strong> — hand long-running work (reviews, audits, research,
-  bulk ingestion) to swarmd's agents, then poll for the result — so the heavy
-  lifting runs on swarmd's compute instead of burning your editor's context.</li>
+  bulk ingestion) to vornik's agents, then poll for the result — so the heavy
+  lifting runs on vornik's compute instead of burning your editor's context.</li>
 </ul>
 <p>The plugin talks to the daemon over MCP-over-HTTP and is gated by its own
 scoped key, so it never needs your admin credentials.</p>
@@ -1397,7 +1397,7 @@ scoped key, so it never needs your admin credentials.</p>
 </tr>
 <tr>
 <td><code>delegate</code></td>
-<td>queue an async task on swarmd; returns a task id and a poll hint</td>
+<td>queue an async task on vornik; returns a task id and a poll hint</td>
 </tr>
 <tr>
 <td><code>status</code></td>
@@ -1425,7 +1425,7 @@ scoped key, so it never needs your admin credentials.</p>
 <code>/delegate</code>, <code>/review</code> (a one-shot architectural review), <code>/peek</code> (recent
 tasks), and <code>/upload</code> (attach files to a delegation).</p>
 <h2 id="project-memory-and-repo-scope">Project memory and repo scope<a class="headerlink" href="#project-memory-and-repo-scope" title="Permanent link">&para;</a></h2>
-<p><code>recall</code> and <code>remember</code> operate on the memory of the swarmd <strong>project</strong> your key
+<p><code>recall</code> and <code>remember</code> operate on the memory of the vornik <strong>project</strong> your key
 is bound to. Because one project can back several repositories, every note
 carries a <strong>repo scope</strong> — a token derived from the repo you're working in. A
 recall returns matches for the current scope plus anything marked
@@ -1435,14 +1435,14 @@ git remote automatically and passes it on every call.</p>
 <div class="highlight"><pre><span></span><code>/recall how does the scheduler lease tasks?
 /remember the broker API rejects fractional shares with error 10243 — keep shares whole
 </code></pre></div>
-<p>Notes go through swarmd's full ingest pipeline (secret scanning, dedup, policy),
+<p>Notes go through vornik's full ingest pipeline (secret scanning, dedup, policy),
 and large content should be sent through the ingest workflow rather than a single
 <code>remember</code> call.</p>
 <h2 id="delegation">Delegation<a class="headerlink" href="#delegation" title="Permanent link">&para;</a></h2>
-<p><code>delegate</code> hands a job to swarmd and returns immediately with a task id and an
-estimated time — you keep working while a swarm agent does the task on swarmd's
+<p><code>delegate</code> hands a job to vornik and returns immediately with a task id and an
+estimated time — you keep working while a swarm agent does the task on vornik's
 infrastructure. <code>status</code> and <code>result</code> poll it. Because the work happens on
-swarmd and <code>result</code> returns only the final output artifact, a long review or
+vornik and <code>result</code> returns only the final output artifact, a long review or
 audit doesn't consume your editor's token budget. File-bearing commands like
 <code>/upload</code> attach files as artifacts so their bytes never enter the model's
 context.</p>
@@ -1455,17 +1455,17 @@ context.</p>
 <li><strong>RAG ingest</strong> — bulk-load files into the project's memory.</li>
 </ul>
 <p><code>catalog</code> lists exactly which of these your key is allowed to run. When you're
-about to delegate something swarmd may already know, <code>delegate</code> can surface a
+about to delegate something vornik may already know, <code>delegate</code> can surface a
 hint from memory first, so you don't spend compute re-deriving it.</p>
 <h2 id="setting-it-up">Setting it up<a class="headerlink" href="#setting-it-up" title="Permanent link">&para;</a></h2>
 <p>On the <strong>daemon</strong> side, an operator prepares a companion project and mints a
 <strong>companion-scoped key</strong> (a plain API key won't be accepted on the companion
 endpoint):</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># confirm the daemon advertises the companion capabilities</span>
-curl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$SWARMD_URL</span><span class="s2">/api/v1/capabilities&quot;</span>
+curl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VORNIK_URL</span><span class="s2">/api/v1/capabilities&quot;</span>
 
 <span class="c1"># mint a scoped key (printed once)</span>
-swarmctl<span class="w"> </span>companion<span class="w"> </span>grant<span class="w"> </span><span class="se">\</span>
+vornikctl<span class="w"> </span>companion<span class="w"> </span>grant<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--project<span class="w"> </span>companion-<span class="nv">$USER</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--client<span class="w"> </span>claude-code<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--workflows<span class="w"> </span>companion-architectural-review,companion-rag-ingest<span class="w"> </span><span class="se">\</span>
@@ -1475,10 +1475,10 @@ swarmctl<span class="w"> </span>companion<span class="w"> </span>grant<span clas
 server-side from the key itself — never from the request.</p>
 <p>On the <strong>client</strong> side, point the plugin at your daemon with two environment
 variables and install it:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_URL</span><span class="o">=</span><span class="s2">&quot;https://swarmd.internal.example.com:8080&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">SWARMD_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-swarmd-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_URL</span><span class="o">=</span><span class="s2">&quot;https://vornik.internal.example.com:8080&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
 </code></pre></div>
-<p>Add the companion plugin from your swarmd checkout's companion plugin directory
+<p>Add the companion plugin from your vornik checkout's companion plugin directory
 (<code>claude --plugin-dir &lt;path&gt;/contrib/claude-code-companion</code>), or install it from
 the bundled plugin marketplace for a persistent setup. Once loaded, the tools
 and slash commands are available in the session, and a start-up digest brings

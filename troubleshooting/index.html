@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://docs.vornik.io/troubleshooting/">
       
       
-        <link rel="prev" href="../reference/swarmctl/">
+        <link rel="prev" href="../reference/vornikctl/">
       
       
         <link rel="next" href="../release-notes/">
@@ -1140,7 +1140,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/swarmctl/" class="md-nav__link">
+      <a href="../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1806,12 +1806,12 @@
 
 <h1 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h1>
 <p>This page walks through the problems you are most likely to hit while running
-swarmd, and how to resolve them yourself. Work top-to-bottom: the quick checks
+vornik, and how to resolve them yourself. Work top-to-bottom: the quick checks
 below resolve the majority of issues, and the sections after them cover
 specific symptoms.</p>
 <p>If a fix here references a setting, see
 <a href="../reference/configuration/">Configuration reference</a> for the full schema, and
-<a href="../reference/swarmctl/">swarmctl reference</a> for command details.</p>
+<a href="../reference/vornikctl/">vornikctl reference</a> for command details.</p>
 <h2 id="quick-checks">Quick checks<a class="headerlink" href="#quick-checks" title="Permanent link">&para;</a></h2>
 <p>Run these first whenever something looks wrong. They tell you, in order,
 whether the daemon is alive, whether it can reach its database, whether the
@@ -1826,9 +1826,9 @@ curl<span class="w"> </span>-s<span class="w"> </span>http://localhost:8080/read
 podman<span class="w"> </span>info
 
 <span class="c1"># Run the built-in diagnostics</span>
-swarmctl<span class="w"> </span>doctor
+vornikctl<span class="w"> </span>doctor
 </code></pre></div>
-<p><code>swarmctl doctor</code> runs a battery of checks (configuration validity, database
+<p><code>vornikctl doctor</code> runs a battery of checks (configuration validity, database
 schema, container runtime, agent images, stuck tasks) and prints actionable
 results. It is the fastest way to localize a problem. A few checks are worth
 knowing by name:</p>
@@ -1840,28 +1840,28 @@ knowing by name:</p>
 <li><strong><code>config_crlf</code></strong> — finds config files saved with Windows-style CRLF line
   endings, a common cause of phantom config drift (see
   <a href="#configuration-drift-after-editing-in-the-ui">Configuration drift after editing in the UI</a>).
-  Run <code>swarmctl doctor --fix</code> to normalize them to LF in place.</li>
+  Run <code>vornikctl doctor --fix</code> to normalize them to LF in place.</li>
 <li><strong><code>model_route_coverage</code></strong> — confirms every model a role uses resolves to a
   configured route and has a pricing entry, so nothing routes to an
   unintended catch-all or has its cost silently estimated.</li>
 </ul>
 <h3 id="collect-evidence-before-asking-for-help">Collect evidence before asking for help<a class="headerlink" href="#collect-evidence-before-asking-for-help" title="Permanent link">&para;</a></h3>
-<p>When a problem is not obvious, make <code>swarmctl support-report</code> your <strong>first</strong>
+<p>When a problem is not obvious, make <code>vornikctl support-report</code> your <strong>first</strong>
 step before opening a support thread. It produces one self-contained,
 <strong>redacted-by-default</strong> <code>tar.gz</code> bundle so you do not have to hand-assemble
 logs, audit, config, and a doctor diagnosis:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Everything tied to one task</span>
-swarmctl<span class="w"> </span>support-report<span class="w"> </span>--task<span class="w"> </span>&lt;task-id&gt;
+vornikctl<span class="w"> </span>support-report<span class="w"> </span>--task<span class="w"> </span>&lt;task-id&gt;
 
 <span class="c1"># Or a time window (a timestamp, or a duration like 2h / 90m)</span>
-swarmctl<span class="w"> </span>support-report<span class="w"> </span>--since<span class="w"> </span>2h
+vornikctl<span class="w"> </span>support-report<span class="w"> </span>--since<span class="w"> </span>2h
 
 <span class="c1"># Preview what would be collected — writes nothing</span>
-swarmctl<span class="w"> </span>support-report<span class="w"> </span>--task<span class="w"> </span>&lt;task-id&gt;<span class="w"> </span>--dry-run
+vornikctl<span class="w"> </span>support-report<span class="w"> </span>--task<span class="w"> </span>&lt;task-id&gt;<span class="w"> </span>--dry-run
 </code></pre></div>
 <p>Exactly one of <code>--task</code> or <code>--since</code> is required. Everything runs through
-swarmd's secret detector before it is written, so the redacted bundle is safe
-to share — send it to support@swarmd.dev.</p>
+vornik's secret detector before it is written, so the redacted bundle is safe
+to share — send it to support@vornik.io.</p>
 <h2 id="the-daemon-will-not-start">The daemon will not start<a class="headerlink" href="#the-daemon-will-not-start" title="Permanent link">&para;</a></h2>
 <p>A daemon that exits immediately on launch almost always reports the reason on
 its first few log lines. The common causes:</p>
@@ -1877,7 +1877,7 @@ its first few log lines. The common causes:</p>
 <tr>
 <td><code>failed to load configuration</code></td>
 <td>The config file is missing or has invalid YAML</td>
-<td>Confirm the path swarmd is reading and validate the YAML syntax. See <a href="../reference/configuration/">Configuration reference</a>.</td>
+<td>Confirm the path vornik is reading and validate the YAML syntax. See <a href="../reference/configuration/">Configuration reference</a>.</td>
 </tr>
 <tr>
 <td><code>failed to connect to PostgreSQL</code></td>
@@ -1891,35 +1891,35 @@ its first few log lines. The common causes:</p>
 </tr>
 <tr>
 <td><code>scheduler already started</code></td>
-<td>A second swarmd process is already running</td>
-<td>Stop the duplicate process, then start swarmd once.</td>
+<td>A second vornik process is already running</td>
+<td>Stop the duplicate process, then start vornik once.</td>
 </tr>
 </tbody>
 </table>
 <p>If the daemon starts but then keeps restarting, the cause is usually that the
-database was not ready when swarmd launched. Make sure your database is up
-before starting swarmd.</p>
+database was not ready when vornik launched. Make sure your database is up
+before starting vornik.</p>
 <h3 id="the-daemon-stops-when-you-log-out">The daemon stops when you log out<a class="headerlink" href="#the-daemon-stops-when-you-log-out" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Symptom</p>
-<p>swarmd becomes unreachable after you close your SSH session, then
+<p>vornik becomes unreachable after you close your SSH session, then
 "magically" works again the next time you log in.</p>
 </div>
-<p>When swarmd runs as a per-user service, the operating system stops it together
+<p>When vornik runs as a per-user service, the operating system stops it together
 with your login session unless you enable lingering. Enable it once:</p>
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>loginctl<span class="w"> </span>enable-linger<span class="w"> </span>&lt;your-username&gt;
 </code></pre></div>
-<p>After this, swarmd keeps running whether or not you are logged in.</p>
+<p>After this, vornik keeps running whether or not you are logged in.</p>
 <h3 id="the-daemon-will-not-stop-or-is-killed-on-restart">The daemon will not stop, or is killed on restart<a class="headerlink" href="#the-daemon-will-not-stop-or-is-killed-on-restart" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Symptom</p>
-<p><code>systemctl --user restart swarmd</code> hangs for the full stop timeout and the
-journal shows swarmd was force-killed (SIGABRT) mid-shutdown.</p>
+<p><code>systemctl --user restart vornik</code> hangs for the full stop timeout and the
+journal shows vornik was force-killed (SIGABRT) mid-shutdown.</p>
 </div>
 <p>This happens when shutdown waits on an in-flight long request — a chat
 completion held open for an agent's whole tool-loop can outlast systemd's
 stop timeout, at which point systemd escalates to a hard kill.</p>
-<p>swarmd now bounds the drain: graceful shutdown gets a fixed budget, then any
+<p>vornik now bounds the drain: graceful shutdown gets a fixed budget, then any
 still-open connections are force-closed so the process always exits in time.
 To give that bounded drain headroom, set <code>TimeoutStopSec=90s</code> on the systemd
 unit (a user drop-in works).</p>
@@ -1928,7 +1928,7 @@ unit (a user drop-in works).</p>
 <li>Do not restart while tasks are <code>RUNNING</code> or <code>LEASED</code>, or while a chat
   conversation is active — in-flight work is force-dropped at the budget.</li>
 <li>Check for live agent containers first, and wait for an idle window:
-  <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>ps<span class="w"> </span>--filter<span class="w"> </span><span class="nv">label</span><span class="o">=</span>swarmd.managed<span class="o">=</span><span class="nb">true</span>
+  <div class="highlight"><pre><span></span><code>podman<span class="w"> </span>ps<span class="w"> </span>--filter<span class="w"> </span><span class="nv">label</span><span class="o">=</span>vornik.managed<span class="o">=</span><span class="nb">true</span>
 </code></pre></div></li>
 </ul>
 <h2 id="tasks-are-not-running">Tasks are not running<a class="headerlink" href="#tasks-are-not-running" title="Permanent link">&para;</a></h2>
@@ -1938,24 +1938,24 @@ them on. Check, in order:</p>
 <ol>
 <li><strong>Is the container runtime healthy?</strong> Run <code>podman info</code>. If it errors, fix
    the runtime first (see <a href="#containers-will-not-run">Containers will not run</a>).</li>
-<li><strong>Are you at your concurrency limit?</strong> swarmd runs a bounded number of tasks
+<li><strong>Are you at your concurrency limit?</strong> vornik runs a bounded number of tasks
    at once. If that many are already <code>RUNNING</code>, new tasks wait their turn. This
    is expected; let the running tasks finish or raise the limit in your config.</li>
 <li><strong>Is the agent image available?</strong> A task cannot start if its container image
    is missing. Pull it manually to confirm it exists.</li>
 </ol>
 <h3 id="tasks-show-running-or-leased-but-nothing-is-happening">Tasks show RUNNING or LEASED but nothing is happening<a class="headerlink" href="#tasks-show-running-or-leased-but-nothing-is-happening" title="Permanent link">&para;</a></h3>
-<p>This usually means a task was interrupted (for example, swarmd restarted
-mid-execution) and the work was not picked back up cleanly. swarmd recovers
+<p>This usually means a task was interrupted (for example, vornik restarted
+mid-execution) and the work was not picked back up cleanly. vornik recovers
 these automatically, but you can clear a known-stuck task immediately:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>cancel<span class="w"> </span>&lt;task-id&gt;<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
-swarmctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w">  </span>&lt;task-id&gt;<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>cancel<span class="w"> </span>&lt;task-id&gt;<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+vornikctl<span class="w"> </span>task<span class="w"> </span>retry<span class="w">  </span>&lt;task-id&gt;<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
 </code></pre></div>
 <h3 id="a-task-failed-instantly">A task failed instantly<a class="headerlink" href="#a-task-failed-instantly" title="Permanent link">&para;</a></h3>
 <p>A task that goes straight to <code>FAILED</code> with no run time almost always failed
 before the agent did any work. Inspect the execution to see the exact error:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>execution<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;<span class="w"> </span>--status<span class="w"> </span>FAILED
-swarmctl<span class="w"> </span>execution<span class="w"> </span>inspect<span class="w"> </span>&lt;execution-id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>execution<span class="w"> </span>list<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;<span class="w"> </span>--status<span class="w"> </span>FAILED
+vornikctl<span class="w"> </span>execution<span class="w"> </span>inspect<span class="w"> </span>&lt;execution-id&gt;
 </code></pre></div>
 <p>The most common causes are a missing container image, a mount path that does
 not exist, or a permissions problem in the container runtime.</p>
@@ -1977,7 +1977,7 @@ artifact store and re-staged into the next step's workspace, so a later step
 reliably sees what an earlier one produced. If you are running a current
 release, you should not hit it.</p>
 <h2 id="containers-will-not-run">Containers will not run<a class="headerlink" href="#containers-will-not-run" title="Permanent link">&para;</a></h2>
-<p>swarmd runs every agent in a container. If the runtime is unavailable, tasks
+<p>vornik runs every agent in a container. If the runtime is unavailable, tasks
 queue but never execute.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Is it installed and on your PATH?</span>
 which<span class="w"> </span>podman
@@ -2006,26 +2006,26 @@ configured. As a last resort you can run agents in the host user namespace via
 the runtime settings in your config — see
 <a href="../reference/configuration/">Configuration reference</a>.</p>
 <h3 id="leftover-containers">Leftover containers<a class="headerlink" href="#leftover-containers" title="Permanent link">&para;</a></h3>
-<p>swarmd labels the containers it manages, so you can list and clean them up
+<p>vornik labels the containers it manages, so you can list and clean them up
 without touching anything else on the host:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># List swarmd-managed containers</span>
-podman<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">label</span><span class="o">=</span>swarmd.managed<span class="o">=</span><span class="nb">true</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># List vornik-managed containers</span>
+podman<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">label</span><span class="o">=</span>vornik.managed<span class="o">=</span><span class="nb">true</span>
 
 <span class="c1"># Remove the ones that have exited</span>
-podman<span class="w"> </span>rm<span class="w"> </span><span class="k">$(</span>podman<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">label</span><span class="o">=</span>swarmd.managed<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--filter<span class="w"> </span><span class="nv">status</span><span class="o">=</span>exited<span class="w"> </span>-q<span class="k">)</span>
+podman<span class="w"> </span>rm<span class="w"> </span><span class="k">$(</span>podman<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">label</span><span class="o">=</span>vornik.managed<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--filter<span class="w"> </span><span class="nv">status</span><span class="o">=</span>exited<span class="w"> </span>-q<span class="k">)</span>
 </code></pre></div>
 <h2 id="database-problems">Database problems<a class="headerlink" href="#database-problems" title="Permanent link">&para;</a></h2>
 <h3 id="the-database-is-unreachable">The database is unreachable<a class="headerlink" href="#the-database-is-unreachable" title="Permanent link">&para;</a></h3>
-<p>If <code>/readyz</code> returns an error, swarmd cannot reach its database. Confirm the
+<p>If <code>/readyz</code> returns an error, vornik cannot reach its database. Confirm the
 database is running and accepting connections, then start it if it is down.
-Once the database recovers, swarmd reconnects on its own — re-check <code>/readyz</code>
+Once the database recovers, vornik reconnects on its own — re-check <code>/readyz</code>
 to confirm.</p>
 <h3 id="upgrade-or-migration-errors">Upgrade or migration errors<a class="headerlink" href="#upgrade-or-migration-errors" title="Permanent link">&para;</a></h3>
 <p>If startup fails with a migration error after an upgrade, the most common cause
-is that the database was previously written by a <em>newer</em> version of swarmd than
-the one you are now running (a downgrade). Run a matching or newer swarmd
+is that the database was previously written by a <em>newer</em> version of vornik than
+the one you are now running (a downgrade). Run a matching or newer vornik
 build, or restore from a backup. Always take a backup before upgrading; see
-<a href="../reference/swarmctl/">swarmctl reference</a> for the backup and restore
+<a href="../reference/vornikctl/">vornikctl reference</a> for the backup and restore
 commands.</p>
 <h2 id="configuration-drift-after-editing-in-the-ui">Configuration drift after editing in the UI<a class="headerlink" href="#configuration-drift-after-editing-in-the-ui" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
@@ -2035,18 +2035,18 @@ showing up as drifted between your source and deployed config even though
 the content looks identical, and the drift comes back after you reconcile
 it.</p>
 </div>
-<p>The cause is invisible Windows-style CRLF (<code>\r\n</code>) line endings. swarmd parses
+<p>The cause is invisible Windows-style CRLF (<code>\r\n</code>) line endings. vornik parses
 them fine, but <code>git</code> and diff tooling treat the deployed copy as changed
 against an LF source tree, so drift keeps reappearing. Saving through the UI
 now normalizes line endings to LF, but to clean up files that already drifted:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># See which files carry CRLF (the config_crlf check)</span>
-swarmctl<span class="w"> </span>doctor
+vornikctl<span class="w"> </span>doctor
 
 <span class="c1"># Normalize CRLF to LF in place</span>
-swarmctl<span class="w"> </span>doctor<span class="w"> </span>--fix
+vornikctl<span class="w"> </span>doctor<span class="w"> </span>--fix
 </code></pre></div>
 <h2 id="memory-and-semantic-search">Memory and semantic search<a class="headerlink" href="#memory-and-semantic-search" title="Permanent link">&para;</a></h2>
-<p>swarmd's <a href="../features/memory-rag/">project memory</a> supports semantic
+<p>vornik's <a href="../features/memory-rag/">project memory</a> supports semantic
 (meaning-based) search in addition to keyword search.</p>
 <h3 id="search-only-ever-returns-keyword-matches">Search only ever returns keyword matches<a class="headerlink" href="#search-only-ever-returns-keyword-matches" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
@@ -2055,9 +2055,9 @@ swarmctl<span class="w"> </span>doctor<span class="w"> </span>--fix
 results — only literal keyword hits.</p>
 </div>
 <p>Semantic search needs the <code>pgvector</code> extension in your PostgreSQL database.
-Without it, swarmd silently falls back to keyword-only search. Install
+Without it, vornik silently falls back to keyword-only search. Install
 <code>pgvector</code> (the simplest path is a PostgreSQL image that ships with it
-pre-installed), enable the extension in your database, and restart swarmd. New
+pre-installed), enable the extension in your database, and restart vornik. New
 content is embedded automatically once the extension is present.</p>
 <h3 id="search-errors-mention-dimensions-mismatch">Search errors mention "dimensions" mismatch<a class="headerlink" href="#search-errors-mention-dimensions-mismatch" title="Permanent link">&para;</a></h3>
 <p>This means the embedding model you configured produces vectors of a different
@@ -2075,12 +2075,12 @@ channel-specific setup. Two quick things to check first:</p>
   bulk memory reclassification) legitimately take longer than the default
   client timeout. Raise the request timeout for those calls — see
   <a href="../guides/workflows-and-llm-controls/">Workflows and LLM controls</a>.</li>
-<li><strong>A channel double-replies.</strong> If you run more than one swarmd instance, only
+<li><strong>A channel double-replies.</strong> If you run more than one vornik instance, only
   one should own each polling channel at a time. Webhook-based channels are
   safe behind a load balancer without extra configuration.</li>
 </ul>
 <h2 id="costs-look-wrong-or-higher-than-expected">Costs look wrong or higher than expected<a class="headerlink" href="#costs-look-wrong-or-higher-than-expected" title="Permanent link">&para;</a></h2>
-<p>swarmd tracks per-project LLM spend and enforces optional budgets. If spend is
+<p>vornik tracks per-project LLM spend and enforces optional budgets. If spend is
 climbing unexpectedly:</p>
 <ul>
 <li>Check the spend panel on the project page for a per-role breakdown.</li>
@@ -2092,7 +2092,7 @@ climbing unexpectedly:</p>
 <p>See <a href="../guides/cost-and-caching/">Cost and caching</a> for the full picture.</p>
 <h2 id="still-stuck">Still stuck?<a class="headerlink" href="#still-stuck" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Re-run <code>swarmctl doctor</code> and read every warning, not just the failures.</li>
+<li>Re-run <code>vornikctl doctor</code> and read every warning, not just the failures.</li>
 <li>Reproduce the problem in the web UI first — it often surfaces a clear error
   message that the command line hides.</li>
 <li>Check the <a href="../release-notes/">Release notes</a> in case the behavior

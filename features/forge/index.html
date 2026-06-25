@@ -1236,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1393,7 +1393,7 @@
 
 
 <h1 id="forge-github-automation">Forge — GitHub automation<a class="headerlink" href="#forge-github-automation" title="Permanent link">&para;</a></h1>
-<p>Forge connects a swarmd project to a GitHub repository so that <strong>labelling an
+<p>Forge connects a vornik project to a GitHub repository so that <strong>labelling an
 issue opens a pull request, and opening a pull request gets a review</strong> — done by
 your swarm, on your infrastructure. The defining property is the credential
 model: <strong>the daemon owns the push, and the agent never holds a credential.</strong></p>
@@ -1435,7 +1435,7 @@ write credentials, because it never has them.</p>
 <li><strong>Create a GitHub App</strong> and download its private key (PEM). Note the App ID.</li>
 <li><strong>Grant permissions:</strong> Contents (read &amp; write — verified at daemon startup),
    Issues (read &amp; write), Pull requests (read &amp; write), and Metadata (read).</li>
-<li><strong>Subscribe to webhook events:</strong> <code>issues</code>, <code>pull_request</code>, and (for <code>@swarmd</code>
+<li><strong>Subscribe to webhook events:</strong> <code>issues</code>, <code>pull_request</code>, and (for <code>@vornik</code>
    mention replies) <code>issue_comment</code>.</li>
 <li><strong>Point the webhook</strong> at your daemon's signed webhook endpoint,
    <code>POST /api/v1/webhooks/{projectId}/{source}</code>, and set a webhook secret. Forge
@@ -1449,7 +1449,7 @@ write credentials, because it never has them.</p>
 <span class="w">  </span><span class="nt">github</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">app_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;123456&quot;</span>
 <span class="w">    </span><span class="nt">installation_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;78901234&quot;</span>
-<span class="w">    </span><span class="nt">private_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/swarmd/secrets/forge-app.pem</span>
+<span class="w">    </span><span class="nt">private_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/secrets/forge-app.pem</span>
 <span class="w">    </span><span class="c1"># api_base_url: https://github.example.com/api/v3   # GitHub Enterprise only</span>
 </code></pre></div>
 <p>Webhook sources route by the classified job: change-request (PR) events go to
@@ -1466,8 +1466,8 @@ verdict into a real GitHub APPROVE / REQUEST_CHANGES. (A review that would
 approve the App's <em>own</em> PR is automatically downgraded to a comment, since GitHub
 won't let an author approve their own pull request.)</p>
 <h2 id="conversational-replies">Conversational replies<a class="headerlink" href="#conversational-replies" title="Permanent link">&para;</a></h2>
-<p>A separate GitHub App <em>channel</em> handles <code>@swarmd</code> mentions in issue comments:
-an allowlisted user mentioning <code>@swarmd</code> routes through swarmd and gets a reply
+<p>A separate GitHub App <em>channel</em> handles <code>@vornik</code> mentions in issue comments:
+an allowlisted user mentioning <code>@vornik</code> routes through vornik and gets a reply
 posted as an issue comment. This is the chat surface; the deterministic flows
 above are the automation surface.</p>
 <h2 id="notes-and-limits">Notes and limits<a class="headerlink" href="#notes-and-limits" title="Permanent link">&para;</a></h2>

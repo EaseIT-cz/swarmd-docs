@@ -1233,7 +1233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1387,13 +1387,13 @@
 
 
 <h1 id="zero-egress-local-first-execution">Zero-egress / local-first execution<a class="headerlink" href="#zero-egress-local-first-execution" title="Permanent link">&para;</a></h1>
-<p>swarmd is built to run agents that have <strong>no direct path to the internet</strong>. Each
+<p>vornik is built to run agents that have <strong>no direct path to the internet</strong>. Each
 agent runs in its own rootless Podman container; in the zero-egress posture that
 container has no network device at all. Anything that genuinely needs to leave
 the host — an LLM completion, an MCP tool call, a broker request — is made by the
 <strong>daemon</strong>, not the agent. The agent asks the daemon over a local socket; the
 daemon is the only process with outbound access.</p>
-<p>This makes swarmd a natural fit for air-gapped and data-sensitive environments,
+<p>This makes vornik a natural fit for air-gapped and data-sensitive environments,
 especially when paired with self-hosted, open-weight models.</p>
 <h2 id="container-hardening">Container hardening<a class="headerlink" href="#container-hardening" title="Permanent link">&para;</a></h2>
 <p>Every agent container is launched with the same baseline regardless of network
@@ -1439,7 +1439,7 @@ mode:</p>
 </table>
 <p><strong><code>daemon-only</code> is the zero-egress workhorse.</strong> On rootless Podman there is no
 network setting that reaches the host daemon while blocking the internet, so
-swarmd removes the network device entirely and gives the agent a Unix socket to
+vornik removes the network device entirely and gives the agent a Unix socket to
 the daemon instead. The daemon rewrites the agent's API, LLM, and memory
 endpoints to that socket, then performs the real outbound calls itself. If no
 daemon socket is configured the mount is simply omitted and the container stays
@@ -1467,7 +1467,7 @@ silently restore egress.</p>
   the container connects to). A role whose LLM endpoint is a direct external URL
   must use <code>egress</code>, not <code>daemon-only</code>.</li>
 <li><strong><code>host</code> is denied by default.</strong> Because host networking defeats the sandbox,
-  it only works when the operator sets <code>SWARMD_ALLOW_NETWORK_HOST=1</code> on the
+  it only works when the operator sets <code>VORNIK_ALLOW_NETWORK_HOST=1</code> on the
   daemon — a deliberate host-level trust decision.</li>
 </ul>
 <blockquote>
@@ -1477,7 +1477,7 @@ zero-egress posture is enabled by setting <code>runtime.default_network:
 daemon-only</code> (which the shipped configuration template does).</p>
 </blockquote>
 <h2 id="local-first-open-weight-models">Local-first / open-weight models<a class="headerlink" href="#local-first-open-weight-models" title="Permanent link">&para;</a></h2>
-<p>Because the agent's LLM endpoint is plain OpenAI-compatible HTTP, pointing swarmd
+<p>Because the agent's LLM endpoint is plain OpenAI-compatible HTTP, pointing vornik
 at a self-hosted model — Ollama on a LAN host, vLLM, or any compatible endpoint —
 is configuration only:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span>

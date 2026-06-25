@@ -1251,7 +1251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1423,12 +1423,12 @@
 
 
 <h1 id="authentication-access-control">Authentication &amp; access control<a class="headerlink" href="#authentication-access-control" title="Permanent link">&para;</a></h1>
-<p>swarmd's control-plane API and UI can require authentication, and once a user is
+<p>vornik's control-plane API and UI can require authentication, and once a user is
 authenticated their <strong>role</strong> and <strong>project scope</strong> decide what they can see and
 do. This page covers turning auth on, the ways a request can be authenticated,
 and the role/group model behind access control.</p>
 <h2 id="turning-auth-on">Turning auth on<a class="headerlink" href="#turning-auth-on" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>auth
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>auth
 </code></pre></div>
 <p>This sets <code>api.auth_enabled</code> and restarts the daemon. <strong>Have an admin key in
 place before you enable it</strong> — once on, unauthenticated requests to control-plane
@@ -1444,7 +1444,7 @@ error. The shipped backends:</p>
 <li><strong>API keys</strong> — static keys from config, and per-project database-backed keys
   (see below).</li>
 <li><strong>Browser sign-in (SSO)</strong> — GitHub OAuth. A user clicks "Sign in with GitHub",
-  and swarmd creates a session cookie. An optional GitHub-organisation
+  and vornik creates a session cookie. An optional GitHub-organisation
   requirement gates who may sign in.</li>
 <li><strong>Break-glass admin keys</strong> — always-on key access for operators, so an
   identity-provider outage can never lock you out.</li>
@@ -1458,10 +1458,10 @@ session and role machinery later.</p>
 <h3 id="per-project-api-keys">Per-project API keys<a class="headerlink" href="#per-project-api-keys" title="Permanent link">&para;</a></h3>
 <p>Issue scoped keys bound to a single project. Each key is stored hashed, carries
 its own project, and can be limited to specific workflows:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--name<span class="w"> </span>ci-bot<span class="w"> </span>--expires<span class="w"> </span>90d
-swarmctl<span class="w"> </span>key<span class="w"> </span>list<span class="w">   </span>--project<span class="w"> </span>research-desk
-swarmctl<span class="w"> </span>key<span class="w"> </span>rotate<span class="w"> </span>&lt;keyID&gt;<span class="w"> </span>--project<span class="w"> </span>research-desk
-swarmctl<span class="w"> </span>key<span class="w"> </span>revoke<span class="w"> </span>&lt;keyID&gt;<span class="w"> </span>--project<span class="w"> </span>research-desk
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>key<span class="w"> </span>create<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--name<span class="w"> </span>ci-bot<span class="w"> </span>--expires<span class="w"> </span>90d
+vornikctl<span class="w"> </span>key<span class="w"> </span>list<span class="w">   </span>--project<span class="w"> </span>research-desk
+vornikctl<span class="w"> </span>key<span class="w"> </span>rotate<span class="w"> </span>&lt;keyID&gt;<span class="w"> </span>--project<span class="w"> </span>research-desk
+vornikctl<span class="w"> </span>key<span class="w"> </span>revoke<span class="w"> </span>&lt;keyID&gt;<span class="w"> </span>--project<span class="w"> </span>research-desk
 </code></pre></div>
 <p>A per-project key can't be repointed at another project by a request header — its
 project is fixed at creation, which is what makes it safe to hand to an external

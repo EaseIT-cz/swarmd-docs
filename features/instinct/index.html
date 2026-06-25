@@ -1242,7 +1242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1405,10 +1405,10 @@
 
 
 <h1 id="instinct-layer">Instinct layer<a class="headerlink" href="#instinct-layer" title="Permanent link">&para;</a></h1>
-<p>The instinct layer lets swarmd learn from its own history. It mines the
+<p>The instinct layer lets vornik learn from its own history. It mines the
 telemetry every task already produces, distils recurring patterns into
 confidence-scored <strong>instincts</strong> — "in situation T, action A held up" — and
-makes those instincts available as <em>evidence</em> to the parts of swarmd that
+makes those instincts available as <em>evidence</em> to the parts of vornik that
 decide how the next task runs.</p>
 <p>The defining rule: <strong>instincts are advisory. Nothing mutates silently.</strong> An
 instinct can raise the confidence of a workflow proposal an operator is already
@@ -1420,7 +1420,7 @@ unchanged.</p>
 <h2 id="how-it-learns">How it learns<a class="headerlink" href="#how-it-learns" title="Permanent link">&para;</a></h2>
 <p>A background worker runs on a cadence (30 minutes by default) and reads the
 <strong>audit spine</strong> — the step outcomes, tool-call log, and memory-retrieval log
-that swarmd writes for every task. Deterministic extractors turn finalised
+that vornik writes for every task. Deterministic extractors turn finalised
 outcomes into atomic patterns; only genuinely ambiguous clusters fall through to
 a cheap distillation model. Each pattern is deduplicated by a canonical trigger
 key and scored.</p>
@@ -1482,7 +1482,7 @@ confidence floor) that changes only how <em>strongly</em> a recovery remediation
 presented to the lead — it does not bypass the approval gate.</p>
 <h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
 <p>Run the feature doctor to diagnose prerequisites and enable:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>instinct
 </code></pre></div>
 <p>This sets <code>instinct.enabled</code> plus the consumer gates and restarts the daemon
 during an idle window. Because it is restart-gated, the doctor refuses to apply
@@ -1490,10 +1490,10 @@ while tasks are running and waits for an idle window. (The tool-budget and
 <code>auto_apply</code> consumers stay manually opt-in.)</p>
 <h2 id="inspecting-what-it-learned">Inspecting what it learned<a class="headerlink" href="#inspecting-what-it-learned" title="Permanent link">&para;</a></h2>
 <p>Everything the layer knows is browsable. Use the CLI:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>instinct<span class="w"> </span>list<span class="w"> </span>--domain<span class="w"> </span>recovery<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">0</span>.8
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>show<span class="w"> </span>&lt;instinct_id&gt;
-swarmctl<span class="w"> </span>instinct<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-o<span class="w"> </span>instincts.json<span class="w">        </span><span class="c1"># filtered snapshot</span>
-swarmctl<span class="w"> </span>instinct<span class="w"> </span>retire<span class="w"> </span>&lt;instinct_id&gt;<span class="w">            </span><span class="c1"># advisory; the row stays for audit</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>instinct<span class="w"> </span>list<span class="w"> </span>--domain<span class="w"> </span>recovery<span class="w"> </span>--min-confidence<span class="w"> </span><span class="m">0</span>.8
+vornikctl<span class="w"> </span>instinct<span class="w"> </span>show<span class="w"> </span>&lt;instinct_id&gt;
+vornikctl<span class="w"> </span>instinct<span class="w"> </span><span class="nb">export</span><span class="w"> </span>-o<span class="w"> </span>instincts.json<span class="w">        </span><span class="c1"># filtered snapshot</span>
+vornikctl<span class="w"> </span>instinct<span class="w"> </span>retire<span class="w"> </span>&lt;instinct_id&gt;<span class="w">            </span><span class="c1"># advisory; the row stays for audit</span>
 </code></pre></div>
 <p><code>list</code> filters by <code>--domain</code>, <code>--scope</code>, <code>--project</code>, <code>--status</code>, and
 <code>--min-confidence</code>. The same inventory is available as a read-only browser at

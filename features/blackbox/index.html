@@ -1248,7 +1248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1426,12 +1426,12 @@ variable changed so you can compare the two side by side.</p>
 <p>Everything here is <strong>admin-gated</strong> — the trace and replay surfaces require an
 admin-scoped API key, the same gate that protects the audit log.</p>
 <h2 id="unified-trace">Unified trace<a class="headerlink" href="#unified-trace" title="Permanent link">&para;</a></h2>
-<p>Every task swarmd runs scatters evidence across many places: the messages
+<p>Every task vornik runs scatters evidence across many places: the messages
 exchanged, each LLM call and its token cost, every tool call and its result,
 memory chunks retrieved, judge verdicts, step outcomes, operator actions. The
 Black Box <strong>assembles</strong> all of it into one chronologically-ordered trace for a
 task, so you read it once instead of stitching it together by hand.</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>trace<span class="w"> </span>&lt;task_id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>blackbox<span class="w"> </span>trace<span class="w"> </span>&lt;task_id&gt;
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Task:        task_20260622_ab12cd
 Project:     research-desk
@@ -1458,7 +1458,7 @@ record. The digest is the trace's tamper-evident fingerprint.</p>
 <p>A counterfactual re-runs a task with <strong>exactly one variable changed</strong> and
 records a new trace. The engine refuses to vary more than one thing at a time —
 multi-variate replays are too hard to reason about.</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>replay<span class="w"> </span>&lt;task_id&gt;<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>blackbox<span class="w"> </span>replay<span class="w"> </span>&lt;task_id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--variable<span class="w"> </span>model<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--value<span class="w"> </span>openai-gpt-oss-120b<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--label<span class="w"> </span><span class="s2">&quot;would gpt-oss have been cheaper?&quot;</span>
@@ -1490,8 +1490,8 @@ new run and shown in the compare view. Further variables (budget, tool-result
 injection, excluding a specific memory chunk) are on the roadmap.</p>
 <p>The replay creates a <strong>new task</strong> that runs to completion under normal
 scheduling. Poll it like any task, then compare:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>task<span class="w"> </span>status<span class="w"> </span>&lt;new_task_id&gt;
-swarmctl<span class="w"> </span>blackbox<span class="w"> </span>scorecard<span class="w"> </span>&lt;original_task_id&gt;<span class="w"> </span>&lt;new_task_id&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>status<span class="w"> </span>&lt;new_task_id&gt;
+vornikctl<span class="w"> </span>blackbox<span class="w"> </span>scorecard<span class="w"> </span>&lt;original_task_id&gt;<span class="w"> </span>&lt;new_task_id&gt;
 </code></pre></div>
 <h3 id="replay-is-side-effect-safe-by-default">Replay is side-effect safe by default<a class="headerlink" href="#replay-is-side-effect-safe-by-default" title="Permanent link">&para;</a></h3>
 <p>A counterfactual must never fire a real-world action — it can't place a broker
@@ -1508,7 +1508,7 @@ Anything that can change the world (order placement, outbound messaging, file
 writes, shell, cluster control) — and anything nobody has classified yet — is
 stubbed.</p>
 <p>Inspect the live allow-list:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>sideeffects
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>blackbox<span class="w"> </span>sideeffects
 </code></pre></div>
 <p>Operators tune it with the <code>blackbox.replay_safe_tools</code> config key followed by a
 daemon reload. Because the policy is deny-by-default, you opt a tool <em>into</em> live
@@ -1519,7 +1519,7 @@ dangerous one — a newly added tool is stubbed until you decide otherwise.</p>
 cost delta, latency delta, step/LLM/tool-call count deltas, and per-step
 divergences (a different tool called at a step, a different judge verdict, a
 different outcome):</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>blackbox<span class="w"> </span>scorecard<span class="w"> </span>&lt;task_a&gt;<span class="w"> </span>&lt;task_b&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>blackbox<span class="w"> </span>scorecard<span class="w"> </span>&lt;task_a&gt;<span class="w"> </span>&lt;task_b&gt;
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Trace 1            Trace 2            Delta
 -------            -------            -----
@@ -1546,7 +1546,7 @@ divergence that's really an artifact of stubbing.</p>
 <tbody>
 <tr>
 <td>CLI</td>
-<td><code>swarmctl blackbox {trace, replay, scorecard, sideeffects}</code></td>
+<td><code>vornikctl blackbox {trace, replay, scorecard, sideeffects}</code></td>
 </tr>
 <tr>
 <td>Web UI</td>

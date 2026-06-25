@@ -1138,7 +1138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/swarmctl/" class="md-nav__link">
+      <a href="../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1515,7 +1515,7 @@
 
 
 <h1 id="release-notes">Release Notes<a class="headerlink" href="#release-notes" title="Permanent link">&para;</a></h1>
-<p>A curated, reverse-chronological summary of user-facing changes in swarmd.
+<p>A curated, reverse-chronological summary of user-facing changes in vornik.
 Each entry highlights what changed for you as an operator — new features,
 behavior changes, and notable fixes. Internal-only changes are omitted.</p>
 <div class="admonition tip">
@@ -1549,8 +1549,8 @@ content provenance.</p>
   <code>server.public_base_url</code>); push requires a key issued with <code>--allow-push</code>
   (keys are read-only by default) and is blocked while a task holds the
   workspace, so a push can't race a running job. Manage it from the new project
-  Git-access panel or <code>swarmctl key --allow-push</code>.</li>
-<li><strong>Centralised log forwarding.</strong> A new subsystem ships swarmd's structured logs
+  Git-access panel or <code>vornikctl key --allow-push</code>.</li>
+<li><strong>Centralised log forwarding.</strong> A new subsystem ships vornik's structured logs
   and audit events to an external HTTP webhook (bearer-token) and/or syslog (TLS
   with a pinned CA). Forwarding is scope-filtered, best-effort, and never blocks
   the daemon; an empty or ship-all scope is refused.</li>
@@ -1559,13 +1559,13 @@ content provenance.</p>
   trusted only when the immediate peer is in your <code>trusted_proxies</code> allowlist —
   so brute-force lockout, rate limiting, and audit no longer collapse every user
   to the proxy's address. Off by default.</li>
-<li><strong>One-command support bundle.</strong> <code>swarmctl support-report --task &lt;id&gt;</code> (or
+<li><strong>One-command support bundle.</strong> <code>vornikctl support-report --task &lt;id&gt;</code> (or
   <code>--since &lt;window&gt;</code>) produces a single, <strong>redacted-by-default</strong>, self-contained
   diagnostic archive — lifecycle, audit, LLM usage, conversation, container and
   daemon logs, redacted config, a doctor diagnosis, and version/health — so you
   no longer hand-assemble evidence for a support thread.</li>
 <li><strong>Smarter content redaction.</strong> The output guard now knows whether scanned
-  content is first-party (produced by swarmd) or third-party, so swarmd's own
+  content is first-party (produced by vornik) or third-party, so vornik's own
   output is no longer over-redacted while untrusted content and secrets still
   are.</li>
 <li><strong>Structured recovery steering.</strong> When a step fails, the lead can be offered a
@@ -1575,7 +1575,7 @@ content provenance.</p>
 <li><strong>Outbound email attachments.</strong> The email channel now sends replies as
   <code>multipart/mixed</code>, delivering <code>send_artifact</code> outputs as attachments on the
   threaded reply. File delivery is now channel-agnostic and shared with Telegram.</li>
-<li><strong>More <code>swarmctl doctor</code> checks.</strong> <code>model_health</code> (flags a model that is
+<li><strong>More <code>vornikctl doctor</code> checks.</strong> <code>model_health</code> (flags a model that is
   failing or returning degenerate output and recommends its fallback),
   <code>config_crlf</code> (detects — and with <code>--fix</code> repairs — CRLF line endings that
   cause phantom config drift), <code>model_route_coverage</code> (every role's model
@@ -1608,14 +1608,14 @@ them.</p>
 <hr />
 <h2 id="202660">2026.6.0<a class="headerlink" href="#202660" title="Permanent link">&para;</a></h2>
 <p><strong>Fix GitHub issues end-to-end.</strong> Label an issue (or open a pull request) and
-swarmd can plan it, make the change across subtasks, review its own diff, and
+vornik can plan it, make the change across subtasks, review its own diff, and
 open a <strong>draft pull request</strong> for you to approve — hands-off, with the daemon
 doing the branch push and the review posting. Every automated PR is a draft, so
 nothing merges without you.</p>
 <p>Other highlights:</p>
 <ul>
 <li><strong>Self-improving workflows.</strong> When a workflow starts failing or getting
-  expensive, swarmd can propose a repair, <strong>replay-test it against real past
+  expensive, vornik can propose a repair, <strong>replay-test it against real past
   runs</strong>, score it against the current version, and apply it only when you
   approve — nothing changes on its own.</li>
 <li><strong>The swarm learns from itself.</strong> A new continuous-learning layer mines
@@ -1632,7 +1632,7 @@ nothing merges without you.</p>
 <li><strong>More model choices.</strong> Free-tier hosted models with automatic fallback, and
   per-role tool budgets that scale to task complexity so simple tasks stay cheap
   and hard ones get more room to work.</li>
-<li><strong>Public documentation</strong> is now live at docs.swarmd.dev.</li>
+<li><strong>Public documentation</strong> is now live at docs.vornik.io.</li>
 <li><strong>Safer web fetching.</strong> The research browser follows shortened links (e.g.
   map short-URLs) to their real destination before applying your host
   allowlist, and refuses to reach private or loopback network addresses.</li>
@@ -1652,11 +1652,11 @@ running just like a template-based project. You can pin the wizard to its own
 model independently of your default chat model.</p>
 <p>Other highlights:</p>
 <ul>
-<li><strong>Official packages and binaries.</strong> Releases now ship prebuilt <code>swarmd</code> and
-  <code>swarmctl</code> binaries (Linux amd64 and arm64) plus RPM and DEB packages,
+<li><strong>Official packages and binaries.</strong> Releases now ship prebuilt <code>vornik</code> and
+  <code>vornikctl</code> binaries (Linux amd64 and arm64) plus RPM and DEB packages,
   attached to each GitHub release.</li>
 <li><strong>Stronger default network isolation for agents.</strong> New installs default to a
-  zero-egress agent network: agents reach swarmd for model and tool access but
+  zero-egress agent network: agents reach vornik for model and tool access but
   cannot reach the internet. Roles that genuinely need outbound access can opt
   in per role.</li>
 <li><strong>More resilient chat under rate limits.</strong> The model client now honors
@@ -1693,7 +1693,7 @@ task execution, scheduling, memory, and inbound channels.</p>
 <li><strong>New landing page</strong> with at-a-glance tiles (active tasks, active chats,
   today's spend, next autonomy run) and a cross-project activity feed.</li>
 <li><strong>Project template gallery.</strong> Browse a catalog of starter projects in the web
-  UI (or via <code>swarmctl init project --template &lt;slug&gt;</code>) and create one from a
+  UI (or via <code>vornikctl init project --template &lt;slug&gt;</code>) and create one from a
   simple form, filterable by domain.</li>
 <li><strong>Per-project home page</strong> with a readable summary card, autonomy status, and
   an effective data-retention panel that shows your actual pruning windows.</li>
@@ -1703,7 +1703,7 @@ task execution, scheduling, memory, and inbound channels.</p>
 <li><strong>Smarter memory recall</strong>, including optional date-range filtering ("what did
   we discuss last week") and a resilience cascade so memory search keeps working
   even if part of the search backend hiccups.</li>
-<li><strong>High-availability friendliness.</strong> If you run more than one swarmd instance,
+<li><strong>High-availability friendliness.</strong> If you run more than one vornik instance,
   polling channels now coordinate so a single inbound message is handled once,
   not duplicated.</li>
 </ul>
@@ -1740,9 +1740,9 @@ strict mode. Restart the daemon to pick up the new behavior.</p>
 <li><strong>New memory maintenance commands</strong>: reclassify, re-embed (for model
   upgrades), and list prune candidates.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>reclassify<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
-swarmctl<span class="w"> </span>memory<span class="w"> </span>reembed<span class="w">     </span>--project<span class="w"> </span>&lt;project&gt;
-swarmctl<span class="w"> </span>memory<span class="w"> </span>prune-candidates<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>memory<span class="w"> </span>reclassify<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
+vornikctl<span class="w"> </span>memory<span class="w"> </span>reembed<span class="w">     </span>--project<span class="w"> </span>&lt;project&gt;
+vornikctl<span class="w"> </span>memory<span class="w"> </span>prune-candidates<span class="w"> </span>--project<span class="w"> </span>&lt;project&gt;
 </code></pre></div>
 <h2 id="202654">2026.5.4<a class="headerlink" href="#202654" title="Permanent link">&para;</a></h2>
 <p>A reliability release.</p>
@@ -1766,7 +1766,7 @@ rebuild it to pick up this release's runtime improvements.</p>
 <ul>
 <li><strong>Declarative output schemas.</strong> Agent roles can declare the exact shape of
   their output in one place, eliminating a whole class of "valid output, wrong
-  shape" failures. <code>swarmctl doctor</code> flags mismatches before they cause a
+  shape" failures. <code>vornikctl doctor</code> flags mismatches before they cause a
   failed run.</li>
 <li><strong>Security hardening</strong> across container isolation, secret detection, webhook
   authentication, and API input validation.</li>
@@ -1799,7 +1799,7 @@ persistence point, and a larger operator UI (spend deep-dive, live tool-call
 audit stream, routing-decision panel).</p>
 <hr />
 <h2 id="earlier-releases-20264x">Earlier releases (2026.4.x)<a class="headerlink" href="#earlier-releases-20264x" title="Permanent link">&para;</a></h2>
-<p>The 2026.4 series built swarmd from its first stable release into a capable
+<p>The 2026.4 series built vornik from its first stable release into a capable
 multi-agent platform. Notable user-facing milestones:</p>
 <ul>
 <li><strong>2026.4.14</strong> — A typed agent tool set (<code>file_edit</code>, <code>grep</code>, <code>glob</code>, and
@@ -1808,10 +1808,10 @@ multi-agent platform. Notable user-facing milestones:</p>
   onboarding wizard; and a browser-based project YAML editor with validation.</li>
 <li><strong>2026.4.13</strong> — Direct-API access to subscription-billed model backends
   (no CLI subprocess), a multi-backend chat router, a headless-browser fetch
-  capability for agents, and an expanded <code>swarmctl doctor</code> with new schema,
+  capability for agents, and an expanded <code>vornikctl doctor</code> with new schema,
   security, cost, and hygiene checks.</li>
 <li><strong>2026.4.12</strong> — Per-task cost drill-down, local-timezone budgets, tool-call
-  rate limits, a per-project data-retention sweeper, and <code>swarmctl backup</code> /
+  rate limits, a per-project data-retention sweeper, and <code>vornikctl backup</code> /
   <code>restore</code>.</li>
 <li><strong>2026.4.11</strong> — First-class <strong>LLM spend tracking</strong>: per-step token and cost
   metrics, a per-project spend panel (24h / 7d / 30d / month-to-date with a
@@ -1826,7 +1826,7 @@ multi-agent platform. Notable user-facing milestones:</p>
   workflow that works with any swarm, a runtime autopilot on/off toggle, and
   lenient registry loading so one broken project no longer takes down the rest.</li>
 <li><strong>2026.4.8</strong> — Per-role model overrides applied correctly to warm containers,
-  an expanded <code>swarmctl doctor</code>, and additional conversation session controls.</li>
+  an expanded <code>vornikctl doctor</code>, and additional conversation session controls.</li>
 <li><strong>2026.4.7</strong> — <strong>First stable release.</strong> The autonomous development pipeline,
   durable task queue and scheduler, the multi-step workflow engine, the
   server-rendered web dashboard, and the conversational bot interface.</li>

@@ -1142,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/swarmctl/" class="md-nav__link">
+      <a href="../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1359,7 +1359,7 @@
 
 
 <h1 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h1>
-<p>swarmd orchestrates teams of AI agents to do continuous, asynchronous work
+<p>vornik orchestrates teams of AI agents to do continuous, asynchronous work
 on your behalf. A handful of ideas explain almost everything you will do
 with it. This page defines them and shows how they fit together. Once they
 click, the <a href="../guides/">guides</a> and
@@ -1370,7 +1370,7 @@ multi-swarm vs multi-node — see <a href="architecture/">Architecture</a>.</p>
 <p>You can read the whole system in one sentence:</p>
 <blockquote>
 <p>A <strong>project</strong> owns a <strong>swarm</strong> of agents and one or more <strong>workflows</strong>;
-you submit <strong>tasks</strong>, and swarmd runs each task through a workflow,
+you submit <strong>tasks</strong>, and vornik runs each task through a workflow,
 letting agents <strong>delegate</strong> sub-work and draw on shared <strong>memory</strong>.</p>
 </blockquote>
 <p>Everything below expands one word in that sentence.</p>
@@ -1388,7 +1388,7 @@ projects on the same host never see each other's work.</p>
 <li>how long history is kept (retention)</li>
 <li>which tools and secrets agents are allowed to use</li>
 </ul>
-<p>You can run many projects at once. swarmd schedules across all of them and
+<p>You can run many projects at once. vornik schedules across all of them and
 keeps them operationally separate, so a busy project cannot starve or
 interfere with a quiet one beyond competing for the host's resources.</p>
 <h2 id="swarms">Swarms<a class="headerlink" href="#swarms" title="Permanent link">&para;</a></h2>
@@ -1410,7 +1410,7 @@ network policy that controls whether it can reach the network at all. New
 installs default to no agent egress, so agents cannot reach outside the
 host unless you grant a role that permission.</p>
 <p>Swarms can be <strong>reused</strong>: a project can point at a shared swarm template,
-or define its own custom one. swarmd ships preset swarm templates (a
+or define its own custom one. vornik ships preset swarm templates (a
 minimal code swarm, a fuller development stack, a research swarm, and
 others) that you can generate and then adapt.</p>
 <h2 id="workflows">Workflows<a class="headerlink" href="#workflows" title="Permanent link">&para;</a></h2>
@@ -1432,11 +1432,11 @@ the <code>reviewer</code> role with this instruction, and depending on the outco
 go here or there." Workflows are <strong>versioned</strong>, so a running task always
 stays tied to the exact workflow version that launched it, even if you edit
 the workflow later.</p>
-<p>When a step fails, a workflow need not simply give up. swarmd can present
+<p>When a step fails, a workflow need not simply give up. vornik can present
 the lead with a <strong>structured recovery decision</strong> whose options carry typed
 actions — re-route the task onto a different (allow-listed) workflow, fall
 back to a role's configured backup model, retry, or skip. When one of these
-paths reaches a successful end, swarmd records that the run <em>recovered</em>
+paths reaches a successful end, vornik records that the run <em>recovered</em>
 rather than completing straight through, so recovery shows up as its own
 trend rather than hiding inside the success rate.</p>
 <p>When you do not name a workflow on a task, the project's default workflow
@@ -1459,7 +1459,7 @@ It is the thing you submit and the thing you track.</p>
 </ul>
 <p>A task moves through a clear lifecycle: <code>PENDING</code> → <code>QUEUED</code> → <code>RUNNING</code>,
 ending in <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code>. Because all of this is
-persisted, a daemon restart does not lose your work — swarmd recovers
+persisted, a daemon restart does not lose your work — vornik recovers
 unfinished tasks and continues.</p>
 <h3 id="artifacts">Artifacts<a class="headerlink" href="#artifacts" title="Permanent link">&para;</a></h3>
 <p>The durable outputs a task produces — plans, findings, drafts, reports,
@@ -1476,7 +1476,7 @@ overwriting it.</p>
   In the default mode this is a per-task copy branched from the project, so
   one task's work never disturbs another's.</li>
 </ul>
-<p>Because a step's outputs live in the ephemeral tier, swarmd bridges them
+<p>Because a step's outputs live in the ephemeral tier, vornik bridges them
 through the durable artifact store when one step needs to hand work to the
 next: each step's outputs are saved to the store and re-staged into the next
 step's workspace as inputs. This <strong>store-backed handoff</strong> is why a writer
@@ -1500,7 +1500,7 @@ off by default and, when enabled, is rate-limited and can be gated behind
 approval so nothing runs without oversight.</p>
 <h2 id="memory">Memory<a class="headerlink" href="#memory" title="Permanent link">&para;</a></h2>
 <p><strong>Memory</strong> lets a project carry knowledge forward across tasks instead of
-starting cold every time. swarmd can store facts, documents, and prior
+starting cold every time. vornik can store facts, documents, and prior
 results for a project and let agents semantically recall the relevant parts
 when they work — so an agent on task #50 can draw on what was learned in
 task #3.</p>
@@ -1514,17 +1514,17 @@ enable it.</p>
 <h2 id="channels">Channels<a class="headerlink" href="#channels" title="Permanent link">&para;</a></h2>
 <p>A <strong>channel</strong> is a way for people to reach a project — to submit work and
 receive results — without using the CLI, API, or Web UI directly. Channels
-are <strong>pluggable</strong>: swarmd ships a Telegram bot and an email channel, and the
+are <strong>pluggable</strong>: vornik ships a Telegram bot and an email channel, and the
 set is meant to grow. They share one contract for sending replies and one
 <strong>channel-agnostic</strong> way of delivering files, so a task's artifacts go out
 the same way regardless of where the request came from — as documents in a
 Telegram chat, or as attachments on a threaded email reply.</p>
 <h2 id="operating-a-fleet">Operating a fleet<a class="headerlink" href="#operating-a-fleet" title="Permanent link">&para;</a></h2>
-<p>swarmd is <strong>local-first</strong>: a node runs the daemon and its agents on one
+<p>vornik is <strong>local-first</strong>: a node runs the daemon and its agents on one
 host. But a deployment can span more than one node, and a couple of
 capabilities keep that observable without adding a separate control service:</p>
 <ul>
-<li><strong>Centralised log forwarding.</strong> swarmd can ship its structured logs and
+<li><strong>Centralised log forwarding.</strong> vornik can ship its structured logs and
   audit events to external sinks (an HTTP webhook and/or syslog), filtered to
   the scopes you care about. It is best-effort by design — a slow or failing
   sink never blocks or crashes the daemon.</li>
@@ -1539,10 +1539,10 @@ capabilities keep that observable without adding a separate control service:</p>
 <ol>
 <li>You submit a <strong>task</strong> to a <strong>project</strong> (via the CLI, the Web UI, the
    API, or a connected chat channel).</li>
-<li>swarmd writes it to the project's durable <strong>queue</strong> with its priority.</li>
+<li>vornik writes it to the project's durable <strong>queue</strong> with its priority.</li>
 <li>The scheduler picks eligible tasks by priority and dependency state,
    respecting each project's concurrency limit.</li>
-<li>swarmd resolves the project's <strong>workflow</strong> and <strong>swarm</strong>, then starts or
+<li>vornik resolves the project's <strong>workflow</strong> and <strong>swarm</strong>, then starts or
    reuses the needed agent containers.</li>
 <li>The workflow runs asynchronously — agents <strong>delegate</strong>, branch, and draw
    on <strong>memory</strong> as the workflow allows.</li>

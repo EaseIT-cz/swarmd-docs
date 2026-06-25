@@ -1142,7 +1142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/swarmctl/" class="md-nav__link">
+      <a href="../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1263,13 +1263,13 @@
 
 
 <h1 id="guides">Guides<a class="headerlink" href="#guides" title="Permanent link">&para;</a></h1>
-<p>Task-focused how-tos for running swarmd day to day. Each guide assumes you
+<p>Task-focused how-tos for running vornik day to day. Each guide assumes you
 already have a project up and running — if you don't, start with
 <a href="../getting-started/">Getting Started</a> and skim the
 <a href="../concepts/">Concepts</a> page first.</p>
 <h2 id="available-guides">Available guides<a class="headerlink" href="#available-guides" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong><a href="conversation-channels/">Conversation channels</a></strong> — connect swarmd to
+<li><strong><a href="conversation-channels/">Conversation channels</a></strong> — connect vornik to
   GitHub, Slack, email, and voice so people can talk to it where they
   already work.</li>
 <li><strong><a href="workflows-and-llm-controls/">Workflows and LLM controls</a></strong> — author
@@ -1277,7 +1277,7 @@ already have a project up and running — if you don't, start with
   controls that wrap every model call.</li>
 <li><strong><a href="mcp-tools/">Connect your tools (MCP)</a></strong> — declare a project's MCP
   servers, restrict each to an explicit set of tools, throttle expensive
-  tools, and inspect it all with <code>swarmctl mcp</code>.</li>
+  tools, and inspect it all with <code>vornikctl mcp</code>.</li>
 <li><strong><a href="artifacts-and-delivery/">Artifacts &amp; outbound file delivery</a></strong> — render
   markdown to PDF/HTML and deliver files (or a task's output artifacts) to
   Telegram and email.</li>
@@ -1297,22 +1297,22 @@ already have a project up and running — if you don't, start with
 <li><strong><a href="observability/">Observability</a></strong> — the operator dashboards, the spend
   and Insight views, and the Prometheus metrics endpoint.</li>
 <li><strong><a href="storage-and-retention/">Storage and retention</a></strong> — understand what
-  swarmd keeps, for how long, and how to manage its long-term context.</li>
+  vornik keeps, for how long, and how to manage its long-term context.</li>
 <li><strong><a href="feature-doctor/">The feature doctor</a></strong> — diagnose and safely enable
-  swarmd's opt-in features.</li>
+  vornik's opt-in features.</li>
 <li><strong><a href="evals/">Evals</a></strong> — author repeatable swarm test suites with pass/fail
-  predicates and run them with <code>swarmctl eval run</code>, with a regression diff
+  predicates and run them with <code>vornikctl eval run</code>, with a regression diff
   across runs.</li>
 <li><strong><a href="clustering/">Clustering and the DMZ webhook relay</a></strong> — scale the worker
   tier or isolate webhook ingress in a DMZ with a mutual-TLS relay.</li>
 </ul>
 <h2 id="how-to-read-these">How to read these<a class="headerlink" href="#how-to-read-these" title="Permanent link">&para;</a></h2>
 <p>Every guide documents only the configuration and commands you, as the person
-running swarmd, actually touch. Configuration lives in your project YAML files;
+running vornik, actually touch. Configuration lives in your project YAML files;
 secrets are always supplied through environment variables rather than written
-into config. The <code>swarmctl</code> command-line tool is your main interface for
+into config. The <code>vornikctl</code> command-line tool is your main interface for
 inspecting and validating that configuration — see the
-<a href="../reference/swarmctl/">swarmctl reference</a> for the full command list and
+<a href="../reference/vornikctl/">vornikctl reference</a> for the full command list and
 the <a href="../reference/configuration/">configuration reference</a> for every key.</p>
 
 

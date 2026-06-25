@@ -1266,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1454,14 +1454,14 @@
 
 <h1 id="cross-project-orchestration-agent-federation">Cross-project orchestration &amp; agent federation<a class="headerlink" href="#cross-project-orchestration-agent-federation" title="Permanent link">&para;</a></h1>
 <p>A workflow in one project can hand work to another project, stand up a brand
-new project on demand, or call a remote swarmd-compatible agent over the open
+new project on demand, or call a remote vornik-compatible agent over the open
 <strong>A2A</strong> (agent-to-agent) protocol. This guide covers all three: <code>call_project</code>,
 <code>spawn_project</code>, and <code>a2a_call</code>.</p>
 <h2 id="enabling-cross-project-calls">Enabling cross-project calls<a class="headerlink" href="#enabling-cross-project-calls" title="Permanent link">&para;</a></h2>
 <p><code>call_project</code> and <code>spawn_project</code> are <strong>off by default</strong> and require Postgres
 (they persist call lineage and spawn records, which the SQLite backend can't
 provide). Turn them on with:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">SWARMD_INTER_PROJECT_ENABLED</span><span class="o">=</span><span class="nb">true</span>
+<div class="highlight"><pre><span></span><code><span class="nv">VORNIK_INTER_PROJECT_ENABLED</span><span class="o">=</span><span class="nb">true</span>
 </code></pre></div>
 <p>With the flag off, both step types fail fast — route their <code>on_fail</code> branch so
 a workflow degrades gracefully rather than erroring out. <code>a2a_call</code> is governed
@@ -1555,7 +1555,7 @@ optionally, kicks off its first task:</p>
 <code>acceptCallsFrom</code> at spawn time — consent to receive calls must be granted
 explicitly afterward, so spawning can't be used to bypass the inbound allowlist.</p>
 <h2 id="a2a-federation-calling-remote-agents">A2A federation: calling remote agents<a class="headerlink" href="#a2a-federation-calling-remote-agents" title="Permanent link">&para;</a></h2>
-<p>The A2A step talks to any agent that speaks the A2A protocol — another swarmd
+<p>The A2A step talks to any agent that speaks the A2A protocol — another vornik
 instance, or a third-party agent — over HTTP + SSE. Unlike <code>call_project</code>, it is
 not bound by the inter-project flag; it's available wherever the A2A handler is
 enabled.</p>
@@ -1612,7 +1612,7 @@ a failed task rather than a checkpoint).</p>
 <h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Step fails immediately with "disabled"</strong> — set
-  <code>SWARMD_INTER_PROJECT_ENABLED=true</code> and confirm you're on Postgres.</li>
+  <code>VORNIK_INTER_PROJECT_ENABLED=true</code> and confirm you're on Postgres.</li>
 <li><strong><code>CYCLE_DETECTED</code> / <code>DEPTH_EXCEEDED</code></strong> — inspect the call chain; raise
   <code>maxCallDepth</code> only if the depth is legitimate, never to mask a cycle.</li>
 <li><strong>Callee refuses the call</strong> — add the caller to the callee's

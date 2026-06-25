@@ -1266,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1453,12 +1453,12 @@
 
 
 <h1 id="memory-rag">Memory &amp; RAG<a class="headerlink" href="#memory-rag" title="Permanent link">&para;</a></h1>
-<p>swarmd can consolidate and semantically recall project memory so agents
+<p>vornik can consolidate and semantically recall project memory so agents
 carry context forward across tasks, with caches that cut cost and latency.
 A <strong>policy-aware firewall</strong> governs what may enter that memory and what may be
 read back out.</p>
 <h2 id="enabling-recall-and-caches">Enabling recall and caches<a class="headerlink" href="#enabling-recall-and-caches" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>memory-rag
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>memory-rag
 </code></pre></div>
 <p>This enables the <code>memory.*</code> gates — LLM consolidation, response cache, and
 embedding cache — and restarts the daemon during an idle window.</p>
@@ -1519,12 +1519,12 @@ default.</p>
 </tbody>
 </table>
 <p>The mode is resolved per request: a project-level <code>firewall.mode</code> override wins,
-then the <code>SWARMD_MEMORY_FIREWALL_MODE</code> daemon environment variable, then the
+then the <code>VORNIK_MEMORY_FIREWALL_MODE</code> daemon environment variable, then the
 <code>advisory</code> default. An unrecognised value safely coerces to <code>advisory</code>. Run in
 <code>advisory</code> first to see what <em>would</em> be blocked, then move to <code>enforce</code> once the
 policy is right.</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>mode<span class="w">                       </span><span class="c1"># show the active mode</span>
-swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>set-policy<span class="w"> </span>&lt;chunk_id&gt;<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>mode<span class="w">                       </span><span class="c1"># show the active mode</span>
+vornikctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>set-policy<span class="w"> </span>&lt;chunk_id&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--sensitivity<span class="w"> </span>confidential<span class="w"> </span>--permitted-roles<span class="w"> </span>reviewer,lead
 </code></pre></div>
 <h2 id="keeping-secrets-out-of-memory">Keeping secrets out of memory<a class="headerlink" href="#keeping-secrets-out-of-memory" title="Permanent link">&para;</a></h2>
@@ -1538,7 +1538,7 @@ swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span clas
   for memory the scan <strong>cannot be downgraded to a no-op</strong>: a detected secret is
   redacted (e.g. <code>[REDACTED:openai_key]</code>), and a deposit that's mostly secret is
   rejected outright rather than stored as a husk. The escape hatch
-  <code>SWARMD_ALLOW_UNSCANNED_MEMORY</code> exists for deliberate, audited exceptions.</li>
+  <code>VORNIK_ALLOW_UNSCANNED_MEMORY</code> exists for deliberate, audited exceptions.</li>
 </ul>
 <h2 id="audit-and-compliance-export">Audit and compliance export<a class="headerlink" href="#audit-and-compliance-export" title="Permanent link">&para;</a></h2>
 <p>Every recall decision — in every mode, including <code>off</code> — writes an audit row
@@ -1546,8 +1546,8 @@ recording the chunk, the requesting role and purpose, the decision, and a digest
 of the policy that was in force. Recalled chunks also carry a policy proof so a
 workflow that cites a chunk can show it was allowed to.</p>
 <p>Review and export evaluations:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--since<span class="w"> </span><span class="m">2026</span>-06-01
-swarmctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--csv<span class="w"> </span>&gt;<span class="w"> </span>compliance.csv
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--since<span class="w"> </span><span class="m">2026</span>-06-01
+vornikctl<span class="w"> </span>memory<span class="w"> </span>firewall<span class="w"> </span>evaluations<span class="w"> </span>--project<span class="w"> </span>research-desk<span class="w"> </span>--csv<span class="w"> </span>&gt;<span class="w"> </span>compliance.csv
 </code></pre></div>
 <p>The CSV export streams RFC 4180 output over a 30-day window by default — suitable
 for a compliance hand-off.</p>
@@ -1575,11 +1575,11 @@ for a compliance hand-off.</p>
 <td><code>off</code> / <code>advisory</code> / <code>enforce</code>, overrides the daemon default</td>
 </tr>
 <tr>
-<td><code>SWARMD_MEMORY_FIREWALL_MODE</code></td>
+<td><code>VORNIK_MEMORY_FIREWALL_MODE</code></td>
 <td>daemon-level enforcement mode</td>
 </tr>
 <tr>
-<td><code>SWARMD_ALLOW_UNSCANNED_MEMORY</code></td>
+<td><code>VORNIK_ALLOW_UNSCANNED_MEMORY</code></td>
 <td>audited escape hatch for the secret-scan clamp</td>
 </tr>
 </tbody>

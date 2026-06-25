@@ -1275,7 +1275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/swarmctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1471,9 +1471,9 @@
 
 
 <h1 id="workflows-and-llm-controls">Workflows and LLM Controls<a class="headerlink" href="#workflows-and-llm-controls" title="Permanent link">&para;</a></h1>
-<p>swarmd runs work as <strong>workflows</strong> — ordered sets of steps, each of which can ask
+<p>vornik runs work as <strong>workflows</strong> — ordered sets of steps, each of which can ask
 a model to do something. This guide covers two things: how to author and
-validate your own workflows, and the controls swarmd wraps around every model
+validate your own workflows, and the controls vornik wraps around every model
 call to keep them safe, focused, and reliable.</p>
 <h2 id="authoring-workflows">Authoring workflows<a class="headerlink" href="#authoring-workflows" title="Permanent link">&para;</a></h2>
 <p>A workflow is a single Markdown file. It has two parts: a frontmatter block that
@@ -1506,28 +1506,28 @@ Using the research above, draft a clear, well-structured report...
   frontmatter and long ones in the body — mix both freely.</li>
 </ul>
 <h3 id="bundled-templates">Bundled templates<a class="headerlink" href="#bundled-templates" title="Permanent link">&para;</a></h3>
-<p>swarmd ships ready-to-use workflow templates you can start from, including
+<p>vornik ships ready-to-use workflow templates you can start from, including
 research, planning-and-writing, an adaptive general-purpose workflow, a
 development pipeline, and a quick-task workflow. List what is
 available with:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>workflow<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>workflow<span class="w"> </span>list
 </code></pre></div>
 <p>and inspect any one of them in full with:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>workflow<span class="w"> </span>show<span class="w"> </span>&lt;name&gt;
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>workflow<span class="w"> </span>show<span class="w"> </span>&lt;name&gt;
 </code></pre></div>
 <h3 id="validating-your-workflow">Validating your workflow<a class="headerlink" href="#validating-your-workflow" title="Permanent link">&para;</a></h3>
 <p>Before you put a workflow into service, validate it:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Validate a single file</span>
-swarmctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>./my-workflow.md
+vornikctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>./my-workflow.md
 
 <span class="c1"># Validate every workflow file in a directory</span>
-swarmctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>./workflows/
+vornikctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>./workflows/
 
 <span class="c1"># Print suggested fixes inline (hints only — nothing is written back)</span>
-swarmctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>--fix<span class="w"> </span>./my-workflow.md
+vornikctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>--fix<span class="w"> </span>./my-workflow.md
 
 <span class="c1"># Machine-readable output</span>
-swarmctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>--json<span class="w"> </span>./workflows/
+vornikctl<span class="w"> </span>workflow<span class="w"> </span>validate<span class="w"> </span>--json<span class="w"> </span>./workflows/
 </code></pre></div>
 <p>The validator checks:</p>
 <ul>
@@ -1543,21 +1543,21 @@ swarmctl<span class="w"> </span>workflow<span class="w"> </span>validate<span cl
 <p class="admonition-title">Note</p>
 <p>The validator reads your file but does not run the workflow. Logical
 problems — a step that depends on one that never runs, for example — only
-show up when swarmd actually loads the workflow, not at validation time.
+show up when vornik actually loads the workflow, not at validation time.
 <code>--fix</code> only <em>prints</em> suggestions; applying them stays a deliberate manual
 edit so the change always gets a human's eye.</p>
 </div>
 <hr />
 <h2 id="llm-controls">LLM controls<a class="headerlink" href="#llm-controls" title="Permanent link">&para;</a></h2>
-<p>Every model call in swarmd is wrapped by a few controls. Most need no
+<p>Every model call in vornik is wrapped by a few controls. Most need no
 configuration, but it helps to know what they do and what you will see.</p>
 <h3 id="intent-judge">Intent judge<a class="headerlink" href="#intent-judge" title="Permanent link">&para;</a></h3>
-<p>Before a tool runs, swarmd assesses how risky the call is and records a verdict
+<p>Before a tool runs, vornik assesses how risky the call is and records a verdict
 — a risk level (<code>critical</code>, <code>high</code>, <code>medium</code>, or <code>low</code>), a recommendation, and a
 short reason. A fast rule-based check runs instantly inline, and a model-based
 refiner runs in the background to add a second opinion.</p>
 <p>Today these verdicts are <strong>informational</strong>: they appear in the audit trail so
-you can see what swarmd thought of each action, and they do not yet block
+you can see what vornik thought of each action, and they do not yet block
 anything. This gives you visibility before any enforcement is switched on in a
 later release.</p>
 <p>You can choose which model performs the background refinement. A small,
@@ -1569,7 +1569,7 @@ reasoning model.</p>
 <span class="w">  </span><span class="nt">refiner_model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;openai.gpt-oss-20b-1:0&quot;</span>
 </code></pre></div>
 <h3 id="output-guard">Output guard<a class="headerlink" href="#output-guard" title="Permanent link">&para;</a></h3>
-<p>swarmd scans the <strong>results</strong> that tools return before handing them back to the
+<p>vornik scans the <strong>results</strong> that tools return before handing them back to the
 model. This protects against content that comes in from the outside world — a
 scraped web page that tries to hijack the conversation, or a tool result that
 leaks a secret.</p>
@@ -1578,9 +1578,9 @@ leaks a secret.</p>
   When they fire, the offending text is redacted in place (replaced with a
   <code>[REDACTED:...]</code> marker) so the model never sees the raw content.</li>
 <li><strong>Suspicious encoded content</strong> and <strong>dangerous-looking links</strong> are flagged as
-  warnings; swarmd notes them and keeps going.</li>
+  warnings; vornik notes them and keeps going.</li>
 </ul>
-<p>In Telegram, when something is flagged, swarmd appends a short footer to the
+<p>In Telegram, when something is flagged, vornik appends a short footer to the
 reply (for example, <code>output_guard: 1 high (credential), 2 warn</code>) so you can see
 at a glance that the guard acted on that turn.</p>
 <div class="admonition note">
@@ -1592,7 +1592,7 @@ arrives through tools.</p>
 <h3 id="tool-discovery-for-large-tool-sets">Tool discovery for large tool sets<a class="headerlink" href="#tool-discovery-for-large-tool-sets" title="Permanent link">&para;</a></h3>
 <p>If a project has a large catalog of tools (more than about 20), showing all of
 them to the model on every turn wastes space and attention. So when the catalog
-is large, swarmd hides the extra tools by default and offers a built-in
+is large, vornik hides the extra tools by default and offers a built-in
 <code>tool_search</code> tool instead. The model searches for the tools it needs by name or
 description, and matches become available for the rest of the conversation.</p>
 <p>This kicks in more aggressively when a conversation is running low on context
@@ -1614,10 +1614,10 @@ match, before it would ever fail outright. The result always tells you when it
 is running on a fallback tier, so you know the answer may be less precise.</p>
 <p>If you notice search persistently using a fallback, run the doctor to find the
 underlying cause:</p>
-<div class="highlight"><pre><span></span><code>swarmctl<span class="w"> </span>doctor
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor
 </code></pre></div>
 <p>The fallbacks protect availability, not quality — fixing the root cause restores
-the best results. For more on what swarmd stores and how to manage it, see
+the best results. For more on what vornik stores and how to manage it, see
 <a href="../storage-and-retention/">Storage and retention</a> and the
 <a href="../../features/memory-rag/">memory feature guide</a>.</p>
 
