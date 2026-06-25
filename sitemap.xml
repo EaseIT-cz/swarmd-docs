@@ -1,139 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://docs.swarmd.dev/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/concepts/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/architecture/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/concepts/architecture/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/cli/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/auth/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/configuration/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/blackbox/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/contributing/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/cluster/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/editions/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/companion/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/getting-started/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/forge/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/security/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/instinct/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/support/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/memory-rag/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/concepts/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/self-healing/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/concepts/architecture/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/features/zero-egress/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/auth/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/getting-started/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/blackbox/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/cluster/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/approvals/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/companion/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/artifacts-and-delivery/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/forge/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/autonomy/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/instinct/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/clustering/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/memory-rag/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/conversation-channels/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/self-healing/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/cost-and-caching/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/features/zero-egress/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/cross-project/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/getting-started/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/evals/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/feature-doctor/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/approvals/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/mcp-tools/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/artifacts-and-delivery/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/observability/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/autonomy/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/recovery/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/clustering/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/secrets/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/conversation-channels/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/storage-and-retention/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/cost-and-caching/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/guides/workflows-and-llm-controls/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/cross-project/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/reference/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/evals/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/reference/configuration/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/feature-doctor/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/reference/swarmctl/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/mcp-tools/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/release-notes/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/observability/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
     <url>
-         <loc>https://docs.swarmd.dev/troubleshooting/</loc>
-         <lastmod>2026-06-24</lastmod>
+         <loc>https://docs.vornik.io/guides/recovery/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/guides/secrets/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/guides/storage-and-retention/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/guides/workflows-and-llm-controls/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/reference/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/reference/configuration/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/reference/swarmctl/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/release-notes/</loc>
+         <lastmod>2026-06-25</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.vornik.io/troubleshooting/</loc>
+         <lastmod>2026-06-25</lastmod>
     </url>
 </urlset>
