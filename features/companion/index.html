@@ -1482,10 +1482,8 @@ vornikctl<span class="w"> </span>companion<span class="w"> </span>grant<span cla
 <p>Use <code>--client codex</code> instead when minting a key for the Codex plugin.</p>
 <p>The key's allowed workflows, spend cap, and memory permissions are enforced
 server-side from the key itself — never from the request.</p>
-<p>On the <strong>client</strong> side, point the plugin at your daemon with two environment
-variables and install it:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_URL</span><span class="o">=</span><span class="s2">&quot;https://vornik.internal.example.com:8080&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
+<p>On the <strong>client</strong> side, set the companion bearer token and install the plugin:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
 </code></pre></div>
 <p>For Claude Code, add the plugin from your vornik checkout's companion plugin
 directory (<code>claude --plugin-dir &lt;path&gt;/contrib/claude-code-companion</code>), or
@@ -1493,9 +1491,28 @@ install it from the bundled plugin marketplace for a persistent setup. Once
 loaded, the tools and slash commands are available in the session, and a
 start-up digest brings recently-completed delegations and fresh memory back into
 context.</p>
-<p>For Codex, load the plugin from <code>&lt;path&gt;/contrib/codex-companion</code>. It exposes the
-same MCP server and a Codex-native <code>delegate</code> skill, but no Claude-only slash
-commands or SessionStart hook.</p>
+<p>For Codex, install <code>codex-companion</code> from the bundled Codex marketplace at
+<code>&lt;path&gt;/.agents/plugins/marketplace.json</code>, or load the plugin directly from
+<code>&lt;path&gt;/contrib/codex-companion</code>. Do not install the Claude marketplace at
+<code>&lt;path&gt;/.claude-plugin/marketplace.json</code> into Codex; that package carries the
+Claude manifest and will not register the companion MCP server in Codex. The
+Codex plugin exposes the same MCP server and a Codex-native <code>delegate</code> skill,
+but no Claude-only slash commands or SessionStart hook. The bundled Codex MCP
+entry targets <code>http://localhost:8080</code>; for a remote daemon, override the MCP
+entry locally:</p>
+<div class="highlight"><pre><span></span><code>codex<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>vornik<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--url<span class="w"> </span>&lt;remote&gt;/api/v1/mcp/companion<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bearer-token-env-var<span class="w"> </span>VORNIK_COMPANION_TOKEN
+</code></pre></div>
+<p>Keep the repo plugin portable: do not put host-specific URLs or shell-style
+expressions such as <code>${VORNIK_URL:-http://localhost:8080}</code> into the plugin
+<code>.mcp.json</code>. Codex does not expand that syntax and will fail before the MCP
+handshake. If the local override supplies the remote daemon URL, disable only
+the plugin-bundled MCP server in <code>~/.codex/config.toml</code> while leaving the plugin
+itself enabled so its skill remains available:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[plugins.</span><span class="s2">&quot;codex-companion@vornik&quot;</span><span class="k">.mcp_servers.vornik]</span>
+<span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</code></pre></div>
 
 
 
