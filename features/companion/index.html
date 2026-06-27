@@ -1361,9 +1361,10 @@
 <p class="admonition-title">Community Edition</p>
 <p>Included in the free, open-source <strong>Community Edition</strong>. See <a href="../../editions/">Editions</a>.</p>
 </div>
-<p>The vornik <strong>companion</strong> is a Claude Code plugin that connects your editor
-session to a running vornik daemon. It gives you two things without leaving
-Claude Code:</p>
+<p>The vornik <strong>companion</strong> connects your host LLM session to a running vornik
+daemon. It ships as a Claude Code plugin and as a Codex plugin; both use the
+same companion MCP endpoint and scoped key model. It gives you two things
+without leaving your coding session:</p>
 <ul>
 <li><strong>Project memory</strong> — semantically recall what vornik knows about the repo
   you're in, and deposit notes back into that memory.</li>
@@ -1425,17 +1426,20 @@ scoped key, so it never needs your admin credentials.</p>
 </tr>
 </tbody>
 </table>
-<p>Several are also wrapped as slash commands — for example <code>/recall</code>, <code>/remember</code>,
-<code>/delegate</code>, <code>/review</code> (a one-shot architectural review), <code>/peek</code> (recent
-tasks), and <code>/upload</code> (attach files to a delegation).</p>
+<p>In Claude Code, several tools are also wrapped as slash commands — for example
+<code>/recall</code>, <code>/remember</code>, <code>/delegate</code>, <code>/review</code> (a one-shot architectural
+review), <code>/peek</code> (recent tasks), and <code>/upload</code> (attach files to a delegation).
+In Codex, use the MCP tools directly; the Codex adapter ships a <code>delegate</code> skill
+that teaches the same recall-before-delegate and file-attachment rules.</p>
 <h2 id="project-memory-and-repo-scope">Project memory and repo scope<a class="headerlink" href="#project-memory-and-repo-scope" title="Permanent link">&para;</a></h2>
 <p><code>recall</code> and <code>remember</code> operate on the memory of the vornik <strong>project</strong> your key
 is bound to. Because one project can back several repositories, every note
 carries a <strong>repo scope</strong> — a token derived from the repo you're working in. A
 recall returns matches for the current scope plus anything marked
 cross-cutting, so two repos served by the same project don't pollute each
-other's results. The session start-up resolves the scope from your checkout's
-git remote automatically and passes it on every call.</p>
+other's results. Claude Code resolves the scope from your checkout's git remote
+in its SessionStart hook. Codex callers should pass the same remote-derived
+token explicitly as <code>repo_scope</code>.</p>
 <div class="highlight"><pre><span></span><code>/recall how does the scheduler lease tasks?
 /remember the broker API rejects fractional shares with error 10243 — keep shares whole
 </code></pre></div>
@@ -1447,9 +1451,9 @@ and large content should be sent through the ingest workflow rather than a singl
 estimated time — you keep working while a swarm agent does the task on vornik's
 infrastructure. <code>status</code> and <code>result</code> poll it. Because the work happens on
 vornik and <code>result</code> returns only the final output artifact, a long review or
-audit doesn't consume your editor's token budget. File-bearing commands like
-<code>/upload</code> attach files as artifacts so their bytes never enter the model's
-context.</p>
+audit doesn't consume your editor's token budget. File-bearing workflows must
+receive files as <code>inputArtifacts</code>; Claude's <code>/upload</code> command wraps that flow,
+while Codex should call <code>delegate</code> directly with base64 <code>inputArtifacts</code>.</p>
 <p>The shipped delegation workflows include:</p>
 <ul>
 <li><strong>architectural review</strong> — a second opinion on a diff, PR, or design doc
@@ -1475,6 +1479,7 @@ vornikctl<span class="w"> </span>companion<span class="w"> </span>grant<span cla
 <span class="w">    </span>--workflows<span class="w"> </span>companion-architectural-review,companion-rag-ingest<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--budget-usd<span class="w"> </span><span class="m">5</span><span class="w"> </span>--memory-read<span class="w"> </span>--memory-write
 </code></pre></div>
+<p>Use <code>--client codex</code> instead when minting a key for the Codex plugin.</p>
 <p>The key's allowed workflows, spend cap, and memory permissions are enforced
 server-side from the key itself — never from the request.</p>
 <p>On the <strong>client</strong> side, point the plugin at your daemon with two environment
@@ -1482,11 +1487,15 @@ variables and install it:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_URL</span><span class="o">=</span><span class="s2">&quot;https://vornik.internal.example.com:8080&quot;</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
 </code></pre></div>
-<p>Add the companion plugin from your vornik checkout's companion plugin directory
-(<code>claude --plugin-dir &lt;path&gt;/contrib/claude-code-companion</code>), or install it from
-the bundled plugin marketplace for a persistent setup. Once loaded, the tools
-and slash commands are available in the session, and a start-up digest brings
-recently-completed delegations and fresh memory back into context.</p>
+<p>For Claude Code, add the plugin from your vornik checkout's companion plugin
+directory (<code>claude --plugin-dir &lt;path&gt;/contrib/claude-code-companion</code>), or
+install it from the bundled plugin marketplace for a persistent setup. Once
+loaded, the tools and slash commands are available in the session, and a
+start-up digest brings recently-completed delegations and fresh memory back into
+context.</p>
+<p>For Codex, load the plugin from <code>&lt;path&gt;/contrib/codex-companion</code>. It exposes the
+same MCP server and a Codex-native <code>delegate</code> skill, but no Claude-only slash
+commands or SessionStart hook.</p>
 
 
 
