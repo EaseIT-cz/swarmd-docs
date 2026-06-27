@@ -1248,6 +1248,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#a-60-second-playground" class="md-nav__link">
+    <span class="md-ellipsis">
+      A 60-second playground
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#install" class="md-nav__link">
     <span class="md-ellipsis">
       Install
@@ -1359,8 +1368,14 @@ defaults are safe and local-first.</p>
 <li><strong>Go 1.25+</strong> — to build the daemon and CLI from source.</li>
 <li><strong>Podman</strong> (rootless recommended) — vornik runs every agent in its own
   Podman container for isolation. Docker is not used.</li>
-<li><strong>PostgreSQL</strong> — vornik keeps all durable state (queues, tasks,
-  executions, artifacts, memory) in PostgreSQL so work survives restarts.</li>
+<li><strong>PostgreSQL with the <a href="https://github.com/pgvector/pgvector">pgvector</a>
+  extension</strong> — vornik keeps all durable state (queues, tasks, executions,
+  artifacts, memory) in PostgreSQL so work survives restarts. pgvector backs
+  the memory/RAG semantic search — the recommended <code>pgvector/pgvector</code> image
+  ships it, and vornik enables the extension on first boot. SQLite is
+  supported for the orchestration core, but it <strong>cannot do vector search</strong>, so
+  memory/RAG falls back to keyword search only (see <a href="../features/memory-rag/">Memory &amp;
+  RAG</a>).</li>
 <li><strong>Make</strong> — convenience build targets.</li>
 </ul>
 <div class="admonition note">
@@ -1368,6 +1383,22 @@ defaults are safe and local-first.</p>
 <p>vornik is <strong>local-first</strong>: the daemon and all agent containers run on
 the same host. There is no cloud service to sign up for.</p>
 </div>
+<h2 id="a-60-second-playground">A 60-second playground<a class="headerlink" href="#a-60-second-playground" title="Permanent link">&para;</a></h2>
+<p>If you just want to kick the tyres, skip the manual build below — one command
+stands up a complete playground (PostgreSQL + pgvector <strong>and</strong> the daemon) in
+containers via Podman Compose. It installs Podman Compose if it is missing,
+configures the host so the daemon can spawn agent containers, brings everything
+up, and prints the URL to open when it is ready:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/grinco/vornik/main/deployments/podman/quickstart.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</code></pre></div>
+<p>The daemon creates and migrates its own schema on first boot, so all you supply
+is an empty database — the script provisions it. When it finishes, open
+<a href="http://localhost:8080/ui">http://localhost:8080/ui</a>. To run real tasks, add an LLM key to
+<code>deployments/podman/.env</code> and re-run <code>podman compose up -d vornik</code>. See the
+<a href="https://github.com/grinco/vornik/tree/main/deployments/podman">Podman Compose deployment notes</a>
+for tunables and the runtime model.</p>
+<p>This is the fastest way to get a working instance; the rest of this page builds
+the same thing by hand so you understand each piece.</p>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <p>Build the two binaries from source:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># The daemon</span>
@@ -1399,8 +1430,12 @@ variables. The quickest path is environment variables:</p>
 <span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_DATABASE_PASSWORD</span><span class="o">=</span>vornik
 </code></pre></div>
 <p>vornik creates and migrates its schema on first start, so an empty
-database is all you need. For a full list of settings and the YAML
-equivalent, see the <a href="../reference/configuration/">Configuration reference</a>.</p>
+database is all you need — point it at a fresh database and let it migrate;
+do not pre-load a schema dump. Use a PostgreSQL image with <strong>pgvector</strong>
+(e.g. <code>pgvector/pgvector</code>) so the memory/RAG vector search works; vornik
+enables the extension during that first-boot migration. For a full list of
+settings and the YAML equivalent, see the
+<a href="../reference/configuration/">Configuration reference</a>.</p>
 <h2 id="start-the-daemon">Start the daemon<a class="headerlink" href="#start-the-daemon" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>vornik
 </code></pre></div>

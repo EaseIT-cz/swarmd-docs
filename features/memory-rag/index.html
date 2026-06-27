@@ -1470,6 +1470,11 @@ read back out.</p>
 <p>This enables the <code>memory.*</code> gates — LLM consolidation, response cache, and
 embedding cache — and restarts the daemon during an idle window.</p>
 <h3 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h3>
+<p>Semantic (vector) search requires a <strong>PostgreSQL backend with the
+<a href="https://github.com/pgvector/pgvector">pgvector</a> extension</strong> — the
+<code>pgvector/pgvector</code> image ships it and vornik enables it on first boot. On a
+SQLite backend there is no vector index, so recall degrades to keyword
+(full-text / substring) search only.</p>
 <p>The doctor checks that the embedding model is actually reachable. When
 <code>memory.embedding_endpoint</code> is set, it probes that endpoint directly (the
 endpoint embeddings really use — typically a local Ollama / TEI server),
