@@ -1384,34 +1384,18 @@ defaults are safe and local-first.</p>
 the same host. There is no cloud service to sign up for.</p>
 </div>
 <h2 id="a-60-second-playground">A 60-second playground<a class="headerlink" href="#a-60-second-playground" title="Permanent link">&para;</a></h2>
-<div class="admonition tip">
-<p class="admonition-title">Preferred: AI-assisted install</p>
-<p>If you use a coding agent (Claude Code, Codex, Gemini CLI, …), let it do
-everything on this page for you — paste this into your agent:</p>
-<blockquote>
-<p>Set up Vornik for me. Follow the runbook at https://agents.vornik.io</p>
-</blockquote>
-<p><a href="https://github.com/grinco/vornik/blob/main/AGENTS.md">AGENTS.md</a> is an
-agent-executable runbook: install (via the same <code>get.vornik.io</code> script
-below), LLM key setup, a first task, and the agent's own companion
-project + persistent RAG memory — with a verifiable check at every step,
-and your approval required before anything privileged.</p>
-</div>
-<p>If you'd rather run it yourself, one command stands up a complete playground
-on a Linux host. It installs any missing prerequisites, builds the daemon +
-CLI in an ephemeral container (no Go toolchain needed), starts PostgreSQL +
-pgvector in a container, and runs the daemon as a rootless <code>systemctl --user</code>
-service that spawns agent containers via your rootless Podman:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.vornik.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+<p>If you just want to kick the tyres, skip the manual build below — one command
+stands up a complete playground (PostgreSQL + pgvector <strong>and</strong> the daemon) in
+containers via Podman Compose. It installs Podman Compose if it is missing,
+configures the host so the daemon can spawn agent containers, brings everything
+up, and prints the URL to open when it is ready:</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/grinco/vornik/main/deployments/podman/quickstart.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </code></pre></div>
 <p>The daemon creates and migrates its own schema on first boot, so all you supply
 is an empty database — the script provisions it. When it finishes, open
-<a href="http://localhost:8080/ui">http://localhost:8080/ui</a>: a first-run <strong>setup guide</strong> walks you through
-connecting an LLM endpoint and key (with a live connection test), optional
-memory/RAG, and creating your first project. To do the same from the terminal,
-set <code>VORNIK_CHAT_API_KEY</code> in <code>~/.config/vornik/vornik.env</code> and run
-<code>systemctl --user restart vornik</code>. See the
-<a href="https://github.com/grinco/vornik/tree/main/deployments/podman">Podman deployment notes</a>
+<a href="http://localhost:8080/ui">http://localhost:8080/ui</a>. To run real tasks, add an LLM key to
+<code>deployments/podman/.env</code> and re-run <code>podman compose up -d vornik</code>. See the
+<a href="https://github.com/grinco/vornik/tree/main/deployments/podman">Podman Compose deployment notes</a>
 for tunables and the runtime model.</p>
 <p>This is the fastest way to get a working instance; the rest of this page builds
 the same thing by hand so you understand each piece.</p>
@@ -1456,8 +1440,7 @@ settings and the YAML equivalent, see the
 <div class="highlight"><pre><span></span><code>vornik
 </code></pre></div>
 <p>With no flags, vornik looks for configuration in this order: the <code>--config</code>
-flag, the <code>VORNIK_CONFIG</code> environment variable, <code>./vornik.yaml</code> (or
-<code>./config.yaml</code>), <code>~/.config/vornik/</code> (XDG user config), then
+flag, the <code>VORNIK_CONFIG</code> environment variable, <code>./vornik.yaml</code>, then
 <code>/etc/vornik/vornik.yaml</code>. To run with an explicit file:</p>
 <div class="highlight"><pre><span></span><code>vornik<span class="w"> </span>--config<span class="w"> </span>/path/to/vornik.yaml
 </code></pre></div>

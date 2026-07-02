@@ -1273,9 +1273,8 @@
 </ul>
 <h2 id="vornik-daemon"><code>vornik</code> (daemon)<a class="headerlink" href="#vornik-daemon" title="Permanent link">&para;</a></h2>
 <p>The daemon takes no required flags. It finds its config file via the search order
-in <a href="../getting-started/#first-run">Getting started</a> (<code>--config</code> flag, then
-<code>$VORNIK_CONFIG</code>, then <code>./vornik.yaml</code>/<code>./config.yaml</code>, then an XDG/home
-location, then <code>/etc/vornik/</code>).</p>
+in <a href="../getting-started/#first-run">Getting started</a> (<code>$VORNIK_CONFIG</code>, then
+<code>./config.yaml</code>, then <code>/etc/vornik/config.yaml</code>, then an XDG/home location).</p>
 <table>
 <thead>
 <tr>
@@ -1287,10 +1286,6 @@ location, then <code>/etc/vornik/</code>).</p>
 <tr>
 <td><code>vornik</code></td>
 <td>Start the daemon (loads config, runs the orchestration loop and API).</td>
-</tr>
-<tr>
-<td><code>vornik --config &lt;path&gt;</code></td>
-<td>Start with an explicit config file.</td>
 </tr>
 <tr>
 <td><code>vornik --version</code></td>
