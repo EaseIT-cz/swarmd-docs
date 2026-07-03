@@ -1232,6 +1232,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202670" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202661" class="md-nav__link">
     <span class="md-ellipsis">
       2026.6.1
@@ -1383,6 +1392,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202670" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202661" class="md-nav__link">
     <span class="md-ellipsis">
       2026.6.1
@@ -1525,6 +1543,60 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202670">2026.7.0<a class="headerlink" href="#202670" title="Permanent link">&para;</a></h2>
+<p><strong>A renamed, edition-aware platform with an AI-first install and a hardened
+memory/chat core.</strong> This release completes the rename to <strong>vornik</strong>, introduces
+a clean Community/Enterprise edition seam, publishes the docs site, and lands a
+broad reliability pass across memory/RAG, chat providers, onboarding, and
+deployment.</p>
+<div class="admonition warning">
+<p class="admonition-title">This release renames the product</p>
+<p><code>vornik</code> is now <strong>vornik</strong> and <code>vornikctl</code> is now <strong>vornikctl</strong>. Service
+names, command names, config paths, environment variables, and dashboards
+changed. Review your automation for the <code>vornik</code> → <code>vornik</code> migration before
+upgrading, and always take a backup first.</p>
+</div>
+<ul>
+<li><strong>Vornik rename, end to end.</strong> Source, commands, environment variables,
+  metrics, deployment files, Helm chart, Grafana dashboards, configs, and docs
+  moved from <code>vornik</code> to <code>vornik</code>; <code>vornikctl</code> is now <code>vornikctl</code>.</li>
+<li><strong>Edition-aware builds.</strong> The codebase now has a clean Community/Enterprise
+  seam: every feature carries a CE/EE tag (shown in the docs and enforced in
+  code), and the Community Edition builds and ships independently under
+  AGPL-3.0.</li>
+<li><strong>Published documentation.</strong> Public docs are now served at
+  <a href="https://docs.vornik.io">https://docs.vornik.io</a>, with per-page edition markers and expanded
+  onboarding, architecture, configuration, CLI, security, and support material.</li>
+<li><strong>AI-first install.</strong> <code>AGENTS.md</code> is now a runbook a coding agent can execute
+  and verify end to end (install → LLM key → first task → its own persistent
+  memory); the getting-started path makes the AI-assisted install the preferred
+  route (short link: <code>agents.vornik.io</code>).</li>
+<li><strong>Sharper memory recall.</strong> Multi-term recall now uses a strict full-text query
+  with a relaxed fallback and all-term matches ranked first; a reranker-gated,
+  round-isolated retrieval path improves context assembly, scoped to
+  non-interactive use so interactive recall stays fast. By-id correction is now
+  the preferred way to fix a stale or wrong memory.</li>
+<li><strong>More resilient chat.</strong> Long conversations are summarized instead of dropped
+  when context overflows, chat providers share a tuned HTTP transport, and
+  persistent-timeout handling engages provider fallback faster.</li>
+<li><strong>Companion &amp; MCP.</strong> A first-party Codex companion plugin joins the Claude
+  companion; companion memory gained a <code>memory_correct</code> tool (including a
+  surgical by-id refute mode) plus input-validation and reliability hardening.</li>
+<li><strong>Deployment quickstarts.</strong> A one-command, pgvector-backed local playground
+  and a hardened installer (clean re-checkout, safe cleanup, literal DB port);
+  PostgreSQL + pgvector is the recommended backend for memory/RAG.</li>
+<li><strong>Fixes &amp; hardening.</strong> Rate-limit minute/hour buckets no longer cross-sum;
+  no-JavaScript pages render one consistent color scheme; Postgres integration
+  tests honor <code>POSTGRES_PORT</code>.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Restart required</p>
+<p>Restart the daemon after upgrading to pick up the new behavior.</p>
+</div>
+<p>Enterprise-edition capabilities (packaging and installers, SSO and admin
+surfaces, clustering, and more) also advanced this release — see the
+<a href="../editions/">Editions matrix</a> for what's included where.</p>
 <hr />
 <h2 id="202661">2026.6.1<a class="headerlink" href="#202661" title="Permanent link">&para;</a></h2>
 <p><strong>A more visual control plane, safer to expose and support.</strong> This release
