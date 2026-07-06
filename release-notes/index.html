@@ -1232,6 +1232,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202671" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202670" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.0
@@ -1392,6 +1401,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202671" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202670" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.0
@@ -1542,6 +1560,43 @@ behavior changes, and notable fixes. Internal-only changes are omitted.</p>
 so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
+</div>
+<hr />
+<h2 id="202671">2026.7.1<a class="headerlink" href="#202671" title="Permanent link">&para;</a></h2>
+<p><strong>A polish release: leaner large tool outputs, an end-to-end project-creation
+experience, and clearer edition boundaries.</strong> This follow-up to 2026.7.0 keeps
+big tool payloads out of the model's context, finishes the guided
+project-creation flow, and tightens the Community/Enterprise line.</p>
+<ul>
+<li><strong>Large tool outputs stay out of the context window.</strong> The daemon can now hold
+  a large MCP tool result and hand the model a compact handle instead of the
+  full payload, and the per-result size cap is configurable (default raised to
+  256 KiB). A new image-encoding helper fetches and downscales an image to an
+  inline data URI, hardened against SSRF.</li>
+<li><strong>End-to-end project creation.</strong> Project templates gained list/multiselect
+  parameters, dynamic option sources, and conflict-free ID suggestions, with new
+  ready-made purpose templates (code reviewer, tool assistant, report pipeline,
+  docs↔RAG sync). A per-project <strong>readiness page</strong> (<code>/ui/projects/{id}/setup</code>)
+  runs config, schedule, secrets, MCP, model, and smoke checks and flags what is
+  still incomplete, and the conversational <strong>project wizard</strong> now composes a
+  project turn by turn from your live MCP servers and models, showing a summary
+  before it commits.</li>
+<li><strong>Clearer edition boundaries.</strong> Community Edition returns a typed
+  "Enterprise-only" response on Enterprise-gated admin routes, companion API-key
+  minting is available in Community, and the Memory Firewall and project
+  configuration are now Community features (cross-project context remains
+  Enterprise).</li>
+<li><strong>Security &amp; correctness.</strong> Fixes for a cross-project access-control gap in the
+  UI, a server-side request-forgery path, and several query-efficiency
+  improvements on hot paths.</li>
+<li><strong>Onboarding fixes.</strong> The setup flow now correctly recognizes router- and
+  CLI-based chat providers as configured, clearing spurious "not configured" and
+  session-authentication errors on the setup and wizard pages.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Restart to pick up new behavior</p>
+<p>The configurable tool-result cap and media-handle behavior take effect after
+a daemon restart.</p>
 </div>
 <hr />
 <h2 id="202670">2026.7.0<a class="headerlink" href="#202670" title="Permanent link">&para;</a></h2>

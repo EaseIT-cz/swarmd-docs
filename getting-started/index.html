@@ -1497,13 +1497,19 @@ does not exist.</p>
 <p class="admonition-title">Note</p>
 <p>You can also create projects without touching the CLI: open the Web UI
 at <code>/ui/projects/new</code> for a gallery of templates, or
-<code>/ui/projects/new/wizard</code> for a conversational wizard that builds the
-project, swarm, and workflow for you.</p>
+<code>/ui/projects/new/wizard</code> for a conversational wizard that composes a
+base template with typed add-ons (MCP servers, schedule, secrets,
+tools, role instructions) and builds the project, swarm, and workflow
+for you.</p>
 </div>
 <p>Confirm the daemon has loaded your project:</p>
 <div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>project<span class="w"> </span>list
 vornikctl<span class="w"> </span>project<span class="w"> </span>show<span class="w"> </span>my-project
 </code></pre></div>
+<p>However you created it, every project gets a readiness checklist at
+<code>/ui/projects/{id}/setup</code> — config, secrets, MCP reachability, chat model,
+schedule, and an optional smoke test — and the project list flags any
+project with unmet required checks.</p>
 <h2 id="submit-your-first-task">Submit your first task<a class="headerlink" href="#submit-your-first-task" title="Permanent link">&para;</a></h2>
 <p>Now submit a task. The <code>--prompt</code> flag is the simplest way to describe the
 work:</p>

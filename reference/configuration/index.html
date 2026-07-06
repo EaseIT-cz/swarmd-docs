@@ -2093,6 +2093,11 @@
 <td>Bound on a single LLM call from inside an agent.</td>
 </tr>
 <tr>
+<td><code>runtime.agent_llm.tool_result_max_bytes</code></td>
+<td>int</td>
+<td>Max bytes of a tool result fed back to the model (0 = agent default 256 KiB).</td>
+</tr>
+<tr>
 <td><code>runtime.warm_pool.enabled</code></td>
 <td>bool</td>
 <td>Reuse warm containers for faster task start.</td>
@@ -2229,6 +2234,11 @@
 <td><code>secrets.checkpoints</code></td>
 <td>map</td>
 <td>Map a channel to an action: detect, redact, or block.</td>
+</tr>
+<tr>
+<td><code>secrets.trusted_output_tools</code></td>
+<td>list</td>
+<td>Tool-name prefixes whose tool-audit OUTPUT is exempt from generic_kv/entropy redaction (strong credential patterns still redact; input always scanned).</td>
 </tr>
 </tbody>
 </table>
