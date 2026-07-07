@@ -14,7 +14,7 @@
         <link rel="prev" href="../forge/">
       
       
-        <link rel="next" href="../../reference/">
+        <link rel="next" href="../knowledge-skills/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -825,6 +825,8 @@
       
         
       
+        
+      
     
     
       
@@ -1123,6 +1125,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../knowledge-skills/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge skills
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1375,7 +1398,7 @@ without leaving your coding session:</p>
 <p>The plugin talks to the daemon over MCP-over-HTTP and is gated by its own
 scoped key, so it never needs your admin credentials.</p>
 <h2 id="the-tools">The tools<a class="headerlink" href="#the-tools" title="Permanent link">&para;</a></h2>
-<p>The companion exposes ten MCP tools:</p>
+<p>The companion exposes these MCP tools:</p>
 <table>
 <thead>
 <tr>
@@ -1424,8 +1447,46 @@ scoped key, so it never needs your admin credentials.</p>
 <td><code>catalog</code></td>
 <td>show which workflows this key may delegate to, with cost estimates</td>
 </tr>
+<tr>
+<td><code>skill_propose</code></td>
+<td>propose a knowledge skill (instructional know-how) as a draft (needs <code>skill_write</code>)</td>
+</tr>
+<tr>
+<td><code>skill_search</code></td>
+<td>find active/trusted knowledge skills by scope, domain, role (needs <code>skill_read</code>)</td>
+</tr>
+<tr>
+<td><code>skill_get</code></td>
+<td>fetch one knowledge skill's full body (needs <code>skill_read</code>)</td>
+</tr>
+<tr>
+<td><code>skill_list</code></td>
+<td>enumerate knowledge skills by maturity for management (needs <code>skill_read</code>)</td>
+</tr>
+<tr>
+<td><code>skill_approve</code></td>
+<td>promote a draft skill to active — the human gate (needs <code>skill_admin</code>)</td>
+</tr>
+<tr>
+<td><code>skill_reject</code></td>
+<td>retire/revoke a knowledge skill (needs <code>skill_admin</code>)</td>
+</tr>
+<tr>
+<td><code>skill_set_global</code></td>
+<td>set/clear a skill's cross-project (global) reach (needs <code>skill_admin</code>)</td>
+</tr>
 </tbody>
 </table>
+<p>The <code>skill_*</code> tools are the client surface of the daemon-owned <strong>knowledge-skill
+store</strong>: instructional know-how authored from any client (a proven procedure, a
+hard-won gotcha) that, once approved, is served to swarm roles and every
+companion client. They are distinct from the <code>SWARM-SKILL.md</code> capability skills
+(workflow + roles) and share no storage with project memory. A proposed skill
+lands as a <code>draft</code> and never fires until an operator with a <code>skill_admin</code> key
+approves it. A skill can also be marked <strong>global</strong> (<code>skill_propose global:true</code>
+or <code>skill_set_global</code>) so it injects into every project's roles, not just its
+home project — the way a procedure captured in your companion project reaches
+the autonomy roles. See <a href="../knowledge-skills/">Knowledge skills</a>.</p>
 <p>In Claude Code, several tools are also wrapped as slash commands — for example
 <code>/recall</code>, <code>/remember</code>, <code>/delegate</code>, <code>/review</code> (a one-shot architectural
 review), <code>/peek</code> (recent tasks), and <code>/upload</code> (attach files to a delegation).
@@ -1498,18 +1559,24 @@ endpoint):</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># confirm the daemon advertises the companion capabilities</span>
 curl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VORNIK_URL</span><span class="s2">/api/v1/capabilities&quot;</span>
 
-<span class="c1"># mint a scoped key (printed once)</span>
+<span class="c1"># mint a scoped key (printed once) — memory + knowledge-skill capable</span>
 vornikctl<span class="w"> </span>companion<span class="w"> </span>grant<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--project<span class="w"> </span>companion-<span class="nv">$USER</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--client<span class="w"> </span>claude-code<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--workflows<span class="w"> </span>companion-architectural-review,companion-rag-ingest<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--budget-usd<span class="w"> </span><span class="m">5</span><span class="w"> </span>--memory-read<span class="w"> </span>--memory-write
+<span class="w">    </span>--budget-usd<span class="w"> </span><span class="m">5</span><span class="w"> </span>--memory-all<span class="w"> </span>--skill-all
 </code></pre></div>
+<p><code>--memory-all</code> and <code>--skill-all</code> are the recommended default for a companion
+project: they grant RAG (<code>remember</code>/<code>recall</code>) and the full knowledge-skill
+store (<code>skill_read</code>/<code>write</code>/<code>admin</code>) so you can capture and approve procedures
+without a second grant. Narrow them per key — e.g. <code>--skill-read --skill-write</code>
+(propose but not self-approve), or drop <code>--skill-all</code> entirely for a
+delegate-only key. <code>--memory-all</code> = <code>--memory-read --memory-write</code>.</p>
 <p>Use <code>--client codex</code> instead when minting a key for the Codex plugin. For Codex
 (no SessionStart scope injector), add <code>--repo-scope github.com/&lt;org&gt;/&lt;repo&gt;</code> so
 memory calls that omit <code>repo_scope</code> inherit the right scope by default.</p>
-<p>The key's allowed workflows, spend cap, and memory permissions are enforced
-server-side from the key itself — never from the request.</p>
+<p>The key's allowed workflows, spend cap, and memory + skill permissions are
+enforced server-side from the key itself — never from the request.</p>
 <p>On the <strong>client</strong> side, set the companion bearer token and install the plugin:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
 </code></pre></div>

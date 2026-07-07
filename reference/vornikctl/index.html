@@ -823,6 +823,8 @@
       
         
       
+        
+      
     
     
       
@@ -1036,6 +1038,27 @@
   
   <span class="md-ellipsis">
     Companion plugin
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/knowledge-skills/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Knowledge skills
   </span>
   
 
@@ -1416,6 +1439,33 @@
   <a href="#vornikctl-key-update" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl key update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge-set-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge set-global
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge-set-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge set-project
     </span>
   </a>
   
@@ -2497,6 +2547,33 @@
   <a href="#vornikctl-key-update" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl key update
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge-set-global" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge set-global
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge-set-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge set-project
     </span>
   </a>
   
@@ -4077,6 +4154,22 @@ raw PUT.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="vornikctl-knowledge">vornikctl knowledge<a class="headerlink" href="#vornikctl-knowledge" title="Permanent link">&para;</a></h2>
+<p>Manage knowledge skills (cross-project reach)</p>
+<p>Operator surface for the knowledge-skill store.</p>
+<p>A knowledge skill authored in one project can be promoted to GLOBAL so it
+injects into every project's roles — e.g. a skill captured from a Claude
+companion session becomes available to the janka and assistant autonomy
+roles. Promotion does not change a skill's maturity; an approved skill
+stays approved.</p>
+<h2 id="vornikctl-knowledge-set-global">vornikctl knowledge set-global<a class="headerlink" href="#vornikctl-knowledge-set-global" title="Permanent link">&para;</a></h2>
+<p>Promote a knowledge skill to GLOBAL (injects into ALL projects)</p>
+<div class="highlight"><pre><span></span><code>vornikctl knowledge set-global &lt;skill-id&gt;
+</code></pre></div>
+<h2 id="vornikctl-knowledge-set-project">vornikctl knowledge set-project<a class="headerlink" href="#vornikctl-knowledge-set-project" title="Permanent link">&para;</a></h2>
+<p>Demote a knowledge skill to project-only (its home project)</p>
+<div class="highlight"><pre><span></span><code>vornikctl knowledge set-project &lt;skill-id&gt;
+</code></pre></div>
 <h2 id="vornikctl-mcp">vornikctl mcp<a class="headerlink" href="#vornikctl-mcp" title="Permanent link">&para;</a></h2>
 <p>Inspect and call MCP tools wired to a project</p>
 <h2 id="vornikctl-mcp-call">vornikctl mcp call<a class="headerlink" href="#vornikctl-mcp-call" title="Permanent link">&para;</a></h2>
