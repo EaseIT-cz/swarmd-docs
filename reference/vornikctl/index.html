@@ -825,6 +825,8 @@
       
         
       
+        
+      
     
     
       
@@ -1068,6 +1070,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/control-plane/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control plane
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1250,6 +1273,60 @@
   <a href="#vornikctl-config-show" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl config show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-approve" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane approve
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-proposals" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane proposals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-propose" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane propose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-reject" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane reject
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane show
     </span>
   </a>
   
@@ -2364,6 +2441,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-approve" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane approve
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-proposals" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane proposals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-propose" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane propose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-reject" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane reject
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-show" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane show
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-doctor" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl doctor
@@ -3460,6 +3591,132 @@ overwrite semantics, etc).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="vornikctl-control-plane">vornikctl control-plane<a class="headerlink" href="#vornikctl-control-plane" title="Permanent link">&para;</a></h2>
+<p>Control-plane proposal ledger (troubleshooting / config proposals)</p>
+<p>Review and decide control-plane change proposals.</p>
+<p>A proposal is a human-gated suggested change (a config diff, a model swap)
+raised by the operator or a Tune detector. Phase 1 lets you propose, list,
+show, approve, and reject; applying an approved change is done by hand (gated
+auto-apply is a later phase).</p>
+<h2 id="vornikctl-control-plane-approve">vornikctl control-plane approve<a class="headerlink" href="#vornikctl-control-plane-approve" title="Permanent link">&para;</a></h2>
+<p>Approve a DRAFT proposal (you must not be its proposer)</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane approve &lt;proposal-id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td><code>swarm-control</code></td>
+<td>Approver identity (must differ from the proposer)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-control-plane-proposals">vornikctl control-plane proposals<a class="headerlink" href="#vornikctl-control-plane-proposals" title="Permanent link">&para;</a></h2>
+<p>List control-plane proposals</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane proposals [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Filter by project ID</td>
+</tr>
+<tr>
+<td><code>-s</code>, <code>--status</code></td>
+<td></td>
+<td>Filter by status (DRAFT/APPROVED/REJECTED/APPLIED/ROLLED_BACK)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-control-plane-propose">vornikctl control-plane propose<a class="headerlink" href="#vornikctl-control-plane-propose" title="Permanent link">&para;</a></h2>
+<p>Raise a control-plane proposal (writes a DRAFT for review)</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane propose [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--blast-radius</code></td>
+<td><code>project</code></td>
+<td>model | project | swarm | daemon</td>
+</tr>
+<tr>
+<td><code>--diff</code></td>
+<td></td>
+<td>The proposed change (diff / patch text)</td>
+</tr>
+<tr>
+<td><code>--kind</code></td>
+<td><code>config</code></td>
+<td>config | model | scaffold</td>
+</tr>
+<tr>
+<td><code>--rationale</code></td>
+<td></td>
+<td>Why</td>
+</tr>
+<tr>
+<td><code>--title</code></td>
+<td></td>
+<td>One-line title (required)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Affected project (omit for a daemon-scope proposal)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-control-plane-reject">vornikctl control-plane reject<a class="headerlink" href="#vornikctl-control-plane-reject" title="Permanent link">&para;</a></h2>
+<p>Reject a DRAFT proposal</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane reject &lt;proposal-id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--author</code></td>
+<td><code>swarm-control</code></td>
+<td>Rejecter identity</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-control-plane-show">vornikctl control-plane show<a class="headerlink" href="#vornikctl-control-plane-show" title="Permanent link">&para;</a></h2>
+<p>Show a single proposal (full diff + rationale)</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane show &lt;proposal-id&gt;
+</code></pre></div>
 <h2 id="vornikctl-doctor">vornikctl doctor<a class="headerlink" href="#vornikctl-doctor" title="Permanent link">&para;</a></h2>
 <p>Diagnose and repair common issues</p>
 <p>Run diagnostic checks against the vornik daemon and optionally fix issues.</p>
@@ -3527,6 +3784,11 @@ because they require operator config changes or external runtime actions.</p>
 <td><code>--json</code></td>
 <td><code>false</code></td>
 <td>Output in JSON format</td>
+</tr>
+<tr>
+<td><code>--offline</code></td>
+<td><code>false</code></td>
+<td>Run static checks WITHOUT the daemon (config parse, DB reachability, migration state, recent journal errors) — the escape hatch when the daemon won't start</td>
 </tr>
 </tbody>
 </table>

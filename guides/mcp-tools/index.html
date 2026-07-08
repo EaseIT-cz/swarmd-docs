@@ -577,6 +577,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Declaring MCP servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-server-request-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-server request timeout
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -912,6 +927,8 @@
       
         
       
+        
+      
     
     
       
@@ -1155,6 +1172,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/control-plane/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control plane
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1344,6 +1382,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Declaring MCP servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#per-server-request-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Per-server request timeout
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1441,6 +1494,19 @@ MCP server:</p>
 <p><code>command</code>/<code>args</code>/<code>env</code> apply only to <code>stdio</code>; <code>url</code> applies only to <code>sse</code>.
 <code>name</code> must be unique within the project — it's how tools are namespaced and
 how you target a server from the CLI.</p>
+<h3 id="per-server-request-timeout">Per-server request timeout<a class="headerlink" href="#per-server-request-timeout" title="Permanent link">&para;</a></h3>
+<p><code>sse</code>/<code>streamable-http</code> servers use a <strong>30-second</strong> per-request timeout by
+default. If a server has tools that legitimately run longer — e.g. a scraper
+whose <code>web_fetch</code> hits slow or anti-bot sites — raise it with
+<code>timeout_seconds</code> so a slow call completes instead of failing with
+<code>context deadline exceeded</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;scraper&quot;</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sse&quot;</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:8787&quot;</span>
+<span class="w">      </span><span class="nt">timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span><span class="w">      </span><span class="c1"># 0 or omitted = 30s default</span>
+</code></pre></div>
 <h2 id="restricting-tools-with-allowed_tools">Restricting tools with <code>allowed_tools</code><a class="headerlink" href="#restricting-tools-with-allowed_tools" title="Permanent link">&para;</a></h2>
 <p>By default a server exposes <strong>every</strong> tool it advertises. In almost all cases
 you want to narrow that to the tools the project actually needs. Add

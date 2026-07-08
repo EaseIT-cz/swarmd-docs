@@ -682,6 +682,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-youre-notified" class="md-nav__link">
+    <span class="md-ellipsis">
+      How you're notified
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#acting-on-approvals" class="md-nav__link">
     <span class="md-ellipsis">
       Acting on approvals
@@ -882,6 +891,8 @@
   
     
     
+      
+        
       
         
       
@@ -1146,6 +1157,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../features/control-plane/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control plane
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1356,6 +1388,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-youre-notified" class="md-nav__link">
+    <span class="md-ellipsis">
+      How you're notified
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#acting-on-approvals" class="md-nav__link">
     <span class="md-ellipsis">
       Acting on approvals
@@ -1428,6 +1469,23 @@ vornikctl<span class="w"> </span>task<span class="w"> </span>answer<span class="
 </code></pre></div>
 <p>You can also steer a running task with <code>vornikctl task directive</code>, pause/resume
 it, or amend its brief — see the <a href="../../reference/vornikctl/">vornikctl reference</a>.</p>
+<h2 id="how-youre-notified">How you're notified<a class="headerlink" href="#how-youre-notified" title="Permanent link">&para;</a></h2>
+<p>When a task needs you (approval or input), vornik pushes a steering
+notification so it doesn't stall unseen (gated by
+<code>steering_notifications_enabled</code>, default on):</p>
+<ul>
+<li><strong>Chat-originated tasks</strong> notify the chat/DM that started them, so the prompt
+  lands where you were already talking to vornik.</li>
+<li><strong>Ownerless tasks</strong> — the autonomy loop's own tasks <em>and the routed
+  sub-tasks they spawn</em> (which carry no originating chat) — are routed by
+  <strong>project</strong>: the alert goes to the operators who have access to that task's
+  project. On Telegram that's the users in <code>telegram.allowed_users</code> whose access
+  covers the project (wildcard users plus users scoped to it) — so an
+  <code>assistant</code> task alerts the assistant operators, a <code>janka</code> task alerts the
+  janka operators. Configure the channel (and an optional catch-all fallback
+  recipient for projects that resolve to nobody) under <code>steering_operator_alert</code>.</li>
+</ul>
+<p>Every alert carries a deep link to the task so you can act on it in one tap.</p>
 <h2 id="acting-on-approvals">Acting on approvals<a class="headerlink" href="#acting-on-approvals" title="Permanent link">&para;</a></h2>
 <p>Approvals and questions are actioned in the Web UI, where they're collected in
 the <strong>Inbox</strong> ("what needs me") — ranked so the things blocking work come first:

@@ -14,7 +14,7 @@
         <link rel="prev" href="../companion/">
       
       
-        <link rel="next" href="../../reference/">
+        <link rel="next" href="../control-plane/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -827,6 +827,8 @@
       
         
       
+        
+      
     
     
       
@@ -1155,6 +1157,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../control-plane/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control plane
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1456,7 +1479,11 @@ RAG memory — memory holds <em>facts</em>, skills hold <em>procedures</em>.</p>
 <li><strong>Companion command.</strong> <code>/skill-list maturity=draft</code> to see pending drafts,
   then <code>/skill-approve &lt;id&gt;</code> (needs a key with the <code>skill_admin</code> capability).</li>
 <li><strong>Web UI (Enterprise).</strong> The <strong>Admin → Skills</strong> page (<code>/ui/admin/skills</code>)
-  lists drafts with Approve / Reject.</li>
+  is a full skills browser across all projects, with maturity tabs
+  (Pending review / Active / Trusted / Retired / All) and per-skill usage
+  counters. Pending drafts carry Approve / Reject; any skill carries a
+  Make global / Make project-only toggle; active/trusted skills can be
+  retired.</li>
 </ul>
 <h2 id="client-tools">Client tools<a class="headerlink" href="#client-tools" title="Permanent link">&para;</a></h2>
 <p>Available in Claude Code (as <code>/skill-*</code> commands) and Codex (as <code>skill_*</code>
