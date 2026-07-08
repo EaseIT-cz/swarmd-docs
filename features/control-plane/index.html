@@ -1149,6 +1149,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#applying-a-change-gated-reversible" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying a change (gated, reversible)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-console-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web console (Enterprise)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-doctor-offline" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl doctor --offline
@@ -1382,6 +1400,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#applying-a-change-gated-reversible" class="md-nav__link">
+    <span class="md-ellipsis">
+      Applying a change (gated, reversible)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web-console-enterprise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Web console (Enterprise)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-doctor-offline" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl doctor --offline
@@ -1436,8 +1472,16 @@ the control plane takes, so it is safe by construction.</p>
 </code></pre></div>
 <p>Proposals come from you (via the CLI) or from a <strong>Tune detector</strong> — a
 leader-gated watcher that raises a DRAFT when a project's health signal
-degrades (e.g. a sustained high failed-task rate), so a regression surfaces as
-a reviewable suggestion rather than something you have to notice yourself.</p>
+degrades, so a regression surfaces as a reviewable suggestion rather than
+something you have to notice yourself. It watches two signals over a rolling
+window and only fires after a <strong>sustained</strong> breach (three consecutive scans):</p>
+<ul>
+<li><strong>failed-task rate</strong> — too many executions failing;</li>
+<li><strong>p95 latency</strong> — executions taking too long.</li>
+</ul>
+<p>So a project that starts failing or slowing down produces a DRAFT proposal
+("investigate the failing step / consider a faster model or a timeout change")
+you can review with <code>vornikctl cp proposals</code>.</p>
 <h3 id="vornikctl-control-plane-alias-cp"><code>vornikctl control-plane</code> (alias <code>cp</code>)<a class="headerlink" href="#vornikctl-control-plane-alias-cp" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># See what&#39;s waiting for you</span>
 vornikctl<span class="w"> </span>cp<span class="w"> </span>proposals<span class="w">                 </span><span class="c1"># add --status DRAFT / --project janka</span>
@@ -1454,7 +1498,31 @@ vornikctl<span class="w"> </span>cp<span class="w"> </span>propose<span class="w
 <span class="w">    </span>--project<span class="w"> </span>janka<span class="w"> </span>--kind<span class="w"> </span>config<span class="w"> </span>--blast-radius<span class="w"> </span>project<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--diff<span class="w"> </span><span class="s1">&#39;-timeout_seconds: 30</span>
 <span class="s1">+timeout_seconds: 90&#39;</span><span class="w"> </span>--rationale<span class="w"> </span><span class="s2">&quot;web_fetch timing out&quot;</span>
+
+<span class="c1"># Apply an APPROVED, applyable proposal (hot-reload) — and roll it back</span>
+vornikctl<span class="w"> </span>cp<span class="w"> </span>apply<span class="w"> </span>&lt;proposal-id&gt;<span class="w">          </span><span class="c1"># --ack-daemon for daemon-scope</span>
+vornikctl<span class="w"> </span>cp<span class="w"> </span>rollback<span class="w"> </span>&lt;proposal-id&gt;
 </code></pre></div>
+<h2 id="applying-a-change-gated-reversible">Applying a change (gated, reversible)<a class="headerlink" href="#applying-a-change-gated-reversible" title="Permanent link">&para;</a></h2>
+<p>An APPROVED proposal that carries a concrete file rewrite can be <strong>applied by
+the daemon</strong> via config hot-reload — no restart:</p>
+<ul>
+<li><strong>Whole-file replace only</strong> — the proposal carries the full new file
+  contents (no fragile diff-patching); the human-readable diff is for review.</li>
+<li><strong>Fail-closed preconditions</strong>: only APPROVED applies (exactly once); a
+  daemon-scope change needs an explicit <code>--ack-daemon</code>; apply is <strong>refused
+  while any task in scope is running</strong> (retry in an idle window); the new
+  content is parsed/validated <strong>before</strong> anything is written.</li>
+<li><strong>Atomic + snapshotted</strong>: the current file is snapshotted, the new file is
+  written atomically, then reloaded. If the reload <strong>rejects</strong> the config (or
+  times out), the daemon <strong>auto-rolls-back</strong> to the snapshot — it never runs a
+  bad config.</li>
+<li><strong>Rollback</strong>: <code>cp rollback</code> restores the pre-apply snapshot and reloads.</li>
+</ul>
+<p>Proposals from the Tune detector are <strong>review-only</strong> (they describe a problem,
+not a specific rewrite) — you approve them and make the change yourself, or
+attach a concrete rewrite. Auto-apply does not exist: a human always runs
+<code>cp apply</code>.</p>
 <p>The surface is <strong>operator-scoped</strong> (it works in Community and is never behind
 the Enterprise admin gate). Two safety rules are enforced daemon-side: a
 proposal can only be decided while it is <code>DRAFT</code> (a decided proposal is
@@ -1462,6 +1530,14 @@ terminal — supersede it with a new one), and <strong>the proposer can never ap
 their own proposal</strong> — approval is always a separate human decision. So when
 the Tune detector proposes (as <code>tune-detector</code>), a human approval always
 clears the gate.</p>
+<h2 id="web-console-enterprise">Web console (Enterprise)<a class="headerlink" href="#web-console-enterprise" title="Permanent link">&para;</a></h2>
+<p>The <strong>Admin → Control plane</strong> page (<code>/ui/admin/control-plane</code>) is a browser
+surface over the same ledger: browse proposals by status, read a proposal's
+rationale + diff, and <strong>approve / reject / apply / rollback</strong> with a click. It
+delegates to the same engine as the CLI, so every gate holds — a daemon-scope
+apply needs the "affects all projects" checkbox, and the proposer can't approve
+their own proposal. (The CLI above is the Community path; the console is an
+Enterprise convenience.)</p>
 <h2 id="vornikctl-doctor-offline"><code>vornikctl doctor --offline</code><a class="headerlink" href="#vornikctl-doctor-offline" title="Permanent link">&para;</a></h2>
 <p>The escape hatch for when the daemon <strong>won't start</strong>. It runs static checks
 without any daemon RPC:</p>
@@ -1477,11 +1553,11 @@ without any daemon RPC:</p>
 </ul>
 <p>It never changes anything and exits non-zero if any check fails.</p>
 <h2 id="whats-not-here-yet">What's not here yet<a class="headerlink" href="#whats-not-here-yet" title="Permanent link">&para;</a></h2>
-<p>Phase 1 is deliberately mutation-free. Applying an approved proposal
-(hot-reload with a pre-apply snapshot + rollback), the richer diagnostic
-assembler over logs/metrics/traces, config-as-conversation project scaffolding,
-and an operator agent you can just talk to are later phases. See the design
-notes in the repo for the full arc.</p>
+<p>Config + model applies land now (Phase 2). Still ahead: scaffold-apply for new
+projects/workflows, the richer diagnostic assembler over logs/metrics/traces,
+config-as-conversation scaffolding, self-healing incident detection, and an
+operator agent you can just talk to. See the design notes in the repo for the
+full arc.</p>
 
 
 

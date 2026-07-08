@@ -1288,6 +1288,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane apply
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-control-plane-approve" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl control-plane approve
@@ -1318,6 +1327,15 @@
   <a href="#vornikctl-control-plane-reject" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl control-plane reject
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane rollback
     </span>
   </a>
   
@@ -2450,6 +2468,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-apply" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane apply
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-control-plane-approve" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl control-plane approve
@@ -2480,6 +2507,15 @@
   <a href="#vornikctl-control-plane-reject" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl control-plane reject
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-rollback" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane rollback
     </span>
   </a>
   
@@ -3598,6 +3634,31 @@ overwrite semantics, etc).</p>
 raised by the operator or a Tune detector. Phase 1 lets you propose, list,
 show, approve, and reject; applying an approved change is done by hand (gated
 auto-apply is a later phase).</p>
+<h2 id="vornikctl-control-plane-apply">vornikctl control-plane apply<a class="headerlink" href="#vornikctl-control-plane-apply" title="Permanent link">&para;</a></h2>
+<p>Apply an APPROVED proposal (hot-reload; auto-rolls-back on failure)</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane apply &lt;proposal-id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--ack-daemon</code></td>
+<td><code>false</code></td>
+<td>Acknowledge a daemon-scope change affects every project</td>
+</tr>
+<tr>
+<td><code>--author</code></td>
+<td><code>swarm-control</code></td>
+<td>Operator identity applying the change</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-control-plane-approve">vornikctl control-plane approve<a class="headerlink" href="#vornikctl-control-plane-approve" title="Permanent link">&para;</a></h2>
 <p>Approve a DRAFT proposal (you must not be its proposer)</p>
 <div class="highlight"><pre><span></span><code>vornikctl control-plane approve &lt;proposal-id&gt; [flags]
@@ -3713,6 +3774,10 @@ auto-apply is a later phase).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="vornikctl-control-plane-rollback">vornikctl control-plane rollback<a class="headerlink" href="#vornikctl-control-plane-rollback" title="Permanent link">&para;</a></h2>
+<p>Roll an APPLIED proposal back to its pre-apply snapshot</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane rollback &lt;proposal-id&gt;
+</code></pre></div>
 <h2 id="vornikctl-control-plane-show">vornikctl control-plane show<a class="headerlink" href="#vornikctl-control-plane-show" title="Permanent link">&para;</a></h2>
 <p>Show a single proposal (full diff + rationale)</p>
 <div class="highlight"><pre><span></span><code>vornikctl control-plane show &lt;proposal-id&gt;
