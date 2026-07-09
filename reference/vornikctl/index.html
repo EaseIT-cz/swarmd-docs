@@ -1306,6 +1306,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-diagnose" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane diagnose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-control-plane-proposals" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl control-plane proposals
@@ -2486,6 +2495,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-control-plane-diagnose" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl control-plane diagnose
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-control-plane-proposals" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl control-plane proposals
@@ -3654,8 +3672,8 @@ auto-apply is a later phase).</p>
 </tr>
 <tr>
 <td><code>--author</code></td>
-<td><code>swarm-control</code></td>
-<td>Operator identity applying the change</td>
+<td></td>
+<td>Operator identity applying the change (defaults to $USER)</td>
 </tr>
 </tbody>
 </table>
@@ -3674,8 +3692,40 @@ auto-apply is a later phase).</p>
 <tbody>
 <tr>
 <td><code>--author</code></td>
-<td><code>swarm-control</code></td>
-<td>Approver identity (must differ from the proposer)</td>
+<td></td>
+<td>Approver identity, must differ from the proposer (defaults to $USER)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-control-plane-diagnose">vornikctl control-plane diagnose<a class="headerlink" href="#vornikctl-control-plane-diagnose" title="Permanent link">&para;</a></h2>
+<p>Diagnose a project/task from its logs &amp; metrics (read-only unless --propose)</p>
+<p>Run a single-shot diagnosis: the daemon assembles an evidence bundle
+(recent failed/successful executions, metrics, logs, known failure patterns)
+and asks the configured LLM for a root cause. Read-only by default; with
+--propose it may file a review-only DRAFT proposal (never auto-applied). Any
+suggested change carrying a secret or an external URL is rejected before a
+proposal is filed.</p>
+<p><focus> is a task id (task_...) or a project id / substring.</p>
+<div class="highlight"><pre><span></span><code>vornikctl control-plane diagnose &lt;focus&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit the raw verdict JSON</td>
+</tr>
+<tr>
+<td><code>--propose</code></td>
+<td><code>false</code></td>
+<td>File a review-only DRAFT proposal from the diagnosis (never auto-applied)</td>
 </tr>
 </tbody>
 </table>
@@ -3769,8 +3819,8 @@ auto-apply is a later phase).</p>
 <tbody>
 <tr>
 <td><code>--author</code></td>
-<td><code>swarm-control</code></td>
-<td>Rejecter identity</td>
+<td></td>
+<td>Rejecter identity (defaults to $USER)</td>
 </tr>
 </tbody>
 </table>

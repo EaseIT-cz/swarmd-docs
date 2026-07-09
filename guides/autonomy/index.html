@@ -640,6 +640,48 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#backlog-autonomy-and-agent-deposits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backlog autonomy and agent deposits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backlog autonomy and agent deposits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-marker-grammar" class="md-nav__link">
+    <span class="md-ellipsis">
+      The marker grammar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#granting-the-deposit-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Granting the deposit tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shipping-deposits-as-draft-prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shipping deposits as draft PRs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#watching-it" class="md-nav__link">
     <span class="md-ellipsis">
       Watching it
@@ -1379,6 +1421,48 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#backlog-autonomy-and-agent-deposits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backlog autonomy and agent deposits
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backlog autonomy and agent deposits">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-marker-grammar" class="md-nav__link">
+    <span class="md-ellipsis">
+      The marker grammar
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#granting-the-deposit-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Granting the deposit tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shipping-deposits-as-draft-prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shipping deposits as draft PRs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#watching-it" class="md-nav__link">
     <span class="md-ellipsis">
       Watching it
@@ -1486,6 +1570,10 @@ to create a task. There are three decision modes:</p>
 <td><code>autonomy.duplicateWindow</code></td>
 <td>how long a completed task suppresses an identical one (default <code>24h</code>; <code>0</code> for cron-style)</td>
 </tr>
+<tr>
+<td><code>autonomy.workflow_id</code></td>
+<td>override the workflow a <code>backlog</code>-mode tick dispatches into (see <a href="#backlog-autonomy-and-agent-deposits">Backlog autonomy and agent deposits</a>)</td>
+</tr>
 </tbody>
 </table>
 <h2 id="staying-in-control">Staying in control<a class="headerlink" href="#staying-in-control" title="Permanent link">&para;</a></h2>
@@ -1513,6 +1601,136 @@ copies.</p>
 </ul>
 <p>To stop autonomy, set <code>autonomy.enabled: false</code> (or toggle it from the project
 page in the UI) — the loop is cancelled.</p>
+<h2 id="backlog-autonomy-and-agent-deposits">Backlog autonomy and agent deposits<a class="headerlink" href="#backlog-autonomy-and-agent-deposits" title="Permanent link">&para;</a></h2>
+<p><code>backlog</code> mode reads a plain checklist file — <code>BACKLOG.md</code> by default
+(<code>autonomy.backlogFilePath</code> to point at another workspace-relative path) —
+and fires the first pending line as a task, ticking it off when the task is
+accepted. You can hand-author that file, but agents can feed it too: any role
+permitted to call the <code>backlog_deposit</code> tool can record an off-scope finding —
+a bug, an optimisation, an inefficiency, or a refactor candidate it noticed
+while working on something else — without derailing its current task. A
+reviewer, for example, can use it for problems it spots in a diff that aren't
+in scope for that PR's verdict.</p>
+<h3 id="the-marker-grammar">The marker grammar<a class="headerlink" href="#the-marker-grammar" title="Permanent link">&para;</a></h3>
+<p>One consumer owns every read/modify/write of the file, and it recognises four
+markers:</p>
+<table>
+<thead>
+<tr>
+<th>Marker</th>
+<th>Meaning</th>
+<th>Written by</th>
+<th>Picked up by the next tick?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>- [ ]</code></td>
+<td>Pending, ready to run</td>
+<td>You (hand-authored), or you flipping a <code>- [?]</code></td>
+<td>Yes — first-in, first-out</td>
+</tr>
+<tr>
+<td><code>- [?]</code></td>
+<td>Proposed, awaiting your review</td>
+<td><code>backlog_deposit</code> — always</td>
+<td>No — inert by construction</td>
+</tr>
+<tr>
+<td><code>- [x]</code></td>
+<td>Done</td>
+<td>The backlog tick, on successful dispatch</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>- [!]</code></td>
+<td>Failed</td>
+<td>The next tick's reconcile pass, on a terminal-failed run</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>Agent-authored deposits always land as <code>- [?]</code>, never <code>- [ ]</code>, and there's no
+config knob to change that. A deposit's title and detail are agent-authored
+text, and once a <code>- [ ]</code> line is consumed it becomes a verbatim task prompt
+with no human in between — so a deposit that could land straight into <code>- [ ]</code>
+would let a confused or compromised agent's own words steer a <em>future</em>
+autonomous task. The FIFO scan only ever matches <code>- [ ]</code>, so a <code>- [?]</code> item is
+structurally unreachable by autonomy until you edit the box yourself. That's
+the per-item approval gate: agent-authored text never becomes an autonomous
+prompt without a human decision.</p>
+<h3 id="granting-the-deposit-tool">Granting the deposit tool<a class="headerlink" href="#granting-the-deposit-tool" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allowedTools</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;backlog_deposit&quot;</span><span class="w">   </span><span class="c1"># plus the role&#39;s usual tools (file_read, run_shell, git_*, ...)</span>
+</code></pre></div>
+<p>The agent calls it with a <code>kind</code> (<code>bug</code> | <code>optimisation</code> | <code>inefficiency</code> |
+<code>refactor</code>), a short <code>title</code>, a <code>detail</code>, and an optional <code>evidence</code> string.
+The daemon validates the fields, secret-scans the rendered line (a match is
+blocked, never appended), rate-caps accepted deposits per task with
+<code>backlogDeposits.maxPerTask</code> (default <strong>10</strong>), and dedups against existing
+lines — an exact title match or a close paraphrase (fuzzy match) of an open
+item is rejected as a duplicate. A close match against an already-closed
+(<code>- [x]</code> / <code>- [!]</code>) item needs <code>regression: true</code> plus non-empty <code>evidence</code>
+to re-open it, and is still refused for 7 days after that item was closed, so
+a flapping check can't spin the same "regression" back in immediately. None
+of these rejections fail the agent's task — it gets a structured reason back
+and moves on:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">backlogDeposits</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">maxPerTask</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w">   </span><span class="c1"># default; per-task cap on accepted deposits</span>
+</code></pre></div>
+<h3 id="shipping-deposits-as-draft-prs">Shipping deposits as draft PRs<a class="headerlink" href="#shipping-deposits-as-draft-prs" title="Permanent link">&para;</a></h3>
+<p><code>backlog</code>-mode ticks normally dispatch into the project's default workflow
+(commonly <code>dev-pipeline</code>, which commits straight to the local clone — no PR,
+no review). Point backlog mode at the purpose-built delivery pipeline instead
+with <code>autonomy.workflow_id: "backlog-item"</code>: it runs the same
+analyze → implement (TDD) → test → review loop, then a deterministic
+<code>publish</code> step pushes the branch and opens a <strong>draft pull request</strong> — no
+agent ever runs <code>git push</code> or a forge CLI. See
+<a href="../../features/forge/#backlog-origin-pull-requests">Backlog-origin pull requests</a>
+for what that PR looks like.</p>
+<p>That publish step needs an outbound repo to target — there's no inbound
+webhook naming one for backlog-originated work — so <code>backlog-item</code> also
+requires <code>github.repo</code> (and a working GitHub App installation; see
+<a href="../../features/forge/">Forge</a>) on the project. Setting <code>autonomy.workflow_id</code>
+to a workflow that doesn't exist is loud, not silent: it's flagged at config
+load/reload, and the tick itself skips (recorded, not a silent fallback to
+the default workflow) rather than guessing.</p>
+<p>Putting it together, a project with backlog autonomy pointed at draft PRs
+looks like:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">github</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">123456</span>
+<span class="w">  </span><span class="nt">installation_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">78901234</span>
+<span class="w">  </span><span class="nt">private_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/secrets/forge-app.pem</span>
+<span class="w">  </span><span class="c1"># Outbound repo for work with no inbound event to name one —</span>
+<span class="w">  </span><span class="c1"># backlog-item&#39;s draft PRs target this.</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your-org/your-repo&quot;</span>
+
+<span class="nt">autonomy</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">            </span><span class="c1"># flip on when you&#39;re ready for deposits to become PRs</span>
+<span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backlog&quot;</span>
+<span class="w">  </span><span class="nt">workflow_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backlog-item&quot;</span>
+<span class="w">  </span><span class="nt">maxTasksPerHour</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;45m&quot;</span>
+<span class="w">  </span><span class="nt">allowedTaskTypes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;backlog&quot;</span>
+
+<span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allowedTools</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;backlog_deposit&quot;</span>
+
+<span class="nt">backlogDeposits</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">maxPerTask</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+</code></pre></div>
+<p>With <code>autonomy.enabled: false</code>, deposits still flow — any role holding the
+tool can propose <code>- [?]</code> items — but nothing consumes them yet. Flip
+<code>enabled: true</code> only once you're ready to have hand-approved (<code>- [ ]</code>) items
+turn into draft pull requests.</p>
+<p>If a <code>backlog-item</code> run exhausts its retries or hard-fails a step, it
+terminates with no PR opened. The next tick's reconcile pass finds the
+terminal-failed item and flips its box from <code>- [x]</code> to <code>- [!]</code> in the backlog
+file, so nothing is silently lost — investigate, then flip it back to
+<code>- [ ]</code> to retry, or delete the line if it's not worth retrying.</p>
 <h2 id="watching-it">Watching it<a class="headerlink" href="#watching-it" title="Permanent link">&para;</a></h2>
 <p>Every evaluation — whether it created a task or not — is recorded with an
 outcome (created, no-action, rate-limited, budget-blocked, duplicate, and so

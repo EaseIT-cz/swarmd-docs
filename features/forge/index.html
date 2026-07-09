@@ -1071,6 +1071,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#backlog-origin-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backlog-origin pull requests
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-credential-model" class="md-nav__link">
     <span class="md-ellipsis">
       The credential model
@@ -1379,6 +1388,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#backlog-origin-pull-requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backlog-origin pull requests
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-credential-model" class="md-nav__link">
     <span class="md-ellipsis">
       The credential model
@@ -1462,6 +1480,33 @@ what to do) and drives two main flows:</p>
   the daemon posts the review back through GitHub's review API.</li>
 </ul>
 <p>A bare issue with no label is ignored — only a <em>labelled</em> issue is actionable.</p>
+<h2 id="backlog-origin-pull-requests">Backlog-origin pull requests<a class="headerlink" href="#backlog-origin-pull-requests" title="Permanent link">&para;</a></h2>
+<p>The two flows above are inbound-event-driven: an issue label or an opened PR
+tells Forge what to do and which repo to do it in. A project running
+<a href="../../guides/autonomy/#backlog-autonomy-and-agent-deposits">backlog autonomy</a>
+opens draft PRs a third way, with no inbound event at all: an item consumed
+from the project's backlog file is dispatched into the <code>backlog-item</code>
+workflow (analyze → implement, TDD → test → review → publish), and its
+<code>publish</code> step is the same deterministic <code>forge.open_change_request</code> handler
+the issue flow uses — pushing the branch and opening the PR daemon-side, no
+agent involved.</p>
+<p>A few things differ from the issue-driven flow because there's no issue to
+key off of:</p>
+<ul>
+<li><strong>Branch naming.</strong> No <code>fix/issue-&lt;n&gt;</code> / <code>feat/issue-&lt;n&gt;</code> — the branch is
+  named from the backlog item itself (<code>backlog/&lt;slug&gt;</code>).</li>
+<li><strong>No issue to close.</strong> The PR title and body describe the change; there's
+  no <code>Fix #&lt;n&gt;</code> linkage because no issue triggered it.</li>
+<li><strong>Always draft, same as the issue flow.</strong> Nothing about backlog origin
+  changes that — every automated PR is opened as a draft regardless of how it
+  was triggered.</li>
+<li><strong>The outbound repo comes from config, not the event.</strong> With no webhook
+  payload naming a repository, backlog-origin publishing needs <code>github.repo</code>
+  (<code>owner/repo</code>) set on the project so the daemon knows where to push.</li>
+</ul>
+<p>Once opened, a backlog-origin PR goes through the exact same <strong>pull request
+opened → review</strong> path as any other PR — it isn't special-cased for review,
+only for how it came to exist.</p>
 <h2 id="the-credential-model">The credential model<a class="headerlink" href="#the-credential-model" title="Permanent link">&para;</a></h2>
 <p>This is the part that matters for security review:</p>
 <ul>
@@ -1510,6 +1555,15 @@ write credentials, because it never has them.</p>
 project and warns you if it can't — so a misconfigured key surfaces immediately,
 not on the first issue.</p>
 <h2 id="review-behaviour">Review behaviour<a class="headerlink" href="#review-behaviour" title="Permanent link">&para;</a></h2>
+<p>The reviewer works through the diff in a fixed order — intent, a design
+challenge (is this the right approach, and what's the alternative?), a
+correctness pass that cites <code>file:line</code> for every finding, test adequacy,
+security and robustness, and an explicit "what would break this" attempt —
+before reaching a severity-ranked verdict. A problem the reviewer notices
+that the diff didn't introduce doesn't block the PR: it gets recorded with
+the <code>backlog_deposit</code> tool (see
+<a href="../../guides/autonomy/#backlog-autonomy-and-agent-deposits">Backlog autonomy and agent deposits</a>)
+instead, so the verdict stays scoped to what's actually in the diff.</p>
 <p>By default a posted review is a non-gating comment, even when the reviewer
 approves. Set <code>gating_reviews: true</code> on the review step to turn the reviewer's
 verdict into a real GitHub APPROVE / REQUEST_CHANGES. (A review that would
