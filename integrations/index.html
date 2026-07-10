@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.vornik.io/reference/">
+        <link rel="canonical" href="https://docs.vornik.io/integrations/">
       
       
-        <link rel="prev" href="../features/control-plane/">
+        <link rel="prev" href="../guides/automation-composer/">
       
       
-        <link rel="next" href="configuration/">
+        <link rel="next" href="telegram/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Reference - Vornik documentation</title>
+        <title>Integrations Hub - Vornik documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#reference" class="md-skip">
+        <a href="#integrations-hub" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Reference
+              Integrations Hub
             
           </span>
         </div>
@@ -823,6 +823,8 @@
       
   
   
+    
+  
   
   
     
@@ -850,16 +852,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../integrations/" class="md-nav__link ">
+            <a href="./" class="md-nav__link md-nav__link--active">
               
   
   <span class="md-ellipsis">
@@ -870,13 +872,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+              <label class="md-nav__link md-nav__link--active" for="__nav_5" id="__nav_5_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Integrations
@@ -892,7 +894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/telegram/" class="md-nav__link">
+      <a href="telegram/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -913,7 +915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/mcp/" class="md-nav__link">
+      <a href="mcp/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -934,7 +936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/email/" class="md-nav__link">
+      <a href="email/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -955,7 +957,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/github-app/" class="md-nav__link">
+      <a href="github-app/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -976,7 +978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../integrations/slack/" class="md-nav__link">
+      <a href="slack/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1303,8 +1305,6 @@
       
   
   
-    
-  
   
   
     
@@ -1326,16 +1326,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../reference/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1346,13 +1346,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_7" id="__nav_7_label" tabindex="">
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             Reference
@@ -1368,7 +1368,7 @@
   
   
     <li class="md-nav__item">
-      <a href="configuration/" class="md-nav__link">
+      <a href="../reference/configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1389,7 +1389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="vornikctl/" class="md-nav__link">
+      <a href="../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1470,6 +1470,50 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-five-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      The five integrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connect-test-save" class="md-nav__link">
+    <span class="md-ellipsis">
+      Connect → test → save
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#project-scope-vs-daemon-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      Project scope vs. daemon scope
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-never-happens" class="md-nav__link">
+    <span class="md-ellipsis">
+      What never happens
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1483,23 +1527,115 @@
                   
 
 
-<h1 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h1>
-<p>Authoritative lookup material for running vornik. Use these pages when you
-already understand the concepts and need exact key names, defaults, and
-command syntax.</p>
+<h1 id="integrations-hub">Integrations Hub<a class="headerlink" href="#integrations-hub" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Enterprise Edition</p>
+<p>This capability is part of the <strong>Enterprise Edition</strong> — a proprietary overlay on the open-source core. See <a href="../editions/">Editions</a> for the full Community vs Enterprise matrix.</p>
+</div>
+<p>The Integrations Hub, at <strong><code>/ui/integrations</code></strong> in the web UI, is the guided
+way to connect the channels and tools vornik talks through — without
+hand-editing a YAML file or an <code>.env</code> file. Every credential you enter is
+<strong>tested before it's saved</strong>, so you find out immediately whether a token
+works, instead of watching a message silently fail to arrive later.</p>
+<p>If you prefer to configure a channel by editing YAML directly, see the
+<a href="../guides/conversation-channels/">Conversation Channels</a> guide instead —
+both routes write to the same configuration, so you can start in the hub and
+finish by hand, or the other way around.</p>
+<h2 id="the-five-integrations">The five integrations<a class="headerlink" href="#the-five-integrations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Integration</th>
+<th>What it's for</th>
+<th>Docs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Telegram</strong></td>
+<td>A Telegram bot vornik can send and receive messages through</td>
+<td><a href="telegram/">Telegram</a></td>
+</tr>
+<tr>
+<td><strong>MCP tool server</strong></td>
+<td>An external MCP server whose tools vornik's roles can call</td>
+<td><a href="mcp/">MCP tool server</a></td>
+</tr>
+<tr>
+<td><strong>Email</strong></td>
+<td>An inbox vornik reads over IMAP and replies to over SMTP</td>
+<td><a href="email/">Email</a></td>
+</tr>
+<tr>
+<td><strong>GitHub App</strong></td>
+<td>A GitHub App vornik uses to react to issues and pull requests</td>
+<td><a href="github-app/">GitHub App</a></td>
+</tr>
+<tr>
+<td><strong>Slack</strong></td>
+<td>A Slack workspace vornik answers in as a bot</td>
+<td><a href="slack/">Slack</a></td>
+</tr>
+</tbody>
+</table>
+<p>Each integration's tile links to its own page above, with the exact fields
+its guided form asks for and what the connection test checks.</p>
+<h2 id="connect-test-save">Connect → test → save<a class="headerlink" href="#connect-test-save" title="Permanent link">&para;</a></h2>
+<p>Every integration in the hub follows the same three steps:</p>
+<ol>
+<li><strong>Fill in the guided form.</strong> Each field carries a plain-language hint for
+   where to find the value (for example, "Message @BotFather → /newbot →
+   copy the token it gives you"). Fields marked <strong>secret</strong> hold a credential
+   — a bot token, a password, a signing secret — and are never redisplayed
+   once saved; you can replace a secret, but you can't read it back through
+   the UI.</li>
+<li><strong>Test the connection.</strong> Before anything is written, the hub calls the
+   provider with exactly the values you entered — Telegram's <code>getMe</code>,
+   Slack's <code>auth.test</code>, an IMAP/SMTP login, a GitHub App installation-token
+   mint, or an MCP endpoint reachability check — and shows a plain result:
+   green "Connected as ..." or red "Invalid — the provider rejected this."
+   A separate red state, "Couldn't reach the provider — try again," means
+   the network or the provider had a hiccup, not that your credential is
+   wrong.</li>
+<li><strong>Save.</strong> Saving re-runs the same test first — <strong>a credential that fails
+   the test cannot be saved</strong>. On success, any secret field is written to
+   vornik's secret store and the configuration file gets only a
+   placeholder that names it, never the literal value. Non-secret fields
+   (a workspace ID, a server URL, a list of allowed repositories) are
+   written as-is.</li>
+</ol>
+<p>After saving, the integration's tile becomes a <strong>health tile</strong>: it shows
+the result of the last test and a "Re-check" button so you can confirm
+it's still working, on demand — the hub does not silently re-probe your
+credentials in the background.</p>
+<h2 id="project-scope-vs-daemon-scope">Project scope vs. daemon scope<a class="headerlink" href="#project-scope-vs-daemon-scope" title="Permanent link">&para;</a></h2>
+<p>The five integrations split into two scopes, and it affects who can connect
+them and where the setting lives:</p>
 <ul>
-<li><strong><a href="configuration/">Configuration</a></strong> — the customer-relevant <code>config.yaml</code>
-  keys and feature flags, organised by section, with types and defaults.</li>
-<li><strong><a href="vornikctl/">vornikctl CLI</a></strong> — the <code>vornikctl</code> commands you use day to day
-  to inspect and control a running daemon: tasks, projects, keys, memory,
-  diagnostics, and more.</li>
+<li><strong>Daemon-scope</strong> (Telegram, MCP tool servers) — these are admin-only,
+  installation-wide settings. They're visible only to an administrator, and
+  they don't belong to any one project.</li>
+<li><strong>Project-scope</strong> (Email, GitHub App, Slack) — these belong to a specific
+  project. A project-scoped user only ever sees their own project's tiles
+  for these three; an administrator sees every project's tiles, each
+  labeled with its project.</li>
 </ul>
-<p>If you are getting started for the first time, begin with the
-<a href="../getting-started/">Getting Started guide</a> and the
-<a href="../concepts/">concepts overview</a>, then return here for specifics.
-For end-to-end walkthroughs, see the <a href="../guides/">guides</a>. If
-something is misbehaving, the <a href="../troubleshooting/">troubleshooting</a>
-page is the place to start.</p>
+<p>If your account is scoped to a single project, the hub picks that project
+for you automatically. An administrator managing several projects chooses
+which project a tile applies to.</p>
+<h2 id="what-never-happens">What never happens<a class="headerlink" href="#what-never-happens" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>A credential never lands on disk as plain text.</strong> The configuration
+  file only ever gets a placeholder that names where the real value is
+  stored.</li>
+<li><strong>A failing test is never silently saved.</strong> If the connection test
+  fails, saving is refused — there's no "save anyway."</li>
+<li><strong>A secret is never sent back to your browser.</strong> Once a secret field is
+  saved, the form shows only that it's configured, never its value.</li>
+<li><strong>Nothing is probed just by opening the page.</strong> Loading the catalog or a
+  form never dials out to a provider — only "Test connection," "Save," and
+  "Re-check" do.</li>
+</ul>
 
 
 
