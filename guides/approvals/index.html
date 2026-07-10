@@ -433,6 +433,8 @@
       
         
       
+        
+      
     
     
       
@@ -867,6 +869,27 @@
   
   <span class="md-ellipsis">
     Clustering and the DMZ Webhook Relay
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../automation-composer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The automation composer ("Describe it")
   </span>
   
 
@@ -1488,10 +1511,14 @@ notification so it doesn't stall unseen (gated by
 <p>Every alert carries a deep link to the task so you can act on it in one tap.</p>
 <h2 id="acting-on-approvals">Acting on approvals<a class="headerlink" href="#acting-on-approvals" title="Permanent link">&para;</a></h2>
 <p>Approvals and questions are actioned in the Web UI, where they're collected in
-the <strong>Inbox</strong> ("what needs me") — ranked so the things blocking work come first:
-tasks needing approval, then tasks needing input, then failures. Each item links
-to the task, where the <strong>Approve</strong> / <strong>Reject</strong> buttons (for approval-gated
-tasks) and the <strong>Answer</strong> action (for checkpoints) live.</p>
+a pinned "Needs your attention" queue at the top of the <strong>Inbox</strong> ("what needs
+me") — ranked so the things blocking work come first: tasks needing approval,
+then tasks needing input, then failures. The <strong>Approve</strong> / <strong>Reject</strong> buttons
+(for approval-gated tasks), the checkpoint <strong>Answer</strong> control (option buttons
+for a decision, a text box for an open question), and <strong>Retry</strong> / <strong>Help me
+fix this</strong> (for a recent failure) act right there in the queue — no need to
+open the task first. The same actions are also available on the task's own
+page for a closer look at context before deciding.</p>
 <blockquote>
 <p>Approving or rejecting a <em>task</em> is a Web UI action (or a steering reply from a
 connected chat channel) — there is no <code>vornikctl approve</code> command for tasks.

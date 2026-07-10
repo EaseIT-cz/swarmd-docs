@@ -8,22 +8,28 @@
       
       
       
+        <link rel="canonical" href="https://docs.vornik.io/guides/automation-composer/">
       
       
+        <link rel="prev" href="../clustering/">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      
+        <link rel="next" href="../../features/blackbox/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
     
     
       
-        <title>Vornik documentation</title>
+        <title>The automation composer ("Describe it") - Vornik documentation</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -42,7 +48,7 @@
       
     
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -67,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#the-automation-composer-describe-it" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -79,7 +90,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/." title="Vornik documentation" class="md-header__button md-logo" aria-label="Vornik documentation" data-md-component="logo">
+    <a href="../.." title="Vornik documentation" class="md-header__button md-logo" aria-label="Vornik documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -99,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              The automation composer ("Describe it")
             
           </span>
         </div>
@@ -202,7 +213,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/." title="Vornik documentation" class="md-nav__button md-logo" aria-label="Vornik documentation" data-md-component="logo">
+    <a href="../.." title="Vornik documentation" class="md-nav__button md-logo" aria-label="Vornik documentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -220,7 +231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -263,7 +274,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/getting-started/" class="md-nav__link ">
+            <a href="../../getting-started/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -323,7 +334,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/concepts/" class="md-nav__link ">
+            <a href="../../concepts/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -356,7 +367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/concepts/architecture/" class="md-nav__link">
+      <a href="../../concepts/architecture/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -381,6 +392,8 @@
       
   
   
+    
+  
   
   
     
@@ -430,16 +443,16 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/guides/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -456,7 +469,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Guides
@@ -472,7 +485,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/conversation-channels/" class="md-nav__link">
+      <a href="../conversation-channels/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -493,7 +506,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/workflows-and-llm-controls/" class="md-nav__link">
+      <a href="../workflows-and-llm-controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -514,7 +527,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/mcp-tools/" class="md-nav__link">
+      <a href="../mcp-tools/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -535,7 +548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/artifacts-and-delivery/" class="md-nav__link">
+      <a href="../artifacts-and-delivery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -556,7 +569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/autonomy/" class="md-nav__link">
+      <a href="../autonomy/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -577,7 +590,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/cross-project/" class="md-nav__link">
+      <a href="../cross-project/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -598,7 +611,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/approvals/" class="md-nav__link">
+      <a href="../approvals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -619,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/recovery/" class="md-nav__link">
+      <a href="../recovery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -640,7 +653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/cost-and-caching/" class="md-nav__link">
+      <a href="../cost-and-caching/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -661,7 +674,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/secrets/" class="md-nav__link">
+      <a href="../secrets/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -682,7 +695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/observability/" class="md-nav__link">
+      <a href="../observability/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -703,7 +716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/storage-and-retention/" class="md-nav__link">
+      <a href="../storage-and-retention/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -724,7 +737,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/feature-doctor/" class="md-nav__link">
+      <a href="../feature-doctor/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -745,7 +758,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/evals/" class="md-nav__link">
+      <a href="../evals/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -766,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/guides/clustering/" class="md-nav__link">
+      <a href="../clustering/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -784,10 +797,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="/guides/automation-composer/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    The automation composer ("Describe it")
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -796,6 +829,71 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-gets-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      What gets created
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-makes-it-safe" class="md-nav__link">
+    <span class="md-ellipsis">
+      What makes it safe
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-schedule-confirmation-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      The schedule-confirmation gate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-estimate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost estimate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling it
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -879,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/blackbox/" class="md-nav__link">
+      <a href="../../features/blackbox/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -900,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/self-healing/" class="md-nav__link">
+      <a href="../../features/self-healing/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -921,7 +1019,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/instinct/" class="md-nav__link">
+      <a href="../../features/instinct/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -942,7 +1040,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/auth/" class="md-nav__link">
+      <a href="../../features/auth/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -963,7 +1061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/memory-rag/" class="md-nav__link">
+      <a href="../../features/memory-rag/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -984,7 +1082,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/zero-egress/" class="md-nav__link">
+      <a href="../../features/zero-egress/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1005,7 +1103,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/cluster/" class="md-nav__link">
+      <a href="../../features/cluster/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1026,7 +1124,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/forge/" class="md-nav__link">
+      <a href="../../features/forge/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1047,7 +1145,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/companion/" class="md-nav__link">
+      <a href="../../features/companion/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1068,7 +1166,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/knowledge-skills/" class="md-nav__link">
+      <a href="../../features/knowledge-skills/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1089,7 +1187,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/features/control-plane/" class="md-nav__link">
+      <a href="../../features/control-plane/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1144,7 +1242,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="/reference/" class="md-nav__link ">
+            <a href="../../reference/" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -1177,7 +1275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/configuration/" class="md-nav__link">
+      <a href="../../reference/configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1198,7 +1296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/reference/vornikctl/" class="md-nav__link">
+      <a href="../../reference/vornikctl/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1226,7 +1324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/troubleshooting/" class="md-nav__link">
+      <a href="../../troubleshooting/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1246,7 +1344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/release-notes/" class="md-nav__link">
+      <a href="../../release-notes/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1276,6 +1374,61 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-gets-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      What gets created
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-makes-it-safe" class="md-nav__link">
+    <span class="md-ellipsis">
+      What makes it safe
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-schedule-confirmation-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      The schedule-confirmation gate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cost-estimate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost estimate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enabling-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enabling it
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1287,8 +1440,122 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="the-automation-composer-describe-it">The automation composer ("Describe it")<a class="headerlink" href="#the-automation-composer-describe-it" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Enterprise Edition</p>
+<p>This capability is part of the <strong>Enterprise Edition</strong> — a proprietary overlay on the open-source core. See <a href="../../editions/">Editions</a> for the full Community vs Enterprise matrix.</p>
+</div>
+<p>The conversational project wizard normally starts from a vetted gallery
+template and fills in the pieces a template doesn't cover with small,
+typed customizations — a schedule, an extra tool, a parameter. The
+<strong>composer</strong> extends that same "Describe it" conversation with a third
+path for requests that don't fit any template: describe the automation
+you want in plain language, and the wizard synthesizes a complete,
+validated project — a swarm of roles and one or more workflows — from
+a curated library of role archetypes.</p>
+<p>You never choose the path yourself. The wizard escalates invisibly,
+turn by turn, as your description sharpens:</p>
+<ol>
+<li><strong>Template + parameters</strong> — your request matches a gallery template
+   closely; the wizard fills in the blanks.</li>
+<li><strong>Template + customizations</strong> — a template is a good base, but you
+   asked for something extra (a schedule, a tool, an approval step)
+   that a small addition covers.</li>
+<li><strong>From-scratch composition</strong> — nothing in the gallery fits, so the
+   wizard assembles a new automation from role archetypes instead.</li>
+</ol>
+<p>If your description closely matches an existing template, the wizard
+prefers the cheaper, better-tested template path even when a
+from-scratch build was technically possible — composing less is more
+reliable. If you genuinely want a from-scratch build despite a
+close-matching template, just say so when asked and the wizard will
+proceed.</p>
+<h2 id="what-gets-created">What gets created<a class="headerlink" href="#what-gets-created" title="Permanent link">&para;</a></h2>
+<p>A composed automation is the same shape as a hand-built one: a
+project, a swarm of one or more roles (each drawn from a curated role
+archetype — researcher, writer, reviewer, coder, tester, analyst,
+publisher, and similar), and one or more workflows wiring those roles
+together into runnable steps. Nothing about how it runs, is monitored,
+or is billed differs from a project you'd build by hand or from the
+template gallery.</p>
+<h2 id="what-makes-it-safe">What makes it safe<a class="headerlink" href="#what-makes-it-safe" title="Permanent link">&para;</a></h2>
+<p>A synthesized automation is never taken on faith. Before it can ever be
+shown to you as ready to commit, the server:</p>
+<ul>
+<li><strong>Re-validates the whole bundle</strong> against the same rules a
+  hand-authored project goes through — every role reference resolves,
+  every workflow step is reachable, nothing is left dangling, and every
+  automation ships with at least one workflow (a swarm with no workflow
+  is never produced).</li>
+<li><strong>Never exceeds a role's declared tool allowlist.</strong> Each role
+  archetype in the library declares the maximum set of tools it may
+  ever use; the composer can select a subset, never add to it — no
+  description can talk it into granting a role a tool its archetype
+  doesn't already allow.</li>
+<li><strong>Never omits a spend budget.</strong> Every composed project carries a
+  budget with conservative default caps if you don't set your own; the
+  plan preview always states the caps.</li>
+<li><strong>Never auto-sends without an approval step, unless you explicitly
+  ask for it and it's shown to you.</strong> Any step with an outward
+  side-effect — sending an email, publishing, opening a request —
+  gets an approval step in front of it by default. If you ask the
+  wizard to skip that approval, the plan preview calls it out
+  prominently, and the request is kept in the conversation record as
+  the audit trail for that choice.</li>
+<li><strong>Never silently rewrites what you approved.</strong> A generated build
+  that would violate one of the guarantees above is never quietly
+  corrected: the wizard either fixes an obviously-safe omission (like
+  filling in a missing budget) and tells you so, or it stops and asks
+  you about anything that would change what the automation actually
+  does.</li>
+<li><strong>Falls back to a template rather than guessing forever.</strong> If the
+  wizard has trouble producing a valid build after a few attempts in a
+  row, it stops retrying from scratch and offers the closest matching
+  gallery template instead, so you're never stuck watching it fail
+  silently on repeat.</li>
+</ul>
+<h2 id="the-schedule-confirmation-gate">The schedule-confirmation gate<a class="headerlink" href="#the-schedule-confirmation-gate" title="Permanent link">&para;</a></h2>
+<p>If your automation should run on a recurring schedule, the plan
+preview shows the exact cadence as a dedicated confirmation chip (for
+example, "Runs every Monday 07:00 — confirm"). The automation cannot
+be committed until you've confirmed that specific cadence — being
+otherwise "ready to commit" is not enough on its own. If a later
+message in the conversation changes the schedule, you're asked to
+reconfirm the new one before it can go live. This means a cadence you
+never actually saw and approved can never start running.</p>
+<h2 id="cost-estimate">Cost estimate<a class="headerlink" href="#cost-estimate" title="Permanent link">&para;</a></h2>
+<p>The plan preview shows a cost estimate for the automation — a rough
+per-run figure, and a per-month figure if it runs on a schedule. This
+number is computed by the server from the roles the automation
+actually uses, not taken from the conversation itself, and it is
+always labelled as an estimate rather than a bill.</p>
+<h2 id="enabling-it">Enabling it<a class="headerlink" href="#enabling-it" title="Permanent link">&para;</a></h2>
+<p>The composer is off by default until it completes its rollout
+verification period. An operator turns it on explicitly once its
+prerequisites are met — a configured chat provider and at least one
+validated role archetype in the library:</p>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>doctor<span class="w"> </span>feature<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>composer
+</code></pre></div>
+<p>See <a href="../feature-doctor/">the feature doctor guide</a> for how enabling and
+prerequisite checks work in general, and
+<a href="../../features/composer/">the automation composer feature page</a> for the
+full prerequisite and safety-guarantee list.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -1328,10 +1595,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "/", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "search.suggest", "content.code.copy"], "search": "/assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.indexes", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.525ec568.min.js"></script>
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
       
     
   </body>

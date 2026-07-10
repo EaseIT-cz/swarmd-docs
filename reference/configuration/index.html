@@ -431,6 +431,8 @@
       
         
       
+        
+      
     
     
       
@@ -780,6 +782,27 @@
   
   <span class="md-ellipsis">
     Clustering and the DMZ Webhook Relay
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/automation-composer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The automation composer ("Describe it")
   </span>
   
 
@@ -1455,6 +1478,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      integrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#narrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      narrator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composer" class="md-nav__link">
+    <span class="md-ellipsis">
+      composer
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1796,6 +1846,33 @@
   <a href="#node" class="md-nav__link">
     <span class="md-ellipsis">
       node
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      integrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#narrator" class="md-nav__link">
+    <span class="md-ellipsis">
+      narrator
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composer" class="md-nav__link">
+    <span class="md-ellipsis">
+      composer
     </span>
   </a>
   
@@ -2699,6 +2776,11 @@
 <td>Model for the project-setup wizard.</td>
 </tr>
 <tr>
+<td><code>chat.fixit_model</code></td>
+<td>string</td>
+<td>Model for the Fix-It Doctor repair chat.</td>
+</tr>
+<tr>
 <td><code>chat.timeout</code></td>
 <td>string</td>
 <td>Bound on a single LLM round-trip.</td>
@@ -3241,6 +3323,102 @@
 <td><code>node.relay_ingress.client_ca</code></td>
 <td>string</td>
 <td>PEM CA bundle; only client certs it signed are accepted.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="integrations">integrations<a class="headerlink" href="#integrations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>integrations.allowed_hosts</code></td>
+<td>list</td>
+<td>Hostnames allowed to bypass the Integrations Hub's private-range SSRF guard for probes/saves. Empty = block all private/loopback/link-local destinations (secure default).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="narrator">narrator<a class="headerlink" href="#narrator" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>narrator.enabled</code></td>
+<td>bool</td>
+<td>Activate the narrator worker.</td>
+</tr>
+<tr>
+<td><code>narrator.model</code></td>
+<td>string</td>
+<td>Model used for narration LLM calls (cheapest tier).</td>
+</tr>
+<tr>
+<td><code>narrator.debounce</code></td>
+<td>int</td>
+<td>Seconds a step-start line waits before emitting, to collapse into a fast completion.</td>
+</tr>
+<tr>
+<td><code>narrator.long_tool_threshold</code></td>
+<td>int</td>
+<td>Seconds before a still-running tool call gets a heartbeat line.</td>
+</tr>
+<tr>
+<td><code>narrator.min_line_interval</code></td>
+<td>int</td>
+<td>Minimum seconds between narration lines for the same execution.</td>
+</tr>
+<tr>
+<td><code>narrator.max_lines</code></td>
+<td>int</td>
+<td>Per-execution narration line cap.</td>
+</tr>
+<tr>
+<td><code>narrator.max_cost_usd</code></td>
+<td>float</td>
+<td>Per-execution narrator LLM spend cap in USD; switches to template-only on breach.</td>
+</tr>
+<tr>
+<td><code>narrator.chat_milestone_kinds</code></td>
+<td>list</td>
+<td>Narration trigger kinds eligible for the chat push (default: step_completed, completion).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="composer">composer<a class="headerlink" href="#composer" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>composer.enabled</code></td>
+<td>bool</td>
+<td>Activate the NL automation composer (wizard tier-3).</td>
+</tr>
+<tr>
+<td><code>composer.max_tier</code></td>
+<td>int</td>
+<td>Highest composer tier allowed (2 disables free-form synthesis; 3 = full).</td>
+</tr>
+<tr>
+<td><code>composer.max_tier3_turns</code></td>
+<td>int</td>
+<td>Per-session cap on expensive tier-3 composer turns.</td>
 </tr>
 </tbody>
 </table>
