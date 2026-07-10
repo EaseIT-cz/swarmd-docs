@@ -22,7 +22,7 @@
     
     
       
-        <title>MCP tool server - Vornik documentation</title>
+        <title>MCP tool servers - Vornik documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mcp-tool-server" class="md-skip">
+        <a href="#mcp-tool-servers" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MCP tool server
+              MCP tool servers
             
           </span>
         </div>
@@ -928,7 +928,7 @@
           
   
   <span class="md-ellipsis">
-    MCP tool server
+    MCP tool servers
   </span>
   
 
@@ -939,7 +939,7 @@
         
   
   <span class="md-ellipsis">
-    MCP tool server
+    MCP tool servers
   </span>
   
 
@@ -961,18 +961,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#guided-form-fields" class="md-nav__link">
+  <a href="#managing-the-daemon-catalog" class="md-nav__link">
     <span class="md-ellipsis">
-      Guided-form fields
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-test-connection-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      What "Test connection" checks
+      Managing the daemon catalog
     </span>
   </a>
   
@@ -1544,18 +1535,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#guided-form-fields" class="md-nav__link">
+  <a href="#managing-the-daemon-catalog" class="md-nav__link">
     <span class="md-ellipsis">
-      Guided-form fields
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-test-connection-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      What "Test connection" checks
+      Managing the daemon catalog
     </span>
   </a>
   
@@ -1585,71 +1567,53 @@
                   
 
 
-<h1 id="mcp-tool-server">MCP tool server<a class="headerlink" href="#mcp-tool-server" title="Permanent link">&para;</a></h1>
-<div class="admonition abstract">
-<p class="admonition-title">Enterprise Edition</p>
-<p>This capability is part of the <strong>Enterprise Edition</strong> — a proprietary overlay on the open-source core. See <a href="../../editions/">Editions</a> for the full Community vs Enterprise matrix.</p>
+<h1 id="mcp-tool-servers">MCP tool servers<a class="headerlink" href="#mcp-tool-servers" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Not managed in the Integrations Hub</p>
+<p>MCP tool servers are <strong>not</strong> one of the Integrations Hub's guided
+integrations. The daemon's MCP catalog has its own management surface —
+read on for where, per edition.</p>
 </div>
-<p>Registers an MCP (Model Context Protocol) server in the daemon-level
-catalog — the shared inventory of servers your installation knows about.
-This integration is <strong>daemon-scope</strong> and <strong>admin-only</strong>, so it only
-appears in the <a href="../">Integrations Hub</a> for an administrator.</p>
-<p>Adding a server here is a <strong>discovery step, not an access grant</strong>: it
-makes the server visible in the catalog so it can be reused across
-projects, but a project only sees the tools of a server it explicitly
-lists in its own <code>mcp.servers</code> configuration. See
-<a href="../../guides/mcp-tools/">Connect Your Tools (MCP)</a> for how a project
-declares and restricts the servers it actually uses.</p>
-<h2 id="guided-form-fields">Guided-form fields<a class="headerlink" href="#guided-form-fields" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th style="text-align: center;">Required</th>
-<th style="text-align: center;">Secret</th>
-<th>What to enter</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Server name</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">No</td>
-<td>A short label for this server, e.g. <code>home-assistant</code>.</td>
-</tr>
-<tr>
-<td>Server URL</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">No</td>
-<td>The MCP server's HTTP(S) endpoint.</td>
-</tr>
-<tr>
-<td>Transport</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">No</td>
-<td><code>streamable-http</code> (most servers) or <code>sse</code>.</td>
-</tr>
-</tbody>
-</table>
-<p>None of the MCP fields are secrets — there's no credential to store for
-this integration; the server itself handles its own authentication, if
-any, at the endpoint you provide.</p>
-<h2 id="what-test-connection-checks">What "Test connection" checks<a class="headerlink" href="#what-test-connection-checks" title="Permanent link">&para;</a></h2>
-<p>The test reaches out to the server's endpoint and confirms it's a live
-MCP server that responds correctly — the same check the connection test
-would need to make an add-server operation trustworthy. On success, it
-reports the number of tools the server exposes. Because some MCP servers
-sit behind a slow network link, this test is allowed a longer timeout
-(up to 30 seconds) than the other integrations' connection tests.</p>
+<p>vornik reaches external tools over MCP (Model Context Protocol) servers.
+Two settings are involved, and they live in different places:</p>
+<ol>
+<li><strong>The daemon-level catalog</strong> (<code>mcp.servers</code> in <code>config.yaml</code>) — the
+   shared inventory of servers your installation knows about. Adding a
+   server here is a <strong>discovery step, not an access grant</strong>: it makes the
+   server visible so projects can reuse it, but connects nothing by itself.</li>
+<li><strong>A project's subscription</strong> (<code>mcp.servers</code> in the project's YAML) — a
+   project only sees the tools of a server it explicitly lists by name.
+   See <a href="../../guides/mcp-tools/">Connect Your Tools (MCP)</a> for how a
+   project declares and restricts the servers it actually uses.</li>
+</ol>
+<h2 id="managing-the-daemon-catalog">Managing the daemon catalog<a class="headerlink" href="#managing-the-daemon-catalog" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Enterprise Edition</strong> — use the control-plane hub's <strong>MCP servers</strong>
+  tab (<code>/ui/admin/control-plane</code>, admin-only). It lists the catalog with
+  live reachability badges and tool counts, lets you <strong>test</strong> a candidate
+  endpoint before committing (the daemon connects and enumerates the
+  server's tools), and files every add/remove as a
+  <a href="../../features/control-plane/">control-plane proposal</a> you review as a
+  diff and apply — never a silent config write.</li>
+<li><strong>Community Edition</strong> — edit <code>mcp.servers</code> in <code>config.yaml</code> directly:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">home-assistant</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">streamable-http</span><span class="w">   </span><span class="c1"># or &quot;sse&quot;, or &quot;stdio&quot; with command:</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://mcp.example.com/mcp</span>
+</code></pre></div>
+<p>See the <a href="../../reference/configuration/">configuration reference</a> for
+  the full field list.</p>
 <h2 id="good-to-know">Good to know<a class="headerlink" href="#good-to-know" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The server URL you enter is dialed through vornik's outbound-request
-  guard, which refuses to connect to private/internal network ranges
-  unless an administrator has explicitly allowed them — this protects
-  the daemon from being tricked into probing its own internal network.</li>
-<li>Adding a server here doesn't change what any project can call. To put
-  its tools in front of a project's agents, add the same server to that
-  project's <code>mcp.servers</code> list.</li>
+<li><strong>Daemon-catalog changes are picked up on daemon restart</strong>, not by the
+  hot config reload. A project's own <code>mcp.servers</code> subscription list, by
+  contrast, does apply on reload. Either way a running task's tool set is
+  fixed when its container starts — changes only affect new runs.</li>
+<li>The daemon catalog is admin territory in every edition: it is shared,
+  installation-wide state, which is why it never appears in the
+  Integrations Hub next to per-project channels like email or Slack.</li>
 </ul>
 
 

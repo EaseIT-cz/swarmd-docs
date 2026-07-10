@@ -919,7 +919,7 @@
         
   
   <span class="md-ellipsis">
-    MCP tool server
+    MCP tool servers
   </span>
   
 
@@ -1477,9 +1477,9 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-five-integrations" class="md-nav__link">
+  <a href="#the-four-integrations" class="md-nav__link">
     <span class="md-ellipsis">
-      The five integrations
+      The four integrations
     </span>
   </a>
   
@@ -1528,9 +1528,9 @@
 
 
 <h1 id="integrations-hub">Integrations Hub<a class="headerlink" href="#integrations-hub" title="Permanent link">&para;</a></h1>
-<div class="admonition abstract">
-<p class="admonition-title">Enterprise Edition</p>
-<p>This capability is part of the <strong>Enterprise Edition</strong> — a proprietary overlay on the open-source core. See <a href="../editions/">Editions</a> for the full Community vs Enterprise matrix.</p>
+<div class="admonition note">
+<p class="admonition-title">Community Edition</p>
+<p>The Integrations Hub is part of the free, open-source <strong>Community Edition</strong> (and therefore also every Enterprise install). See <a href="../editions/">Editions</a> for the full Community vs Enterprise matrix.</p>
 </div>
 <p>The Integrations Hub, at <strong><code>/ui/integrations</code></strong> in the web UI, is the guided
 way to connect the channels and tools vornik talks through — without
@@ -1541,7 +1541,7 @@ works, instead of watching a message silently fail to arrive later.</p>
 <a href="../guides/conversation-channels/">Conversation Channels</a> guide instead —
 both routes write to the same configuration, so you can start in the hub and
 finish by hand, or the other way around.</p>
-<h2 id="the-five-integrations">The five integrations<a class="headerlink" href="#the-five-integrations" title="Permanent link">&para;</a></h2>
+<h2 id="the-four-integrations">The four integrations<a class="headerlink" href="#the-four-integrations" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1555,11 +1555,6 @@ finish by hand, or the other way around.</p>
 <td><strong>Telegram</strong></td>
 <td>A Telegram bot vornik can send and receive messages through</td>
 <td><a href="telegram/">Telegram</a></td>
-</tr>
-<tr>
-<td><strong>MCP tool server</strong></td>
-<td>An external MCP server whose tools vornik's roles can call</td>
-<td><a href="mcp/">MCP tool server</a></td>
 </tr>
 <tr>
 <td><strong>Email</strong></td>
@@ -1580,6 +1575,9 @@ finish by hand, or the other way around.</p>
 </table>
 <p>Each integration's tile links to its own page above, with the exact fields
 its guided form asks for and what the connection test checks.</p>
+<p>Looking for <strong>MCP tool servers</strong>? They're daemon-wide infrastructure with
+their own management surface, not a hub tile — see
+<a href="mcp/">MCP tool servers</a> for where to manage them in each edition.</p>
 <h2 id="connect-test-save">Connect → test → save<a class="headerlink" href="#connect-test-save" title="Permanent link">&para;</a></h2>
 <p>Every integration in the hub follows the same three steps:</p>
 <ol>
@@ -1591,8 +1589,8 @@ its guided form asks for and what the connection test checks.</p>
    the UI.</li>
 <li><strong>Test the connection.</strong> Before anything is written, the hub calls the
    provider with exactly the values you entered — Telegram's <code>getMe</code>,
-   Slack's <code>auth.test</code>, an IMAP/SMTP login, a GitHub App installation-token
-   mint, or an MCP endpoint reachability check — and shows a plain result:
+   Slack's <code>auth.test</code>, an IMAP/SMTP login, or a GitHub App
+   installation-token mint — and shows a plain result:
    green "Connected as ..." or red "Invalid — the provider rejected this."
    A separate red state, "Couldn't reach the provider — try again," means
    the network or the provider had a hiccup, not that your credential is
@@ -1609,12 +1607,12 @@ the result of the last test and a "Re-check" button so you can confirm
 it's still working, on demand — the hub does not silently re-probe your
 credentials in the background.</p>
 <h2 id="project-scope-vs-daemon-scope">Project scope vs. daemon scope<a class="headerlink" href="#project-scope-vs-daemon-scope" title="Permanent link">&para;</a></h2>
-<p>The five integrations split into two scopes, and it affects who can connect
+<p>The four integrations split into two scopes, and it affects who can connect
 them and where the setting lives:</p>
 <ul>
-<li><strong>Daemon-scope</strong> (Telegram, MCP tool servers) — these are admin-only,
-  installation-wide settings. They're visible only to an administrator, and
-  they don't belong to any one project.</li>
+<li><strong>Daemon-scope</strong> (Telegram) — an admin-only, installation-wide setting.
+  It's visible only to an administrator, and it doesn't belong to any one
+  project.</li>
 <li><strong>Project-scope</strong> (Email, GitHub App, Slack) — these belong to a specific
   project. A project-scoped user only ever sees their own project's tiles
   for these three; an administrator sees every project's tiles, each
