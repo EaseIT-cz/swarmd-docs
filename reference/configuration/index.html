@@ -3150,6 +3150,11 @@
 <td>Activate the memory subsystem.</td>
 </tr>
 <tr>
+<td><code>memory.embedding_provider</code></td>
+<td>string</td>
+<td>Embedding transport: empty or openai for an OpenAI-compatible /v1/embeddings endpoint, or bedrock for native AWS Bedrock InvokeModel embeddings.</td>
+</tr>
+<tr>
 <td><code>memory.sufficiency.enabled</code></td>
 <td>bool</td>
 <td>Widen-and-retry recall when too few high-relevance hits (requires the reranker).</td>
@@ -3213,6 +3218,11 @@
 <td><code>memory.embedding_api_key</code></td>
 <td>string</td>
 <td>Override API key for embedding requests.</td>
+</tr>
+<tr>
+<td><code>memory.bedrock.region</code></td>
+<td>string</td>
+<td>AWS region for native Bedrock embeddings when memory.embedding_provider=bedrock.</td>
 </tr>
 <tr>
 <td><code>memory.embedding_cache_enabled</code></td>
