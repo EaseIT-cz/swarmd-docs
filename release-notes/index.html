@@ -1479,6 +1479,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202672" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202671" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.1
@@ -1648,6 +1657,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202672" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202671" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.1
@@ -1807,6 +1825,67 @@ behavior changes, and notable fixes. Internal-only changes are omitted.</p>
 so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
+</div>
+<hr />
+<h2 id="202672">2026.7.2<a class="headerlink" href="#202672" title="Permanent link">&para;</a></h2>
+<p><strong>The operator-experience release: describe an automation in plain language,
+watch tasks narrate themselves, and repair failures from a guided chat.</strong> This
+cycle is built for operators who never want to touch YAML — plus a
+control-plane copilot, a learning loop for knowledge skills, and an
+autonomous backlog-to-PR pipeline for those who do.</p>
+<ul>
+<li><strong>Automation Composer.</strong> Describe what you want automated in chat and the
+  composer assembles a validated project — roles, workflow, schedule —
+  grounded in your connected MCP servers and models, with a Plan/Graph/YAML
+  preview before anything is committed. Ships <strong>disabled by default</strong>
+  (<code>composer.enabled</code>) while quality gates soak; the classic wizard remains
+  the default.</li>
+<li><strong>Narrated execution.</strong> Running tasks tell their story on the task pages,
+  and can push progress to the chat channel that started them (opt-in per
+  project). Completion is deliverable-first: output artifacts appear as cards
+  you can send straight to chat.</li>
+<li><strong>Fix-It Doctor.</strong> Failed tasks open into a repair chat that gathers the
+  failure context and proposes fixes; every applied action is deny-by-default,
+  audited, and rollback-able.</li>
+<li><strong>"My requests" home.</strong> A new Outcome Inbox groups your work into request
+  cards with status rollups and inline actions for anything awaiting you — and
+  it is now the default home page for non-admin users.</li>
+<li><strong>Guided Integrations Hub</strong> (Community). Set up Telegram, Slack, email,
+  GitHub App, and MCP integrations through guided forms that <strong>probe the
+  credentials before saving</strong>, with recheck and assisted troubleshooting.</li>
+<li><strong>Control-plane copilot</strong> (Enterprise console). Detectors watch for tunable
+  timeouts, failure-rate regressions, and self-healing incidents, and raise
+  <strong>proposals</strong> you can inspect, apply (gated, atomic, rollback-able — live
+  where non-disruptive), or withdraw, from the web console or
+  <code>vornikctl control-plane</code>. A diagnose-from-logs engine turns incidents into
+  ready-to-apply config changes.</li>
+<li><strong>Knowledge skills learn.</strong> Skills gathered from past work now carry usage
+  signals and mature (or decay) automatically, with distilled new-skill
+  proposals reviewed from Telegram, Slack, or the web inbox — and skills can
+  be promoted to <strong>global</strong>, applying across every project.</li>
+<li><strong>Autonomous dev loop.</strong> Agents can deposit work items into a per-project
+  backlog, and autonomy drives open items to <strong>draft pull requests</strong> through
+  an adversarial review loop; failed items are blocked visibly instead of
+  silently skipped.</li>
+<li><strong>Model-health circuit breaker.</strong> Unhealthy upstream models trip a breaker
+  and tasks fail over immediately instead of grinding through the retry
+  ladder. <strong>On by default</strong> with conservative thresholds; tune via
+  <code>chat.router.health.*</code>.</li>
+<li><strong>Credential carryover.</strong> Tools that mint credentials during a task can have
+  them captured (opt-in per tool) and surfaced to you at completion —
+  redaction stays fail-closed throughout.</li>
+<li><strong>Telegram task control.</strong> <code>/tasks</code>, <code>/status</code>, <code>/cancel</code>, <code>/retry</code>, plus
+  button-driven recovery steering and tap-to-copy command rendering.</li>
+<li><strong>Community contribution: AWS Bedrock embeddings.</strong> Native Bedrock embedding
+  support for memory/RAG — the first inbound community contribution.</li>
+<li><strong>Quality of life.</strong> Config saves never hang (invalid saves are rejected;
+  restart-required changes show a banner), a unified Artifacts panel, paused
+  tasks can be cancelled, per-MCP-server timeouts, and mobile layout fixes.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Restart to pick up new behavior</p>
+<p>The model-health circuit breaker and the new detectors start with the
+daemon; restart after upgrading. All new configuration keys are additive.</p>
 </div>
 <hr />
 <h2 id="202671">2026.7.1<a class="headerlink" href="#202671" title="Permanent link">&para;</a></h2>

@@ -2576,6 +2576,11 @@
 <td>list</td>
 <td>Tool-name prefixes whose tool-audit OUTPUT is exempt from generic_kv/entropy redaction (strong credential patterns still redact; input always scanned).</td>
 </tr>
+<tr>
+<td><code>secrets.tool_credentials</code></td>
+<td>list</td>
+<td>Map a trusted tool to a credential field in its output to capture and surface code-formatted + copyable (strong-pattern values are never captured).</td>
+</tr>
 </tbody>
 </table>
 <h2 id="retention">retention<a class="headerlink" href="#retention" title="Permanent link">&para;</a></h2>

@@ -1812,6 +1812,12 @@ a bug, an optimisation, an inefficiency, or a refactor candidate it noticed
 while working on something else — without derailing its current task. A
 reviewer, for example, can use it for problems it spots in a diff that aren't
 in scope for that PR's verdict.</p>
+<p>Before each tick reads the file, the workspace is refreshed to the tip of
+<code>origin/main</code> — so every iteration works against the latest code, picking up
+external contributions (merged PRs) since the last run. Your local <code>- [x]</code> /
+<code>- [!]</code> consumption marks are preserved across that refresh, so an item is
+never re-run. The refresh is best-effort: if the fetch fails, the tick proceeds
+against the current workspace rather than stalling.</p>
 <h3 id="the-marker-grammar">The marker grammar<a class="headerlink" href="#the-marker-grammar" title="Permanent link">&para;</a></h3>
 <p>One consumer owns every read/modify/write of the file, and it recognises four
 markers:</p>
@@ -1839,18 +1845,30 @@ markers:</p>
 </tr>
 <tr>
 <td><code>- [x]</code></td>
-<td>Done</td>
-<td>The backlog tick, on successful dispatch</td>
+<td>Done — the task <strong>completed</strong> (raised its PR)</td>
+<td>Marked at dispatch, then confirmed by the reconcile pass when the task completes</td>
 <td>No</td>
 </tr>
 <tr>
 <td><code>- [!]</code></td>
-<td>Failed</td>
-<td>The next tick's reconcile pass, on a terminal-failed run</td>
-<td>No</td>
+<td>Blocked — the task ended unsuccessfully</td>
+<td>The reconcile pass (below)</td>
+<td>No — flip to <code>- [ ]</code> by hand to retry once you've addressed the cause</td>
 </tr>
 </tbody>
 </table>
+<p>An item is only truly <em>done</em> when its task <strong>completed</strong> (raised its PR). Each
+tick's reconcile pass checks the dispatched items: a task that ended
+<strong>unsuccessfully</strong> — failed, cancelled, or closed after giving up (e.g. an
+infinite-rework guard trip) — has its line flipped from <code>- [x]</code> to <code>- [!]</code>
+(blocked). This way the item is neither silently skipped as done nor
+auto-retried into a storm: you flip <code>- [!]</code> → <code>- [ ]</code> by hand to retry once
+you've addressed the cause (granted a permission, fixed a flaky test, split a
+too-big item), or delete the line if it's not worth retrying. (A task closed
+<em>after</em> a clean completion keeps its <code>- [x]</code> — only a failure indication flips
+it.) A task that can't <strong>publish</strong> its change — e.g. the forge rejected the
+push — is a separate case: it parks in <code>AWAITING_INPUT</code> with a mail-in patch
+attached and keeps its <code>- [x]</code>, so it waits on you rather than looping.</p>
 <p>Agent-authored deposits always land as <code>- [?]</code>, never <code>- [ ]</code>, and there's no
 config knob to change that. A deposit's title and detail are agent-authored
 text, and once a <code>- [ ]</code> line is consumed it becomes a verbatim task prompt
