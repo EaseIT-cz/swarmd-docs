@@ -1750,6 +1750,14 @@ at <code>/ui/projects/new</code> for a gallery of templates, or
 base template with typed add-ons (MCP servers, schedule, secrets,
 tools, role instructions) and builds the project, swarm, and workflow
 for you.</p>
+<p>A project runs <strong>one</strong> autonomy style. If you describe a need with two
+cadences — say, "ingest my mail every 5 minutes <strong>and</strong> produce a daily
+digest" — the wizard builds a single scheduled loop whose goal handles
+both (frequent ingestion each tick; the digest when the day's elapsed),
+rather than two conflicting schedules. Set <code>chat.wizard_model</code> to a
+capable model (a strong Bedrock chat model works well) if you want
+higher-quality drafts; the wizard still converges on a valid project
+regardless of the model.</p>
 </div>
 <p>Confirm the daemon has loaded your project:</p>
 <div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>project<span class="w"> </span>list

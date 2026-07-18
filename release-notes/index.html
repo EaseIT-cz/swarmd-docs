@@ -1479,6 +1479,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202673" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202672" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.2
@@ -1657,6 +1666,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202673" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202672" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.2
@@ -1826,6 +1844,46 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202673">2026.7.3<a class="headerlink" href="#202673" title="Permanent link">&para;</a></h2>
+<p><strong>A hardening + security release.</strong> The headline is a full security pass over
+the code base, alongside autonomy workspace-state hygiene, a manifest-driven
+config installer, wizard composition convergence, an Ollama Cloud chat
+provider, and a broad fix batch.</p>
+<ul>
+<li><strong>Security hardening.</strong> A sweep of the static-analysis backlog: path handling
+  for user-supplied project/swarm/workflow identifiers is centralised on one
+  confinement primitive; e-mail envelope addresses reject control-character
+  injection; result pre-allocations are bounded; a webhook echo is HTML-escaped;
+  admin redirects are constrained to same-origin; and session/chat cookies set
+  <code>Secure</code> automatically when served over HTTPS (without breaking plain-HTTP
+  deployments). Additional trust-scope and config-path hardening also landed.</li>
+<li><strong>Autonomy workspace hygiene.</strong> Failed/cancelled tasks no longer strand
+  tracked-file residue in the shared workspace clone; the prelude auto-commit
+  now attributes honestly (<code>backlog: marker checkpoint</code> / <code>rescue: stranded
+  tracked changes</code>) instead of blaming the next task. <strong>Scripts grepping the
+  old <code>auto-commit: workspace-root prelude</code> message must update.</strong> A new
+  <code>vornik_executor_residue_discard_total{project}</code> metric flags workspace
+  contract violations.</li>
+<li><strong>RAG-ingest quality gating.</strong> A task's output is ingested into memory only
+  once the producing task succeeds, so failed runs no longer deposit garbage;
+  <code>vornikctl memory purge-producer-failed</code> retro-cleans older residue. Backlog
+  items are marked done at the success terminal, not at dispatch.</li>
+<li><strong>Agent LLM circuit breaker.</strong> Per-agent model calls now get the same
+  circuit-breaker / fast fail-over as the chat router.</li>
+<li><strong>Manifest-driven config tree.</strong> A single manifest drives what installs into
+  the deployed config tree, with drift-checking across all deployable subtrees.</li>
+<li><strong>Ollama Cloud provider.</strong> A new chat sub-provider for Ollama's hosted
+  open-weight models, separate from the local Ollama route; pricing refreshed.</li>
+<li><strong>Wizard convergence.</strong> The project wizard normalises and repairs
+  compositions (dropping undeclared params, defaulting required ones) and
+  retains the last good build.</li>
+<li><strong>Quality-of-life.</strong> Progressive-disclosure skill injection; friendlier
+  internal-role labels on the spend dashboards; the Fix-It Doctor link now works
+  on every deployment; an inbox mobile pass; and a turnkey in-place update
+  script for Community quickstart installs.</li>
+</ul>
+<p>See <code>docs/release-notes/2026.7.3.md</code>.</p>
 <hr />
 <h2 id="202672">2026.7.2<a class="headerlink" href="#202672" title="Permanent link">&para;</a></h2>
 <p><strong>The operator-experience release: describe an automation in plain language,

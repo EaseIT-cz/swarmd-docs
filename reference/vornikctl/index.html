@@ -1957,6 +1957,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-memory-purge-producer-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl memory purge-producer-failed
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-memory-reassign" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl memory reassign
@@ -3140,6 +3149,15 @@
   <a href="#vornikctl-memory-prune-candidates" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl memory prune-candidates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-memory-purge-producer-failed" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl memory purge-producer-failed
     </span>
   </a>
   
@@ -5360,6 +5378,62 @@ tooling or 'vornikctl memory wipe' for the whole project.</p>
 <td><code>--since</code></td>
 <td><code>720h0m0s</code></td>
 <td>Retrieval lookback window (default 30d)</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-memory-purge-producer-failed">vornikctl memory purge-producer-failed<a class="headerlink" href="#vornikctl-memory-purge-producer-failed" title="Permanent link">&para;</a></h2>
+<p>Retro-clean RAG chunks produced by failed/cancelled executions</p>
+<p>Hard-evict every memory chunk whose PRODUCING EXECUTION ended
+unsuccessfully (FAILED or CANCELLED). This is the retro-clean half of the
+RAG-ingest producer-success gate (LLD 2026-07-12-rag-ingest-producer-success-
+gate §5): the gate stops NEW failed-task outputs from being ingested; this
+command removes the PRE-GATE garbage already in the store — e.g. the
+2026-07-12 person-dossier incident where a failed research task's wrong-people
+candidates were ingested and now surface on recall as if they were findings.</p>
+<p>Candidate selection joins chunks → artifacts → executions and filters on
+executions.status IN ('FAILED','CANCELLED'), so:
+  - a task's failed-execution chunks ARE selected;
+  - a task's successfully-retried (COMPLETED) execution's chunks are NOT;
+  - companion notes / uploaded docs (empty task_id) are never selected.</p>
+<p>Deletion reuses the audited hard-evict path (per-chunk memory_eviction_audit
+tombstone). It is DESTRUCTIVE and IRREVERSIBLE — restore needs a DB restore.</p>
+<p>Safety flow (stricter than a single --confirm, because this is a bulk op):
+  1. Run --dry-run first: prints the candidate chunk IDs + count.
+  2. Re-run with --confirm --expect-count=N, where N is the dry-run count.
+     A mismatch (the set changed between runs) aborts without deleting.</p>
+<p>Examples:
+  vornikctl memory purge-producer-failed --project assistant --dry-run
+  vornikctl memory purge-producer-failed --project assistant --confirm --expect-count 17</p>
+<div class="highlight"><pre><span></span><code>vornikctl memory purge-producer-failed [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--confirm</code></td>
+<td><code>false</code></td>
+<td>REQUIRED (with --expect-count) to actually delete</td>
+</tr>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>List candidate chunk IDs + count without deleting</td>
+</tr>
+<tr>
+<td><code>--expect-count</code></td>
+<td><code>-1</code></td>
+<td>The count from your --dry-run; a mismatch aborts (bulk-op safety)</td>
 </tr>
 <tr>
 <td><code>-p</code>, <code>--project</code></td>

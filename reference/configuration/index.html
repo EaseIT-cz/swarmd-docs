@@ -2434,6 +2434,31 @@
 <td>Max bytes of a tool result fed back to the model (0 = agent default 256 KiB).</td>
 </tr>
 <tr>
+<td><code>runtime.agent_llm.health.enabled</code></td>
+<td>bool</td>
+<td>Activate the model-health circuit breaker (default on; false disables).</td>
+</tr>
+<tr>
+<td><code>runtime.agent_llm.health.window</code></td>
+<td>string</td>
+<td>Rolling failure window, e.g. 60s (default 60s).</td>
+</tr>
+<tr>
+<td><code>runtime.agent_llm.health.min_samples</code></td>
+<td>int</td>
+<td>Minimum in-window failures before the breaker can trip (default 5).</td>
+</tr>
+<tr>
+<td><code>runtime.agent_llm.health.failure_rate</code></td>
+<td>float</td>
+<td>Failure fraction at/above which the breaker trips (default 0.5).</td>
+</tr>
+<tr>
+<td><code>runtime.agent_llm.health.open_cooldown</code></td>
+<td>string</td>
+<td>How long the circuit stays open before a half-open probe, e.g. 30s (default 30s).</td>
+</tr>
+<tr>
 <td><code>runtime.warm_pool.enabled</code></td>
 <td>bool</td>
 <td>Reuse warm containers for faster task start.</td>
@@ -2924,6 +2949,21 @@
 <td>Reject any non-:free model — a hard guard against accidental spend.</td>
 </tr>
 <tr>
+<td><code>chat.router.ollama_cloud.enabled</code></td>
+<td>bool</td>
+<td>Enable the Ollama Cloud sub-provider.</td>
+</tr>
+<tr>
+<td><code>chat.router.ollama_cloud.api_key</code></td>
+<td>string</td>
+<td>Ollama Cloud API key.</td>
+</tr>
+<tr>
+<td><code>chat.router.ollama_cloud.model</code></td>
+<td>string</td>
+<td>Ollama Cloud default model, e.g. gpt-oss:120b.</td>
+</tr>
+<tr>
 <td><code>chat.router.bedrock.enabled</code></td>
 <td>bool</td>
 <td>Enable AWS Bedrock (credentials via the AWS SDK chain).</td>
@@ -3022,6 +3062,11 @@
 <td><code>chat.max_tool_iterations</code></td>
 <td>int</td>
 <td>Tool-call loop cap per dispatcher turn.</td>
+</tr>
+<tr>
+<td><code>chat.deferred_tool_threshold</code></td>
+<td>int</td>
+<td>MCP catalog size above which chat sessions defer MCP tools behind tool_search. 0 = default (20); negative = never defer.</td>
 </tr>
 <tr>
 <td><code>chat.max_concurrent_requests</code></td>
@@ -3228,6 +3273,11 @@
 <td><code>memory.bedrock.region</code></td>
 <td>string</td>
 <td>AWS region for native Bedrock embeddings when memory.embedding_provider=bedrock.</td>
+</tr>
+<tr>
+<td><code>memory.ingest_require_producer_success</code></td>
+<td>bool</td>
+<td>Gate RAG ingest on the producing task reaching COMPLETED (default on).</td>
 </tr>
 <tr>
 <td><code>memory.embedding_cache_enabled</code></td>

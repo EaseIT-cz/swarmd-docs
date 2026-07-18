@@ -1688,7 +1688,10 @@ MCP server:</p>
 <li><strong><code>stdio</code></strong> — the daemon launches <code>command</code> (with <code>args</code>) as a child process
   and speaks MCP over its stdin/stdout. Use this for tools you ship alongside
   vornik. <code>env</code> values support <code>${VAR}</code> expansion from the daemon's own
-  environment, so secrets stay out of the project file.</li>
+  environment, so secrets stay out of the project file. On disconnect the
+  daemon terminates the server's whole process group, so launchers that fork
+  a worker process (<code>npx</code>, <code>tsx</code>, shell wrappers) are cleaned up with it —
+  don't rely on an MCP subprocess outliving its connection.</li>
 <li><strong><code>sse</code></strong> — the daemon connects to a long-running server at <code>url</code> over HTTP.
   Use this for tools that run as their own service.</li>
 </ul>
