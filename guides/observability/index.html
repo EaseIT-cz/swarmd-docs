@@ -1728,6 +1728,12 @@ trusted interface.</p>
   <a href="../autonomy/#backlog-autonomy-and-agent-deposits">backlog deposits</a>
   (accepted, or rejected as a duplicate, a secret hit, over the per-task cap,
   or in cooldown).</li>
+<li><strong>Scheduled updates (task-kind reminders)</strong> — task-kind fires per project,
+  outcome deliveries by success/failure, fires skipped because the prior run
+  was still going, delivery-time channel-send failures, and stuck-<code>firing</code>
+  rows the crash-recovery sweep reclaims. See the
+  <a href="../../reference/vornikctl/">vornikctl reference</a> (<code>reminders</code> group) for the
+  <code>text</code> vs <code>task</code> kinds and pause/resume.</li>
 <li><strong>HTTP and process</strong> — request counts, durations, in-flight requests, plus
   standard Go/process collectors.</li>
 </ul>

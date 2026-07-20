@@ -2182,6 +2182,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-reminders-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl reminders pause
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-reminders-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl reminders resume
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-reminders-schedule" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl reminders schedule
@@ -3374,6 +3392,24 @@
   <a href="#vornikctl-reminders-list" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl reminders list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-reminders-pause" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl reminders pause
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-reminders-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl reminders resume
     </span>
   </a>
   
@@ -6147,6 +6183,31 @@ sweeper stops tracking the project for deletion.</p>
 operator asks the bot for one in chat. This CLI exists for terminal-
 only operators (no chat session) and for cleaning up stuck rows.</p>
 <p>Calls are served by the daemon's /api/v1/reminders endpoints.</p>
+<p>Two kinds:
+  text  (default) — deliver the stored content verbatim.
+  task  — at fire time, run the content as a task prompt in a project
+          and deliver that task's outcome instead of static text
+          ("scheduled updates" — a daily digest, a weekly plan, a
+          recurring report). The KIND column in 'list'/'show'
+          distinguishes the two; a task-kind row also shows the
+          last task it spawned.</p>
+<p>Task-kind reminders are created from chat (set_reminder with
+kind="task", plus cron and project) — this CLI's 'schedule' command
+only produces text-kind reminders via the natural-language parser.
+Once created, task-kind rows are inspected, paused, resumed, and
+cancelled here exactly like text-kind ones.</p>
+<p>Limits: at most 20 concurrent task-kind reminders per operator
+(override VORNIK_REMINDERS_MAX_TASK_PER_OPERATOR), and each spawned task
+runs as a "research" task type (override VORNIK_REMINDERS_TASK_TYPE).
+A row stuck in 'firing' past a grace window (default 15m, override
+VORNIK_REMINDERS_FIRING_GRACE) — e.g. a crash between lease and task
+creation, or between send and finalize — is reclaimed automatically by
+a background sweep.</p>
+<p>Pause/resume works the same from three places: chat (the
+pause_reminder / resume_reminder tools), this CLI ('reminders
+pause' / 'reminders resume'), and the web UI's reminders table —
+all three drive the same daemon state machine, so pausing from one
+surface is immediately visible from the others.</p>
 <h2 id="vornikctl-reminders-cancel">vornikctl reminders cancel<a class="headerlink" href="#vornikctl-reminders-cancel" title="Permanent link">&para;</a></h2>
 <p>Cancel a pending reminder</p>
 <p>Flip a pending or firing dispatcher_reminders row to status=cancelled.
@@ -6250,6 +6311,54 @@ need to ignore "already gone".</p>
 </tr>
 </tbody>
 </table>
+<h2 id="vornikctl-reminders-pause">vornikctl reminders pause<a class="headerlink" href="#vornikctl-reminders-pause" title="Permanent link">&para;</a></h2>
+<p>Mute a pending reminder</p>
+<p>Flip a pending dispatcher_reminders row to status=paused.
+The heartbeat skips paused rows; use 'resume' to re-arm.</p>
+<p>Refuses rows that aren't pending (firing, awaiting_task, already
+terminal) — the daemon returns a 409 in that case.</p>
+<div class="highlight"><pre><span></span><code>vornikctl reminders pause &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-reminders-resume">vornikctl reminders resume<a class="headerlink" href="#vornikctl-reminders-resume" title="Permanent link">&para;</a></h2>
+<p>Re-arm a paused reminder</p>
+<p>Flip a paused dispatcher_reminders row back to status=pending,
+recomputing fire_at from the row's cron expression relative to now.</p>
+<p>Only recurring reminders (cron_expr set) can be resumed; one-shot
+reminders have no schedule to re-derive fire_at from.</p>
+<div class="highlight"><pre><span></span><code>vornikctl reminders resume &lt;id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Output JSON instead of human-readable</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-reminders-schedule">vornikctl reminders schedule<a class="headerlink" href="#vornikctl-reminders-schedule" title="Permanent link">&para;</a></h2>
 <p>Create a one-shot or recurring reminder from natural language</p>
 <p>Parse free-form text into a reminder via the daemon's
@@ -6267,6 +6376,10 @@ and the heartbeat re-arms them after every fire.</p>
       --timezone Europe/Prague</p>
 <p>By default the CLI prints the parsed reminder, asks for y/N confirmation,
 then commits. Pass --yes to skip the prompt (scripted use).</p>
+<p>This command always creates a text-kind reminder (static content,
+delivered verbatim). For a task-kind "scheduled update" — one that
+runs a task on a cadence and delivers its outcome — ask the bot in
+chat instead (set_reminder with kind="task").</p>
 <div class="highlight"><pre><span></span><code>vornikctl reminders schedule &lt;natural-language text&gt; [flags]
 </code></pre></div>
 <table>

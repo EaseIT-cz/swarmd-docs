@@ -1653,6 +1653,15 @@ pgvector in a container, and runs the daemon as a rootless <code>systemctl --use
 service that spawns agent containers via your rootless Podman:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.vornik.io<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
 </code></pre></div>
+<p>This pins the <strong>release tag baked into the script</strong> (not a moving branch); set
+<code>VORNIK_REF=main</code> for bleeding-edge. To verify the script against its published
+checksum before piping it to a shell (catches transit/redirect tampering — not
+a signature), fetch both first:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">REF</span><span class="o">=</span>&lt;release&gt;<span class="w">  </span><span class="c1"># a tag from github.com/grinco/vornik/releases that ships quickstart.sh.sha256</span>
+<span class="nv">base</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/grinco/vornik/</span><span class="nv">$REF</span><span class="s2">/deployments/podman&quot;</span>
+curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$base</span><span class="s2">/quickstart.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$base</span><span class="s2">/quickstart.sh.sha256&quot;</span>
+sha256sum<span class="w"> </span>-c<span class="w"> </span>quickstart.sh.sha256<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">VORNIK_REF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$REF</span><span class="s2">&quot;</span><span class="w"> </span>bash<span class="w"> </span>quickstart.sh
+</code></pre></div>
 <p>The daemon creates and migrates its own schema on first boot, so all you supply
 is an empty database — the script provisions it. When it finishes, open
 <a href="http://localhost:8080/ui">http://localhost:8080/ui</a>: a first-run <strong>setup guide</strong> walks you through
