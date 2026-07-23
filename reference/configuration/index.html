@@ -1684,6 +1684,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#web" class="md-nav__link">
+    <span class="md-ellipsis">
+      web
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#gateway" class="md-nav__link">
     <span class="md-ellipsis">
       gateway
@@ -2060,6 +2069,15 @@
   <a href="#composer" class="md-nav__link">
     <span class="md-ellipsis">
       composer
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#web" class="md-nav__link">
+    <span class="md-ellipsis">
+      web
     </span>
   </a>
   
@@ -2670,6 +2688,11 @@
 <td><code>retention.response_cache_days</code></td>
 <td>int</td>
 <td>Days to keep cached LLM responses (30d recommended on busy deployments).</td>
+</tr>
+<tr>
+<td><code>retention.embedding_cache_days</code></td>
+<td>int</td>
+<td>Days to keep cached embeddings before evicting cold entries (0 = keep forever; 30d recommended if the table grows large).</td>
 </tr>
 </tbody>
 </table>
@@ -3743,6 +3766,38 @@
 </tr>
 </tbody>
 </table>
+<h2 id="web">web<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>web.writes</code></td>
+<td>string</td>
+<td>Web write-action mode: off (default), on (per-project write_allowlist), or insecure (bypass the allowlist — dev only, requires insecure_ack).</td>
+</tr>
+<tr>
+<td><code>web.insecure_ack</code></td>
+<td>bool</td>
+<td>Must be true to activate web.writes=insecure. A deliberate second flag so the allowlist bypass cannot be enabled by a single value.</td>
+</tr>
+<tr>
+<td><code>web.submit_secret</code></td>
+<td>string</td>
+<td>Daemon↔scraper web_submit capability secret attached as daemon_auth (prefer submit_secret_file). Required when web.writes is on/insecure.</td>
+</tr>
+<tr>
+<td><code>web.submit_secret_file</code></td>
+<td>string</td>
+<td>Path to a file holding the web_submit capability secret (preferred over inline submit_secret).</td>
+</tr>
+</tbody>
+</table>
 <h2 id="gateway">gateway<a class="headerlink" href="#gateway" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3777,6 +3832,11 @@
 <td><code>gateway.providers</code></td>
 <td>map</td>
 <td>Registered API providers the agent may call by name.</td>
+</tr>
+<tr>
+<td><code>gateway.agent_writes</code></td>
+<td>string</td>
+<td>Tri-state policy for query_api writes from task-executing agents: off (default; task-originated writes refused — chat-direct writes unaffected), user (permit only when the task's request-root creation_source is USER, i.e. a human-initiated tree; autonomous/scheduled/route-rooted trees stay read-only), all (any task-originated write permitted). Always AND-gated by the provider's writes_enabled and the gateway route allowlist. 'all' is broad (a prompt-injected autonomous agent can write to every writes_enabled provider) and emits a load-time warning.</td>
 </tr>
 </tbody>
 </table>
