@@ -1716,6 +1716,15 @@ the autonomy roles. See <a href="../knowledge-skills/">Knowledge skills</a>.</p>
 review), <code>/peek</code> (recent tasks), and <code>/upload</code> (attach files to a delegation).
 In Codex, use the MCP tools directly; the Codex adapter ships a <code>delegate</code> skill
 that teaches the same recall-before-delegate and file-attachment rules.</p>
+<p>Both companion plugins also bundle a <code>report-problem</code> skill that ships enabled by
+default: it teaches the host LLM how to help you file an <strong>anonymized</strong> Vornik
+problem report — a bug, a crash, a misbehaving swarm, or an install failure — as a
+prefilled <code>github.com/grinco/vornik</code> issue. The work is done by the deterministic
+<code>vornikctl report</code> CLI (rich diagnostics when the daemon is up, <code>--offline</code> static
+checks when it is down) plus the quickstart installer's own failure URL for
+pre-daemon install errors; the skill is the guardrail — review the anonymized body
+before submitting, and you file it under your own GitHub account (nothing is ever
+posted automatically).</p>
 <h2 id="project-memory-and-repo-scope">Project memory and repo scope<a class="headerlink" href="#project-memory-and-repo-scope" title="Permanent link">&para;</a></h2>
 <p><code>recall</code> and <code>remember</code> operate on the memory of the vornik <strong>project</strong> your key
 is bound to. Because one project can back several repositories, every note
@@ -1764,7 +1773,11 @@ infrastructure. <code>status</code> and <code>result</code> poll it. Because the
 vornik and <code>result</code> returns only the final output artifact, a long review or
 audit doesn't consume your editor's token budget. File-bearing workflows must
 receive files as <code>inputArtifacts</code>; Claude's <code>/upload</code> command wraps that flow,
-while Codex should call <code>delegate</code> directly with base64 <code>inputArtifacts</code>.</p>
+while Codex should call <code>delegate</code> directly with base64 <code>inputArtifacts</code>. When
+the target workflow declares <code>require_input_artifacts</code>, the daemon stages your
+upload as a raw file rather than extracting it into project memory first — so
+the agent reads exactly the bytes you sent, and no client has to opt into that
+behaviour.</p>
 <p>The shipped delegation workflows include:</p>
 <ul>
 <li><strong>architectural review</strong> — a second opinion on a diff, PR, or design doc
