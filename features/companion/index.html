@@ -1293,6 +1293,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#operator-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operator skills
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#project-memory-and-repo-scope" class="md-nav__link">
     <span class="md-ellipsis">
       Project memory and repo scope
@@ -1562,6 +1571,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#operator-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operator skills
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#project-memory-and-repo-scope" class="md-nav__link">
     <span class="md-ellipsis">
       Project memory and repo scope
@@ -1716,15 +1734,42 @@ the autonomy roles. See <a href="../knowledge-skills/">Knowledge skills</a>.</p>
 review), <code>/peek</code> (recent tasks), and <code>/upload</code> (attach files to a delegation).
 In Codex, use the MCP tools directly; the Codex adapter ships a <code>delegate</code> skill
 that teaches the same recall-before-delegate and file-attachment rules.</p>
-<p>Both companion plugins also bundle a <code>report-problem</code> skill that ships enabled by
-default: it teaches the host LLM how to help you file an <strong>anonymized</strong> Vornik
-problem report — a bug, a crash, a misbehaving swarm, or an install failure — as a
-prefilled <code>github.com/grinco/vornik</code> issue. The work is done by the deterministic
-<code>vornikctl report</code> CLI (rich diagnostics when the daemon is up, <code>--offline</code> static
-checks when it is down) plus the quickstart installer's own failure URL for
-pre-daemon install errors; the skill is the guardrail — review the anonymized body
-before submitting, and you file it under your own GitHub account (nothing is ever
-posted automatically).</p>
+<h2 id="operator-skills">Operator skills<a class="headerlink" href="#operator-skills" title="Permanent link">&para;</a></h2>
+<p>Both companion plugins bundle an <strong>operator lifecycle triad</strong> — three skills
+that ship enabled by default and teach your host LLM to drive Vornik's own
+tooling instead of improvising. They cross-reference each other, so a session
+can walk from "set this up" to "why is it broken" to "file it upstream"
+without you naming the next step.</p>
+<p><strong><code>configure-vornik</code></strong> — configuring a deployment: daemon settings, projects,
+swarms, workflows, models, secrets, channels. It leads with the config
+hazards that silently no-op an otherwise correct change. The registry tree
+holding <code>projects/</code>, <code>swarms/</code>, and <code>workflows/</code> is resolved by a <em>fallback
+chain</em>, not one environment variable, and <code>vornikctl</code>'s chain differs from
+the daemon's — so a file can be perfectly valid and still sit in a directory
+the daemon never reads. <code>VORNIK_CONFIGS_DIR</code> is honoured only when the
+directory already contains all three subdirectories; otherwise it is skipped
+with no error at all. The skill then pins the apply loop — validate with
+<code>vornikctl doctor</code>, <code>vornikctl config reload</code>, then <strong>confirm</strong> with
+<code>vornikctl config reload-status</code>, where validation errors actually surface —
+and the restart-versus-reload boundary: systemd resolves the daemon's
+environment only at start, so unit and env-file edits need a restart.</p>
+<p><strong><code>troubleshoot-vornik</code></strong> — diagnosing a deployment that is down, degraded,
+or failing tasks, routed by symptom. Daemon down goes to
+<code>vornikctl doctor --offline</code>, the static escape hatch that needs no running
+daemon. Degraded goes to <code>vornikctl doctor</code> and <code>doctor feature</code>. A failed
+task goes to <code>vornikctl task explain</code> and then <code>vornikctl playbook show
+&lt;CLASS&gt;</code> — the failure-class corpus that already carries a written
+remediation for the error the executor stamped. The skill also states plainly
+which findings <code>--fix</code> can repair and which are diagnostic only, so you don't
+get sent in a circle.</p>
+<p><strong><code>report-problem</code></strong> — filing an <strong>anonymized</strong> Vornik problem report (a bug,
+a crash, a misbehaving swarm, or an install failure) as a prefilled
+<code>github.com/grinco/vornik</code> issue. The work is done by the deterministic
+<code>vornikctl report</code> CLI (rich diagnostics when the daemon is up, <code>--offline</code>
+static checks when it is down) plus the quickstart installer's own failure URL
+for pre-daemon install errors; the skill is the guardrail — review the
+anonymized body before submitting, and you file it under your own GitHub
+account (nothing is ever posted automatically).</p>
 <h2 id="project-memory-and-repo-scope">Project memory and repo scope<a class="headerlink" href="#project-memory-and-repo-scope" title="Permanent link">&para;</a></h2>
 <p><code>recall</code> and <code>remember</code> operate on the memory of the vornik <strong>project</strong> your key
 is bound to. Because one project can back several repositories, every note

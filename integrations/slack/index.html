@@ -1639,6 +1639,9 @@ Slack-side hiccup.</p>
 <ul>
 <li>All three fields — workspace ID, bot token, and signing secret — are
   required before the Slack channel activates.</li>
+<li>Slash commands require one Slack-side step: create <code>/vornik</code>, point it at
+  the same <code>/api/v1/slack/webhook</code> URL as Events API, add the <code>commands</code> OAuth
+  scope, and reinstall the App. Then use <code>/vornik &lt;prompt&gt;</code>.</li>
 <li>Channel and sender allowlisting, and Slack's request-timestamp replay
   protection, are covered in the <strong>Slack</strong> section of
   <a href="../../guides/conversation-channels/#slack">Conversation Channels</a>.</li>

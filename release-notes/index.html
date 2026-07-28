@@ -1479,6 +1479,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202676" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202675" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.5
@@ -1684,6 +1693,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202676" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202675" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.5
@@ -1881,6 +1899,64 @@ before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
 <hr />
+<h2 id="202676">2026.7.6<a class="headerlink" href="#202676" title="Permanent link">&para;</a></h2>
+<p><strong>A conversation-channels release.</strong> The bot now keeps its bearings in email and
+Slack. <strong>Two behaviour changes are visible to your users immediately</strong> — Slack
+reply placement and the shape of inbound email in the prompt. Read those two
+items before upgrading.</p>
+<ul>
+<li><strong>Behaviour change: Slack replies to a top-level message now land in the
+  channel, not in a thread.</strong> A message sent inside a thread still gets an
+  in-thread reply, so the bot mirrors wherever the person chose to speak.
+  Deliberate: Slack threads become unfindable within days, so people follow up
+  in the channel anyway, and burying every answer in a thread fought that.
+  Expect a slightly busier channel and far less "where did the bot say that?".</li>
+<li><strong>Fixed: Slack conversations in a channel had no memory.</strong> Every top-level
+  message opened a brand-new empty session, so the bot had no recollection of
+  earlier threads — or even of the message someone typed a minute earlier. All
+  top-level messages in a channel now share one continuous conversation;
+  threads keep their own.</li>
+<li><strong>New: the bot can reach a channel's earlier threads.</strong> On a channel-level
+  turn it sees a short digest of the channel's recent threads — opening
+  question, latest answer, turn count, date — and can pull any one of them in
+  full when the digest is not enough. Reads are scoped to the caller's own
+  workspace and channel. Requires PostgreSQL; on SQLite, digests cover only the
+  current process lifetime.</li>
+<li><strong>Behaviour change: inbound email now carries a <code>From:</code> and <code>Subject:</code> header
+  on the model's turn.</strong> If you pin project prompts to an exact inbound email
+  shape, re-check them. Other channels are unchanged.</li>
+<li><strong>Fixed: the email subject line never reached the model.</strong> An instruction
+  written only in the subject — "add these books to rag", with the books
+  attached and an empty body — was silently dropped, and the bot answered as if
+  no instruction had been given.</li>
+<li><strong>Fixed: the bot read its own quoted replies as somebody else's words.</strong> Mail
+  clients quote the message being replied to, and the whole trailer was handed
+  to the model, which had no idea what its own address was. Reply someone said
+  "4" to a numbered list and the bot asked them what they meant. Quoted
+  trailers are now trimmed (Gmail, Apple Mail, Thunderbird, Roundcube, Outlook
+  including localised forms, forwards, plain <code>&gt;</code> quotes), and the bot is told
+  its own address and that quoted text from it is its own earlier turn.</li>
+<li><strong>Fixed: multi-party email threads were unattributable.</strong> With two people on a
+  thread the bot could not tell their messages apart. Each turn now records its
+  sender.</li>
+<li><strong>Fixed: Slack retries no longer produce duplicate replies</strong>, and Slack slash
+  commands are handled as first-class inbound.</li>
+<li><strong>Fixed: inbound Slack and GitHub webhook events could reach a channel with no
+  receiver attached</strong> and land in logs only, when observability initialisation
+  rebuilt the HTTP server after startup.</li>
+<li><strong>Fixed on Community edition: operator profiles.</strong> The operator memory page
+  renders and saves — its storage and UI route were not fully wired.</li>
+<li><strong>New operator skills for the Claude Code / Codex companion:</strong>
+  <code>configure-vornik</code> (find the tree the daemon actually reads, scaffold, then
+  validate → reload → confirm), <code>troubleshoot-vornik</code> (route by symptom to the
+  right diagnostic instead of improvising) and <code>report-problem</code> (file an
+  anonymised upstream issue, with review before submit). These were described
+  under 2026.7.5 but landed after that release was cut — 2026.7.6 is the first
+  release that actually contains them.</li>
+</ul>
+<p>Upgrading requires no configuration changes and adds no migrations. The Slack
+and email changes take effect when you restart the daemon.</p>
+<hr />
 <h2 id="202675">2026.7.5<a class="headerlink" href="#202675" title="Permanent link">&para;</a></h2>
 <p><strong>A security-and-governance release.</strong> Two full security audits — the ten-day
 contribution window and then the whole tree — found and fixed 37 issues, one
@@ -1985,8 +2061,20 @@ detail in the Telemetry and privacy reference.
   chunks rather than the attachment, because extracting the upload at submit time
   suppressed staging the file for the agent. Workflows that declare they need
   input artifacts now always get the raw file. The Claude Code and Codex
-  companion plugins ship as 0.13.0 and 0.11.0 with corrected guidance; installed
+  companion plugins ship as 0.14.0 and 0.12.0 with corrected guidance; installed
   clients pick that up on their next marketplace update.
+- <strong>New: your coding assistant can now configure and troubleshoot Vornik.</strong> Both
+  companion plugins bundle an operator lifecycle triad — <code>configure-vornik</code>,
+  <code>troubleshoot-vornik</code>, and the existing <code>report-problem</code> — so setup, diagnosis,
+  and filing a bug each follow a guarded path over Vornik's own tooling instead
+  of being improvised. <code>configure-vornik</code> leads with the configuration traps that
+  fail silently: the config tree is found by a fallback chain rather than one
+  environment variable, <code>VORNIK_CONFIGS_DIR</code> is ignored without complaint unless
+  the directory already holds <code>projects/</code>, <code>swarms/</code>, and <code>workflows/</code>, and
+  editing the wrong copy of a config is the usual reason a correct change does
+  nothing. <code>troubleshoot-vornik</code> routes by symptom to the right diagnostic —
+  <code>doctor --offline</code> when the daemon is down, the failure-class playbook when a
+  task fails — and hands off to <code>report-problem</code> when it runs out of road.
 - <strong>Behavior changes to note.</strong> A <code>web_fetch</code> of a page with a blocked or
   unresolvable third-party asset now <strong>succeeds</strong> and lists what it refused in a
   new <code>denied_subresources</code> field, instead of failing the whole fetch. Inbound

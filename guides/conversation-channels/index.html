@@ -1982,8 +1982,11 @@ been allowed into.</p>
 <li>Subscribe the bot to the <code>app_mention</code>, <code>message.im</code>, and <code>message.channels</code>
    events.</li>
 <li>Under <strong>OAuth &amp; Permissions</strong>, add the <code>app_mentions:read</code>, <code>chat:write</code>,
-   <code>im:history</code>, <code>im:read</code>, and <code>channels:history</code> scopes.</li>
-<li>Install the App to your workspace and capture the signing secret and the bot
+   <code>im:history</code>, <code>im:read</code>, <code>channels:history</code>, and <code>commands</code> scopes.</li>
+<li>Under <strong>Slash Commands</strong>, create <code>/vornik</code> and set its request URL to the
+   same <code>/api/v1/slack/webhook</code> endpoint. Use <code>/vornik &lt;prompt&gt;</code> to start or
+   continue the per-user channel session.</li>
+<li>Install (or reinstall) the App to your workspace and capture the signing secret and the bot
    token (it starts with <code>xoxb-</code>).</li>
 </ol>
 <h3 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h3>
@@ -2012,6 +2015,16 @@ is what lets vornik reply.</p>
   server's clock is in sync.</li>
 <li>Slack limits how fast a bot can post (roughly one message per second per
   channel). vornik respects this automatically and waits when Slack asks it to.</li>
+<li>Slack retries Events API deliveries when acknowledgement is slow. vornik
+  drops Slack-marked retries (including when they reach another replica) and
+  deduplicates repeated <code>event_id</code> values, so one message produces one
+  dispatcher turn.</li>
+<li><code>/vornik</code> is the Slack command entry point. Telegram-specific commands such
+  as <code>/tasks</code> are not separately registered in Slack; ask for those operations
+  through <code>/vornik</code>, for example <code>/vornik show my running tasks</code>.</li>
+<li>Slash commands use a per-user, per-channel session separate from ordinary
+  message threads. Their delayed answers post at channel level because a slash
+  invocation has no Slack message timestamp to reply under.</li>
 </ul>
 <hr />
 <h2 id="email">Email<a class="headerlink" href="#email" title="Permanent link">&para;</a></h2>
