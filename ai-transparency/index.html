@@ -1557,6 +1557,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#if-you-were-mentioned-here-but-never-wrote-to-us" class="md-nav__link">
+    <span class="md-ellipsis">
+      If you were mentioned here but never wrote to us
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#human-oversight" class="md-nav__link">
     <span class="md-ellipsis">
       Human oversight
@@ -1693,6 +1702,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#if-you-were-mentioned-here-but-never-wrote-to-us" class="md-nav__link">
+    <span class="md-ellipsis">
+      If you were mentioned here but never wrote to us
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#human-oversight" class="md-nav__link">
     <span class="md-ellipsis">
       Human oversight
@@ -1735,7 +1753,7 @@
 
 
 <h1 id="ai-transparency">AI transparency<a class="headerlink" href="#ai-transparency" title="Permanent link">&para;</a></h1>
-<p><strong>Last updated:</strong> 28 July 2026</p>
+<p><strong>Last updated:</strong> 29 July 2026</p>
 <p>If you arrived here from a message that said <em>"You are interacting with an AI
 system"</em> — this page explains what that means.</p>
 <h2 id="you-are-talking-to-software-not-a-person">You are talking to software, not a person<a class="headerlink" href="#you-are-talking-to-software-not-a-person" title="Permanent link">&para;</a></h2>
@@ -1787,6 +1805,14 @@ configured it. The possible recipients are:</p>
 <td>Model routing to further downstream providers</td>
 </tr>
 <tr>
+<td>Google Cloud (Vertex AI)</td>
+<td>Language model inference</td>
+</tr>
+<tr>
+<td>Ollama Cloud</td>
+<td>Language model inference, including image input</td>
+</tr>
+<tr>
 <td>Locally-hosted models (e.g. Ollama)</td>
 <td>Inference with no external transmission</td>
 </tr>
@@ -1797,6 +1823,39 @@ external transmission at all. Ask the operator of the deployment you are
 talking to which configuration applies.</p>
 <p>This list is also the sub-processor list for data-protection purposes — see
 the <a href="../compliance/">compliance status</a> page.</p>
+<h2 id="if-you-were-mentioned-here-but-never-wrote-to-us">If you were mentioned here but never wrote to us<a class="headerlink" href="#if-you-were-mentioned-here-but-never-wrote-to-us" title="Permanent link">&para;</a></h2>
+<p>This section is for a different reader: someone whose personal data a Vornik
+deployment holds because <strong>somebody else</strong> put it there. An email that names
+you. A CV sent about you. A photo you appear in.</p>
+<p><strong>Who to ask, and who not to.</strong> Vornik is software that organisations run on
+their own infrastructure. <strong>The Vornik project does not hold, store, or have
+access to any data from a customer's deployment</strong> — so we cannot look you up,
+confirm whether a deployment holds data about you, or action a request. The
+organisation running the deployment is the <strong>data controller</strong> and the only
+party who can answer you.</p>
+<p>If you do not know who that is, the message or document that brought you here
+usually identifies them — the sending domain, the signature, or the person who
+contacted you.</p>
+<p><strong>What you are entitled to.</strong> GDPR Article 14 obliges that controller to tell
+you what they hold about you, why, on what legal basis, who else sees it, how
+long they keep it, and where it came from — and they owe you that even though
+you never chose to interact with their system. You can also ask for a copy
+(Article 15), correction (16), erasure (17), restriction (18), portability (20),
+and you can object to processing based on legitimate interests (21). If they do
+not respond satisfactorily you can complain to your national supervisory
+authority without going through them first.</p>
+<p><strong>What Vornik does to make that possible.</strong> Two things worth knowing, because
+they affect what a controller can honestly promise you:</p>
+<ul>
+<li>The software records where each piece of data entered from, so a controller
+  can answer "where did you get this about me?" rather than guessing.</li>
+<li>Its image analysis explicitly <strong>refuses</strong> to identify people, infer emotions,
+  or deduce race, religion, politics, union membership, health, sex life, or
+  sexual orientation from appearance.</li>
+</ul>
+<p>Operators: the notice you owe under Article 14 is yours to publish, not ours.
+A template you can adopt is in the project's
+<code>docs/legal/art14-notice-template.md</code>.</p>
 <h2 id="human-oversight">Human oversight<a class="headerlink" href="#human-oversight" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Sensitive and irreversible actions are gated behind explicit human approval.</li>

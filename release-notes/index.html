@@ -1574,6 +1574,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202677" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202676" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.6
@@ -1788,6 +1797,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202677" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.7.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202676" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.6
@@ -1993,6 +2011,80 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202677">2026.7.7<a class="headerlink" href="#202677" title="Permanent link">&para;</a></h2>
+<p><strong>The assistant can see.</strong> Send it a photo and it answers about the photo. Two
+legal obligations also moved from documented to enforced-in-code.</p>
+<ul>
+<li><strong>New: media perception.</strong> Images sent over any channel are now understood —
+  answered directly when the dispatcher's model can see them, otherwise handed
+  to a dedicated vision agent. Audio is transcribed; video yields a transcript
+  plus sampled keyframes. Previously a photo produced an honest "I cannot see
+  this", because the pixels were being discarded before they reached the agent.</li>
+<li><strong>Behaviour change: the dispatcher model is now <code>minimax-m3</code>.</strong> It is
+  multimodal, tool-use tuned, and <strong>cheaper</strong> than the model it replaces. If you
+  pin Bedrock models on swarm roles, check <code>vornikctl doctor</code>'s
+  <code>model_route_coverage</code> after upgrading — the default provider route moved, and
+  Bedrock ids are now pinned explicitly rather than relying on it.</li>
+<li><strong>New: <code>vornikctl erase artifact &lt;id&gt;</code>.</strong> Performs a complete GDPR Article 17
+  erasure — the extraction rows, the memory chunks derived from them, and the
+  stored files. Deleting an artifact alone never removed any of that: derived
+  embeddings survived and merely lost the pointer back to their source. Shows
+  you exactly what will go and asks before doing it.</li>
+<li><strong>New: AI-disclosure observability.</strong> Serve and failure counts for the EU AI
+  Act Article 50 notice are now exported, so you can show the obligation is
+  being met and notice if it ever stops.</li>
+<li><strong>Fixed: the disclosure record can no longer be pruned.</strong> It is the evidence
+  that the notice was served; retention now refuses to touch it outright rather
+  than merely omitting it from a list.</li>
+<li><strong>New: GDPR data-subject rights.</strong> <code>vornikctl subject</code> registers a person,
+  records what is held about them, and produces an Article 15 access or
+  Article 20 portability report. Identity verification is required before
+  anything is produced — an export handed to whoever asked would disclose that
+  person's data to a stranger. Records that also concern other people are listed
+  but their content is withheld, under Article 15(4).</li>
+<li><strong>New: breach ledger.</strong> <code>vornikctl incident</code> records a personal-data breach and
+  walks the Article 33/34 obligations, with the 72-hour clock running from when
+  you became <em>aware</em> rather than when the breach happened. <code>vornikctl doctor</code>
+  warns while there is still a day left and errors once the window closes.</li>
+<li><strong>New: retention guidance.</strong> The sweeper still ships off — enabling it on
+  upgrade would delete data you never agreed to lose — but the doctor now tells
+  you plainly that the deployment keeps personal data indefinitely, and a
+  recommended profile ships alongside your config to copy from. It also warns
+  when the sweeper is on with no windows, and when the memory-chunk window is
+  missing: long-term memory is the longest-lived personal data in the system.</li>
+<li><strong>Fixed: a model was billing at the wrong rate.</strong> <code>kimi-k3</code> was available but
+  unpriced, so its spend accrued at the default rate — the most expensive model
+  on that route was the one being mis-costed.</li>
+<li><strong>Fixed: AI disclosure now covers two surfaces that are not channels.</strong> The
+  Article 50(1) notice was served on every chat channel, but two paths reach a
+  person without being a channel and so bypassed it: code-review comments the
+  platform posts on pull requests, and autonomous posts to a third-party API. Both
+  now carry the notice. Review comments refuse to post if the disclosure is
+  unavailable rather than publishing undisclosed, and a gateway provider can be
+  marked as a <strong>publication surface</strong> — a write whose content lacks the notice is
+  refused, with the exact wording to add, so the agent corrects itself and retries.
+  Publication surfaces get their own wording, because "replies in this
+  conversation" is untrue of something the system authored.</li>
+<li><strong>New: <code>vornikctl subject erase</code>.</strong> Carries out an Article 17 erasure for a
+  verified request. It shows the plan and asks before destroying anything, names
+  each record's treatment, and lists what is retained under an exemption with the
+  legal ground — a subject told "erased" while records remain has been misled.
+  The Article 17(1) ground you record decides what happens to records that also
+  concern other people: under most grounds they are preserved, but under 17(1)(d)
+  or (e) the controller has no discretion to retain and the record goes in full.
+  Uploaded files are removed properly — the derived text, the memory built from
+  it, the stored file, and the row.
+  <strong>Known limitation, stated because it affects the response a subject receives:</strong>
+  removing one person's data from a record shared with others is not yet automated.
+  Those records are identified and reported, and the request is deliberately left
+  open rather than closed as complete.</li>
+<li><strong>Docs: the records of processing and the DPA template were re-verified against
+  the code.</strong> Both had gone stale in the direction that understates the platform —
+  the processing record still said no data-subject identifier existed, and the DPA
+  told a prospective controller that erasure was available only per project or per
+  record. Corrected, along with what the platform still cannot warrant.</li>
+</ul>
 <hr />
 <h2 id="202676">2026.7.6<a class="headerlink" href="#202676" title="Permanent link">&para;</a></h2>
 <p><strong>A conversation-channels release.</strong> The bot now keeps its bearings in email and

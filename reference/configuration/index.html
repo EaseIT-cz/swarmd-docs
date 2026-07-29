@@ -1657,6 +1657,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#media" class="md-nav__link">
+    <span class="md-ellipsis">
+      media
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#node" class="md-nav__link">
     <span class="md-ellipsis">
       node
@@ -2155,6 +2164,15 @@
   <a href="#voice" class="md-nav__link">
     <span class="md-ellipsis">
       voice
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#media" class="md-nav__link">
+    <span class="md-ellipsis">
+      media
     </span>
   </a>
   
@@ -3213,6 +3231,11 @@
 <td>Default model identifier when a request does not pin one.</td>
 </tr>
 <tr>
+<td><code>chat.model_capabilities</code></td>
+<td>map</td>
+<td>Per-model modality declarations (text, vision, audio). Undeclared models fall back to built-in id patterns, then text-only.</td>
+</tr>
+<tr>
 <td><code>chat.wizard_model</code></td>
 <td>string</td>
 <td>Model for the project-setup wizard.</td>
@@ -3793,6 +3816,48 @@
 <td><code>voice.tts.voice</code></td>
 <td>string</td>
 <td>Absolute path to the TTS voice model.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="media">media<a class="headerlink" href="#media" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>media.stage_max_bytes</code></td>
+<td>int</td>
+<td>Largest raw media file staged into an agent container alongside its extraction. 0 = unbounded.</td>
+</tr>
+<tr>
+<td><code>media.inline_max_bytes</code></td>
+<td>int</td>
+<td>Largest single image attached to a dispatcher chat turn. 0 = built-in default (5 MB).</td>
+</tr>
+<tr>
+<td><code>media.inline_max_bytes_total</code></td>
+<td>int</td>
+<td>Combined image bytes allowed on one dispatcher chat turn. 0 = built-in default (10 MB).</td>
+</tr>
+<tr>
+<td><code>media.inline_max_images</code></td>
+<td>int</td>
+<td>Most images attached to one dispatcher chat turn. 0 = built-in default (4).</td>
+</tr>
+<tr>
+<td><code>media.video.max_frames</code></td>
+<td>int</td>
+<td>Most keyframes sampled from one video. 0 = extractor default (8).</td>
+</tr>
+<tr>
+<td><code>media.video.min_interval_seconds</code></td>
+<td>int</td>
+<td>Shortest gap between sampled keyframes. 0 = extractor default (5).</td>
 </tr>
 </tbody>
 </table>
