@@ -618,6 +618,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reporting-a-problem-with-vornik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reporting a problem with vornik
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1876,6 +1885,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#reporting-a-problem-with-vornik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reporting a problem with vornik
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2093,6 +2111,15 @@ been allowed into.</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;C0ABCDEF12&quot;</span>
 <span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;U0AAAAAAA&quot;</span>
+<span class="w">  </span><span class="c1"># Optional. The command this deployment answers; defaults to /vornik. Set it</span>
+<span class="w">  </span><span class="c1"># when the bot is branded differently, and match the app&#39;s own manifest.</span>
+<span class="w">  </span><span class="nt">slash_command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/vornik&quot;</span>
+<span class="w">  </span><span class="c1"># Optional. A turn can take a minute, and Slack gives bots no typing</span>
+<span class="w">  </span><span class="c1"># indicator, so vornik posts a short &quot;working on it&quot; placeholder and replaces</span>
+<span class="w">  </span><span class="c1"># it with the answer. Set false to keep the channel silent until the reply.</span>
+<span class="w">  </span><span class="nt">progress_signal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># Optional. How long a turn may run before that placeholder appears.</span>
+<span class="w">  </span><span class="nt">progress_signal_gap</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2s&quot;</span>
 </code></pre></div>
 <p>Supply the secrets in the environment before starting vornik:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_SIGNING_SECRET</span><span class="o">=</span><span class="s2">&quot;your-signing-secret&quot;</span>
@@ -2120,7 +2147,39 @@ is what lets vornik reply.</p>
 <li>Slash commands use a per-user, per-channel session separate from ordinary
   message threads. Their delayed answers post at channel level because a slash
   invocation has no Slack message timestamp to reply under.</li>
+<li><strong>Direct messages are never gated by <code>channel_allowlist</code>.</strong> A DM's channel id
+  is created by Slack the first time each person writes to the bot, so it cannot
+  be listed in advance. <code>sender_allowlist</code> is the control for DMs — and with it
+  empty, any member of the workspace can DM the bot.</li>
+<li><strong>In a thread, you only tag the bot once.</strong> Replies inside a thread vornik is
+  already part of continue the conversation without a mention. A new top-level
+  message in a channel still needs an @-mention, which is what keeps the bot out
+  of conversations between colleagues.</li>
+<li>Images posted to Slack are read: they go to the model directly when it can see
+  images, and to the vision role when it cannot. Voice memos are transcribed when
+  voice is configured.</li>
+<li>Opening the app's <strong>Home</strong> tab shows what this deployment serves and how to
+  reach it. Subscribe to the <code>app_home_opened</code> bot event to enable it; no extra
+  OAuth scope is needed.</li>
+<li><strong>You can see what a turn is doing.</strong> While vornik works, the "working on it"
+  message is rewritten in place to name the current step — searching memory,
+  scheduling the job, calling an external service. It is replaced by the answer
+  when the turn finishes, and it never becomes part of the conversation.</li>
+<li><strong>A job scheduled from chat reports back.</strong> When a task vornik created for you
+  finishes, it posts the outcome and a link into the same conversation, whether
+  or not it succeeded. That works across a daemon restart: the link between the
+  task and your conversation is stored in the database, not in memory.</li>
 </ul>
+<h3 id="reporting-a-problem-with-vornik">Reporting a problem with vornik<a class="headerlink" href="#reporting-a-problem-with-vornik" title="Permanent link">&para;</a></h3>
+<p>Ask the bot to report a bug ("something is broken, please file a report") on any
+channel and it prepares an anonymised report: hostnames, file paths, IP
+addresses, email addresses and anything resembling a credential are stripped
+automatically.</p>
+<p>It gives you back a <strong>link</strong>, and does not submit anything itself. The report
+would go to a public repository, and automatic redaction cannot know whether
+your own description mentions a customer or a system you would rather not name —
+so you read it on GitHub and press submit yourself. The same rule applies to
+<code>vornikctl report</code> on the host.</p>
 <hr />
 <h2 id="email">Email<a class="headerlink" href="#email" title="Permanent link">&para;</a></h2>
 <p>The email channel reads inbound mail over IMAP and replies over SMTP, so anyone

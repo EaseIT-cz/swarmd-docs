@@ -1795,6 +1795,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-mcp-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl mcp connect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-mcp-disconnect" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl mcp disconnect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-mcp-oauth-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl mcp oauth-status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-mcp-servers" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl mcp servers
@@ -1942,6 +1969,15 @@
   <a href="#vornikctl-memory-gist" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl memory gist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-memory-ned-calibrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl memory ned-calibrate
     </span>
   </a>
   
@@ -3106,6 +3142,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-mcp-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl mcp connect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-mcp-disconnect" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl mcp disconnect
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-mcp-oauth-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl mcp oauth-status
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-mcp-servers" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl mcp servers
@@ -3253,6 +3316,15 @@
   <a href="#vornikctl-memory-gist" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl memory gist
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-memory-ned-calibrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl memory ned-calibrate
     </span>
   </a>
   
@@ -4214,6 +4286,10 @@ proposal is filed.</p>
   model_health          Role-pinned models with high recent failure rate or
                         degenerate output; RECOMMENDS the role's modelFallback
                         (diagnostic only — never auto-switches a model)
+  model_calls_live      Model calls failing SINCE DAEMON START, per (model, call
+                        site). Covers EVERY call site, including the memory
+                        workers (classifier/titler/reranker/graph) that
+                        model_health does not enumerate
   model_route_coverage  Role-pinned models that don't resolve to a chat
                         model_route prefix or are missing from pricing.yaml</p>
 <p>Cost &amp; budget:
@@ -4943,6 +5019,85 @@ spinning up an agent container and paying for an LLM call.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="vornikctl-mcp-connect">vornikctl mcp connect<a class="headerlink" href="#vornikctl-mcp-connect" title="Permanent link">&para;</a></h2>
+<p>Grant an MCP server access via OAuth (prints a URL and waits)</p>
+<p>Start the OAuth consent flow for one MCP server.</p>
+<p>Prints the resource and scopes being requested, then an authorization URL to
+open in a browser. The daemon's own callback completes the exchange; this
+command waits for it and then verifies that the recorded grant matches what was
+requested.</p>
+<p>Omit --project for a daemon-level server (config.yaml's mcp.servers). NOTE that
+a daemon-level grant is reachable from EVERY project on the daemon.</p>
+<p>Examples:
+  vornikctl mcp connect atlassian -p my-project
+  vornikctl mcp connect n8n</p>
+<div class="highlight"><pre><span></span><code>vornikctl mcp connect &lt;server&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (omit for a daemon-level server)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-mcp-disconnect">vornikctl mcp disconnect<a class="headerlink" href="#vornikctl-mcp-disconnect" title="Permanent link">&para;</a></h2>
+<p>Revoke Vornik's stored OAuth grant for an MCP server</p>
+<p>Delete the stored OAuth grant for one MCP server.</p>
+<p>The server's auth: block in config is untouched, so reconnecting needs no config
+change. This does NOT revoke the grant at the vendor — do that in their console
+if you want the authorization itself withdrawn.</p>
+<div class="highlight"><pre><span></span><code>vornikctl mcp disconnect &lt;server&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (omit for a daemon-level server)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-mcp-oauth-status">vornikctl mcp oauth-status<a class="headerlink" href="#vornikctl-mcp-oauth-status" title="Permanent link">&para;</a></h2>
+<p>Show the stored OAuth grant for an MCP server</p>
+<div class="highlight"><pre><span></span><code>vornikctl mcp oauth-status &lt;server&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>JSON output</td>
+</tr>
+<tr>
+<td><code>-p</code>, <code>--project</code></td>
+<td></td>
+<td>Project ID (omit for a daemon-level server)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-mcp-servers">vornikctl mcp servers<a class="headerlink" href="#vornikctl-mcp-servers" title="Permanent link">&para;</a></h2>
 <p>List the daemon-level MCP server inventory</p>
 <p>List every MCP server declared at the daemon level (top-level
@@ -5468,6 +5623,83 @@ for this project yet.</p>
 <td><code>--json</code></td>
 <td><code>false</code></td>
 <td>Emit JSON instead of a table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-memory-ned-calibrate">vornikctl memory ned-calibrate<a class="headerlink" href="#vornikctl-memory-ned-calibrate" title="Permanent link">&para;</a></h2>
+<p>Measure the shared-scope NED resolver decision distribution over historical chat</p>
+<p>Sample historical human chat turns (chat_audit_log.user_message), run the
+SHIPPED shared-scope NED extract→resolve path (the same billed code the chat
+<code>remember</code> tool uses) over the sample, and report the resolver decision
+distribution — match / new / ambiguous / none (design §6.2.1, §7).</p>
+<p>This is USABILITY calibration, not safety: the NED gate blocks every unresolved
+detected person by construction regardless. This answers whether shared-scope
+<code>remember</code> is USABLE — i.e. whether the normal case is blocked.</p>
+<p>Sampling frame (§7):
+  - stratified by project; &gt;=100 turns per stratum where available
+  - the dominant project is capped at 50% of the total sample (janka holds
+    ~95% of turns — an unstratified draw measures one person)
+  - recent-only within --window
+  - projects with &lt;100 eligible turns are reported as a separate
+    "insufficient_sample" bucket and are NOT screened or folded into the
+    aggregate (review I4)</p>
+<p>Cost: each screened turn is 1 extractor LLM call + (for person-bearing turns) a
+resolver call that short-circuits ~70% without an LLM call. The measurement's own
+spend is BILLED to task_llm_usage under source=chat_remember_ned (design D6.4).</p>
+<p>Use --dry-run FIRST: it prints the sampling plan, per-stratum counts, and a
+rough LLM-call estimate WITHOUT making a single LLM call, so cost is visible
+before any spend.</p>
+<p>The report is AGGREGATES ONLY — no chat content is ever printed.</p>
+<p>Requires chat.provider=router with chat.router.bedrock.enabled=true (the KG
+extractor/resolver models route to the bedrock sub-provider), and a postgres
+database. AWS credentials must be present in the environment for the real run
+(the systemd unit loads ~/.config/vornik/secrets/aws.env; a manual run must
+source it).</p>
+<p>Examples:
+  vornikctl memory ned-calibrate --dry-run
+  vornikctl memory ned-calibrate --dry-run --json
+  vornikctl memory ned-calibrate --sample-size 800 --window 30d
+  vornikctl memory ned-calibrate --sample-size 800 --window 30d --json</p>
+<div class="highlight"><pre><span></span><code>vornikctl memory ned-calibrate [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dry-run</code></td>
+<td><code>false</code></td>
+<td>Print the sampling plan + per-stratum counts + call estimate WITHOUT any LLM call</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Emit JSON instead of the human-readable report</td>
+</tr>
+<tr>
+<td><code>--min-per-stratum</code></td>
+<td><code>100</code></td>
+<td>Minimum eligible turns for a project to be a stratum; below this it is reported as insufficient_sample</td>
+</tr>
+<tr>
+<td><code>--sample-size</code></td>
+<td><code>800</code></td>
+<td>Target number of turns to screen across all eligible strata</td>
+</tr>
+<tr>
+<td><code>--seed</code></td>
+<td><code>vornik-ned-calibration</code></td>
+<td>Deterministic sampling seed — the same seed draws the same turns (reproducible re-runs)</td>
+</tr>
+<tr>
+<td><code>--window</code></td>
+<td><code>30d</code></td>
+<td>Recent-only window (e.g. 30d, 720h) — only turns newer than now-window are eligible</td>
 </tr>
 </tbody>
 </table>

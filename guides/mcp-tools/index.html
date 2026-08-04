@@ -597,11 +597,95 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#authenticating-to-a-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticating to a server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authenticating to a server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-static-a-bearer-token-or-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      mode: static — a bearer token or API key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-env-credentials-for-a-stdio-servers-own-upstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      mode: env — credentials for a stdio server's own upstream
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-validated-and-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is validated, and when
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-oauth-the-consent-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      mode: oauth — the consent flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daemon-level-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Daemon-level servers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#restricting-tools-with-allowed_tools" class="md-nav__link">
     <span class="md-ellipsis">
       Restricting tools with allowed_tools
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Restricting tools with allowed_tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#noticing-when-a-servers-tool-set-changes-under-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      Noticing when a server's tool set changes under you
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-that-reach-your-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools that reach your filesystem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1696,11 +1780,95 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#authenticating-to-a-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticating to a server
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Authenticating to a server">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mode-static-a-bearer-token-or-api-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      mode: static — a bearer token or API key
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-env-credentials-for-a-stdio-servers-own-upstream" class="md-nav__link">
+    <span class="md-ellipsis">
+      mode: env — credentials for a stdio server's own upstream
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-is-validated-and-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is validated, and when
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mode-oauth-the-consent-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      mode: oauth — the consent flow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#daemon-level-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Daemon-level servers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#restricting-tools-with-allowed_tools" class="md-nav__link">
     <span class="md-ellipsis">
       Restricting tools with allowed_tools
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Restricting tools with allowed_tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#noticing-when-a-servers-tool-set-changes-under-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      Noticing when a server's tool set changes under you
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tools-that-reach-your-filesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools that reach your filesystem
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1806,6 +1974,148 @@ whose <code>web_fetch</code> hits slow or anti-bot sites — raise it with
 <span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:8787&quot;</span>
 <span class="w">      </span><span class="nt">timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span><span class="w">      </span><span class="c1"># 0 or omitted = 30s default</span>
 </code></pre></div>
+<h2 id="authenticating-to-a-server">Authenticating to a server<a class="headerlink" href="#authenticating-to-a-server" title="Permanent link">&para;</a></h2>
+<p>Most hosted MCP servers require credentials. Add an <code>auth:</code> block to the server
+entry. Omitting it (the default) means "no authentication", which is how every
+server behaved before this block existed.</p>
+<p>Credentials are <strong>never written in the config</strong>. Every credential field takes a
+<code>secret://&lt;name&gt;</code> reference; the value lives in the secret store, and the name
+must appear in the project's <code>permissions.secrets</code>. That is what lets a server
+definition travel through the control plane as a reviewable diff without
+leaking anything.</p>
+<h3 id="mode-static-a-bearer-token-or-api-key"><code>mode: static</code> — a bearer token or API key<a class="headerlink" href="#mode-static-a-bearer-token-or-api-key" title="Permanent link">&para;</a></h3>
+<p>For a server that authenticates with a fixed header (n8n's MCP Server Trigger,
+and most servers that predate OAuth support):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;N8N_MCP_TOKEN&quot;</span><span class="p p-Indicator">]</span><span class="w">        </span><span class="c1"># required — the reference is checked against this</span>
+<span class="nt">mcp</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;n8n&quot;</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;streamable-http&quot;</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://n8n.example.com/mcp/abc&quot;</span>
+<span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">static</span>
+<span class="w">        </span><span class="nt">header</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Authorization&quot;</span><span class="w">     </span><span class="c1"># optional; Authorization is the default</span>
+<span class="w">        </span><span class="nt">value_from</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secret://N8N_MCP_TOKEN&quot;</span>
+<span class="w">        </span><span class="nt">value_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bearer</span><span class="nv"> </span><span class="s">&quot;</span><span class="w">     </span><span class="c1"># optional; note the trailing space</span>
+</code></pre></div>
+<p>The resolved header is attached to every request for that server, and it wins
+over a header of the same name set anywhere else.</p>
+<h3 id="mode-env-credentials-for-a-stdio-servers-own-upstream"><code>mode: env</code> — credentials for a stdio server's own upstream<a class="headerlink" href="#mode-env-credentials-for-a-stdio-servers-own-upstream" title="Permanent link">&para;</a></h3>
+<p>A stdio MCP server often holds its <em>own</em> account with a third party (a YouTube,
+Reddit or Instagram wrapper holding a Google or Reddit app). There is no
+handshake for vornik to run — the job is to hand the subprocess its secrets:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;REDDIT_CLIENT_ID&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;REDDIT_CLIENT_SECRET&quot;</span><span class="p p-Indicator">]</span>
+<span class="nt">mcp</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;reddit&quot;</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stdio&quot;</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;reddit-mcp&quot;</span>
+<span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">env</span>
+<span class="w">        </span><span class="nt">env_from</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">REDDIT_CLIENT_ID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secret://REDDIT_CLIENT_ID&quot;</span>
+<span class="w">          </span><span class="nt">REDDIT_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secret://REDDIT_CLIENT_SECRET&quot;</span>
+</code></pre></div>
+<p>Resolved values are passed to the subprocess verbatim — unlike the legacy <code>env</code>
+map, they are <strong>not</strong> <code>${VAR}</code>-expanded, so a credential containing <code>$</code> arrives
+intact. Prefer <code>env_from</code> over <code>env</code> for anything secret: <code>env</code> resolves from
+the daemon's own environment, so two projects on one daemon necessarily share
+the value, and it bypasses the <code>permissions.secrets</code> check.</p>
+<h3 id="what-is-validated-and-when">What is validated, and when<a class="headerlink" href="#what-is-validated-and-when" title="Permanent link">&para;</a></h3>
+<p>Mistakes fail at config load rather than at the first tool call:</p>
+<ul>
+<li><code>mode</code> outside <code>none | oauth | static | env</code>.</li>
+<li><code>mode: env</code> on a non-stdio server, or <code>static</code>/<code>oauth</code> on a stdio one.</li>
+<li>A credential field holding a literal or a <code>${VAR}</code> placeholder instead of a
+  <code>secret://</code> reference.</li>
+<li>A <code>secret://</code> name that is not in the project's <code>permissions.secrets</code>.</li>
+<li>A <code>header</code> the MCP protocol owns (<code>Content-Type</code>, <code>Accept</code>,
+  <code>MCP-Protocol-Version</code>, <code>Mcp-Session-Id</code>) — it would be dropped before the
+  request was sent.</li>
+<li>A field belonging to a different mode, which would otherwise be ignored
+  silently.</li>
+</ul>
+<p>A secret that is <em>missing at runtime</em> is reported separately: the server is
+withheld rather than connected without its credential, and the daemon log names
+the secret. A server that 401s on every call would look like a permissions
+problem at the vendor; this points at the actual cause.</p>
+<h3 id="mode-oauth-the-consent-flow"><code>mode: oauth</code> — the consent flow<a class="headerlink" href="#mode-oauth-the-consent-flow" title="Permanent link">&para;</a></h3>
+<p>Most hosted MCP servers (Atlassian, Linear, Notion, Slack, GitHub, …) are OAuth
+2.1 resource servers. Declare the block, then connect once per project:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;atlassian&quot;</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;streamable-http&quot;</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://mcp.atlassian.com/v1/mcp/authv2&quot;</span>
+<span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oauth</span>
+<span class="w">        </span><span class="nt">scopes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;read:jira-work&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;offline_access&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>Vornik discovers the authorization server, registers itself as an OAuth client
+where the vendor supports it, and stores the resulting token per
+<code>(project, server)</code>. That last part matters: one operator consents once, and
+every task in the project uses that grant — including autonomous and cron runs,
+which have no user to borrow a token from.</p>
+<p><strong>Precondition.</strong> <code>server.public_base_url</code> must be set to an <code>https://</code> origin
+(loopback also works for local testing). OAuth 2.1 requires a redirect URI the
+vendor can reach, and Vornik's callback is
+<code>&lt;public_base_url&gt;/auth/mcp/callback</code>. Connect is refused up front when it is
+unset — better than failing after you have already consented at the vendor.</p>
+<p>Connect from the CLI:</p>
+<div class="highlight"><pre><span></span><code>$ vornikctl mcp connect atlassian -p my-project
+Connecting MCP server &quot;atlassian&quot; for project my-project
+
+  Resource:     https://mcp.atlassian.com/v1/mcp/authv2
+  Scopes:       read:jira-work offline_access
+  Redirect URI: https://vornik.example.com/auth/mcp/callback
+
+Open this URL to consent:
+
+  https://auth.atlassian.com/authorize?...
+
+Waiting for the callback (up to 5m0s)…
+</code></pre></div>
+<p>Open the URL, consent, and the daemon's own callback completes the exchange. The
+command then <strong>verifies</strong> the recorded grant against what it displayed and exits
+non-zero if the resource or scopes differ — it never sees the token, so a
+matching record is the only evidence it can offer you.</p>
+<p>The control-plane MCP tab (<code>/ui/admin/control-plane?section=mcp</code>) has the same
+Connect/Disconnect buttons plus an authorized-vs-reachable status per row. Note
+that "reachable" is auth-blind: a server that 401s every call is still
+reachable, which is why the row shows the grant separately.</p>
+<p>Other commands:</p>
+<div class="highlight"><pre><span></span><code>vornikctl mcp oauth-status atlassian -p my-project   # resource, scopes, expiry
+vornikctl mcp disconnect atlassian -p my-project     # deletes the stored grant
+</code></pre></div>
+<p><strong>Servers with no dynamic registration</strong> (Slack, GitHub, Box) need a
+pre-registered client — set <code>client_id</code>, and <code>client_secret_from</code> when the
+vendor issued a secret. <strong>Servers with no discovery at all</strong> (Intercom) need
+<code>authorization_endpoint</code> and <code>token_endpoint</code> set explicitly. Vornik tells you
+which case you are in rather than failing generically.</p>
+<p><strong>Refresh and reconnect.</strong> Access tokens refresh automatically, shortly before
+expiry, and rotated refresh tokens are handled. If the vendor revokes the grant,
+the server is flagged <code>needs_reconnect</code>: its calls stop rather than retrying
+forever, <code>mcp oauth-status</code> says so, and <code>mcp connect</code> fixes it. Disconnecting
+in Vornik does <strong>not</strong> revoke the authorization at the vendor — do that in their
+console too if you want it withdrawn there.</p>
+<p><strong>If you change a server's <code>url</code>, reconnect it.</strong> Vornik refuses to present a
+grant whose origin no longer matches the configured URL, so moving a server to a
+different host fails loudly. A change to the PATH only (<code>/v1</code> → <code>/v2</code> on the same
+host) is not detected — if that vendor scopes access per path, run
+<code>vornikctl mcp connect</code> again after the edit.</p>
+<p><strong>A note on the grant record.</strong> Every Connect and Disconnect is recorded in the
+admin audit trail with who consented, to which resource, and with which scopes —
+never the token. That is what makes a grant auditable after the fact.</p>
+<h3 id="daemon-level-servers">Daemon-level servers<a class="headerlink" href="#daemon-level-servers" title="Permanent link">&para;</a></h3>
+<p>The same <code>auth:</code> block works in <code>config.yaml</code>'s <code>mcp.servers</code>. Note the
+difference in blast radius: a daemon-level server is reachable from <strong>every</strong>
+project, so a credential attached there shares one account with all of them.
+Prefer a project-scoped server for anything account-bearing.</p>
+<p>The control-plane MCP tab can edit <code>auth:</code> blocks directly. The project-config
+form has no auth fields, but it preserves a block you hand-wrote rather than
+dropping it on an unrelated save.</p>
 <h2 id="restricting-tools-with-allowed_tools">Restricting tools with <code>allowed_tools</code><a class="headerlink" href="#restricting-tools-with-allowed_tools" title="Permanent link">&para;</a></h2>
 <p>By default a server exposes <strong>every</strong> tool it advertises. In almost all cases
 you want to narrow that to the tools the project actually needs. Add
@@ -1834,6 +2144,64 @@ vornik enforces it in two places:</p>
 </ul>
 <p>Keeping <code>allowed_tools</code> tight is the single most effective control here: it is
 both a safety boundary and a reliability win.</p>
+<h3 id="noticing-when-a-servers-tool-set-changes-under-you">Noticing when a server's tool set changes under you<a class="headerlink" href="#noticing-when-a-servers-tool-set-changes-under-you" title="Permanent link">&para;</a></h3>
+<p><code>allowed_tools</code> is a list <em>you</em> maintain against a catalogue the <em>server</em> owns. A
+third-party server can add a tool in any release — including a destructive one —
+and your allow-list will quietly keep filtering it out. That is the correct
+behaviour, but you probably want to know it happened, because the credential that
+server uses may still permit whatever the new tool does.</p>
+<p>Vornik classifies every advertised tool as read-only or mutating at connect time,
+using the server's own <code>readOnlyHint</code> / <code>destructiveHint</code> annotations where it
+supplies them and the tool name otherwise. Anything it cannot recognise as a read
+is treated as mutating — the safe direction, since the tool nobody anticipated is
+exactly the one a denylist would miss.</p>
+<p>Names are split on separators <em>and</em> on camelCase, so <code>drive_search</code>,
+<code>calendar_listEvents</code> and <code>calendar.listEvents</code> are all read correctly. Servers
+mix these conventions freely and you do not get to choose which one yours uses.</p>
+<p>When a server advertises a mutating tool your <code>allowed_tools</code> does not name, the
+daemon logs a warning listing them. Nothing is exposed to the model, but the
+change is visible.</p>
+<p>If a server's annotations <strong>disagree</strong> with what the tool name suggests — declaring
+a <code>delete</code>-looking tool read-only, or a <code>get</code>-looking one destructive — the daemon
+logs that too, at INFO. The server is believed either way, because it knows its own
+semantics; the log exists so a third party cannot quietly reclassify a destructive
+tool as safe without leaving a trace.</p>
+<p>For a server whose tool set you do not control and want to be strict about, add:</p>
+<div class="highlight"><pre><span></span><code><span class="w">      </span><span class="nt">require_declared_tools</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<p>With that set, the daemon <strong>refuses to register the server</strong> if it advertises a
+mutating tool while <code>allowed_tools</code> is empty — that combination means "expose
+everything", and everything now includes something destructive. If
+<code>allowed_tools</code> <em>is</em> set, registration proceeds and you get the warning, because
+the allow-list is already keeping the tool away from the model and taking a whole
+integration offline because an upstream release added a tool would be worse than
+the problem.</p>
+<p>It is <strong>off by default</strong>, deliberately: plenty of servers legitimately expose
+mutating tools with no allow-list — a page publisher, a home-automation bridge —
+and those should keep working untouched.</p>
+<h3 id="tools-that-reach-your-filesystem">Tools that reach your filesystem<a class="headerlink" href="#tools-that-reach-your-filesystem" title="Permanent link">&para;</a></h3>
+<p>Some MCP tools take a path on <strong>your host</strong> rather than a remote identifier —
+<code>localPath</code>, <code>filePath</code>, <code>outputPath</code> and similar. A stdio server runs as a child
+of the daemon, with the daemon's OS user, so such a tool is file access with the
+daemon's permissions: it can read whatever that user can read (including the
+daemon's own config and secrets) and overwrite whatever that user can write.</p>
+<p>This is easy to miss, because a tool's name usually gives no hint. Google's
+Workspace MCP server, for example, advertises four tools that write a
+caller-chosen absolute path — and all four begin with <code>download</code> or <code>get</code>, which
+read as harmless fetches. None of them annotates itself.</p>
+<p>Vornik therefore treats <strong>any tool taking a host filesystem parameter as
+mutating</strong>, whatever its name suggests, and this cannot be overridden by the
+server's <code>readOnlyHint</code>. That hint is a claim about the <em>remote</em> service; a third
+party has no standing to declare a write to your disk safe. At connect time the
+daemon logs these tools at WARN, naming the parameter, and separately flags any
+that your <code>allowed_tools</code> actually exposes.</p>
+<p>The practical rule: <strong>keep host-path tools out of <code>allowed_tools</code> unless you
+specifically want a model writing files as your daemon user.</strong> If you do want one,
+declare it explicitly, so the choice is recorded rather than inherited from an
+expose-everything default.</p>
+<p>A generic parameter name such as <code>path</code> or <code>dir</code> is treated the same way. Where
+that parameter is really a <em>remote</em> path, the cost is one line in <code>allowed_tools</code>;
+the opposite mistake costs arbitrary file access.</p>
 <h2 id="throttling-tools-with-toolratelimits">Throttling tools with <code>toolRateLimits</code><a class="headerlink" href="#throttling-tools-with-toolratelimits" title="Permanent link">&para;</a></h2>
 <p>Some tools are expensive or sensitive — placing orders, scraping the web. Give
 them an in-daemon ceiling so vornik degrades gracefully instead of leaning on

@@ -1558,6 +1558,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#workspace_ingest" class="md-nav__link">
+    <span class="md-ellipsis">
+      workspace_ingest
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#metrics" class="md-nav__link">
     <span class="md-ellipsis">
       metrics
@@ -1588,6 +1597,15 @@
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       api
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a2a" class="md-nav__link">
+    <span class="md-ellipsis">
+      a2a
     </span>
   </a>
   
@@ -2071,6 +2089,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#workspace_ingest" class="md-nav__link">
+    <span class="md-ellipsis">
+      workspace_ingest
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#metrics" class="md-nav__link">
     <span class="md-ellipsis">
       metrics
@@ -2101,6 +2128,15 @@
   <a href="#api" class="md-nav__link">
     <span class="md-ellipsis">
       api
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a2a" class="md-nav__link">
+    <span class="md-ellipsis">
+      a2a
     </span>
   </a>
   
@@ -2862,6 +2898,28 @@
 </tr>
 </tbody>
 </table>
+<h2 id="workspace_ingest">workspace_ingest<a class="headerlink" href="#workspace_ingest" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>workspace_ingest.enabled</code></td>
+<td>bool</td>
+<td>Turn on automatic ingestion of Workspace documents. Off by default; ingest-on-request works regardless.</td>
+</tr>
+<tr>
+<td><code>workspace_ingest.sources</code></td>
+<td>list</td>
+<td>Explicit source rules. No rules means nothing is ingested automatically.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="metrics">metrics<a class="headerlink" href="#metrics" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -3042,6 +3100,23 @@
 <td><code>api.rate_limit.per_ip.trusted_proxies</code></td>
 <td>list</td>
 <td>Deprecated: use server.real_ip.trusted_proxies. CIDRs/IPs trusted to set X-Forwarded-For.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="a2a">a2a<a class="headerlink" href="#a2a" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a2a</code></td>
+<td>struct</td>
+<td>Outbound A2A federation: consultable peer instances + consult guardrails.</td>
 </tr>
 </tbody>
 </table>
@@ -3530,6 +3605,11 @@
 <td><code>memory.retrieval_routing.enabled</code></td>
 <td>bool</td>
 <td>Master switch for confidence-based retrieval routing (default true; set false to disable the feature entirely).</td>
+</tr>
+<tr>
+<td><code>memory.min_refute_score</code></td>
+<td>float</td>
+<td>Minimum hybrid-search (RRF) score a chunk must reach before memory_correct's claim search will refute it (0 = default 0.05). Guards against refuting an unrelated chunk on a weak claim match.</td>
 </tr>
 <tr>
 <td><code>memory.embedding_model</code></td>
