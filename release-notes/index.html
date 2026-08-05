@@ -1574,6 +1574,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202680" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202677" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.7
@@ -1797,6 +1806,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202680" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202677" class="md-nav__link">
     <span class="md-ellipsis">
       2026.7.7
@@ -2010,6 +2028,71 @@ behavior changes, and notable fixes. Internal-only changes are omitted.</p>
 so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
+</div>
+<hr />
+<h2 id="202680">2026.8.0<a class="headerlink" href="#202680" title="Permanent link">&para;</a></h2>
+<p><strong>Vornik can authenticate to a remote MCP server on its own.</strong> Connect a
+tool server by granting consent in the browser instead of pasting a token
+that expires. Plus a batch of fixes for things that were reporting success
+while doing nothing.</p>
+<ul>
+<li><strong>New: OAuth 2.1 for MCP servers.</strong> A remote MCP server that requires
+  authentication is now connected by clicking <strong>Connect</strong> on the MCP tab (or
+  <code>vornikctl mcp connect</code>). Vornik discovers the server's authorization
+  requirements, registers itself, runs the consent flow, and refreshes the
+  token as needed — telling you when a revoked grant needs reconnecting.
+  Servers that use a static header or a subprocess credential are supported
+  through the same <code>auth:</code> block. Verified against the published discovery
+  behaviour of eighteen well-known MCP servers.</li>
+<li><strong>New: ask another Vornik a question.</strong> A synchronous <code>consult</code> tool lets one
+  deployment put a question to another and wait for the answer.</li>
+<li><strong>New: write to memory from a conversation.</strong> Ask the assistant to remember
+  something and it will, behind an explicit confirmation step and an opt-in per
+  channel. Personal-scope notes carry their own expiry.</li>
+<li><strong>New: richer Slack.</strong> Inbound images are understood, there is a real App Home
+  tab, a turn that is thinking shows that it is working, threads can be followed
+  up without a mention, <code>/vornik</code> works in a DM, and the slash-command name is
+  per-deployment.</li>
+<li><strong>Behaviour change — chat allowlists now fail CLOSED.</strong> An empty
+  <code>allowed_users</code> (Telegram) or <code>sender_allowlist</code> / <code>channel_allowlist</code> (Slack)
+  used to admit <strong>everyone</strong>. Both bots are publicly addressable, so an
+  unconfigured allowlist was an open door that looked like an unset field. If you
+  rely on the old behaviour, set <code>telegram.allow_unlisted_users: true</code> or Slack's
+  <code>allow_unlisted_senders: true</code> — deliberately, and for development only.
+  Telegram logs at boot which way it will behave.</li>
+<li><strong>Fixed: the knowledge-graph extractor was discarding most of its input.</strong> A
+  reasoning model was spending its whole token allowance thinking and returning
+  nothing, and an empty answer was being recorded as "found no entities" and the
+  chunk marked done — so the loss was permanent and silent. Truncation is now a
+  distinct, counted outcome with bounded retries, and the graph stages request a
+  low reasoning effort. <strong>If you raised the graph token cap to work around this,
+  put it back:</strong> a bigger cap makes each failure more expensive, not less likely.
+  Chunks already marked extracted do not self-heal — run
+  <code>vornikctl memory regraph --project &lt;id&gt;</code> to reclaim them.</li>
+<li><strong>Fixed: email now tells you when a job finishes.</strong> Previously it only did so
+  for tasks created a particular way, and never if the daemon restarted in
+  between. The notice no longer depends on a working model to compose itself.</li>
+<li><strong>Fixed: the control-plane proposal diff.</strong> A configuration edit could render
+  as a wall of deletions it was not making, because unrelated lines got
+  reformatted and the diff had no positional pairing. It also had a size limit
+  below the size of a real <code>config.yaml</code>, which made whole-file edits impossible
+  to apply.</li>
+<li><strong>Fixed: adding an MCP server no longer needs a restart.</strong> The change applied
+  and reloaded, but every consumer of the server list was still reading the
+  boot-time configuration — so the server did not exist and could not be
+  connected.</li>
+<li><strong>Fixed: GDPR erasure reaches entangled records.</strong> A memory chunk concerning
+  several people can now be redacted and re-embedded rather than reported as
+  deferred.</li>
+<li><strong>Fixed:</strong> cron mode ignored <code>autonomy.workflow_id</code>; MCP subscriptions pinned a
+  transport and broke stdio servers; host-filesystem MCP tools were not treated
+  as mutating; the "Test endpoint" button called an authentication-protected
+  server unreachable.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">New configuration keys</p>
+<p><code>telegram.allow_unlisted_users</code>, Slack <code>allow_unlisted_senders</code>. Both default
+to the safe value. See the configuration reference.</p>
 </div>
 <hr />
 <h2 id="202677">2026.7.7<a class="headerlink" href="#202677" title="Permanent link">&para;</a></h2>

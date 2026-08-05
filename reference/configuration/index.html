@@ -3445,6 +3445,11 @@
 <td>Map of Telegram user ID to access. true = full access; a list of project IDs scopes the user. Absent users are denied.</td>
 </tr>
 <tr>
+<td><code>telegram.allow_unlisted_users</code></td>
+<td>bool</td>
+<td>When allowed_users is empty, admit every Telegram user (dev only). Default false = deny.</td>
+</tr>
+<tr>
 <td><code>telegram.rate_limit</code></td>
 <td>int</td>
 <td>Requests per minute per user.</td>

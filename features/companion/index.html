@@ -1761,6 +1761,18 @@ scoped key, so it never needs your admin credentials.</p>
 <td>list the repo scopes the project's memory is partitioned into</td>
 </tr>
 <tr>
+<td><code>memory_correct</code></td>
+<td>soft-refute a wrong or stale memory chunk, optionally storing the correction</td>
+</tr>
+<tr>
+<td><code>whoami</code></td>
+<td>show this key's project and the repo scope your calls resolve to right now</td>
+</tr>
+<tr>
+<td><code>report_problem</code></td>
+<td>build an anonymized problem report + prefilled issue URL for you to review and submit</td>
+</tr>
+<tr>
 <td><code>delegate</code></td>
 <td>queue an async task on vornik; returns a task id and a poll hint</td>
 </tr>
@@ -1953,7 +1965,11 @@ delegate-only key. <code>--memory-all</code> = <code>--memory-read --memory-writ
 (no SessionStart scope injector), add <code>--repo-scope github.com/&lt;org&gt;/&lt;repo&gt;</code> so
 memory calls that omit <code>repo_scope</code> inherit the right scope by default.</p>
 <p>The key's allowed workflows, spend cap, and memory + skill permissions are
-enforced server-side from the key itself — never from the request.</p>
+enforced server-side from the key itself — never from the request. The spend cap
+counts what the key has spent across the tasks it created, including tasks it
+created through the REST API rather than <code>delegate</code>; the per-key row on
+<a href="../../guides/observability/#spend-per-api-key"><code>/ui/spend</code></a> is the same
+attribution, over a wider set of rows.</p>
 <p>On the <strong>client</strong> side, set the companion bearer token and install the plugin:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
 </code></pre></div>

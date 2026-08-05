@@ -2129,9 +2129,13 @@ been allowed into.</p>
 is what lets vornik reply.</p>
 <h3 id="good-to-know_1">Good to know<a class="headerlink" href="#good-to-know_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>An empty <code>channel_allowlist</code> accepts <strong>every</strong> channel in the workspace.
-  Restrict it in production so the bot is not pulled into channels you did not
-  intend.</li>
+<li>An empty <code>channel_allowlist</code> or <code>sender_allowlist</code> <strong>denies</strong> everything. A
+  Slack bot is addressable by every member of the workspace it is installed in,
+  so an unconfigured allowlist would otherwise mean the whole workspace could
+  drive the project — spending its budget and reaching its tools — with nothing
+  in the config saying so. List the channels and senders you intend, or set
+  <code>allow_unlisted_senders: true</code> to opt into the open behaviour deliberately
+  (dev only).</li>
 <li>Slack rejects requests whose timestamps are more than five minutes off, a
   standard replay defense. If valid messages get rejected, check that your
   server's clock is in sync.</li>
