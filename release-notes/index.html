@@ -1574,6 +1574,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202682" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202681" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202680" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.0
@@ -1806,6 +1824,24 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202682" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202681" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202680" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.0
@@ -2029,6 +2065,95 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202682">2026.8.2<a class="headerlink" href="#202682" title="Permanent link">&para;</a></h2>
+<p><strong>Upgrade if you use vornik in Slack direct messages.</strong> 2026.8.0 stopped a Slack
+bot answering DMs entirely — silently, with no reply and no visible error.
+<strong>Both 2026.8.0 and 2026.8.1 are affected.</strong></p>
+<ul>
+<li>
+<p><strong>Fixed: Slack direct messages were dropped when <code>channel_allowlist</code> was empty.</strong>
+  2026.8.0 correctly made an unconfigured <code>channel_allowlist</code> deny rather than
+  admit every channel in your workspace. But that new check ran <em>before</em> the
+  long-standing rule that a channel allow-list never applies to a direct message,
+  so it answered first and the DM rule never got a chance to.</p>
+<p>An empty <code>channel_allowlist</code> is not a mistake — it is the normal setup for a
+bot people talk to in DMs. Slack creates a DM's channel id the first time each
+person writes to the bot, so you cannot list it in advance; <code>sender_allowlist</code>
+is what controls a DM. Every deployment set up that way lost every DM, on
+messages, <code>/vornik</code>, file uploads and voice memos alike. Because both
+allow-list checks drop a message before doing any work, nothing appeared in
+Slack and no task was created — the bot simply went quiet.</p>
+<p>Direct messages are now exempt from <code>channel_allowlist</code> whether it lists
+channels or is empty. This does not loosen anything: <code>sender_allowlist</code> still
+gates DMs, and it also denies by default as of 2026.8.0, so a message from
+someone you have not listed is still refused.</p>
+<p><strong>If you worked around this by setting <code>allow_unlisted_senders: true</code>, remove
+it.</strong> On an installation with an empty <code>channel_allowlist</code>, that flag also
+admits every channel in the workspace. You never needed it for DMs: with a
+populated <code>sender_allowlist</code>, it is not consulted there.</p>
+</li>
+<li>
+<p><strong>Fixed: the App Home tab promised channel access the bot did not have.</strong> With
+  no <code>channel_allowlist</code> configured, the <strong>Where I answer</strong> section said "any
+  channel I have been added to" — which stopped being true in 2026.8.0, when an
+  empty list started denying every channel. The first page a Slack user opens was
+  telling them the bot would answer in places it silently ignored them. It now
+  says what is actually configured, and what to ask an admin for.</p>
+</li>
+<li>
+<p><strong>Clarified: group DMs are not supported.</strong> The direct-message exemption covers
+  one-to-one DMs only. Adding the bot to a group DM produces silence rather than
+  an answer; the App Home tab and the Slack guide now both say so, instead of
+  leaving you to find out.</p>
+</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">If a chat bot ever goes quiet</p>
+<p>Both Slack allow-list checks log a warning and stop before any model is
+called, so a refused message leaves no trace in Slack and no task behind.
+Searching the daemon log for <code>not on installation allowlist</code> distinguishes an
+allow-list refusal from a genuine failure.</p>
+</div>
+<hr />
+<h2 id="202681">2026.8.1<a class="headerlink" href="#202681" title="Permanent link">&para;</a></h2>
+<p><strong>A security fix worth upgrading for.</strong> Four built-in agent tools were available
+to every role regardless of the tool allow-list configured for it, plus fixes for
+a class of problem where a task finished successfully and its result never
+reached you.</p>
+<ul>
+<li><strong>Security: four agent tools ignored per-role tool permissions.</strong>
+  <code>memory_search</code>, <code>skill_fetch</code>, <code>get_conversation_window</code> and
+  <code>summarize_thread</code> were offered to, and usable by, every role — even roles whose
+  <code>allowedTools</code> did not list them. All four are read-only (project memory,
+  skills, conversation history), so this granted broader <em>read</em> access than you
+  configured rather than any ability to run commands or write data. If you rely on
+  role tool allow-lists to keep a role away from project memory, <strong>upgrade</strong>.
+  Deliberately ungated tools are now recorded explicitly with a reason, so the
+  distinction between "ungated on purpose" and "ungated by accident" is visible.</li>
+<li><strong>Fixed: a finished task whose result never arrived, permanently.</strong> The record
+  linking a task back to the chat it came from could be lost when a conversation
+  turn ran long. Once lost, the completion message and the <strong>Send</strong> button both
+  concluded the task had never come from a chat — and nothing ever repaired it.
+  That record is now written independently of the turn's own timing.</li>
+<li><strong>Fixed: a delegated task's output was invisible on the task that requested it.</strong>
+  When a request was routed to a sub-task, the page you opened showed only the
+  routing step's own small files and hid the actual deliverable. Output now
+  appears on the requesting task, and can be sent from there. Artifacts stay
+  strictly within their own project.</li>
+<li><strong>Fixed: an unhelpful error when a result could not be delivered.</strong> "This task
+  wasn't started from a chat channel" was shown even for tasks that plainly were.
+  The message now distinguishes a task that genuinely has no chat origin from one
+  whose origin record is missing, and offers a download link either way.</li>
+<li><strong>Fixed: Community Edition was told to run an Enterprise-only command.</strong>
+  <code>vornikctl report</code> pointed every reporter at <code>vornikctl support-report</code>, which
+  Community Edition does not include. It now explains what Community collects and
+  what to attach instead.</li>
+<li><strong>Fixed: PDF output is now guaranteed by tests.</strong> The agent image ships the PDF
+  toolchain and role prompts rely on it, but nothing verified it. A regression
+  test now renders a real PDF, including non-ASCII text.</li>
+</ul>
+<p>See <a href="https://docs.vornik.io">docs.vornik.io</a> for the full documentation.</p>
 <hr />
 <h2 id="202680">2026.8.0<a class="headerlink" href="#202680" title="Permanent link">&para;</a></h2>
 <p><strong>Vornik can authenticate to a remote MCP server on its own.</strong> Connect a

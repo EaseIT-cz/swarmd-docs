@@ -2129,7 +2129,8 @@ been allowed into.</p>
 is what lets vornik reply.</p>
 <h3 id="good-to-know_1">Good to know<a class="headerlink" href="#good-to-know_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>An empty <code>channel_allowlist</code> or <code>sender_allowlist</code> <strong>denies</strong> everything. A
+<li>An empty <code>channel_allowlist</code> or <code>sender_allowlist</code> <strong>denies</strong> everything
+  (direct messages excepted from <code>channel_allowlist</code> — see below). A
   Slack bot is addressable by every member of the workspace it is installed in,
   so an unconfigured allowlist would otherwise mean the whole workspace could
   drive the project — spending its budget and reaching its tools — with nothing
@@ -2151,10 +2152,16 @@ is what lets vornik reply.</p>
 <li>Slash commands use a per-user, per-channel session separate from ordinary
   message threads. Their delayed answers post at channel level because a slash
   invocation has no Slack message timestamp to reply under.</li>
-<li><strong>Direct messages are never gated by <code>channel_allowlist</code>.</strong> A DM's channel id
-  is created by Slack the first time each person writes to the bot, so it cannot
-  be listed in advance. <code>sender_allowlist</code> is the control for DMs — and with it
-  empty, any member of the workspace can DM the bot.</li>
+<li><strong>Direct messages are never gated by <code>channel_allowlist</code></strong>, whether it lists
+  channels or is left empty. A DM's channel id is created by Slack the first time
+  each person writes to the bot, so it cannot be listed in advance.
+  <code>sender_allowlist</code> is the control for DMs — so a DM-only bot lists its senders
+  and leaves <code>channel_allowlist</code> empty, which denies every real channel while
+  direct messages keep working. This covers one-to-one DMs only: a <strong>group DM</strong>
+  is not a DM for this purpose, and vornik does not support group DMs at all —
+  the bot is not subscribed to group-DM history, and a group-DM message is
+  dropped as an unhandled conversation type. Adding the bot to a group DM
+  produces silence, not an answer.</li>
 <li><strong>In a thread, you only tag the bot once.</strong> Replies inside a thread vornik is
   already part of continue the conversation without a mention. A new top-level
   message in a channel still needs an @-mention, which is what keeps the bot out

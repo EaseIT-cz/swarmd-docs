@@ -583,6 +583,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#project_id-is-supplied-by-the-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      project_id is supplied by the daemon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#per-server-request-timeout" class="md-nav__link">
     <span class="md-ellipsis">
       Per-server request timeout
@@ -1766,6 +1775,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#project_id-is-supplied-by-the-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      project_id is supplied by the daemon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#per-server-request-timeout" class="md-nav__link">
     <span class="md-ellipsis">
       Per-server request timeout
@@ -1955,10 +1973,27 @@ MCP server:</p>
   daemon terminates the server's whole process group, so launchers that fork
   a worker process (<code>npx</code>, <code>tsx</code>, shell wrappers) are cleaned up with it —
   don't rely on an MCP subprocess outliving its connection.</li>
-<li><strong><code>sse</code></strong> — the daemon connects to a long-running server at <code>url</code> over HTTP.
-  Use this for tools that run as their own service.</li>
 </ul>
-<p><code>command</code>/<code>args</code>/<code>env</code> apply only to <code>stdio</code>; <code>url</code> applies only to <code>sse</code>.
+<p>If a stdio server exits or closes stdout on its own, the daemon <strong>re-launches
+  it automatically</strong> on the next tool call and retries that call once. You do
+  not need to restart the daemon to recover a crashed stdio server. Concurrent
+  calls against a server that has just died share one relaunch rather than
+  starting a subprocess each. If the relaunch itself fails — the command is
+  gone, or it exits immediately — the tool call returns an error saying the
+  server is not running, and the daemon log carries the launch failure.
+- <strong><code>sse</code></strong> — the daemon connects to a long-running server at <code>url</code> over HTTP.
+  Use this for tools that run as their own service.</p>
+<p><code>command</code>/<code>args</code>/<code>env</code> apply only to <code>stdio</code>; <code>url</code> applies only to <code>sse</code>.</p>
+<h3 id="project_id-is-supplied-by-the-daemon"><code>project_id</code> is supplied by the daemon<a class="headerlink" href="#project_id-is-supplied-by-the-daemon" title="Permanent link">&para;</a></h3>
+<p>If a server declares a <code>project_id</code> argument, the daemon fills it in on every
+call from the calling project and <strong>removes it from the schema the model sees</strong>.
+Servers use it for tenant isolation, quota accounting and per-project state, so
+it is the daemon's to state rather than the model's to claim — a model naming
+another project would otherwise be billed to it and could reach its state. It is
+also simply unknowable to a chat model, and leaving it as a <code>required</code> field
+made such tools fail validation outright.</p>
+<p>Nothing is required of a server author beyond declaring the argument as usual;
+if you call a tool by hand through <code>vornikctl mcp call -p &lt;project&gt;</code>, omit it.
 <code>name</code> must be unique within the project — it's how tools are namespaced and
 how you target a server from the CLI.</p>
 <h3 id="per-server-request-timeout">Per-server request timeout<a class="headerlink" href="#per-server-request-timeout" title="Permanent link">&para;</a></h3>
@@ -2257,10 +2292,41 @@ shows each tool and its description.</p>
 <div class="highlight"><pre><span></span><code>vornikctl mcp servers
 </code></pre></div>
 <p>This is daemon-scoped (there is no <code>--project</code> flag); it reports each server's
-transport, whether it's <code>reachable</code>, how many tools it advertises, and its
-endpoint. Remember that a server appearing here is <strong>not</strong> automatically
-available to a project — grant access by adding it to that project's
-<code>mcp.servers</code>.</p>
+transport, its status, how many tools it advertises, and its endpoint. Remember
+that a server appearing here is <strong>not</strong> automatically available to a project —
+grant access by adding it to that project's <code>mcp.servers</code>.</p>
+<p>The status column has three values, and the third is easy to mistake for a
+fault:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>reachable</code></td>
+<td>The last health probe connected and listed tools.</td>
+</tr>
+<tr>
+<td><code>unreachable: &lt;error&gt;</code></td>
+<td>The last probe ran and failed, for the reason shown.</td>
+</tr>
+<tr>
+<td><code>checking</code></td>
+<td><strong>No probe has run yet.</strong> The first probe after a daemon start or a config reload is asynchronous, so every server reads <code>checking</code> for a moment. Re-run the command rather than troubleshooting the server.</td>
+</tr>
+</tbody>
+</table>
+<p>The same three states appear on the Control Plane → MCP tab, where <code>checking</code>
+renders as a neutral "checking…" badge. In <code>--json</code> output, a server that has
+never been probed simply has no <code>last_checked_at</code> field.</p>
+<p><code>checking</code> covers the <em>first</em> probe only. Once a server has a verdict, a
+re-probe does not change what you see: the row keeps showing the previous result
+and the time it was taken, until the new probe lands and replaces it. So a
+failing server reads <code>unreachable</code> continuously rather than flickering — the
+<code>last checked</code> timestamp is what tells you how old that verdict is.</p>
 <p><strong>Call a tool directly</strong>, skipping the model — the fastest way to confirm a
 tool works and check its arguments:</p>
 <div class="highlight"><pre><span></span><code>vornikctl mcp call -p acme --tool mcp__scraper__web_fetch \
