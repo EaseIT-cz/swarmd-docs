@@ -14,7 +14,7 @@
         <link rel="prev" href="../configuration/">
       
       
-        <link rel="next" href="../../compliance/">
+        <link rel="next" href="../../benchmarks/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -1521,6 +1521,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-verify-determinism" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory verify-determinism
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-config" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl config
@@ -2707,6 +2716,8 @@
     
       
         
+          
+        
       
         
       
@@ -2725,7 +2736,91 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../benchmarks/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Benchmarks
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Benchmarks
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../benchmarks/results/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Results by release
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -2736,8 +2831,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
             <span class="md-nav__icon md-icon"></span>
             Compliance
           </label>
@@ -2916,6 +3011,15 @@
   <a href="#vornikctl-bench-memory-run" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench memory run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-verify-determinism" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory verify-determinism
     </span>
   </a>
   
@@ -4189,6 +4293,11 @@ run already marked untrustworthy.</p>
 </thead>
 <tbody>
 <tr>
+<td><code>--accept-unverified-path</code></td>
+<td><code>false</code></td>
+<td>Permit a --tier2-only run whose retrieval path cannot be shown deterministic: an external service that does not report a retrieval method, or a competitor that reranks internally. REQUIRED for --system external. It does not silence the check — the run is stamped retrieval_path_unverified in its comparability key, so it can never compare clean against a gate baseline that proved determinism</td>
+</tr>
+<tr>
 <td><code>--answer-model</code></td>
 <td></td>
 <td>Model that answers from retrieved context</td>
@@ -4227,6 +4336,11 @@ run already marked untrustworthy.</p>
 <td><code>--external-config-path</code></td>
 <td></td>
 <td>Route reporting the external system's effective config; unset marks the comparability key PARTIAL</td>
+</tr>
+<tr>
+<td><code>--external-dialect</code></td>
+<td></td>
+<td>Request-BODY shape for --system external: empty = the conventional guess, 'hindsight' = the shape verified against hindsight 0.9.0 (batched <code>items[]</code> ingest keyed <code>timestamp</code>, idempotent PUT bank create). Paths stay separately configurable; only bodies and the create method differ</td>
 </tr>
 <tr>
 <td><code>--external-ingest-path</code></td>
@@ -4313,8 +4427,27 @@ run already marked untrustworthy.</p>
 <td><code>vornik</code></td>
 <td>System under test: vornik | external</td>
 </tr>
+<tr>
+<td><code>--tier2-only</code></td>
+<td><code>false</code></td>
+<td>Score RETRIEVAL only (context recall/precision/MRR): no answer generation, no judge, no model credentials. Accuracy is reported as undefined, not zero. This is the mode a CI gate uses — the RRF retrieval path is deterministic where judged accuracy has sd ~4.5% at n=30 and would fire on noise. It also stops REQUESTING the reranked path, and REFUSES the run if recall reports a rerank happened anyway or cannot say which path it took: an LLM reranker is billed per call and reorders between identical runs, so it must be off on the deployment under test (memory.reranker.enabled: false) — this flag alone cannot disable it</td>
+</tr>
 </tbody>
 </table>
+<h2 id="vornikctl-bench-memory-verify-determinism">vornikctl bench memory verify-determinism<a class="headerlink" href="#vornikctl-bench-memory-verify-determinism" title="Permanent link">&para;</a></h2>
+<p>Require two runs of the same fixture to have retrieved byte-identically</p>
+<p>Compare the per-question retrieval of two runs and fail on any difference.</p>
+<p>This is the blocking half of the retrieval CI gate. It needs no committed
+baseline, so it can never go stale: there is nothing to re-bless when
+retrieval legitimately improves.</p>
+<p>It compares the CHUNK-LEVEL RANK ORDER, not the metrics. On 2026-08-11 RRF
+ties broke arbitrarily and two identical runs ranked differently, while every
+metric said they matched — tier-2 collapses chunks to documents and the
+document set was unchanged. A metrics-based check is blind to the defect this
+exists to catch.</p>
+<p>Intended use: run the fixture twice with --tier2-only, then verify.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench memory verify-determinism &lt;run-dir-a&gt; &lt;run-dir-b&gt;
+</code></pre></div>
 <h2 id="vornikctl-config">vornikctl config<a class="headerlink" href="#vornikctl-config" title="Permanent link">&para;</a></h2>
 <p>Inspect and control daemon configuration</p>
 <h2 id="vornikctl-config-reload">vornikctl config reload<a class="headerlink" href="#vornikctl-config-reload" title="Permanent link">&para;</a></h2>
