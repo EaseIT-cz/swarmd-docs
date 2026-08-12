@@ -4333,6 +4333,11 @@ run already marked untrustworthy.</p>
 <td>Dataset: longmemeval | locomo | native (required)</td>
 </tr>
 <tr>
+<td><code>--external-bank-delete-path</code></td>
+<td></td>
+<td>Route template that DELETES one bank, e.g. '/v1/default/banks/{bank}'. Without it teardown is a no-op and each run re-ingests into the previous run's bank: the corpus accumulates, precision falls run over run, and repeated runs are not comparable. Hindsight measured 0.806 then 0.639 precision on identical items for exactly this reason</td>
+</tr>
+<tr>
 <td><code>--external-config-path</code></td>
 <td></td>
 <td>Route reporting the external system's effective config; unset marks the comparability key PARTIAL</td>
