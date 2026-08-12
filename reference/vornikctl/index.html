@@ -1318,6 +1318,8 @@
       
         
       
+        
+      
     
     
       
@@ -1359,6 +1361,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1438,6 +1461,60 @@
   <a href="#vornikctl-backup" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl backup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory aggregate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory compare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory report
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory run
     </span>
   </a>
   
@@ -2791,6 +2868,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory aggregate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory compare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory report
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-memory-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench memory run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-config" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl config
@@ -3998,6 +4129,189 @@ is portable across hosts when restored via 'vornikctl restore'.</p>
 <td><code>--out</code></td>
 <td></td>
 <td>output archive path (default auto-generated)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench">vornikctl bench<a class="headerlink" href="#vornikctl-bench" title="Permanent link">&para;</a></h2>
+<p>Benchmark subsystems against labelled datasets</p>
+<h2 id="vornikctl-bench-memory">vornikctl bench memory<a class="headerlink" href="#vornikctl-bench-memory" title="Permanent link">&para;</a></h2>
+<p>Score memory retrieval quality on a labelled dataset</p>
+<p>Score memory retrieval quality on a labelled dataset.</p>
+<p>Reports three tiers separately and never blended: judge-free retrieval
+metrics (context recall/precision/MRR), judged answer accuracy, and
+cost/latency. The judge-free tier is the one cheap enough to gate on.</p>
+<h2 id="vornikctl-bench-memory-aggregate">vornikctl bench memory aggregate<a class="headerlink" href="#vornikctl-bench-memory-aggregate" title="Permanent link">&para;</a></h2>
+<p>Summarise repeated runs: mean, spread, and the gate tolerance each metric needs</p>
+<p>Summarise repeated runs of the same experiment.</p>
+<p>The variance of a metric — not its value — is what decides whether the
+metric can be gated at all. A metric identical across every run can carry
+an exact-equality gate; one that moves needs a tolerance, reported here as
+3 standard deviations.</p>
+<p>Refuses to average runs whose comparability keys differ, and refuses any
+run already marked untrustworthy.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench memory aggregate &lt;run-dir&gt;... [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Print the aggregation as JSON</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-memory-compare">vornikctl bench memory compare<a class="headerlink" href="#vornikctl-bench-memory-compare" title="Permanent link">&para;</a></h2>
+<p>Compare two runs, refusing when they are not comparable</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench memory compare &lt;run-dir-a&gt; &lt;run-dir-b&gt;
+</code></pre></div>
+<h2 id="vornikctl-bench-memory-report">vornikctl bench memory report<a class="headerlink" href="#vornikctl-bench-memory-report" title="Permanent link">&para;</a></h2>
+<p>Print the scoreboard for a completed run</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench memory report &lt;run-dir&gt;
+</code></pre></div>
+<h2 id="vornikctl-bench-memory-run">vornikctl bench memory run<a class="headerlink" href="#vornikctl-bench-memory-run" title="Permanent link">&para;</a></h2>
+<p>Run the benchmark and write a manifest, journal and results</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench memory run [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--answer-model</code></td>
+<td></td>
+<td>Model that answers from retrieved context</td>
+</tr>
+<tr>
+<td><code>--category</code></td>
+<td></td>
+<td>Only run this category</td>
+</tr>
+<tr>
+<td><code>--corpus-dir</code></td>
+<td></td>
+<td>Directory of documents forming the haystack for the native dataset. Required with --dataset native, whose gold set names documents in this directory; the longmemeval and locomo datasets carry their own haystacks and ignore it.</td>
+</tr>
+<tr>
+<td><code>--database</code></td>
+<td></td>
+<td>Target database name (required)</td>
+</tr>
+<tr>
+<td><code>--dataset-path</code></td>
+<td></td>
+<td>Path to the dataset file (or gold set, for native)</td>
+</tr>
+<tr>
+<td><code>--dataset-sha256</code></td>
+<td></td>
+<td>Expected dataset digest; verified before the run</td>
+</tr>
+<tr>
+<td><code>--dataset</code></td>
+<td></td>
+<td>Dataset: longmemeval | locomo | native (required)</td>
+</tr>
+<tr>
+<td><code>--external-config-path</code></td>
+<td></td>
+<td>Route reporting the external system's effective config; unset marks the comparability key PARTIAL</td>
+</tr>
+<tr>
+<td><code>--external-ingest-path</code></td>
+<td></td>
+<td>Override the external ingest route (default: a conventional shape)</td>
+</tr>
+<tr>
+<td><code>--external-recall-path</code></td>
+<td></td>
+<td>Override the external recall route</td>
+</tr>
+<tr>
+<td><code>--external-token</code></td>
+<td></td>
+<td>Bearer token for the external system</td>
+</tr>
+<tr>
+<td><code>--external-url</code></td>
+<td></td>
+<td>Base URL of the external system (--system external)</td>
+</tr>
+<tr>
+<td><code>--i-know-this-wipes</code></td>
+<td></td>
+<td>Name the database this run will bulk-write (required)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>Print results as JSON</td>
+</tr>
+<tr>
+<td><code>--judge-model</code></td>
+<td></td>
+<td>Model that grades answers</td>
+</tr>
+<tr>
+<td><code>--max-degraded-rate</code></td>
+<td><code>0</code></td>
+<td>Tighten the untrustworthy threshold below the 20% ceiling (0 = ceiling)</td>
+</tr>
+<tr>
+<td><code>--max-items-per-category</code></td>
+<td><code>0</code></td>
+<td>Cap items per category (0 = all)</td>
+</tr>
+<tr>
+<td><code>--max-items</code></td>
+<td><code>0</code></td>
+<td>Cap total items (0 = all)</td>
+</tr>
+<tr>
+<td><code>--max-tokens</code></td>
+<td><code>4096</code></td>
+<td>Context budget requested from the system</td>
+</tr>
+<tr>
+<td><code>--our-extraction-model</code></td>
+<td></td>
+<td>The daemon's OWN ingest/retrieval model (titler, classifier, reranker) for the comparability key. Unset marks the key partial — the companion surface cannot report it, and guessing would misrepresent the run.</td>
+</tr>
+<tr>
+<td><code>--profile</code></td>
+<td></td>
+<td>Model profile: local | judged | cloud (required unless every model flag is set)</td>
+</tr>
+<tr>
+<td><code>--recall-method</code></td>
+<td></td>
+<td>The retrieval path actually EXERCISED, for the comparability key — e.g. context-assembly+rerank | context-assembly | interactive. Verify it against the usage ledger, not the config: a reranker can be enabled and correctly wired and still never fire, in which case the flag you requested proves nothing. Unset records the method as unknown rather than assuming one.</td>
+</tr>
+<tr>
+<td><code>--resume</code></td>
+<td><code>false</code></td>
+<td>Skip items already judged in the run directory's journal</td>
+</tr>
+<tr>
+<td><code>--run-dir</code></td>
+<td></td>
+<td>Directory for journal/manifest/results (default: bench-runs/<timestamp>)</td>
+</tr>
+<tr>
+<td><code>--system</code></td>
+<td><code>vornik</code></td>
+<td>System under test: vornik | external</td>
 </tr>
 </tbody>
 </table>
@@ -6009,6 +6323,11 @@ the parent process to handle the polling).</p>
 <td><code>--no-watch</code></td>
 <td><code>false</code></td>
 <td>Detach after enqueueing instead of polling for progress</td>
+</tr>
+<tr>
+<td><code>--only-missing</code></td>
+<td><code>false</code></td>
+<td>Enqueue ONLY chunks that have no embedding yet, instead of the whole project. Use this to repair gaps (a restart can leave chunks unembedded with an empty queue); use the default after changing the embedding model or dimension, when every vector must genuinely be recomputed.</td>
 </tr>
 <tr>
 <td><code>-p</code>, <code>--project</code></td>

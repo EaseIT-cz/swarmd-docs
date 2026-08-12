@@ -1433,6 +1433,8 @@
       
         
       
+        
+      
     
     
       
@@ -1474,6 +1476,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/reference-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1806,12 +1829,22 @@ reachability, <strong>runtime</strong> probes, and <strong>cluster</strong> lead
 <h2 id="spend-and-cost-efficiency">Spend and cost-efficiency<a class="headerlink" href="#spend-and-cost-efficiency" title="Permanent link">&para;</a></h2>
 <p>The spend dashboard (<code>/ui/spend</code>) slices cost by window (24h / 7d / 30d),
 project, source, task, role+model, and <strong>API key</strong>. Alongside total cost and
-token counts it surfaces a few efficiency signals:</p>
+token counts it surfaces a few efficiency signals.</p>
+<p>Embedding spend appears under the role <strong>Memory · Embedder</strong> and the source
+<strong>Memory embedding</strong>. It is included in every rollup on the page — a deployment using a hosted embedder can see what
+ingest and retrieval cost, not only what chat cost.</p>
 <ul>
 <li><strong>Input ratio</strong> — prompt tokens as a share of total; a persistently high ratio
   flags context bloat.</li>
 <li><strong>Cache hit ratio</strong> and <strong>dollars saved</strong> — how much
   <a href="../cost-and-caching/">prompt/embedding caching</a> is actually saving.</li>
+<li><strong>Estimated token counts</strong> — a <code>~</code> before a token figure means at least one
+  call behind that line reported no token count, so the total is partly derived
+  from text length rather than measured by the provider. Embedding backends
+  differ here: an OpenAI-compatible endpoint reports usage and Bedrock Titan
+  reports an input-token count, while Bedrock Cohere reports neither. The marker
+  exists so an inferred number is never mistaken for a measured one when
+  reconciling a provider bill.</li>
 <li><strong>Effective cost per success</strong> and its <strong>drift ratio</strong> — cost per <em>useful</em>
   result (spend divided by successful outcomes), and how the recent window
   compares to a baseline. A cheap model that fails often can cost more per

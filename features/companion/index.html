@@ -1308,6 +1308,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Project memory and repo scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#digging-harder-when-the-fast-answer-misses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Digging harder when the fast answer misses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dating-a-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dating a note
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1403,6 +1427,8 @@
       
         
       
+        
+      
     
     
       
@@ -1444,6 +1470,27 @@
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/reference-architecture/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference architecture
+  </span>
+  
+
+      </a>
+    </li>
+  
+
               
             
               
@@ -1681,6 +1728,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Project memory and repo scope">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#digging-harder-when-the-fast-answer-misses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Digging harder when the fast answer misses
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dating-a-note" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dating a note
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1836,17 +1907,42 @@ approves it. A skill can also be marked <strong>global</strong> (<code>skill_pro
 or <code>skill_set_global</code>) so it injects into every project's roles, not just its
 home project — the way a procedure captured in your companion project reaches
 the autonomy roles. See <a href="../knowledge-skills/">Knowledge skills</a>.</p>
+<p><strong>Proposals are checked for near-duplicates.</strong> Before a skill is written,
+<code>skill_propose</code> scores it against the whole catalogue — every repo scope, every
+maturity including retired, and other projects' global skills. On a hit it
+returns <code>{"blocked": true, "matches": [...]}</code> and writes nothing. Answer the
+block rather than retrying:</p>
+<ul>
+<li><code>supersedes: "&lt;id&gt;"</code> — this replaces that skill. The old one is retired and
+  its body kept (still readable by id); it is never overwritten.</li>
+<li><code>confirm_distinct: "&lt;why they differ&gt;"</code> — they are genuinely different. The
+  justification is required and is stored on the skill.</li>
+</ul>
+<p>You do not need to search first: the preflight already looks wider than
+<code>skill_search</code>, which filters by repo scope and so hides skills that would be
+injected alongside yours anyway. Matching is semantic where an embedding backend
+is configured, and falls back to a weaker lexical comparison otherwise — a
+preflight can miss, but it never blocks authoring when the embedder is down.</p>
 <p>In Claude Code, several tools are also wrapped as slash commands — for example
 <code>/recall</code>, <code>/remember</code>, <code>/delegate</code>, <code>/review</code> (a one-shot architectural
 review), <code>/peek</code> (recent tasks), and <code>/upload</code> (attach files to a delegation).
 In Codex, use the MCP tools directly; the Codex adapter ships a <code>delegate</code> skill
 that teaches the same recall-before-delegate and file-attachment rules.</p>
 <h2 id="operator-skills">Operator skills<a class="headerlink" href="#operator-skills" title="Permanent link">&para;</a></h2>
-<p>Both companion plugins bundle an <strong>operator lifecycle triad</strong> — three skills
-that ship enabled by default and teach your host LLM to drive Vornik's own
-tooling instead of improvising. They cross-reference each other, so a session
-can walk from "set this up" to "why is it broken" to "file it upstream"
-without you naming the next step.</p>
+<p>Both companion plugins bundle <strong>five operator skills</strong> that ship enabled by
+default and teach your host LLM to drive Vornik's own tooling instead of
+improvising. They cross-reference each other, so a session can walk from "where
+is this documented" to "set this up" to "is it set up right" to "why is it
+broken" to "file it upstream" without you naming the next step.</p>
+<p><strong><code>vornik-docs</code></strong> — where the documentation lives. It carries the site map and
+an order of preference that puts your <strong>installed</strong> CLI's own <code>--help</code> first,
+then a local checkout, then this site, and the model's own recall last — used to
+decide where to look, never as the answer. It exists because the characteristic
+failure when answering Vornik questions is a confident, plausible, nonexistent
+config key or CLI flag, and that failure is expensive: unknown keys are
+frequently ignored, so you get no error and the setting silently does nothing.
+The skill also states where the docs deliberately stop, so an honest gap is
+reported rather than filled in.</p>
 <p><strong><code>configure-vornik</code></strong> — configuring a deployment: daemon settings, projects,
 swarms, workflows, models, secrets, channels. It leads with the config
 hazards that silently no-op an otherwise correct change. The registry tree
@@ -1860,6 +1956,18 @@ with no error at all. The skill then pins the apply loop — validate with
 <code>vornikctl config reload-status</code>, where validation errors actually surface —
 and the restart-versus-reload boundary: systemd resolves the daemon's
 environment only at start, so unit and env-file edits need a restart.</p>
+<p><strong><code>validate-install</code></strong> — checking a deployment against the
+<a href="../../reference/reference-architecture/">reference architecture</a>: the expected
+shape of a healthy install, and where yours diverges. Strictly read-only, which
+matters more than it sounds — <code>POST /api/v1/config/reload</code> looks like the natural
+way to ask whether the registry is valid, and it answers by <em>applying</em> the tree,
+so an audit could push a half-edited file into service. The skill's discipline is
+<strong>configured versus observed</strong>: a config value is a statement of intent, never
+evidence of behaviour, so it reads the daemon's resolved state from the boot log
+and then the usage ledger that proves the subsystem actually ran. Findings are
+split by severity, because the failure mode of a validator is noise — absence of
+an optional subsystem is never reported, and neither are your names or model
+choices.</p>
 <p><strong><code>troubleshoot-vornik</code></strong> — diagnosing a deployment that is down, degraded,
 or failing tasks, routed by symptom. Daemon down goes to
 <code>vornikctl doctor --offline</code>, the static escape hatch that needs no running
@@ -1918,6 +2026,33 @@ populated.</p>
 <p>Notes go through vornik's full ingest pipeline (secret scanning, dedup, policy),
 and large content should be sent through the ingest workflow rather than a single
 <code>remember</code> call.</p>
+<h3 id="digging-harder-when-the-fast-answer-misses">Digging harder when the fast answer misses<a class="headerlink" href="#digging-harder-when-the-fast-answer-misses" title="Permanent link">&para;</a></h3>
+<p><code>recall</code> is tuned for interactive use: one search pass, ranked by fusing semantic
+and keyword matches, back in well under a second. When that misses something you
+are confident is in there, pass <code>sufficient</code> to switch to the slower,
+higher-quality retrieval mode:</p>
+<div class="highlight"><pre><span></span><code>/recall sufficient=true which design covers the fork-bomb PID limit
+</code></pre></div>
+<p>That mode widens the search when the first pass returns too few strongly-relevant
+results, and re-orders candidates with a model rather than by fusion score alone.
+It costs an extra model call and takes noticeably longer, which is why it is off by
+default — but it is the same mode agents use when assembling context for a task, so
+it is the closest thing to "search the way the swarm searches".</p>
+<h3 id="dating-a-note">Dating a note<a class="headerlink" href="#dating-a-note" title="Permanent link">&para;</a></h3>
+<p>By default a note is filed under the moment you deposited it, and <code>recall</code>'s
+date filters match on that. When you are recording something that <em>happened</em> at
+a different time — an incident from last March, a decision taken in Q1, a
+meeting note written up a week later — pass <code>event_time</code> so date-filtered recall
+finds it by when it happened rather than by when you stored it:</p>
+<div class="highlight"><pre><span></span><code>/remember event_time=2026-03-14 the ibgateway warm-up outage traced to a stale session cookie
+</code></pre></div>
+<p>It accepts <code>YYYY-MM-DD</code> or full RFC3339. Leave it off when you don't know, and
+recall falls back to the deposit time exactly as before. A value that isn't a
+date is rejected rather than quietly ignored, so a typo can't file the note
+under the wrong clock without telling you.</p>
+<p>This matters most for bulk ingests: a whole document set deposited in one pass
+shares a single deposit timestamp, so without <code>event_time</code> a query like "what
+changed in July" matches all of it or none of it.</p>
 <h2 id="delegation">Delegation<a class="headerlink" href="#delegation" title="Permanent link">&para;</a></h2>
 <p><code>delegate</code> hands a job to vornik and returns immediately with a task id and an
 estimated time — you keep working while a swarm agent does the task on vornik's
