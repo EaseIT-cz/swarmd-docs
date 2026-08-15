@@ -433,6 +433,8 @@
       
         
       
+        
+      
     
     
       
@@ -656,6 +658,27 @@
   
   <span class="md-ellipsis">
     Cost and Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/inference-speed-timeouts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Timeouts on your own hardware
   </span>
   
 
@@ -2856,6 +2879,46 @@
 <td><code>scheduler.lease_timeout</code></td>
 <td>string</td>
 <td>How long a task lease is held before it is considered stale.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.enabled</code></td>
+<td>bool</td>
+<td>Scale time budgets by measured decode speed. Off by default; off is byte-identical to not having the feature.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.reference_tokens_per_sec</code></td>
+<td>float</td>
+<td>Decode rate the shipped base timeouts were calibrated against. Must be declared; a local measurement cannot serve as its own reference.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.min_factor</code></td>
+<td>float</td>
+<td>Floor, so fast hardware cannot starve a step of startup time.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.max_factor</code></td>
+<td>float</td>
+<td>Ceiling. Deliberately below what the slowest hardware demands: hitting it is reported, because the honest answer there is that the hardware cannot run the workload at this shape.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.observed_tokens_per_sec</code></td>
+<td>float</td>
+<td>This host's measured decode rate (see: vornikctl profile). Zero disables scaling.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.min_samples</code></td>
+<td>int</td>
+<td>Steps required before a fitted profile is trusted at all.</td>
+</tr>
+<tr>
+<td><code>scheduler.speed_aware_timeouts.window</code></td>
+<td>string</td>
+<td>Rolling window the profile is fitted over.</td>
+</tr>
+<tr>
+<td><code>scheduler.default_step_timeout</code></td>
+<td>string</td>
+<td>Ceiling for a step whose workflow declares no timeout. Empty = 30m.</td>
 </tr>
 </tbody>
 </table>

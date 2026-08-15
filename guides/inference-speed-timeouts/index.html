@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.vornik.io/integrations/slack/">
+        <link rel="canonical" href="https://docs.vornik.io/guides/inference-speed-timeouts/">
       
       
-        <link rel="prev" href="../github-app/">
+        <link rel="prev" href="../cost-and-caching/">
       
       
-        <link rel="next" href="../../features/blackbox/">
+        <link rel="next" href="../secrets/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Slack - Vornik documentation</title>
+        <title>Timeouts on your own hardware - Vornik documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slack" class="md-skip">
+        <a href="#timeouts-on-your-own-hardware" class="md-skip">
           Skip to content
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slack
+              Timeouts on your own hardware
             
           </span>
         </div>
@@ -392,460 +392,6 @@
       
   
   
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-        
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../guides/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    Guides
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Guides
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/conversation-channels/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Conversation Channels
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/workflows-and-llm-controls/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Workflows and LLM Controls
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/mcp-tools/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Connect Your Tools (MCP)
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/artifacts-and-delivery/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Artifacts &amp; Outbound File Delivery
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/autonomy/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Autonomy — self-running projects
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/cross-project/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Cross-project orchestration &amp; agent federation
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/approvals/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Approvals &amp; human-in-the-loop
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/recovery/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Recovering failed work
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/cost-and-caching/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Cost and Caching
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/inference-speed-timeouts/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Timeouts on your own hardware
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/secrets/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Named secrets
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/observability/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Observability
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/storage-and-retention/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Storage and Retention
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/feature-doctor/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The feature doctor
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/evals/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Evals: repeatable swarm tests
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/clustering/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Clustering and the DMZ Webhook Relay
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../guides/automation-composer/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    The automation composer ("Describe it")
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
     
   
   
@@ -855,6 +401,30 @@
       
         
           
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
         
       
         
@@ -879,7 +449,7 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           
@@ -888,23 +458,23 @@
               
   
   <span class="md-ellipsis">
-    Integrations
+    Guides
   </span>
   
 
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            Integrations
+            Guides
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -917,11 +487,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../telegram/" class="md-nav__link">
+      <a href="../conversation-channels/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Telegram
+    Conversation Channels
   </span>
   
 
@@ -938,11 +508,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../mcp/" class="md-nav__link">
+      <a href="../workflows-and-llm-controls/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    MCP tool servers
+    Workflows and LLM Controls
   </span>
   
 
@@ -959,11 +529,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../email/" class="md-nav__link">
+      <a href="../mcp-tools/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Email
+    Connect Your Tools (MCP)
   </span>
   
 
@@ -980,11 +550,116 @@
   
   
     <li class="md-nav__item">
-      <a href="../github-app/" class="md-nav__link">
+      <a href="../artifacts-and-delivery/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    GitHub App
+    Artifacts &amp; Outbound File Delivery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autonomy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autonomy — self-running projects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cross-project/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cross-project orchestration &amp; agent federation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../approvals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Approvals &amp; human-in-the-loop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recovery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recovering failed work
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cost-and-caching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cost and Caching
   </span>
   
 
@@ -1014,7 +689,7 @@
           
   
   <span class="md-ellipsis">
-    Slack
+    Timeouts on your own hardware
   </span>
   
 
@@ -1025,7 +700,7 @@
         
   
   <span class="md-ellipsis">
-    Slack
+    Timeouts on your own hardware
   </span>
   
 
@@ -1047,27 +722,57 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#guided-form-fields" class="md-nav__link">
+  <a href="#measure-first" class="md-nav__link">
     <span class="md-ellipsis">
-      Guided-form fields
+      Measure first
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measure first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-machine-with-no-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      A machine with no history
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#what-test-connection-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      What "Test connection" checks
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#good-to-know" class="md-nav__link">
+  <a href="#then-enable" class="md-nav__link">
     <span class="md-ellipsis">
-      Good to know
+      Then enable
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Then enable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-hardware-is-too-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      When hardware is too slow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#budgets-this-does-not-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Budgets this does not scale
     </span>
   </a>
   
@@ -1077,6 +782,331 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../secrets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Named secrets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../observability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Observability
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../storage-and-retention/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Storage and Retention
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../feature-doctor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The feature doctor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evals/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Evals: repeatable swarm tests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clustering/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clustering and the DMZ Webhook Relay
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../automation-composer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The automation composer ("Describe it")
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../integrations/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Integrations
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Integrations
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/telegram/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Telegram
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/mcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MCP tool servers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/email/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/github-app/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GitHub App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../integrations/slack/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Slack
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -1771,27 +1801,57 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#guided-form-fields" class="md-nav__link">
+  <a href="#measure-first" class="md-nav__link">
     <span class="md-ellipsis">
-      Guided-form fields
+      Measure first
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Measure first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-machine-with-no-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      A machine with no history
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#what-test-connection-checks" class="md-nav__link">
-    <span class="md-ellipsis">
-      What "Test connection" checks
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#good-to-know" class="md-nav__link">
+  <a href="#then-enable" class="md-nav__link">
     <span class="md-ellipsis">
-      Good to know
+      Then enable
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Then enable">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-hardware-is-too-slow" class="md-nav__link">
+    <span class="md-ellipsis">
+      When hardware is too slow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#budgets-this-does-not-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Budgets this does not scale
     </span>
   </a>
   
@@ -1812,69 +1872,107 @@
                   
 
 
-<h1 id="slack">Slack<a class="headerlink" href="#slack" title="Permanent link">&para;</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Community Edition</p>
-<p>The Integrations Hub is part of the free, open-source <strong>Community Edition</strong> (and therefore also every Enterprise install). See <a href="../../editions/">Editions</a> for the full Community vs Enterprise matrix.</p>
-</div>
-<p>Connects a Slack workspace so vornik can answer direct messages and
-<code>@</code>-mentions as a bot. This integration is <strong>project-scope</strong> — it's
-connected to one specific project, and if your account is scoped to a
-single project the hub picks that project for you automatically.</p>
-<p>You'll need a Slack App already created (with the Events API enabled and
-the right OAuth scopes) before you start the guided form — see
-<a href="../../guides/conversation-channels/#slack">Conversation Channels → Slack</a>
-for the App-creation steps.</p>
-<h2 id="guided-form-fields">Guided-form fields<a class="headerlink" href="#guided-form-fields" title="Permanent link">&para;</a></h2>
+<h1 id="timeouts-on-your-own-hardware">Timeouts on your own hardware<a class="headerlink" href="#timeouts-on-your-own-hardware" title="Permanent link">&para;</a></h1>
+<p>Vornik's time budgets — how long a step may run, how long a task lease is held —
+are absolute wall-clock values. They were chosen on particular hardware. Move to
+hardware that generates tokens at a different speed and those numbers stop
+meaning what they meant.</p>
+<p>The gap is not small. Two self-hosted endpoints measured on the same day:</p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th style="text-align: center;">Required</th>
-<th style="text-align: center;">Secret</th>
-<th>What to enter</th>
+<th></th>
+<th style="text-align: right;">marginal decode</th>
+<th style="text-align: right;">per-request overhead</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Workspace (Team) ID</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">No</td>
-<td>Starts with <code>T</code> — shown on your Slack App's "Basic Information" page.</td>
+<td>a fast GPU host</td>
+<td style="text-align: right;">206 tok/s</td>
+<td style="text-align: right;">58 ms</td>
 </tr>
 <tr>
-<td>Bot token</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">Yes</td>
-<td>From your Slack App's "OAuth &amp; Permissions" page — starts with <code>xoxb-</code>.</td>
-</tr>
-<tr>
-<td>Signing secret</td>
-<td style="text-align: center;">Yes</td>
-<td style="text-align: center;">Yes</td>
-<td>From your Slack App's "Basic Information" page, under App Credentials.</td>
+<td>a modest local box</td>
+<td style="text-align: right;">12 tok/s</td>
+<td style="text-align: right;">499 ms</td>
 </tr>
 </tbody>
 </table>
-<h2 id="what-test-connection-checks">What "Test connection" checks<a class="headerlink" href="#what-test-connection-checks" title="Permanent link">&para;</a></h2>
-<p>The test calls Slack's <code>auth.test</code> API with the bot token you entered. On
-success, it reports the workspace and bot identity Slack returns,
-confirming the token is valid and belongs to the workspace you specified.
-On failure, it distinguishes an outright-rejected token from a network or
-Slack-side hiccup.</p>
-<h2 id="good-to-know">Good to know<a class="headerlink" href="#good-to-know" title="Permanent link">&para;</a></h2>
+<p>Seventeen times. Replaying real recorded step shapes at the slower rate puts 16%
+of steps past the default 5-minute lease timeout, where the fast host had none.
+Those tasks are re-leased mid-flight and their containers die — and nothing in
+the logs says "your hardware is slower than this budget assumed".</p>
+<h2 id="measure-first">Measure first<a class="headerlink" href="#measure-first" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>profile
+</code></pre></div>
+<p>With no arguments it reads the daemon's own database and fits every model that
+has recent work:</p>
+<div class="highlight"><pre><span></span><code>MODEL                      STEPS  DECODE tok/s  ±   PER TOOL CALL  FIXED
+Qwen/Qwen3-Coder-Next-FP8    689           215  6%          0.80s   -0.0s
+</code></pre></div>
+<p>Three separate numbers, deliberately:</p>
 <ul>
-<li>All three fields — workspace ID, bot token, and signing secret — are
-  required before the Slack channel activates.</li>
-<li>Slash commands require one Slack-side step: create <code>/vornik</code>, point it at
-  the same <code>/api/v1/slack/webhook</code> URL as Events API, add the <code>commands</code> OAuth
-  scope, and reinstall the App. Then use <code>/vornik &lt;prompt&gt;</code>.</li>
-<li>Channel and sender allowlisting, and Slack's request-timestamp replay
-  protection, are covered in the <strong>Slack</strong> section of
-  <a href="../../guides/conversation-channels/#slack">Conversation Channels</a>.</li>
-<li>Slack throttles how fast a bot can post; vornik respects this
-  automatically once connected.</li>
+<li><strong>DECODE</strong> is the model's own rate. This is the one a timeout should scale on.</li>
+<li><strong>PER TOOL CALL</strong> is what your tools cost. A rising value here is a tool
+  problem, and must not buy the model more time.</li>
+<li><strong>±</strong> is how uncertain the decode rate is. Above 30% the command refuses to
+  report a rate at all: a figure that loose is a range, not a number.</li>
 </ul>
+<p>The naive measure — tokens divided by step duration — folds all three together,
+and would make a deployment look slower simply for having slow tools.</p>
+<h3 id="a-machine-with-no-history">A machine with no history<a class="headerlink" href="#a-machine-with-no-history" title="Permanent link">&para;</a></h3>
+<p>A fresh install has nothing to fit, which is exactly when you want to know
+whether the hardware is usable. Probe the endpoint directly:</p>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>profile<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--probe-endpoint<span class="w"> </span>http://your-host:8000/v1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--probe-model<span class="w"> </span>your-model<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--suggest-config
+</code></pre></div>
+<p>This needs no database and no prior work. It measures decode as the <strong>slope</strong>
+between a short and a long generation, so per-request overhead cancels instead of
+dragging the rate down.</p>
+<p>Probe and fit measure different things and are never averaged. The probe is what
+the hardware can do; the fit is what it does under your real workload. When both
+exist the command prints them together, and the <strong>gap between them is your
+contention</strong> — a scheduling story, not a model one.</p>
+<h2 id="then-enable">Then enable<a class="headerlink" href="#then-enable" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>profile<span class="w"> </span>--suggest-config
+</code></pre></div>
+<p>emits a block to paste into the config the daemon actually reads (confirm with
+<code>vornikctl config show</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="nt">scheduler</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">speed_aware_timeouts</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">reference_tokens_per_sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">215</span>
+<span class="w">    </span><span class="nt">observed_tokens_per_sec</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">215</span>
+<span class="w">    </span><span class="nt">min_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.5</span>
+<span class="w">    </span><span class="nt">max_factor</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8.0</span>
+</code></pre></div>
+<p><code>reference_tokens_per_sec</code> is the only value needing judgement. Read it as a
+claim you are making: <em>"the timeouts in this deployment work as they are, on
+hardware that decodes at this rate."</em> If that is true of the machine you just
+measured, use its number. Every slower host then scales against a baseline that
+demonstrably worked.</p>
+<p>It cannot be inferred for you. If each deployment used its own measurement as its
+own reference, the factor would be 1.0 everywhere and the feature would never do
+anything.</p>
+<p>The feature is <strong>off by default</strong>, and off is byte-identical to not having it.</p>
+<h3 id="when-hardware-is-too-slow">When hardware is too slow<a class="headerlink" href="#when-hardware-is-too-slow" title="Permanent link">&para;</a></h3>
+<p><code>max_factor</code> is deliberately lower than the slowest hardware would ask for. A 12
+tok/s box against a 215 tok/s reference wants roughly 18x; the ceiling stops at
+8x, logs a warning, and a step that then times out fails as <code>hardware_too_slow</code>
+rather than as a generic timeout.</p>
+<p>That is on purpose. The honest answer at 18x is that the hardware cannot run the
+workload in this shape — not a two-hour step timeout arrived at by arithmetic.
+Raise <code>max_factor</code> if you disagree; it is your call, made knowingly.</p>
+<h2 id="budgets-this-does-not-scale">Budgets this does not scale<a class="headerlink" href="#budgets-this-does-not-scale" title="Permanent link">&para;</a></h2>
+<p>Build and test tools are <strong>compute-bound, not decode-bound</strong> — a <code>go build</code> does
+not get faster because the model does. They have their own knob:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">VORNIK_TOOL_TIMEOUT_FACTOR</span><span class="o">=</span><span class="m">2</span>.5<span class="w">    </span><span class="c1"># in the agent container&#39;s environment</span>
+</code></pre></div>
+<p>It is a factor rather than absolute overrides so the deliberate ratios survive: a
+Rust build stays longer than a typecheck.</p>
 
 
 

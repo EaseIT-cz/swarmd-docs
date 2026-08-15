@@ -433,6 +433,8 @@
       
         
       
+        
+      
     
     
       
@@ -656,6 +658,27 @@
   
   <span class="md-ellipsis">
     Cost and Caching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/inference-speed-timeouts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Timeouts on your own hardware
   </span>
   
 
@@ -1470,6 +1493,87 @@
   <a href="#vornikctl-bench" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent compare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-gold" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent gold
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-gold-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent gold-merge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent report
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-rescore" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent rescore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-rollup" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent rollup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-taskset-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent taskset-hash
     </span>
   </a>
   
@@ -2972,6 +3076,87 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent compare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-gold" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent gold
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-gold-merge" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent gold-merge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent report
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-rescore" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent rescore
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-rollup" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent rollup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent run
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-taskset-hash" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent taskset-hash
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-bench-memory" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench memory
@@ -4238,6 +4423,306 @@ is portable across hosts when restored via 'vornikctl restore'.</p>
 </table>
 <h2 id="vornikctl-bench">vornikctl bench<a class="headerlink" href="#vornikctl-bench" title="Permanent link">&para;</a></h2>
 <p>Benchmark subsystems against labelled datasets</p>
+<h2 id="vornikctl-bench-agent">vornikctl bench agent<a class="headerlink" href="#vornikctl-bench-agent" title="Permanent link">&para;</a></h2>
+<p>Score agent decision quality: tool grants, schema following, tool use</p>
+<p>Score the decisions Vornik's control logic makes.</p>
+<p>Three probes, reported as vectors and never blended into one score:
+  tool-grant       did the lead grant what the task demonstrably needed
+  schema-following did each role produce output matching its schema
+  tool-use         did the agent call real tools with valid arguments</p>
+<p>schema-following and tool-use need no gold set — their ground truth is
+configuration, not a recording — so they can gate before any gold pass.</p>
+<h2 id="vornikctl-bench-agent-compare">vornikctl bench agent compare<a class="headerlink" href="#vornikctl-bench-agent-compare" title="Permanent link">&para;</a></h2>
+<p>Diff two runs, refusing incomparable arms</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent compare &lt;journal-a&gt; &lt;journal-b&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>emit JSON instead of a table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-gold">vornikctl bench agent gold<a class="headerlink" href="#vornikctl-bench-agent-gold" title="Permanent link">&para;</a></h2>
+<p>Record ground truth from an unrestricted-ceiling arm</p>
+<p>Record ground truth by running the task set with no grant ceiling and
+keeping the tools each PASSING run actually invoked.</p>
+<p>Refuses when the task set is unchanged: regenerating against the same set
+replaces the ground truth the gate measures against, which makes prior
+numbers incomparable and future ones unfalsifiable. To rebuild anyway,
+delete the pinned manifest — that is a reviewable diff.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent gold [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--benchmark-project</code></td>
+<td></td>
+<td>the only project this deployment permits benchmarking in</td>
+</tr>
+<tr>
+<td><code>--database</code></td>
+<td></td>
+<td>target database</td>
+</tr>
+<tr>
+<td><code>--gold</code></td>
+<td><code>gold.json</code></td>
+<td>pinned gold manifest to write, and to fence against if it exists</td>
+</tr>
+<tr>
+<td><code>--i-know-this-wipes</code></td>
+<td></td>
+<td>must equal --database; this run bulk-writes and clears it</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>project to run in</td>
+</tr>
+<tr>
+<td><code>--runs</code></td>
+<td><code>3</code></td>
+<td>unrestricted-ceiling runs per task; a task no run passes is excluded</td>
+</tr>
+<tr>
+<td><code>--swarm</code></td>
+<td></td>
+<td>swarm whose roles execute the tasks</td>
+</tr>
+<tr>
+<td><code>--task-set-hash</code></td>
+<td></td>
+<td>digest of the task set being recorded; the regeneration fence compares against it</td>
+</tr>
+<tr>
+<td><code>--tasks</code></td>
+<td></td>
+<td>JSON task set to run</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-gold-merge">vornikctl bench agent gold-merge<a class="headerlink" href="#vornikctl-bench-agent-gold-merge" title="Permanent link">&para;</a></h2>
+<p>Combine per-batch gold manifests into one pinned set</p>
+<p>Combine per-batch gold manifests into one.</p>
+<p>A full gold pass is hours long; losing it to a dropped session means
+re-spending all of it. Running in batches caps that loss to one batch —
+this is what makes the partials usable afterwards.</p>
+<p>Paths accumulate across batches. An exclusion survives only if NO batch
+recorded a path, because a task that passed once was measurable.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent gold-merge &lt;batch.json&gt;... [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out</code></td>
+<td><code>gold.json</code></td>
+<td>where to write the merged manifest</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-report">vornikctl bench agent report<a class="headerlink" href="#vornikctl-bench-agent-report" title="Permanent link">&para;</a></h2>
+<p>Print a run's scoreboard</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent report &lt;journal&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>emit JSON instead of a table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-rescore">vornikctl bench agent rescore<a class="headerlink" href="#vornikctl-bench-agent-rescore" title="Permanent link">&para;</a></h2>
+<p>Re-score a completed journal under the current contract, without re-running</p>
+<p>Re-score a completed journal under the CURRENT scoring contract.</p>
+<p>Bumping HarnessVersion correctly makes every earlier figure incomparable,
+and until this existed the only way back was to re-run the pass — hours of
+wall clock and, on a prepaid allowance, days of waiting for a quota reset.
+The evidence a probe reads is already in the ledger, so this re-scores the
+evidence instead of re-buying it. No agent runs.</p>
+<p>Cost, tokens, success and every arm axis describing the RUN are preserved:
+re-scoring changes what a number MEANS, not what happened.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent rescore &lt;journal&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--database</code></td>
+<td></td>
+<td>the benchmark database to READ traces from</td>
+</tr>
+<tr>
+<td><code>--gold</code></td>
+<td></td>
+<td>gold manifest the grant probe scores against</td>
+</tr>
+<tr>
+<td><code>--out</code></td>
+<td></td>
+<td>where to write the re-scored journal (required)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-rollup">vornikctl bench agent rollup<a class="headerlink" href="#vornikctl-bench-agent-rollup" title="Permanent link">&para;</a></h2>
+<p>Print the customer figures: cost, efficiency, accuracy, success rate</p>
+<p>Print the customer figures for one run, or for several batches of one run.</p>
+<p>Several journals are merged before rolling up, and merging REFUSES arms
+that disagree — a batched pass is one experiment or it is not a pass.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent rollup &lt;journal&gt;... [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>emit JSON instead of a table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-run">vornikctl bench agent run<a class="headerlink" href="#vornikctl-bench-agent-run" title="Permanent link">&para;</a></h2>
+<p>Run one arm and journal its probe verdicts</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent run [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--arm</code></td>
+<td></td>
+<td>name of the arm being run</td>
+</tr>
+<tr>
+<td><code>--benchmark-project</code></td>
+<td></td>
+<td>the only project this deployment permits benchmarking in</td>
+</tr>
+<tr>
+<td><code>--context-policy</code></td>
+<td></td>
+<td>REQUIRED: names the policy under test (suppression set, advert gating, ceiling). It is the independent variable, so a run that does not name it cannot be compared</td>
+</tr>
+<tr>
+<td><code>--daemon-binary</code></td>
+<td></td>
+<td>path to the daemon binary under test; hashed into the arm key so a release change refuses comparison instead of silently producing one</td>
+</tr>
+<tr>
+<td><code>--daemon-config</code></td>
+<td></td>
+<td>path to the config the daemon reads; hashed into the arm key</td>
+</tr>
+<tr>
+<td><code>--database</code></td>
+<td></td>
+<td>target database</td>
+</tr>
+<tr>
+<td><code>--gold</code></td>
+<td></td>
+<td>pinned gold manifest; omit to run only the probes that need none</td>
+</tr>
+<tr>
+<td><code>--i-know-this-wipes</code></td>
+<td></td>
+<td>must equal --database; this run bulk-writes and clears it</td>
+</tr>
+<tr>
+<td><code>--journal</code></td>
+<td><code>journal.json</code></td>
+<td>where to write the run journal</td>
+</tr>
+<tr>
+<td><code>--preregistration</code></td>
+<td></td>
+<td>REQUIRED: committed manifest stating the arms, metric, intended delta and computed n</td>
+</tr>
+<tr>
+<td><code>--project</code></td>
+<td></td>
+<td>project to run in</td>
+</tr>
+<tr>
+<td><code>--repeats</code></td>
+<td><code>1</code></td>
+<td>runs per task; repeats shrink a task's contribution to sigma_d but add no pairs</td>
+</tr>
+<tr>
+<td><code>--run-id</code></td>
+<td></td>
+<td>identifier for this run</td>
+</tr>
+<tr>
+<td><code>--swarm</code></td>
+<td></td>
+<td>swarm whose roles execute the tasks</td>
+</tr>
+<tr>
+<td><code>--tasks</code></td>
+<td></td>
+<td>JSON task set to run</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-taskset-hash">vornikctl bench agent taskset-hash<a class="headerlink" href="#vornikctl-bench-agent-taskset-hash" title="Permanent link">&para;</a></h2>
+<p>Print a task set's digest, which the gold fence compares against</p>
+<p>Print a task set's digest.</p>
+<p>This is what --task-set-hash takes and what the regeneration fence compares
+against, so it must be computed the same way the harness computes it —
+order-independent and length-prefixed, not a sha256 of the file.</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent taskset-hash &lt;tasks.json&gt;
+</code></pre></div>
 <h2 id="vornikctl-bench-memory">vornikctl bench memory<a class="headerlink" href="#vornikctl-bench-memory" title="Permanent link">&para;</a></h2>
 <p>Score memory retrieval quality on a labelled dataset</p>
 <p>Score memory retrieval quality on a labelled dataset.</p>
