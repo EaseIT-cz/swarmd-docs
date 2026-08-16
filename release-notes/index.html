@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202686" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202685" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.5
@@ -1983,6 +1992,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202686" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202685" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.5
@@ -2251,6 +2269,37 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202686">2026.8.6<a class="headerlink" href="#202686" title="Permanent link">&para;</a></h2>
+<p><strong>Upgrade if you run any role on Bedrock with a declared output schema — those
+steps have been failing outright.</strong> The agent's final turn deliberately offers
+no tools, but the conversation still carried tool records, and Bedrock rejects
+that pairing. The step produced no result at all. Fixed by converting those
+records to plain text on the final turn.</p>
+<p><strong>A failed step now tells you why it failed.</strong> Previously almost every agent
+failure was recorded as "the container exited non-zero", collapsing four
+distinct faults into one label. Failures are now recorded with their actual
+cause — a stuck tool loop, an exhausted tool budget, a context overflow, or a
+broken output rule.</p>
+<p><strong>Agents are now shown the output rules they are judged against.</strong> A role can
+require that, say, a claim of passing tests is accompanied by the list of cases
+checked. Those rules were enforced after the fact and never communicated, so
+work was rejected for a contract the agent had never seen. The rules are now
+part of the agent's instructions and are checked before it finishes, with one
+chance to correct.</p>
+<p><strong>An agent that repeats itself is warned before the step is ended</strong>, and an
+agent that runs out of tool calls now produces its best answer instead of
+nothing. The record still shows the budget was exhausted, so this improves the
+output without hiding the cause.</p>
+<p><strong>A fallback model gets its own time budget.</strong> When a primary model was
+unavailable, the replacement inherited a timeout sized for the original and
+could not finish in it — so failover reliably failed. It now gets a budget of
+its own.</p>
+<p><strong>The daemon no longer refuses to start when a container-runtime check is
+merely slow</strong>, and benchmark runs now verify the model's real context window
+against the endpoint instead of trusting configuration.</p>
+<p>No configuration changes are required. If you pin per-model context windows,
+confirm they match what your endpoint actually serves.</p>
 <hr />
 <h2 id="202685">2026.8.5<a class="headerlink" href="#202685" title="Permanent link">&para;</a></h2>
 <p><strong>Upgrade if your tasks ever retry — retried work has not been billed to
