@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202687" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202686" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.6
@@ -1992,6 +2001,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202687" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202686" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.6
@@ -2269,6 +2287,48 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202687">2026.8.7<a class="headerlink" href="#202687" title="Permanent link">&para;</a></h2>
+<p><strong>Two roles were failing most of the time because we asked them to restate
+something the system already knew.</strong> Both are fixed, and both were measured
+before and after on a benchmark deployment. Neither was a model limitation.</p>
+<p><strong>A tester could claim tests passed without listing what it checked.</strong> The rule
+requiring the list of validated cases was enforced after the fact, but the
+machine-readable contract the model is decoded against marked that list
+optional — so the model was doing exactly what it was permitted to do, and the
+work was rejected afterwards at the cost of a retry. The list is now required
+where it binds. Measured on the same deployment: the failure went from 37 in 50
+attempts to none, and the retry ladder stopped being entered at all.</p>
+<p><strong>A step could fail for not mentioning a file it had just written.</strong> Where a
+step declares an output file, the daemon verifies it against the real
+filesystem. That check passed — and then the step was failed anyway because the
+agent's own summary of what it produced was empty. A verified file now settles
+the question; the agent's omission is still recorded, but no longer fails the
+step. This does not weaken the opposite check: an agent claiming a file it never
+wrote is still caught. Measured: first-attempt success rose from 36% to 100%,
+and the work took one model call per step instead of 2.3.</p>
+<p><strong>Field descriptions in an output schema now reach the model.</strong> They were
+dropped on the way to the prompt, so agents saw field names with no explanation
+of what belonged in them.</p>
+<p><strong>A daemon whose configuration fails to load now stops instead of serving.</strong>
+Previously it kept running with a synthetic fallback, so a task naming a
+workflow that no longer existed could still report success — having never run
+that workflow. Relatedly, the <code>pedantic</code> setting now actually takes the strict
+path it describes.</p>
+<p><strong>Agents are told when their checkout is read-only.</strong> They were looping on
+writes that could never succeed, which accounted for most of the stuck-agent
+reports.</p>
+<p><strong>New: output-contract scoring for workflows.</strong> Workflows that declare an
+output file are now scored on whether they delivered it, across nine shipped
+workflows. This measures delivery, not correctness — a workflow that writes a
+valid but empty file scores full marks — so treat it as a regression guard for
+"this workflow stopped producing its output", not as a quality score.</p>
+<p><strong>Other fixes:</strong> adaptive workflows now record a terminal outcome for each
+step; a parent task waiting on children no longer needs a restart to unstick; a
+tool call that a provider flattens into a single argument string is split back
+apart; a refused tool grant explains why; deduplicated deliverables are
+surfaced; published HTML is preserved when the page host fails; scheduled task
+attachments are delivered; and workflow timeout proposals are scoped globally.</p>
 <hr />
 <h2 id="202686">2026.8.6<a class="headerlink" href="#202686" title="Permanent link">&para;</a></h2>
 <p><strong>Upgrade if you run any role on Bedrock with a declared output schema — those

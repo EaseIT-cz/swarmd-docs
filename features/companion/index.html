@@ -2190,7 +2190,7 @@ hint from memory first, so you don't spend compute re-deriving it.</p>
 <strong>companion-scoped key</strong> (a plain API key won't be accepted on the companion
 endpoint):</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># confirm the daemon advertises the companion capabilities</span>
-curl<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$VORNIK_URL</span><span class="s2">/api/v1/capabilities&quot;</span>
+curl<span class="w"> </span><span class="s2">"</span><span class="nv">$VORNIK_URL</span><span class="s2">/api/v1/capabilities"</span>
 
 <span class="c1"># mint a scoped key (printed once) — memory + knowledge-skill capable</span>
 vornikctl<span class="w"> </span>companion<span class="w"> </span>grant<span class="w"> </span><span class="se">\</span>
@@ -2215,7 +2215,7 @@ created through the REST API rather than <code>delegate</code>; the per-key row 
 <a href="../../guides/observability/#spend-per-api-key"><code>/ui/spend</code></a> is the same
 attribution, over a wider set of rows.</p>
 <p>On the <strong>client</strong> side, set the companion bearer token and install the plugin:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">&quot;sk-vornik-companion-…&quot;</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_COMPANION_TOKEN</span><span class="o">=</span><span class="s2">"sk-vornik-companion-…"</span><span class="w">   </span><span class="c1"># the key from `companion grant`</span>
 </code></pre></div>
 <p>For Claude Code, add the plugin from your vornik checkout's companion plugin
 directory (<code>claude --plugin-dir &lt;path&gt;/contrib/claude-code-companion</code>), or
@@ -2242,7 +2242,7 @@ expressions such as <code>${VORNIK_URL:-http://localhost:8080}</code> into the p
 handshake. If the local override supplies the remote daemon URL, disable only
 the plugin-bundled MCP server in <code>~/.codex/config.toml</code> while leaving the plugin
 itself enabled so its skill remains available:</p>
-<div class="highlight"><pre><span></span><code><span class="k">[plugins.</span><span class="s2">&quot;codex-companion@vornik&quot;</span><span class="k">.mcp_servers.vornik]</span>
+<div class="highlight"><pre><span></span><code><span class="k">[plugins.</span><span class="s2">"codex-companion@vornik"</span><span class="k">.mcp_servers.vornik]</span>
 <span class="n">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 </code></pre></div>
 

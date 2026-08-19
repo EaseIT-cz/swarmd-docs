@@ -1942,8 +1942,8 @@ text pasted into the chat. vornik has two built-in tools for that:</p>
 <li><strong><code>send_artifact</code></strong> — deliver a file a completed task already produced.</li>
 </ul>
 <p>Both deliver to <strong>wherever the conversation is happening</strong> — the file lands in
-the same Telegram chat or email thread the request came in on. You never name a
-recipient; the destination is bound to the conversation.</p>
+the same Telegram chat, Slack thread, or email thread the request came in on.
+You never name a recipient; the destination is bound to the conversation.</p>
 <h2 id="rendering-a-document-on-the-fly">Rendering a document on the fly<a class="headerlink" href="#rendering-a-document-on-the-fly" title="Permanent link">&para;</a></h2>
 <p><code>render_document</code> converts markdown you (or the agent) supply into one or more
 formats and sends each file back to the chat. It runs deterministically on the
@@ -2020,18 +2020,27 @@ delivers it as a download.</p>
   task's published output artifacts; internal scratch and debug files can never
   be sent.</li>
 </ul>
+<p>The name shown after completion is the <strong>harvested name</strong>, not necessarily the
+literal path from the workflow prompt. For example, an agent writes
+<code>artifacts/out/research.md</code>, while the durable catalogue may expose
+<code>research-20260817-929c.md</code>; the date and execution suffix prevent collisions
+between runs. Terminal task status includes this harvested inventory so callers
+do not mistake the renamed file for a missing output. Raw <code>*-response-…md</code>
+step transcripts are diagnostics, not deliverables; explicit artifact listings
+label them accordingly.</p>
 <h2 id="where-files-go">Where files go<a class="headerlink" href="#where-files-go" title="Permanent link">&para;</a></h2>
 <p>File delivery is bound to the channel the conversation started on:</p>
 <ul>
 <li><strong>Telegram</strong> — delivered as a document upload (up to <strong>50 MiB</strong> per file).</li>
+<li><strong>Slack</strong> — uploaded into the originating channel or DM thread (up to
+  <strong>50 MiB</strong> per file).</li>
 <li><strong>Email</strong> — delivered as an attachment on a reply in the same thread
   (<code>multipart/mixed</code>, with the body always listing the files produced).</li>
 </ul>
-<blockquote>
-<p><strong>Slack is not a file-delivery target</strong> for these tools today. A request on a
-channel with no file surface simply doesn't expose <code>render_document</code> /
-<code>send_artifact</code>.</p>
-</blockquote>
+<p>Task-kind scheduled updates use the same channel binding. When a successful
+scheduled task publishes OUTPUT artifacts, Vornik automatically attaches them
+to the original Telegram, Slack, or email destination before posting the
+completion summary. Scratch/intermediate files are never forwarded.</p>
 <p>Email also enforces a per-message attachment size cap (configurable, below):
 over-cap attachments are <strong>skipped and logged, but the reply is still sent</strong> —
 with the body listing the files — so the recipient is never left with nothing.</p>
@@ -2104,11 +2113,11 @@ mechanism the task never used. For an upload, assert on <code>inputFiles</code> 
 <p>File delivery over Telegram works as soon as the bot is connected. Email
 delivery needs outbound SMTP configured on the project's <code>email</code> block:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">email</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">smtp_host</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;smtp.example.com&quot;</span>
+<span class="w">  </span><span class="nt">smtp_host</span><span class="p">:</span><span class="w"> </span><span class="s">"smtp.example.com"</span>
 <span class="w">  </span><span class="nt">smtp_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">587</span>
-<span class="w">  </span><span class="nt">smtp_username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;assistant@example.com&quot;</span>
-<span class="w">  </span><span class="nt">smtp_password_env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ASSISTANT_SMTP_PASSWORD&quot;</span><span class="w">   </span><span class="c1"># value read from this env var</span>
-<span class="w">  </span><span class="nt">from_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;assistant@example.com&quot;</span>
+<span class="w">  </span><span class="nt">smtp_username</span><span class="p">:</span><span class="w"> </span><span class="s">"assistant@example.com"</span>
+<span class="w">  </span><span class="nt">smtp_password_env</span><span class="p">:</span><span class="w"> </span><span class="s">"ASSISTANT_SMTP_PASSWORD"</span><span class="w">   </span><span class="c1"># value read from this env var</span>
+<span class="w">  </span><span class="nt">from_address</span><span class="p">:</span><span class="w"> </span><span class="s">"assistant@example.com"</span>
 <span class="w">  </span><span class="c1"># Per-message attachment cap in bytes; 0 = unlimited. 25 MiB shown.</span>
 <span class="w">  </span><span class="nt">attachment_size_cap_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26214400</span>
 </code></pre></div>

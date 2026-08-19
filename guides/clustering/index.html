@@ -2087,21 +2087,21 @@ is internal to your cluster and is never seen by webhook providers. Run these in
 <div class="highlight"><pre><span></span><code><span class="c1"># 1a. A private CA for the relay.</span>
 openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span>-days<span class="w"> </span><span class="m">3650</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-keyout<span class="w"> </span>relay-ca.key<span class="w"> </span>-out<span class="w"> </span>relay-ca.crt<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=vornik-relay-ca&quot;</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">"/CN=vornik-relay-ca"</span>
 
 <span class="c1"># 1b. Job-tier SERVER cert. The subjectAltName must match the host the</span>
 <span class="c1">#     webhook node will use in node.relay.upstream (DNS name or IP:&lt;addr&gt;).</span>
 openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-keyout<span class="w"> </span>jobtier.key<span class="w"> </span>-out<span class="w"> </span>jobtier.csr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=jobtier.internal&quot;</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">"/CN=jobtier.internal"</span>
 openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>jobtier.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>jobtier.crt<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-extfile<span class="w"> </span>&lt;<span class="o">(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;subjectAltName=DNS:jobtier.internal&quot;</span><span class="o">)</span>
+<span class="w">  </span>-extfile<span class="w"> </span>&lt;<span class="o">(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">"subjectAltName=DNS:jobtier.internal"</span><span class="o">)</span>
 
 <span class="c1"># 1c. DMZ webhook node CLIENT cert.</span>
 openssl<span class="w"> </span>req<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span>-nodes<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-keyout<span class="w"> </span>dmz-webhook.key<span class="w"> </span>-out<span class="w"> </span>dmz-webhook.csr<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-subj<span class="w"> </span><span class="s2">&quot;/CN=dmz-webhook-1&quot;</span>
+<span class="w">  </span>-subj<span class="w"> </span><span class="s2">"/CN=dmz-webhook-1"</span>
 openssl<span class="w"> </span>x509<span class="w"> </span>-req<span class="w"> </span>-in<span class="w"> </span>dmz-webhook.csr<span class="w"> </span>-CA<span class="w"> </span>relay-ca.crt<span class="w"> </span>-CAkey<span class="w"> </span>relay-ca.key<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-CAcreateserial<span class="w"> </span>-days<span class="w"> </span><span class="m">825</span><span class="w"> </span>-out<span class="w"> </span>dmz-webhook.crt
 </code></pre></div>
@@ -2118,7 +2118,7 @@ relay CA.</p>
 <span class="nt">node</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">worker</span>
 <span class="w">  </span><span class="nt">relay_ingress</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8443&quot;</span><span class="w">                    </span><span class="c1"># mTLS listener for relayed webhooks</span>
+<span class="w">    </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">":8443"</span><span class="w">                    </span><span class="c1"># mTLS listener for relayed webhooks</span>
 <span class="w">    </span><span class="nt">server_cert</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/jobtier.crt</span>
 <span class="w">    </span><span class="nt">server_key</span><span class="p">:</span><span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/jobtier.key</span>
 <span class="w">    </span><span class="nt">client_ca</span><span class="p">:</span><span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/certs/relay-ca.crt</span><span class="w">   </span><span class="c1"># only certs it signed are accepted</span>
@@ -2145,7 +2145,7 @@ on a node that runs workers — the daemon refuses to start otherwise.</p>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># DMZ webhook node config</span>
 <span class="nt">server</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:8080&quot;</span><span class="w">                   </span><span class="c1"># public webhook ingress (front this with TLS)</span>
+<span class="w">  </span><span class="nt">address</span><span class="p">:</span><span class="w"> </span><span class="s">":8080"</span><span class="w">                   </span><span class="c1"># public webhook ingress (front this with TLS)</span>
 
 <span class="nt">node</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">profile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">webhook</span>
@@ -2174,7 +2174,7 @@ to <code>POST /api/v1/webhooks/{…}</code>.</p>
 <span class="w">  </span>-v<span class="w"> </span>./dmz-webhook-config.yaml:/etc/vornik/config.yaml:ro,Z<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span>./certs:/etc/vornik/certs:ro,Z<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>-v<span class="w"> </span>vornik-dmz-data:/var/lib/vornik:Z<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--health-cmd<span class="w"> </span><span class="s1">&#39;wget -qO- http://localhost:8080/livez || exit 1&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--health-cmd<span class="w"> </span><span class="s1">'wget -qO- http://localhost:8080/livez || exit 1'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--health-interval<span class="w"> </span>30s<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>vornik:thin
 </code></pre></div>

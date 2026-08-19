@@ -1885,9 +1885,9 @@ service that spawns agent containers via your rootless Podman:</p>
 checksum before piping it to a shell (catches transit/redirect tampering — not
 a signature), fetch both first:</p>
 <div class="highlight"><pre><span></span><code><span class="nv">REF</span><span class="o">=</span>&lt;release&gt;<span class="w">  </span><span class="c1"># a tag from github.com/grinco/vornik/releases that ships quickstart.sh.sha256</span>
-<span class="nv">base</span><span class="o">=</span><span class="s2">&quot;https://raw.githubusercontent.com/grinco/vornik/</span><span class="nv">$REF</span><span class="s2">/deployments/podman&quot;</span>
-curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$base</span><span class="s2">/quickstart.sh&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$base</span><span class="s2">/quickstart.sh.sha256&quot;</span>
-sha256sum<span class="w"> </span>-c<span class="w"> </span>quickstart.sh.sha256<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">VORNIK_REF</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$REF</span><span class="s2">&quot;</span><span class="w"> </span>bash<span class="w"> </span>quickstart.sh
+<span class="nv">base</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/grinco/vornik/</span><span class="nv">$REF</span><span class="s2">/deployments/podman"</span>
+curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$base</span><span class="s2">/quickstart.sh"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>curl<span class="w"> </span>-fsSLO<span class="w"> </span><span class="s2">"</span><span class="nv">$base</span><span class="s2">/quickstart.sh.sha256"</span>
+sha256sum<span class="w"> </span>-c<span class="w"> </span>quickstart.sh.sha256<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">VORNIK_REF</span><span class="o">=</span><span class="s2">"</span><span class="nv">$REF</span><span class="s2">"</span><span class="w"> </span>bash<span class="w"> </span>quickstart.sh
 </code></pre></div>
 <p>The daemon creates and migrates its own schema on first boot, so all you supply
 is an empty database — the script provisions it. When it finishes, open
@@ -1949,7 +1949,7 @@ flag, the <code>VORNIK_CONFIG</code> environment variable, <code>./vornik.yaml</
 <p>Once it is up, the daemon serves a Web UI and an HTTP API (default
 <code>:8080</code>). Check it is ready before submitting work:</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>http://localhost:8080/readyz
-<span class="c1"># {&quot;status&quot;:&quot;ready&quot;,&quot;checks&quot;:[{&quot;name&quot;:&quot;database&quot;,&quot;status&quot;:&quot;ok&quot;}]}</span>
+<span class="c1"># {"status":"ready","checks":[{"name":"database","status":"ok"}]}</span>
 </code></pre></div>
 <p>A <code>200</code> from <code>/readyz</code> means every dependency the daemon needs is
 reachable. A <code>503</code> lists which check is failing — see
@@ -1970,7 +1970,7 @@ validates it against the registry before saving.</p>
 <p>Generate a project that uses the swarm you just created and the built-in
 <code>adaptive</code> workflow:</p>
 <div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>init<span class="w"> </span>project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--display-name<span class="w"> </span><span class="s2">&quot;My First Project&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--display-name<span class="w"> </span><span class="s2">"My First Project"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--swarm<span class="w"> </span>my-swarm<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--workflow<span class="w"> </span>adaptive
 </code></pre></div>
@@ -2008,7 +2008,7 @@ project with unmet required checks.</p>
 work:</p>
 <div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>submit<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--prompt<span class="w"> </span><span class="s2">&quot;Summarise the key themes in the attached notes.&quot;</span>
+<span class="w">  </span>--prompt<span class="w"> </span><span class="s2">"Summarise the key themes in the attached notes."</span>
 </code></pre></div>
 <p>The command returns a task ID. vornik has queued the task; the scheduler
 will pick it up, start the agents, and run them through the project's
@@ -2024,7 +2024,7 @@ workflow.</p>
   extracted into project memory so agents can read it.</li>
 </ul>
 <div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>submit<span class="w"> </span>-p<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--prompt<span class="w"> </span><span class="s2">&quot;Review this report and list open risks.&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--prompt<span class="w"> </span><span class="s2">"Review this report and list open risks."</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--attach<span class="w"> </span>report.pdf<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--priority<span class="w"> </span><span class="m">10</span>
 </code></pre></div>

@@ -2199,7 +2199,7 @@ node roles, not duplicated daemons. See <a href="../../guides/clustering/">Clust
 tasks, executions, artifact metadata, memory chunks and their embeddings, audit
 trails, and the usage ledger.</p>
 <p><strong>Observe:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">extversion</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_extension</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">extname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;vector&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">extversion</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">pg_extension</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">extname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'vector'</span><span class="p">;</span>
 </code></pre></div>
 <p><strong>Reference:</strong> pgvector present; migrations applied to the current head; the
 embedding column's dimension matching the configured embedding model. A dimension
@@ -2280,13 +2280,13 @@ disagree. See <a href="../configuration/">Configuration</a> for the full resolut
 <p>A project names exactly one swarm and one default workflow. Both must resolve, or the
 project fails validation at load — loudly, which is correct.</p>
 <p><strong>Reference project fields:</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nt">projectId</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docs-review&quot;</span><span class="w">              </span><span class="c1"># stable identifier; never reused</span>
-<span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Documentation</span><span class="nv"> </span><span class="s">review&quot;</span>
-<span class="nt">swarmId</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;docs-review-swarm&quot;</span><span class="w">          </span><span class="c1"># must resolve</span>
-<span class="nt">defaultWorkflowId</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;architectural-review&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nt">projectId</span><span class="p">:</span><span class="w"> </span><span class="s">"docs-review"</span><span class="w">              </span><span class="c1"># stable identifier; never reused</span>
+<span class="nt">displayName</span><span class="p">:</span><span class="w"> </span><span class="s">"Documentation</span><span class="nv"> </span><span class="s">review"</span>
+<span class="nt">swarmId</span><span class="p">:</span><span class="w"> </span><span class="s">"docs-review-swarm"</span><span class="w">          </span><span class="c1"># must resolve</span>
+<span class="nt">defaultWorkflowId</span><span class="p">:</span><span class="w"> </span><span class="s">"architectural-review"</span>
 <span class="nt">adaptiveCandidateWorkflows</span><span class="p">:</span><span class="w">           </span><span class="c1"># bounds adaptive routing</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;doc-review&quot;</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;rag-ingest&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"doc-review"</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"rag-ingest"</span>
 <span class="nt">defaultPriority</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">50</span>
 <span class="nt">maxConcurrentTasks</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w">                 </span><span class="c1"># the per-project concurrency bound</span>
 </code></pre></div>
@@ -2298,10 +2298,10 @@ an adaptive route's selection is <em>silently ignored</em> and the workflow term
 without spawning a child task. Present-but-empty behaves differently from absent.</p>
 <p><strong>Reference swarm role:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="nt">roles</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;lead&quot;</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your-model-id&quot;</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"lead"</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">"your-model-id"</span>
 <span class="w">    </span><span class="nt">runtime</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;localhost/vornik-agent:latest&quot;</span><span class="w">   </span><span class="c1"># required</span>
+<span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="s">"localhost/vornik-agent:latest"</span><span class="w">   </span><span class="c1"># required</span>
 </code></pre></div>
 <p>Every role needs a runtime image. Roles routinely differ in model — a cheap model for
 classification, a stronger one for synthesis — and that heterogeneity is normal, not
@@ -2384,7 +2384,7 @@ a config value is a statement of intent, not evidence of behaviour.</p>
 <p><strong>Observe:</strong> the daemon logs the <strong>resolved</strong> state at start —
 <code>memory reranker ACTIVE</code> or <code>memory reranker INERT</code> with the reason and the specific
 gate that closed. Then confirm behaviour, not intent:</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">role</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">task_llm_usage</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="k">ILIKE</span><span class="w"> </span><span class="s1">&#39;%rerank%&#39;</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">role</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">role</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">task_llm_usage</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="k">ILIKE</span><span class="w"> </span><span class="s1">'%rerank%'</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">role</span><span class="p">;</span>
 </code></pre></div>
 <p><strong>Reference:</strong> if <code>reranker.enabled</code> is true, the log says ACTIVE <strong>and</strong> the ledger
 accumulates reranker rows once context-assembly recall runs. Enabled-plus-zero-rows

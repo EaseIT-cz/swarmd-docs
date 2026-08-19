@@ -1911,7 +1911,7 @@ window and only fires after a <strong>sustained</strong> breach (three consecuti
 ("investigate the failing step / consider a faster model or a timeout change")
 you can review with <code>vornikctl cp proposals</code>.</p>
 <h3 id="vornikctl-control-plane-alias-cp"><code>vornikctl control-plane</code> (alias <code>cp</code>)<a class="headerlink" href="#vornikctl-control-plane-alias-cp" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># See what&#39;s waiting for you</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># See what's waiting for you</span>
 vornikctl<span class="w"> </span>cp<span class="w"> </span>proposals<span class="w">                 </span><span class="c1"># add --status DRAFT / --project janka</span>
 
 <span class="c1"># Inspect one (full diff + rationale)</span>
@@ -1922,10 +1922,10 @@ vornikctl<span class="w"> </span>cp<span class="w"> </span>approve<span class="w
 vornikctl<span class="w"> </span>cp<span class="w"> </span>reject<span class="w">  </span>&lt;proposal-id&gt;
 
 <span class="c1"># Raise one yourself</span>
-vornikctl<span class="w"> </span>cp<span class="w"> </span>propose<span class="w"> </span>--title<span class="w"> </span><span class="s2">&quot;bump scraper timeout&quot;</span><span class="w"> </span><span class="se">\</span>
+vornikctl<span class="w"> </span>cp<span class="w"> </span>propose<span class="w"> </span>--title<span class="w"> </span><span class="s2">"bump scraper timeout"</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--project<span class="w"> </span>janka<span class="w"> </span>--kind<span class="w"> </span>config<span class="w"> </span>--blast-radius<span class="w"> </span>project<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--diff<span class="w"> </span><span class="s1">&#39;-timeout_seconds: 30</span>
-<span class="s1">+timeout_seconds: 90&#39;</span><span class="w"> </span>--rationale<span class="w"> </span><span class="s2">&quot;web_fetch timing out&quot;</span>
+<span class="w">    </span>--diff<span class="w"> </span><span class="s1">'-timeout_seconds: 30</span>
+<span class="s1">+timeout_seconds: 90'</span><span class="w"> </span>--rationale<span class="w"> </span><span class="s2">"web_fetch timing out"</span>
 
 <span class="c1"># Apply an APPROVED, applyable proposal (hot-reload) — and roll it back</span>
 vornikctl<span class="w"> </span>cp<span class="w"> </span>apply<span class="w"> </span>&lt;proposal-id&gt;<span class="w">          </span><span class="c1"># --ack-daemon for daemon-scope</span>
@@ -1941,6 +1941,10 @@ the daemon</strong> via config hot-reload — no restart:</p>
   daemon-scope change needs an explicit <code>--ack-daemon</code>; apply is <strong>refused
   while any task in scope is running</strong> (retry in an idle window); the new
   content is parsed/validated <strong>before</strong> anything is written.</li>
+<li><strong>Workflow edits are daemon-scope</strong>: workflow definitions are shared registry
+  objects, even when one project's metrics motivated the proposal. Timeout
+  proposals therefore disclose their cross-project reach, require
+  <code>--ack-daemon</code>, and check every project for active tasks.</li>
 <li><strong>Atomic + snapshotted</strong>: the current file is snapshotted, the new file is
   written atomically, then reloaded. If the reload <strong>rejects</strong> the config (or
   times out), the daemon <strong>auto-rolls-back</strong> to the snapshot — it never runs a

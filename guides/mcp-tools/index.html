@@ -2086,15 +2086,15 @@ the project's own <code>mcp.servers</code> list.</p>
 MCP server:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;scraper&quot;</span><span class="w">           </span><span class="c1"># unique within the project</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stdio&quot;</span><span class="w">        </span><span class="c1"># subprocess launched by the daemon</span>
-<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/acme-scraper&quot;</span>
-<span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;--feeds&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;/etc/acme/news-feeds.yaml&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"scraper"</span><span class="w">           </span><span class="c1"># unique within the project</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"stdio"</span><span class="w">        </span><span class="c1"># subprocess launched by the daemon</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">"/usr/local/bin/acme-scraper"</span>
+<span class="w">      </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"--feeds"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"/etc/acme/news-feeds.yaml"</span><span class="p p-Indicator">]</span>
 <span class="w">      </span><span class="nt">env</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">SCRAPER_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;${ACME_SCRAPER_TOKEN}&quot;</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;broker&quot;</span><span class="w">            </span><span class="c1"># an HTTP/SSE server already running</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sse&quot;</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:7081/sse&quot;</span>
+<span class="w">        </span><span class="nt">SCRAPER_TOKEN</span><span class="p">:</span><span class="w"> </span><span class="s">"${ACME_SCRAPER_TOKEN}"</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"broker"</span><span class="w">            </span><span class="c1"># an HTTP/SSE server already running</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"sse"</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"http://127.0.0.1:7081/sse"</span>
 </code></pre></div>
 <p>There are two transports:</p>
 <ul>
@@ -2136,9 +2136,9 @@ whose <code>web_fetch</code> hits slow or anti-bot sites — raise it with
 <code>context deadline exceeded</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;scraper&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sse&quot;</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:8787&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"scraper"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"sse"</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"http://127.0.0.1:8787"</span>
 <span class="w">      </span><span class="nt">timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">90</span><span class="w">      </span><span class="c1"># 0 or omitted = 30s default</span>
 </code></pre></div>
 <h2 id="authenticating-to-a-server">Authenticating to a server<a class="headerlink" href="#authenticating-to-a-server" title="Permanent link">&para;</a></h2>
@@ -2154,17 +2154,17 @@ leaking anything.</p>
 <p>For a server that authenticates with a fixed header (n8n's MCP Server Trigger,
 and most servers that predate OAuth support):</p>
 <div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;N8N_MCP_TOKEN&quot;</span><span class="p p-Indicator">]</span><span class="w">        </span><span class="c1"># required — the reference is checked against this</span>
+<span class="w">  </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"N8N_MCP_TOKEN"</span><span class="p p-Indicator">]</span><span class="w">        </span><span class="c1"># required — the reference is checked against this</span>
 <span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;n8n&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;streamable-http&quot;</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://n8n.example.com/mcp/abc&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"n8n"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"streamable-http"</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://n8n.example.com/mcp/abc"</span>
 <span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">static</span>
-<span class="w">        </span><span class="nt">header</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Authorization&quot;</span><span class="w">     </span><span class="c1"># optional; Authorization is the default</span>
-<span class="w">        </span><span class="nt">value_from</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secret://N8N_MCP_TOKEN&quot;</span>
-<span class="w">        </span><span class="nt">value_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Bearer</span><span class="nv"> </span><span class="s">&quot;</span><span class="w">     </span><span class="c1"># optional; note the trailing space</span>
+<span class="w">        </span><span class="nt">header</span><span class="p">:</span><span class="w"> </span><span class="s">"Authorization"</span><span class="w">     </span><span class="c1"># optional; Authorization is the default</span>
+<span class="w">        </span><span class="nt">value_from</span><span class="p">:</span><span class="w"> </span><span class="s">"secret://N8N_MCP_TOKEN"</span>
+<span class="w">        </span><span class="nt">value_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">"Bearer</span><span class="nv"> </span><span class="s">"</span><span class="w">     </span><span class="c1"># optional; note the trailing space</span>
 </code></pre></div>
 <p>The resolved header is attached to every request for that server, and it wins
 over a header of the same name set anywhere else.</p>
@@ -2173,17 +2173,17 @@ over a header of the same name set anywhere else.</p>
 Reddit or Instagram wrapper holding a Google or Reddit app). There is no
 handshake for vornik to run — the job is to hand the subprocess its secrets:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;REDDIT_CLIENT_ID&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;REDDIT_CLIENT_SECRET&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">  </span><span class="nt">secrets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"REDDIT_CLIENT_ID"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"REDDIT_CLIENT_SECRET"</span><span class="p p-Indicator">]</span>
 <span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;reddit&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stdio&quot;</span>
-<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;reddit-mcp&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"reddit"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"stdio"</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">"reddit-mcp"</span>
 <span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">env</span>
 <span class="w">        </span><span class="nt">env_from</span><span class="p">:</span>
-<span class="w">          </span><span class="nt">REDDIT_CLIENT_ID</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secret://REDDIT_CLIENT_ID&quot;</span>
-<span class="w">          </span><span class="nt">REDDIT_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secret://REDDIT_CLIENT_SECRET&quot;</span>
+<span class="w">          </span><span class="nt">REDDIT_CLIENT_ID</span><span class="p">:</span><span class="w"> </span><span class="s">"secret://REDDIT_CLIENT_ID"</span>
+<span class="w">          </span><span class="nt">REDDIT_CLIENT_SECRET</span><span class="p">:</span><span class="w"> </span><span class="s">"secret://REDDIT_CLIENT_SECRET"</span>
 </code></pre></div>
 <p>Resolved values are passed to the subprocess verbatim — unlike the legacy <code>env</code>
 map, they are <strong>not</strong> <code>${VAR}</code>-expanded, so a credential containing <code>$</code> arrives
@@ -2213,12 +2213,12 @@ problem at the vendor; this points at the actual cause.</p>
 2.1 resource servers. Declare the block, then connect once per project:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;atlassian&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;streamable-http&quot;</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://mcp.atlassian.com/v1/mcp/authv2&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"atlassian"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"streamable-http"</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://mcp.atlassian.com/v1/mcp/authv2"</span>
 <span class="w">      </span><span class="nt">auth</span><span class="p">:</span>
 <span class="w">        </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oauth</span>
-<span class="w">        </span><span class="nt">scopes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;read:jira-work&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;offline_access&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="nt">scopes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"read:jira-work"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"offline_access"</span><span class="p p-Indicator">]</span>
 </code></pre></div>
 <p>Vornik discovers the authorization server, registers itself as an OAuth client
 where the vendor supports it, and stores the resulting token per
@@ -2232,7 +2232,7 @@ vendor can reach, and Vornik's callback is
 unset — better than failing after you have already consented at the vendor.</p>
 <p>Connect from the CLI:</p>
 <div class="highlight"><pre><span></span><code>$ vornikctl mcp connect atlassian -p my-project
-Connecting MCP server &quot;atlassian&quot; for project my-project
+Connecting MCP server "atlassian" for project my-project
 
   Resource:     https://mcp.atlassian.com/v1/mcp/authv2
   Scopes:       read:jira-work offline_access
@@ -2289,14 +2289,14 @@ you want to narrow that to the tools the project actually needs. Add
 <code>allowed_tools</code> to a server:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;broker&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sse&quot;</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:7081/sse&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"broker"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"sse"</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"http://127.0.0.1:7081/sse"</span>
 <span class="w">      </span><span class="nt">allowed_tools</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;get_quote&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;get_position&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;place_order&quot;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;cancel_order&quot;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"get_quote"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"get_position"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"place_order"</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"cancel_order"</span>
 </code></pre></div>
 <p>An empty or omitted <code>allowed_tools</code> means "expose all tools." When it's set,
 vornik enforces it in two places:</p>
@@ -2376,16 +2376,16 @@ the upstream server to push back. Add a <code>toolRateLimits</code> map to the <
 block:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mcp</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;broker&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;sse&quot;</span>
-<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http://127.0.0.1:7081/sse&quot;</span>
-<span class="w">      </span><span class="nt">allowed_tools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;get_quote&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;place_order&quot;</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;scraper&quot;</span>
-<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;stdio&quot;</span>
-<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/acme-scraper&quot;</span>
-<span class="w">      </span><span class="nt">allowed_tools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;web_fetch&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"broker"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"sse"</span>
+<span class="w">      </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">"http://127.0.0.1:7081/sse"</span>
+<span class="w">      </span><span class="nt">allowed_tools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"get_quote"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"place_order"</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"scraper"</span>
+<span class="w">      </span><span class="nt">transport</span><span class="p">:</span><span class="w"> </span><span class="s">"stdio"</span>
+<span class="w">      </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s">"/usr/local/bin/acme-scraper"</span>
+<span class="w">      </span><span class="nt">allowed_tools</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"web_fetch"</span><span class="p p-Indicator">]</span>
 <span class="w">  </span><span class="nt">toolRateLimits</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">broker.place_order</span><span class="p">:</span><span class="w">        </span><span class="c1"># most specific: this server&#39;s tool</span>
+<span class="w">    </span><span class="nt">broker.place_order</span><span class="p">:</span><span class="w">        </span><span class="c1"># most specific: this server's tool</span>
 <span class="w">      </span><span class="nt">rps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <span class="w">      </span><span class="nt">burst</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 <span class="w">    </span><span class="nt">broker.get_quote</span><span class="p">:</span>
@@ -2462,7 +2462,7 @@ failing server reads <code>unreachable</code> continuously rather than flickerin
 <p><strong>Call a tool directly</strong>, skipping the model — the fastest way to confirm a
 tool works and check its arguments:</p>
 <div class="highlight"><pre><span></span><code>vornikctl mcp call -p acme --tool mcp__scraper__web_fetch \
-    --args &#39;{&quot;url&quot;:&quot;https://example.com&quot;,&quot;text_only&quot;:true,&quot;max_bytes&quot;:2000}&#39;
+    --args '{"url":"https://example.com","text_only":true,"max_bytes":2000}'
 </code></pre></div>
 <p><code>--project</code> and <code>--tool</code> are required. The tool name is the fully qualified
 <code>mcp__&lt;server&gt;__&lt;tool&gt;</code> form. <code>--args</code> takes a JSON object (default <code>{}</code>). Add

@@ -2000,9 +2000,9 @@ upgrading and raise any cap that was sized against companion traffic alone.</p>
 server and point your scraper at it:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">metrics</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;:9090&quot;</span><span class="w">            </span><span class="c1"># dedicated metrics listener; scrape http://&lt;host&gt;:9090/metrics</span>
+<span class="w">  </span><span class="nt">addr</span><span class="p">:</span><span class="w"> </span><span class="s">":9090"</span><span class="w">            </span><span class="c1"># dedicated metrics listener; scrape http://&lt;host&gt;:9090/metrics</span>
 <span class="w">  </span><span class="nt">require_admin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># when true (with auth on), the main-port /metrics needs a token</span>
-<span class="w">  </span><span class="c1"># scrape_token: &quot;…&quot;      # a read-only credential accepted alongside the admin key</span>
+<span class="w">  </span><span class="c1"># scrape_token: "…"      # a read-only credential accepted alongside the admin key</span>
 </code></pre></div>
 <p><code>/metrics</code> is also mounted on the main API port. When you run with
 <a href="../../features/auth/">authentication</a> on and set <code>require_admin: true</code>, the

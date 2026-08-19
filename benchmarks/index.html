@@ -1829,8 +1829,8 @@ them.</p>
 <p><strong>It refuses to write the wrong database.</strong> The harness bulk-writes a corpus, so it
 asks the daemon which database it <em>actually</em> writes to and compares that with the one
 you named. It fails closed when it cannot get an answer:</p>
-<div class="highlight"><pre><span></span><code>error: refusing to run: you named &quot;vornik_bench&quot; but the &quot;vornik&quot; system actually
-writes &quot;production_db&quot;
+<div class="highlight"><pre><span></span><code>error: refusing to run: you named "vornik_bench" but the "vornik" system actually
+writes "production_db"
 </code></pre></div>
 <p><strong>It waits for ingest to finish.</strong> Embedding is asynchronous. A run that recalls
 while the queue is still draining measures keyword-only retrieval and reports it as

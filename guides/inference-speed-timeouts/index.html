@@ -1969,7 +1969,7 @@ Raise <code>max_factor</code> if you disagree; it is your call, made knowingly.<
 <h2 id="budgets-this-does-not-scale">Budgets this does not scale<a class="headerlink" href="#budgets-this-does-not-scale" title="Permanent link">&para;</a></h2>
 <p>Build and test tools are <strong>compute-bound, not decode-bound</strong> — a <code>go build</code> does
 not get faster because the model does. They have their own knob:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">VORNIK_TOOL_TIMEOUT_FACTOR</span><span class="o">=</span><span class="m">2</span>.5<span class="w">    </span><span class="c1"># in the agent container&#39;s environment</span>
+<div class="highlight"><pre><span></span><code><span class="nv">VORNIK_TOOL_TIMEOUT_FACTOR</span><span class="o">=</span><span class="m">2</span>.5<span class="w">    </span><span class="c1"># in the agent container's environment</span>
 </code></pre></div>
 <p>It is a factor rather than absolute overrides so the deliberate ratios survive: a
 Rust build stays longer than a typecheck.</p>

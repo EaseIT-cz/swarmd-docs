@@ -1772,7 +1772,7 @@ Edition open under AGPL.</p>
 <span class="nb">cd</span><span class="w"> </span>vornik
 go<span class="w"> </span>build<span class="w"> </span>./cmd/vornik<span class="w">      </span><span class="c1"># build the Community daemon</span>
 go<span class="w"> </span><span class="nb">test</span><span class="w"> </span>./...<span class="w">              </span><span class="c1"># run the test suite</span>
-make<span class="w"> </span>lint<span class="w">                  </span><span class="c1"># golangci-lint + the project&#39;s drift/contract linters</span>
+make<span class="w"> </span>lint<span class="w">                  </span><span class="c1"># golangci-lint + the project's drift/contract linters</span>
 </code></pre></div>
 <p>An automated <strong>import-law test</strong> enforces the Community/Enterprise boundary:
 Community code can never import Enterprise code, and CI fails if it does. Keep

@@ -1952,8 +1952,8 @@ to create a task. There are three decision modes:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">autonomy</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">llm</span>
-<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Scan</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">configured</span><span class="nv"> </span><span class="s">feeds</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">open</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">digest</span><span class="nv"> </span><span class="s">task</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">material</span><span class="nv"> </span><span class="s">lands.&quot;</span>
-<span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;30m&quot;</span><span class="w">        </span><span class="c1"># must carry a unit (&quot;30m&quot;, &quot;60s&quot;) — a bare number falls back to 5m</span>
+<span class="w">  </span><span class="nt">goal</span><span class="p">:</span><span class="w"> </span><span class="s">"Scan</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">configured</span><span class="nv"> </span><span class="s">feeds</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">open</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">digest</span><span class="nv"> </span><span class="s">task</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">something</span><span class="nv"> </span><span class="s">material</span><span class="nv"> </span><span class="s">lands."</span>
+<span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="s">"30m"</span><span class="w">        </span><span class="c1"># must carry a unit ("30m", "60s") — a bare number falls back to 5m</span>
 <span class="w">  </span><span class="nt">maxTasksPerHour</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w">         </span><span class="c1"># 0 = unlimited</span>
 <span class="w">  </span><span class="nt">requireApproval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">     </span><span class="c1"># true parks created tasks for operator approval</span>
 </code></pre></div>
@@ -2108,7 +2108,7 @@ prompt without a human decision.</p>
 <h3 id="granting-the-deposit-tool">Granting the deposit tool<a class="headerlink" href="#granting-the-deposit-tool" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">permissions</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">allowedTools</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;backlog_deposit&quot;</span><span class="w">   </span><span class="c1"># plus the role&#39;s usual tools (file_read, run_shell, git_*, ...)</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"backlog_deposit"</span><span class="w">   </span><span class="c1"># plus the role's usual tools (file_read, run_shell, git_*, ...)</span>
 </code></pre></div>
 <p>The agent calls it with a <code>kind</code> (<code>bug</code> | <code>optimisation</code> | <code>inefficiency</code> |
 <code>refactor</code>), a short <code>title</code>, a <code>detail</code>, and an optional <code>evidence</code> string.
@@ -2149,21 +2149,21 @@ looks like:</p>
 <span class="w">  </span><span class="nt">installation_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">78901234</span>
 <span class="w">  </span><span class="nt">private_key_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/etc/vornik/secrets/forge-app.pem</span>
 <span class="w">  </span><span class="c1"># Outbound repo for work with no inbound event to name one —</span>
-<span class="w">  </span><span class="c1"># backlog-item&#39;s draft PRs target this.</span>
-<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;your-org/your-repo&quot;</span>
+<span class="w">  </span><span class="c1"># backlog-item's draft PRs target this.</span>
+<span class="w">  </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="s">"your-org/your-repo"</span>
 
 <span class="nt">autonomy</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">            </span><span class="c1"># flip on when you&#39;re ready for deposits to become PRs</span>
-<span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backlog&quot;</span>
-<span class="w">  </span><span class="nt">workflow_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;backlog-item&quot;</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">            </span><span class="c1"># flip on when you're ready for deposits to become PRs</span>
+<span class="w">  </span><span class="nt">mode</span><span class="p">:</span><span class="w"> </span><span class="s">"backlog"</span>
+<span class="w">  </span><span class="nt">workflow_id</span><span class="p">:</span><span class="w"> </span><span class="s">"backlog-item"</span>
 <span class="w">  </span><span class="nt">maxTasksPerHour</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
-<span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;45m&quot;</span>
+<span class="w">  </span><span class="nt">pollInterval</span><span class="p">:</span><span class="w"> </span><span class="s">"45m"</span>
 <span class="w">  </span><span class="nt">allowedTaskTypes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;backlog&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"backlog"</span>
 
 <span class="nt">permissions</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">allowedTools</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;backlog_deposit&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"backlog_deposit"</span>
 
 <span class="nt">backlogDeposits</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">maxPerTask</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>

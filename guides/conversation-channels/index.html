@@ -2187,17 +2187,17 @@ repositories you choose. It can:</p>
 <span class="w">  </span><span class="nt">installation_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">89012345</span>
 <span class="w">  </span><span class="nt">webhook_secret_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_GITHUB_APP_WEBHOOK_SECRET</span>
 <span class="w">  </span><span class="nt">repo_allowlist</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;your-org/your-repo&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"your-org/your-repo"</span>
 <span class="w">  </span><span class="nt">task_labels</span><span class="p">:</span><span class="w">        </span><span class="c1"># labels that create a task (the label name becomes the task type)</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;vornik&quot;</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;research&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"vornik"</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"research"</span>
 <span class="w">  </span><span class="nt">pr_review_labels</span><span class="p">:</span><span class="w">   </span><span class="c1"># leave empty to review every opened PR</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;needs-review&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"needs-review"</span>
 <span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span><span class="w">   </span><span class="c1"># GitHub login names allowed to trigger vornik</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;your-github-login&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"your-github-login"</span>
 </code></pre></div>
 <p>Supply the webhook secret in the environment before starting vornik:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_GITHUB_APP_WEBHOOK_SECRET</span><span class="o">=</span><span class="s2">&quot;your-webhook-secret&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_GITHUB_APP_WEBHOOK_SECRET</span><span class="o">=</span><span class="s2">"your-webhook-secret"</span>
 </code></pre></div>
 <p>A webhook secret and a non-empty <code>repo_allowlist</code> are the minimum for vornik to
 <em>receive</em> events. To let it <em>reply</em>, also set <code>app_id</code>, <code>private_key_path</code>, and
@@ -2227,7 +2227,9 @@ been allowed into.</p>
 <li>Subscribe the bot to the <code>app_mention</code>, <code>message.im</code>, and <code>message.channels</code>
    events.</li>
 <li>Under <strong>OAuth &amp; Permissions</strong>, add the <code>app_mentions:read</code>, <code>chat:write</code>,
-   <code>im:history</code>, <code>im:read</code>, <code>channels:history</code>, and <code>commands</code> scopes.</li>
+   <code>im:history</code>, <code>im:read</code>, <code>channels:history</code>, <code>files:read</code>, <code>files:write</code>,
+   and <code>commands</code> scopes. <code>files:read</code> lets vornik consume inbound attachments;
+   <code>files:write</code> lets it return reports and other task artifacts to Slack.</li>
 <li>Under <strong>Slash Commands</strong>, create <code>/vornik</code> and set its request URL to the
    same <code>/api/v1/slack/webhook</code> endpoint. Use <code>/vornik &lt;prompt&gt;</code> to start or
    continue the per-user channel session.</li>
@@ -2236,26 +2238,26 @@ been allowed into.</p>
 </ol>
 <h3 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">slack</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">team_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;T01234567&quot;</span>
+<span class="w">  </span><span class="nt">team_id</span><span class="p">:</span><span class="w"> </span><span class="s">"T01234567"</span>
 <span class="w">  </span><span class="nt">signing_secret_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_SLACK_SIGNING_SECRET</span>
 <span class="w">  </span><span class="nt">bot_token_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_SLACK_BOT_TOKEN</span>
 <span class="w">  </span><span class="nt">channel_allowlist</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;C0ABCDEF12&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"C0ABCDEF12"</span>
 <span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;U0AAAAAAA&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"U0AAAAAAA"</span>
 <span class="w">  </span><span class="c1"># Optional. The command this deployment answers; defaults to /vornik. Set it</span>
-<span class="w">  </span><span class="c1"># when the bot is branded differently, and match the app&#39;s own manifest.</span>
-<span class="w">  </span><span class="nt">slash_command</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/vornik&quot;</span>
+<span class="w">  </span><span class="c1"># when the bot is branded differently, and match the app's own manifest.</span>
+<span class="w">  </span><span class="nt">slash_command</span><span class="p">:</span><span class="w"> </span><span class="s">"/vornik"</span>
 <span class="w">  </span><span class="c1"># Optional. A turn can take a minute, and Slack gives bots no typing</span>
-<span class="w">  </span><span class="c1"># indicator, so vornik posts a short &quot;working on it&quot; placeholder and replaces</span>
+<span class="w">  </span><span class="c1"># indicator, so vornik posts a short "working on it" placeholder and replaces</span>
 <span class="w">  </span><span class="c1"># it with the answer. Set false to keep the channel silent until the reply.</span>
 <span class="w">  </span><span class="nt">progress_signal</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="c1"># Optional. How long a turn may run before that placeholder appears.</span>
-<span class="w">  </span><span class="nt">progress_signal_gap</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;2s&quot;</span>
+<span class="w">  </span><span class="nt">progress_signal_gap</span><span class="p">:</span><span class="w"> </span><span class="s">"2s"</span>
 </code></pre></div>
 <p>Supply the secrets in the environment before starting vornik:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_SIGNING_SECRET</span><span class="o">=</span><span class="s2">&quot;your-signing-secret&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_BOT_TOKEN</span><span class="o">=</span><span class="s2">&quot;xoxb-...&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_SIGNING_SECRET</span><span class="o">=</span><span class="s2">"your-signing-secret"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_SLACK_BOT_TOKEN</span><span class="o">=</span><span class="s2">"xoxb-..."</span>
 </code></pre></div>
 <p>A signing secret and <code>team_id</code> are the minimum to receive events; the bot token
 is what lets vornik reply.</p>
@@ -2301,6 +2303,9 @@ is what lets vornik reply.</p>
 <li>Images posted to Slack are read: they go to the model directly when it can see
   images, and to the vision role when it cannot. Voice memos are transcribed when
   voice is configured.</li>
+<li>Reports and other operator-facing task outputs can be uploaded back into the
+  originating Slack thread. This requires the <code>files:write</code> OAuth scope; after
+  adding it to an existing app, reinstall the app to the workspace.</li>
 <li>Opening the app's <strong>Home</strong> tab shows what this deployment serves and how to
   reach it. Subscribe to the <code>app_home_opened</code> bot event to enable it; no extra
   OAuth scope is needed.</li>
@@ -2345,22 +2350,22 @@ For Gmail, for example:</p>
 <span class="w">  </span><span class="nt">imap_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">993</span>
 <span class="w">  </span><span class="nt">imap_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assistant@example.com</span>
 <span class="w">  </span><span class="nt">imap_password_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_ASSISTANT_IMAP_PASSWORD</span>
-<span class="w">  </span><span class="nt">imap_mailbox</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;INBOX&quot;</span>
+<span class="w">  </span><span class="nt">imap_mailbox</span><span class="p">:</span><span class="w"> </span><span class="s">"INBOX"</span>
 <span class="w">  </span><span class="nt">smtp_host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">smtp.gmail.com</span>
 <span class="w">  </span><span class="nt">smtp_port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">587</span>
 <span class="w">  </span><span class="nt">smtp_username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assistant@example.com</span>
 <span class="w">  </span><span class="nt">smtp_password_env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VORNIK_ASSISTANT_SMTP_PASSWORD</span>
-<span class="w">  </span><span class="nt">from_address</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Assistant</span><span class="nv"> </span><span class="s">&lt;assistant@example.com&gt;&quot;</span>
+<span class="w">  </span><span class="nt">from_address</span><span class="p">:</span><span class="w"> </span><span class="s">"Assistant</span><span class="nv"> </span><span class="s">&lt;assistant@example.com&gt;"</span>
 <span class="w">  </span><span class="nt">sender_allowlist</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;you@example.com&quot;</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;example.com&quot;</span><span class="w">            </span><span class="c1"># bare domains are allowed too</span>
-<span class="w">  </span><span class="nt">poll_interval</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;60s&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"you@example.com"</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"example.com"</span><span class="w">            </span><span class="c1"># bare domains are allowed too</span>
+<span class="w">  </span><span class="nt">poll_interval</span><span class="p">:</span><span class="w"> </span><span class="s">"60s"</span>
 <span class="w">  </span><span class="nt">attachment_size_cap_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">26214400</span><span class="w">   </span><span class="c1"># 25 MiB</span>
 <span class="w">  </span><span class="nt">attachment_store_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/email-attachments</span>
 </code></pre></div>
 <p>Supply the credentials in the environment before starting vornik:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_ASSISTANT_IMAP_PASSWORD</span><span class="o">=</span><span class="s2">&quot;your-imap-password&quot;</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_ASSISTANT_SMTP_PASSWORD</span><span class="o">=</span><span class="s2">&quot;your-smtp-password&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_ASSISTANT_IMAP_PASSWORD</span><span class="o">=</span><span class="s2">"your-imap-password"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">VORNIK_ASSISTANT_SMTP_PASSWORD</span><span class="o">=</span><span class="s2">"your-smtp-password"</span>
 </code></pre></div>
 <p>The IMAP host, username, and password are the minimum to receive mail. Add the
 SMTP block and <code>from_address</code> to let vornik reply; an inbound-only setup is
@@ -2412,16 +2417,16 @@ configuration at them.</p>
 <h3 id="configuration_3">Configuration<a class="headerlink" href="#configuration_3" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nt">voice</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">stt</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;whisper-local&quot;</span>
-<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/ggml-base.en.bin&quot;</span>
-<span class="w">    </span><span class="nt">binary_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/whisper-cpp&quot;</span>
-<span class="w">    </span><span class="nt">ffmpeg_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/bin/ffmpeg&quot;</span>
-<span class="w">    </span><span class="nt">language_hint</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="w">        </span><span class="c1"># leave empty to auto-detect</span>
+<span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="s">"whisper-local"</span>
+<span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">"/path/to/ggml-base.en.bin"</span>
+<span class="w">    </span><span class="nt">binary_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/usr/local/bin/whisper-cpp"</span>
+<span class="w">    </span><span class="nt">ffmpeg_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/usr/bin/ffmpeg"</span>
+<span class="w">    </span><span class="nt">language_hint</span><span class="p">:</span><span class="w"> </span><span class="s">"en"</span><span class="w">        </span><span class="c1"># leave empty to auto-detect</span>
 <span class="w">  </span><span class="nt">tts</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;piper&quot;</span>
-<span class="w">    </span><span class="nt">voice</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/en_US-amy-medium.onnx&quot;</span>
-<span class="w">    </span><span class="nt">binary_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/piper&quot;</span>
-<span class="w">    </span><span class="nt">ffmpeg_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/usr/bin/ffmpeg&quot;</span>
+<span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="s">"piper"</span>
+<span class="w">    </span><span class="nt">voice</span><span class="p">:</span><span class="w"> </span><span class="s">"/path/to/en_US-amy-medium.onnx"</span>
+<span class="w">    </span><span class="nt">binary_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/usr/local/bin/piper"</span>
+<span class="w">    </span><span class="nt">ffmpeg_path</span><span class="p">:</span><span class="w"> </span><span class="s">"/usr/bin/ffmpeg"</span>
 <span class="w">    </span><span class="nt">speed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
 <span class="w">    </span><span class="nt">max_text_runes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1500</span>
 </code></pre></div>

@@ -1890,10 +1890,10 @@ or information from you — it emits a <strong>checkpoint</strong> and the task 
 <em>awaiting-input</em> state. A decision checkpoint presents options as buttons; an
 open question waits for your answer. Reply from the CLI:</p>
 <div class="highlight"><pre><span></span><code>vornikctl<span class="w"> </span>task<span class="w"> </span>answer<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--checkpoint<span class="w"> </span>&lt;checkpointId&gt;<span class="w"> </span>--choice<span class="w"> </span><span class="s2">&quot;Option A&quot;</span>
+<span class="w">    </span>--checkpoint<span class="w"> </span>&lt;checkpointId&gt;<span class="w"> </span>--choice<span class="w"> </span><span class="s2">"Option A"</span>
 <span class="c1"># or provide free-text:</span>
 vornikctl<span class="w"> </span>task<span class="w"> </span>answer<span class="w"> </span>&lt;taskId&gt;<span class="w"> </span>--project<span class="w"> </span>my-project<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>--checkpoint<span class="w"> </span>&lt;checkpointId&gt;<span class="w"> </span>--content<span class="w"> </span><span class="s2">&quot;Use the staging bucket, not prod.&quot;</span>
+<span class="w">    </span>--checkpoint<span class="w"> </span>&lt;checkpointId&gt;<span class="w"> </span>--content<span class="w"> </span><span class="s2">"Use the staging bucket, not prod."</span>
 </code></pre></div>
 <p>You can also steer a running task with <code>vornikctl task directive</code>, pause/resume
 it, or amend its brief — see the <a href="../../reference/vornikctl/">vornikctl reference</a>.</p>

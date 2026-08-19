@@ -1508,9 +1508,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-calibrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent calibrate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-bench-agent-compare" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench agent compare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent gate
     </span>
   </a>
   
@@ -1529,6 +1547,24 @@
   <a href="#vornikctl-bench-agent-gold-merge" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench agent gold-merge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-noise-floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent noise-floor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-release-preregistration" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent release-preregistration
     </span>
   </a>
   
@@ -3085,9 +3121,27 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-calibrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent calibrate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-bench-agent-compare" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench agent compare
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-gate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent gate
     </span>
   </a>
   
@@ -3106,6 +3160,24 @@
   <a href="#vornikctl-bench-agent-gold-merge" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl bench agent gold-merge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-noise-floor" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent noise-floor
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-bench-agent-release-preregistration" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl bench agent release-preregistration
     </span>
   </a>
   
@@ -4432,6 +4504,26 @@ is portable across hosts when restored via 'vornikctl restore'.</p>
   tool-use         did the agent call real tools with valid arguments</p>
 <p>schema-following and tool-use need no gold set — their ground truth is
 configuration, not a recording — so they can gate before any gold pass.</p>
+<h2 id="vornikctl-bench-agent-calibrate">vornikctl bench agent calibrate<a class="headerlink" href="#vornikctl-bench-agent-calibrate" title="Permanent link">&para;</a></h2>
+<p>Build a task calibration artifact from a repeated journal</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent calibrate &lt;journal&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out</code></td>
+<td><code>calibration.json</code></td>
+<td>where to write the immutable calibration artifact</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-bench-agent-compare">vornikctl bench agent compare<a class="headerlink" href="#vornikctl-bench-agent-compare" title="Permanent link">&para;</a></h2>
 <p>Diff two runs, refusing incomparable arms</p>
 <div class="highlight"><pre><span></span><code>vornikctl bench agent compare &lt;journal-a&gt; &lt;journal-b&gt; [flags]
@@ -4449,6 +4541,41 @@ configuration, not a recording — so they can gate before any gold pass.</p>
 <td><code>--json</code></td>
 <td><code>false</code></td>
 <td>emit JSON instead of a table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-gate">vornikctl bench agent gate<a class="headerlink" href="#vornikctl-bench-agent-gate" title="Permanent link">&para;</a></h2>
+<p>Evaluate the pre-registered agent benchmark release gate</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent gate &lt;baseline-journal&gt; &lt;candidate-journal&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--calibration</code></td>
+<td></td>
+<td>calibration artifact (required)</td>
+</tr>
+<tr>
+<td><code>--json</code></td>
+<td><code>false</code></td>
+<td>emit the complete decision as JSON</td>
+</tr>
+<tr>
+<td><code>--noise-floor</code></td>
+<td></td>
+<td>noise-floor artifact (required)</td>
+</tr>
+<tr>
+<td><code>--policy</code></td>
+<td></td>
+<td>release gate policy (required)</td>
 </tr>
 </tbody>
 </table>
@@ -4541,6 +4668,71 @@ recorded a path, because a task that passed once was measurable.</p>
 <td><code>--out</code></td>
 <td><code>gold.json</code></td>
 <td>where to write the merged manifest</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-noise-floor">vornikctl bench agent noise-floor<a class="headerlink" href="#vornikctl-bench-agent-noise-floor" title="Permanent link">&para;</a></h2>
+<p>Measure paired release-gate noise from two same-config arms</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent noise-floor &lt;same-config-journal-a&gt; &lt;same-config-journal-b&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--out</code></td>
+<td><code>noise-floor.json</code></td>
+<td>where to write the immutable noise-floor artifact</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-bench-agent-release-preregistration">vornikctl bench agent release-preregistration<a class="headerlink" href="#vornikctl-bench-agent-release-preregistration" title="Permanent link">&para;</a></h2>
+<p>Derive the shared release pre-registration from reviewed gate artifacts</p>
+<div class="highlight"><pre><span></span><code>vornikctl bench agent release-preregistration [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--arms</code></td>
+<td><code>[]</code></td>
+<td>baseline and candidate arm names (required)</td>
+</tr>
+<tr>
+<td><code>--calibration</code></td>
+<td></td>
+<td>calibration artifact (required)</td>
+</tr>
+<tr>
+<td><code>--noise-floor</code></td>
+<td></td>
+<td>noise-floor artifact (required)</td>
+</tr>
+<tr>
+<td><code>--out</code></td>
+<td><code>release-preregistration.json</code></td>
+<td>where to write the shared pre-registration</td>
+</tr>
+<tr>
+<td><code>--policy</code></td>
+<td></td>
+<td>release gate policy (required)</td>
+</tr>
+<tr>
+<td><code>--rationale</code></td>
+<td></td>
+<td>why this release comparison is being run (required)</td>
 </tr>
 </tbody>
 </table>
@@ -4649,6 +4841,11 @@ that disagree — a batched pass is one experiment or it is not a pass.</p>
 <td>the only project this deployment permits benchmarking in</td>
 </tr>
 <tr>
+<td><code>--calibration</code></td>
+<td></td>
+<td>release calibration artifact pinned by the pre-registration</td>
+</tr>
+<tr>
 <td><code>--context-policy</code></td>
 <td></td>
 <td>REQUIRED: names the policy under test (suppression set, advert gating, ceiling). It is the independent variable, so a run that does not name it cannot be compared</td>
@@ -4669,6 +4866,11 @@ that disagree — a batched pass is one experiment or it is not a pass.</p>
 <td>target database</td>
 </tr>
 <tr>
+<td><code>--gate-policy</code></td>
+<td></td>
+<td>release gate policy pinned by the pre-registration</td>
+</tr>
+<tr>
 <td><code>--gold</code></td>
 <td></td>
 <td>pinned gold manifest; omit to run only the probes that need none</td>
@@ -4687,6 +4889,11 @@ that disagree — a batched pass is one experiment or it is not a pass.</p>
 <td><code>--journal</code></td>
 <td><code>journal.json</code></td>
 <td>where to write the run journal</td>
+</tr>
+<tr>
+<td><code>--noise-floor</code></td>
+<td></td>
+<td>release noise-floor artifact pinned by the pre-registration</td>
 </tr>
 <tr>
 <td><code>--preregistration</code></td>
