@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202688" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202687" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.7
@@ -2001,6 +2010,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202688" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.8
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202687" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.7
@@ -2288,6 +2306,58 @@ before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
 <hr />
+<h2 id="202688">2026.8.8<a class="headerlink" href="#202688" title="Permanent link">&para;</a></h2>
+<p><strong>Action required if you allowlist outbound URLs.</strong> Anonymous telemetry now
+reports to <code>https://telemetry.vornik.io</code> instead of
+<code>https://telemetry.vornik.io/v1/collect.json</code>. The collector still accepts the
+old path, so an older release keeps reporting, but egress rules that match the
+full URL need updating. What is collected has not changed: aggregate counts of a
+fixed set of values, a request body that is never parsed or stored, and the same
+retention windows. See <a href="../reference/telemetry-and-privacy/">Telemetry and privacy</a>.</p>
+<p><strong><code>vornik telemetry sample</code> now shows you the real request.</strong> It previously
+rebuilt the payload for display, which could in principle drift from what was
+actually sent; it now prints the request itself. Contributed by
+<a href="https://github.com/vmindru">@vmindru</a>.</p>
+<p><strong>A reporting step could fail after doing the work.</strong> The step that writes a
+feature's changelog was asked to identify the relevant commits before writing the
+file. On a repository whose history offers no clear boundary — no tags, no merges
+— that search has no end, and the step could exhaust its tool budget without ever
+writing the file it was required to produce. It now writes the changelog first
+from information it already has, then enriches it with a bounded look at history.
+An inconclusive search can now cost detail in the changelog; it can no longer
+cost the step.</p>
+<p><strong>Agent steps could fail for work they had actually done correctly.</strong> Before
+storing a step's result, the daemon scans it for anything that looks like a
+credential and masks what it finds. That masking was applied before the result was
+checked against the step's declared output fields — and because it replaces text
+without regard for the surrounding JSON, masking an identifier could leave the
+result unreadable. The step was then failed for "missing required fields" that
+were present all along, and its tool-call counts were recorded as blank.</p>
+<p>Ordinary output triggered it: test-case ids, commit hashes, generated
+identifiers. The check now runs on the result as the agent wrote it, while masking
+still governs everything that is stored, displayed or forwarded — no change to
+what counts as a credential or what is kept. Measured on a benchmark deployment,
+the affected failures went from 10 in 14 reporting steps to none, with masking
+still occurring on the steps that now pass.</p>
+<p>If you have historical step-failure data, treat "missing required fields" counts
+recorded before this release as an upper bound rather than a measurement.</p>
+<p><strong>Steps could be recorded under the wrong failure reason.</strong> Two related issues:
+a step that exhausted its wall clock while stuck repeating itself was recorded as
+a timeout rather than as a stuck step, and text appearing in an agent's own log
+output could influence how a failure was categorised. Both are corrected. This
+matters if you act on failure categories — a stuck step is not fixed by granting
+it more time, which is what a timeout label implies.</p>
+<p><strong>A review decision could be ignored.</strong> A workflow condition read a field that
+the agent was not actually required to produce, so the condition could never be
+satisfied and work was rejected downstream. The field is now required where it is
+read.</p>
+<p><strong>A failure that should have stopped a task could send it in a loop.</strong> Two
+gate-failure paths did not honour the strict-failure setting and instead routed
+into recovery. They now terminate as configured.</p>
+<p><strong>Failed steps carry more diagnostic detail.</strong> The log excerpt kept with a failed
+step previously retained only the beginning of the step's output, which is rarely
+where the problem is. It now keeps both the failure message and the end of the
+log.</p>
 <h2 id="202687">2026.8.7<a class="headerlink" href="#202687" title="Permanent link">&para;</a></h2>
 <p><strong>Two roles were failing most of the time because we asked them to restate
 something the system already knew.</strong> Both are fixed, and both were measured
