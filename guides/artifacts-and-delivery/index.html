@@ -2041,6 +2041,13 @@ label them accordingly.</p>
 scheduled task publishes OUTPUT artifacts, Vornik automatically attaches them
 to the original Telegram, Slack, or email destination before posting the
 completion summary. Scratch/intermediate files are never forwarded.</p>
+<p>Attachments are collected from the scheduled task <strong>and any tasks it delegated
+to</strong>. A scheduled prompt frequently runs a router workflow that hands the real
+work to a child task, and the deliverable is written there — collecting only
+the scheduled task's own artifacts would attach the router's bookkeeping and
+none of the report. Per-step agent transcripts (<code>&lt;step&gt;-response.md</code>) are
+excluded everywhere: they record how a step answered, not what the run
+produced.</p>
 <p>Email also enforces a per-message attachment size cap (configurable, below):
 over-cap attachments are <strong>skipped and logged, but the reply is still sent</strong> —
 with the body listing the files — so the recipient is never left with nothing.</p>

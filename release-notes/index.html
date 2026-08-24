@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202689" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.9
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202688" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.8
@@ -2010,6 +2019,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202689" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.8.9
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202688" class="md-nav__link">
     <span class="md-ellipsis">
       2026.8.8
@@ -2305,6 +2323,48 @@ so upgrades generally require no config changes. Always take a backup
 before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
+<hr />
+<h2 id="202689">2026.8.9<a class="headerlink" href="#202689" title="Permanent link">&para;</a></h2>
+<p><strong>A stuck execution no longer dies at an unrelated step.</strong> A step result that
+was not valid JSON was stored as-is and failed at the <em>next</em> checkpoint, so an
+execution died several steps away from the cause with a confusing
+<code>failed to marshal execution checkpoint</code> error. Such a result is now stored as a
+readable diagnostic that keeps the original text, and the execution continues.</p>
+<p><strong>Delegations and checkpoints survive a deleted ancestor task.</strong> If a parent
+task had been pruned by retention or removed with its project, the lineage walk
+failed instead of stopping — surfacing as
+<code>delegation cycle check failed: not found</code>. A missing ancestor now simply ends
+the chain.</p>
+<p><strong>The watchdog no longer re-reports the same stuck execution every sweep</strong> when
+its task has already been deleted, and the stuck-execution counters now include
+those cases instead of under-counting them.</p>
+<p><strong>Scheduled reports deliver the work, not the routing.</strong> A scheduled task that
+delegates to a child produced its output on the child, and delivery only looked
+at the parent — so the attached files could be internal routing transcripts
+rather than the report. Delivery now collects the whole task tree and leaves
+per-step transcripts out.</p>
+<p><strong><code>vornikctl mcp connect</code> tells you when it asks for fewer scopes than the
+server offers.</strong> A daemon-level connection deliberately does not inherit write
+scopes — that is unchanged — but it now prints a <code>WITHHELD:</code> block listing what
+was not requested and the two ways to grant it. Previously the narrowed request
+was invisible, which made a read-only grant look like a server with no write
+tools.</p>
+<p><strong>New metric: <code>vornik_mcp_gate_unrestricted_total{path,reason}</code>.</strong> Counts MCP
+calls that applied no role allowlist, with the reason named
+(<code>no_task_id</code>, <code>deps_unwired</code>, <code>role_not_found</code>, <code>role_declares_none</code>, and
+others). These calls were always permitted by design; they were simply not
+visible. A rising number means roles are not resolving — not that something was
+blocked.</p>
+<p><strong>Right-to-erasure now removes derived data.</strong> Erasing a subject's content
+previously deleted the stored chunks and left the knowledge-graph entities,
+edges and quarantined pre-ingest copies derived from them — all of which are on
+the retrieval path. Erasure now settles those too and records what it removed.
+Retention, which is a separate legal basis, parks that graph data instead of
+deleting it, with a horizon you can disable for a legal hold
+(<code>retention.graph_quarantine_days: -1</code>).</p>
+<p><strong>Agent tool advertisement follows execution on every path.</strong> A third
+advertisement path could offer a tool to a role's model that the execution gate
+would refuse. Roles now see only what they can call.</p>
 <hr />
 <h2 id="202688">2026.8.8<a class="headerlink" href="#202688" title="Permanent link">&para;</a></h2>
 <p><strong>Action required if you allowlist outbound URLs.</strong> Anonymous telemetry now
