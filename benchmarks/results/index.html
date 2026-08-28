@@ -1585,8 +1585,35 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#the-same-six-items-measured-cold" class="md-nav__link">
+    <span class="md-ellipsis">
+      The same six items, measured cold
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#longmemeval-retrieval-all-six-abilities-tier-2-cold-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      LongMemEval — retrieval, all six abilities (tier 2, cold corpus)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#releases-with-no-row-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      Releases with no row, and why
+    </span>
+  </a>
   
 </li>
       
@@ -1828,8 +1855,35 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#the-same-six-items-measured-cold" class="md-nav__link">
+    <span class="md-ellipsis">
+      The same six items, measured cold
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#longmemeval-retrieval-all-six-abilities-tier-2-cold-corpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      LongMemEval — retrieval, all six abilities (tier 2, cold corpus)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#releases-with-no-row-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      Releases with no row, and why
+    </span>
+  </a>
   
 </li>
       
@@ -1897,7 +1951,13 @@ regression is shown by the next row being worse, not by the previous row changin
 without a spread is not a result: two systems whose intervals overlap have not been
 separated by the measurement.</p>
 <h2 id="longmemeval-retrieval-tier-2-judge-free">LongMemEval — retrieval (tier 2, judge-free)<a class="headerlink" href="#longmemeval-retrieval-tier-2-judge-free" title="Permanent link">&para;</a></h2>
-<p><strong>Reproduce:</strong></p>
+<p><strong>How these rows were produced</strong> — kept as the record of what was run, <strong>not</strong> as a
+reproduction recipe. The harness now clears the store before every run, so this command
+yields a <em>cold</em> result against a table of <em>warm</em> ones. What that costs you depends on
+your deployment: with the reranker <strong>off</strong> it reproduces these figures exactly
+(measured 2026-08-27, sd 0.0000 on all three metrics); with the reranker <strong>on</strong> the
+MRR varies run to run. The script cannot control that — it is
+<code>memory.reranker.enabled</code> on the daemon. See the axis note below.</p>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sLO<span class="w"> </span>https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_oracle.json
 scripts/bench-reproduce.sh<span class="w"> </span>--dataset-path<span class="w"> </span>./longmemeval_oracle.json<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--category<span class="w"> </span>temporal-reasoning<span class="w"> </span>--items<span class="w"> </span><span class="m">6</span><span class="w"> </span>--runs<span class="w"> </span><span class="m">3</span><span class="w"> </span>--database<span class="w"> </span>&lt;your-bench-db&gt;
@@ -1909,6 +1969,11 @@ measured the same questions rather than inferring it from a count.</p>
 <p><strong>Dataset:</strong> LongMemEval v1-cleaned (<code>xiaowu0162/longmemeval-cleaned</code>, Sept 2025),
 <code>longmemeval_oracle.json</code>, <code>sha256 821a2034d219ab45846873dd14c14f12cfe7776e73527a483f9dac095d38620c</code>.
 <strong>Budget:</strong> <code>max_tokens=4096</code> both arms. <strong>Judge:</strong> none — tier 2 is judge-free.</p>
+<p><strong>This axis is CLOSED.</strong> It measures a <em>warm</em> corpus — the run repeats against an
+already-ingested store. Since <code>98037e34</code> (2026-08-21) the harness clears the store
+before every run, unconditionally, so a warm repeat can no longer be produced. The
+table is kept because a shipped row is history; it is not extended. The open axis is
+<a href="#longmemeval--retrieval-all-six-abilities-tier-2-cold-corpus">all six abilities, cold</a>.</p>
 <table>
 <thead>
 <tr>
@@ -1919,6 +1984,7 @@ measured the same questions rather than inferring it from a count.</p>
 <th>Context precision</th>
 <th>MRR</th>
 <th>Runs</th>
+<th>Key</th>
 </tr>
 </thead>
 <tbody>
@@ -1930,25 +1996,297 @@ measured the same questions rather than inferring it from a count.</p>
 <td>0.9444 ±0.0000</td>
 <td>1.0000 ±0.0000</td>
 <td>n=3</td>
+<td><code>d0fa4f0f8389</code></td>
+</tr>
+<tr>
+<td><code>2026.8.7-48-g0e450f9c</code> (shipped as <strong>2026.8.8</strong>)</td>
+<td>6</td>
+<td>temporal-reasoning</td>
+<td>1.0000 ±0.0000</td>
+<td>0.9444 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>n=3</td>
+<td><code>e865104e9959</code></td>
 </tr>
 </tbody>
 </table>
-<p>Comparability key <code>d0fa4f0f8389</code>. Produced by the <code>scripts/bench-reproduce.sh</code>
-invocation above, on the binary named in the Release column. All three metrics are
-<strong>deterministic</strong> across repeated runs — sd exactly 0.0000 — so this row can be gated
-on exact equality rather than a tolerance.</p>
-<p>Tracking starts with the next tagged release. This first row is a <strong>baseline taken
-before tracking began</strong>, recorded so the first tracked release has something to be
-compared against.</p>
+<p>Both rows were produced by the <code>scripts/bench-reproduce.sh</code> invocation above, on the
+binary named in the Release column. All three metrics are <strong>deterministic</strong> across
+repeated runs — sd exactly 0.0000 — so these rows can be gated on exact equality
+rather than a tolerance.</p>
+<p><strong>The two rows carry different comparability keys, and that is stated rather than
+smoothed over.</strong> The 2026.8.8 run left <code>our_extraction_model</code>, <code>answer_model</code> and
+<code>judge_model</code> empty, which marks its key PARTIAL; the baseline run named them. Every
+field that determines <em>what was measured</em> matches — harness version, dataset name and
+digest, item selection, <code>max_tokens=4096</code>, <code>observed_recall_method=context-assembly</code>.
+So the relationship is "not provably comparable" rather than "not comparable", and the
+exact metric equality is offered as the evidence. A reader who wants the strict
+reading should treat them as two tables of one row each.</p>
+<p><strong>Why 2026.8.8's row is dated a day before its tag.</strong> The run was taken at
+<code>0e450f9c</code>, four commits before <code>2026.8.8</code>; all four are release-notes and installer
+plumbing, touching no code the benchmark exercises. This is recorded rather than
+rounded off, because the alternative — writing the tag and hoping — is how a track
+record stops being believable.</p>
 <h4 id="re-ingesting-the-corpus-moves-the-numbers-slightly">Re-ingesting the corpus moves the numbers slightly<a class="headerlink" href="#re-ingesting-the-corpus-moves-the-numbers-slightly" title="Permanent link">&para;</a></h4>
-<p>The row above repeats the run against an <strong>already-ingested</strong> corpus, which is what
-the reproduction script does. Clearing the database and re-ingesting before every run
-instead gives MRR 0.9444 ±0.0481 (n=3) on the same six items, with recall and
+<p>The rows above repeat the run against an <strong>already-ingested</strong> corpus, which is what
+the reproduction script did at the time. Clearing the database and re-ingesting before
+every run instead gives MRR 0.9444 ±0.0481 (n=3) on the same six items, with recall and
 precision unchanged.</p>
-<p>The cause is worth knowing before you compare two numbers: ingest runs an LLM titler
-over each chunk, and it does not produce identical titles every time. Retrieval is
-deterministic <em>given a corpus</em>; the corpus is not identical across re-ingests. So
-compare warm-to-warm or cold-to-cold, never one against the other.</p>
+<p>The cause was recorded at the time as ingest non-determinism: an LLM titler runs over
+each chunk and does not produce identical titles every time, so retrieval is
+deterministic <em>given a corpus</em> while the corpus is not identical across re-ingests.</p>
+<p><strong>That attribution turned out to be wrong, and is corrected below.</strong> Re-measured
+2026-08-27 with the reranker disabled, the same six items are deterministic <em>cold</em> —
+MRR 1.0000, sd exactly 0.0000 across three runs. The ±0.0481 came from the LLM
+reranker reordering results between runs, not from the corpus changing. The original
+figure was taken with each system as it ships, reranker active, and the reranker was
+never named as the source. The advice to compare warm-to-warm or cold-to-cold still
+holds on general grounds; it is just not what produced this particular spread.</p>
+<p><strong>This distinction stopped being a caveat and became the axis break.</strong> Until
+2026-08-21 the harness never actually performed the clear that its own flag
+(<code>--i-know-this-wipes</code>), its guard text and its design all promised — the
+authorisation was built, the action was not (<code>98037e34</code>). Every run before that date
+is warm; every run after it is cold, and there is no flag to opt out. The fix also
+established that the missing clear <em>moved the score</em>: on three runs of an identical
+120 items, admitted deposits fell 426 → 426 → 209 as the store filled, and judged
+accuracy moved 0.692 → 0.750 on a manual wipe with nothing else changed — in the
+direction that <strong>understates</strong> the system, because a deduped item loses the haystack
+it is scored against. Warm numbers are therefore not merely incomparable to cold ones;
+the older ones are pessimistic by an amount nobody has bounded.</p>
+<h4 id="the-same-six-items-measured-cold">The same six items, measured cold<a class="headerlink" href="#the-same-six-items-measured-cold" title="Permanent link">&para;</a></h4>
+<p>Taken 2026-08-27 on <code>2026.8.9-50-g4b343821</code>, reranker disabled, store cleared before
+every run. It is <strong>not</strong> appended to the table above, because that table is warm and
+this is cold — appending it is precisely the silent axis change rule 3 forbids.</p>
+<table>
+<thead>
+<tr>
+<th>Release</th>
+<th>Items</th>
+<th>Ability</th>
+<th>Context recall</th>
+<th>Context precision</th>
+<th>MRR</th>
+<th>Runs</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2026.8.9-50-g4b343821</code></td>
+<td>6</td>
+<td>temporal-reasoning</td>
+<td>1.0000 ±0.0000</td>
+<td>0.9444 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>n=3</td>
+<td><code>e865104e9959</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>On this subset, warm and cold are identical</strong> — the same three figures, all with sd
+exactly 0.0000, as the warm <code>2026.8.7-48-g0e450f9c</code> row. The corpus-warmth effect the
+section above warns about does not appear here at all once the reranker is out of the
+retrieval path.</p>
+<p>That reframes the earlier caveat rather than contradicting it. The published cold
+figure of <strong>MRR 0.9444 ±0.0481</strong> was measured with each system <em>as it ships</em> — LLM
+reranker active — so its variance was a model reordering results between runs, not the
+corpus differing. Take the model out and the RRF path is deterministic cold, exactly as
+it is warm.</p>
+<blockquote>
+<p><strong>A gap this exposed, recorded rather than smoothed over.</strong> The warm row above and
+the cold row here carry the <strong>same comparability key</strong> <code>e865104e9959</code>.
+<code>ComparabilityFields</code> does not encode whether the corpus was warm or cold, so two runs
+on opposite sides of the 2026-08-21 clear fix compare clean and the tooling would
+merge them without complaint. It went unnoticed because on these six items the two
+regimes give identical numbers — but a key that cannot express an axis the
+documentation calls decisive is a guard that looks protective and is not. Tracked as
+a defect; until it is fixed, warm-versus-cold has to be checked by hand against the
+run date.</p>
+</blockquote>
+<h2 id="longmemeval-retrieval-all-six-abilities-tier-2-cold-corpus">LongMemEval — retrieval, all six abilities (tier 2, cold corpus)<a class="headerlink" href="#longmemeval-retrieval-all-six-abilities-tier-2-cold-corpus" title="Permanent link">&para;</a></h2>
+<p><strong>This is the open axis.</strong> It replaces the six-item warm axis above, which the
+2026-08-21 clear fix closed. It is a better measurement on both counts that matter:
+120 items rather than 6, and all six abilities rather than one — a single ability is a
+statement about that ability, not about retrieval.</p>
+<p><strong>Reproduce:</strong></p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sLO<span class="w"> </span>https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_oracle.json
+vornikctl<span class="w"> </span>bench<span class="w"> </span>memory<span class="w"> </span>run<span class="w"> </span>--system<span class="w"> </span>vornik<span class="w"> </span>--dataset<span class="w"> </span>longmemeval<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dataset-path<span class="w"> </span>./longmemeval_oracle.json<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--dataset-sha256<span class="w"> </span>821a2034d219ab45846873dd14c14f12cfe7776e73527a483f9dac095d38620c<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--database<span class="w"> </span>&lt;your-bench-db&gt;<span class="w"> </span>--i-know-this-wipes<span class="w"> </span>&lt;your-bench-db&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tier2-only<span class="w"> </span>--accept-unverified-path<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--max-items-per-category<span class="w"> </span><span class="m">20</span><span class="w"> </span>--max-tokens<span class="w"> </span><span class="m">4096</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--run-dir<span class="w"> </span>./run-<span class="nv">$i</span><span class="w">          </span><span class="c1"># repeat for i in 1 2 3</span>
+vornikctl<span class="w"> </span>bench<span class="w"> </span>memory<span class="w"> </span>aggregate<span class="w"> </span>./run-*
+</code></pre></div>
+<p><strong>Dataset:</strong> as above. <strong>Budget:</strong> <code>max_tokens=4096</code>. <strong>Judge:</strong> none — tier 2 is
+judge-free. <strong>Corpus:</strong> cold; the harness clears the store before each run.</p>
+<table>
+<thead>
+<tr>
+<th>Release</th>
+<th>Items</th>
+<th>Abilities</th>
+<th>Context recall</th>
+<th>Context precision</th>
+<th>MRR</th>
+<th>Runs</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2026.8.8-40-g2698eb67</code></td>
+<td>120</td>
+<td>all 6</td>
+<td>0.9900 ±0.0036</td>
+<td>0.9854 ±0.0000</td>
+<td>0.9958 ±0.0000</td>
+<td>n=3</td>
+<td><code>93a6e7a0729b</code></td>
+</tr>
+<tr>
+<td><code>2026.8.9-50-g4b343821</code></td>
+<td>120</td>
+<td>all 6</td>
+<td>0.9891 ±0.0036</td>
+<td>0.9854 ±0.0000</td>
+<td>0.9958 ±0.0000</td>
+<td>n=3</td>
+<td><code>93a6e7a0729b</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>The second row is the first release-over-release comparison this table can
+actually support</strong>, and it shows no regression. Precision and MRR are identical to
+four decimal places; recall moved −0.0009 against a per-release sd of 0.0036 and a
+narrowest-defensible (3σ) threshold of ±0.0107 — about a twelfth of the smallest
+move that could fire without being noise. The sd itself reproduced exactly
+(0.0036 both times), which is the more reassuring number: it says the <em>measurement</em>
+is stable, not merely that two point estimates happened to agree.</p>
+<p>Figures from <code>bench memory aggregate</code> over the three run directories, not
+hand-computed. Standard deviations are sample (n−1), which is what the tool reports.</p>
+<p>Per ability, same three runs:</p>
+<table>
+<thead>
+<tr>
+<th>Ability</th>
+<th>Context recall</th>
+<th>Context precision</th>
+<th>MRR</th>
+<th>Items</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>knowledge-update</code></td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>multi-session</code></td>
+<td>0.9564 ±0.0250</td>
+<td>0.9667 ±0.0000</td>
+<td>0.9750 ±0.0000</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>single-session-assistant</code></td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>single-session-preference</code></td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>single-session-user</code></td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>20</td>
+</tr>
+<tr>
+<td><code>temporal-reasoning</code></td>
+<td>0.9833 ±0.0144</td>
+<td>0.9458 ±0.0000</td>
+<td>1.0000 ±0.0000</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Where it loses.</strong> <code>multi-session</code> is the only ability that misses recall, and it is
+also the only one whose recall varies run to run (sd 0.0250 against 0.0000 on four of
+six). Questions needing evidence spread across sessions are where this system is
+weakest, and the variance says the weakness is not a fixed set of items — the boundary
+moves. <code>temporal-reasoning</code> carries the lowest precision (0.9458): it retrieves the
+right documents and pads the set.</p>
+<p><strong>Caveats specific to this row.</strong></p>
+<ul>
+<li>The key is <strong>PARTIAL</strong>. <code>our_extraction_model</code>, <code>answer_model</code> and <code>judge_model</code>
+  were left empty, so the run cannot be <em>proven</em> comparable to another — only observed
+  to match on every field it does record.</li>
+<li><code>retrieval_path_unverified</code> is set. The reranker was enabled on the deployment, so
+  the observed path is <code>context-assembly|context-assembly+rerank</code> — a model is in the
+  retrieval path and the run is therefore not deterministic by construction. This is
+  the correct setting for reporting the system <strong>as shipped</strong> and the wrong one for a
+  CI gate, which wants the reranker off and the RRF path proven.</li>
+<li>n=3 on 120 items. Enough for a spread, not enough to resolve a sub-point move.</li>
+</ul>
+<h2 id="releases-with-no-row-and-why">Releases with no row, and why<a class="headerlink" href="#releases-with-no-row-and-why" title="Permanent link">&para;</a></h2>
+<p>The policy in <code>RELEASE.md</code> requires a row per release from <code>2026.8.4</code>. It was not
+followed. Rather than leave the gaps silent — which reads as "nothing regressed" —
+each is stated:</p>
+<table>
+<thead>
+<tr>
+<th>Release</th>
+<th>Row</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2026.8.4</code></td>
+<td>none</td>
+<td>No benchmark run was taken. Not backfillable: it would need the tagged binary rebuilt <em>and</em> the bench deployment's models restored to what they were, and those were changed during 2026.8.7.</td>
+</tr>
+<tr>
+<td><code>2026.8.5</code></td>
+<td>none</td>
+<td>As above.</td>
+</tr>
+<tr>
+<td><code>2026.8.6</code></td>
+<td>none</td>
+<td>As above.</td>
+</tr>
+<tr>
+<td><code>2026.8.7</code></td>
+<td>none</td>
+<td>No run. The reason was recorded at the time in the 2026.8.7 release notes: every outward-facing provider was disabled and all roles moved to a locally served model during that cycle, so a run could not be pinned to the baseline row's axes.</td>
+</tr>
+<tr>
+<td><code>2026.8.8</code></td>
+<td><strong>yes</strong></td>
+<td>Both axes above. The warm row was measured at <code>0e450f9c</code>; the cold row at <code>2698eb67</code>.</td>
+</tr>
+<tr>
+<td><code>2026.8.9</code></td>
+<td>none <em>at the tag</em></td>
+<td>No run was taken at <code>2026.8.9</code> itself. The tree 50 commits past it (<code>2026.8.9-50-g4b343821</code>) is measured on both axes above.</td>
+</tr>
+</tbody>
+</table>
+<p>A missing row stated as missing is honest. An absent row is not — which is the whole
+reason this section exists.</p>
 <h2 id="longmemeval-judged-accuracy-tier-1-and-the-judges-noise-floor">LongMemEval — judged accuracy (tier 1) and the judge's noise floor<a class="headerlink" href="#longmemeval-judged-accuracy-tier-1-and-the-judges-noise-floor" title="Permanent link">&para;</a></h2>
 <p><strong>A judge with an unmeasured noise floor is not a standard.</strong> Before any judged number
 can be gated or quoted as a win, the variance of the judge itself has to be known —

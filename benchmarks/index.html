@@ -1817,9 +1817,17 @@ corpus. A bench daemon wants its own database, its own listener, and a config tr
 containing only autonomy-off projects — a daemon that loads a production project tree
 against a throwaway database will happily start doing that project's real work.</p>
 <p><strong>Item selection is deterministic:</strong> the first N items of the named category, in
-dataset file order. Every published row lists the question ids it scored, so a
-reproduction can confirm it measured the same questions rather than inferring it from
-a count.</p>
+dataset file order — or, for a run spanning every ability, the first N of <em>each</em>
+category. The six-item rows list the question ids they scored, so a reproduction can
+confirm it measured the same questions rather than inferring it from a count. The
+120-item row does not list 120 ids; its selection rule is exact instead
+(<code>--max-items-per-category 20</code>, no <code>--category</code> filter), and the ids it actually
+scored are in that run's journal.</p>
+<p><strong>Warm and cold are different experiments.</strong> Until 2026-08-21 the harness did not
+perform the store clear its own flag promised, so repeated runs accumulated a corpus.
+It now clears before every run, unconditionally. Rows taken before that date are warm
+and are marked closed; the tracked axis is cold. <code>bench memory aggregate</code> and the
+comparability key both refuse to mix the two.</p>
 <p><code>scripts/bench-reproduce.sh</code> pins every axis that changes a result and prints the
 comparability key it produced. If your key differs from a published one, the runs are
 measuring different things and the script says so rather than letting you compare
