@@ -1770,10 +1770,21 @@
 
 
 <h1 id="benchmarks">Benchmarks<a class="headerlink" href="#benchmarks" title="Permanent link">&para;</a></h1>
-<p>Vornik's memory subsystem is measured, not asserted. This section states what we
-measure, how to reproduce it, and where Vornik loses.</p>
-<p>Every number here is produced by <code>vornikctl bench memory</code>, which ships with the
-product. Nothing is hand-transcribed from a spreadsheet, and every result carries a
+<p>Vornik is measured, not asserted. This section states what we measure, how to
+reproduce it, and where Vornik loses.</p>
+<p>Two benchmarks, answering different questions:</p>
+<ul>
+<li><strong>Memory / retrieval</strong> — how well the memory subsystem finds what matters,
+  against a public dataset. Most of this page. Independently reproducible.</li>
+<li><strong>Agent quality</strong> — the decisions the control logic makes: what the lead
+  granted, whether roles followed their output schemas, whether agents called
+  tools correctly. Reported in
+  <a href="results/#agent-quality--202690-first-scored-arm">Results by release</a>.
+  <strong>Not independently reproducible</strong> — its task set and answer key are not
+  published — so it is reported with that limitation stated rather than implied.</li>
+</ul>
+<p>Every number here is produced by <code>vornikctl bench memory</code> or <code>vornikctl bench
+agent</code>, which ship with the product. Nothing is hand-transcribed from a spreadsheet, and every result carries a
 <strong>comparability key</strong> — a digest of the dataset revision, the models involved, the
 retrieval budget and the prompts — so two numbers that are not comparable refuse to
 be compared.</p>
@@ -1791,7 +1802,13 @@ proprietary judge stops being reproducible the day that judge is retired. Any ju
 figure we publish names an <strong>open-weight, version-pinned</strong> judge so an external
 auditor can re-run it.</p>
 <h2 id="current-results">Current results<a class="headerlink" href="#current-results" title="Permanent link">&para;</a></h2>
-<p>See <a href="results/">Results by release</a> for the tracked history.</p>
+<p>See <a href="results/">Results by release</a> for the tracked history — the LongMemEval
+retrieval rows, and the agent-quality arm.</p>
+<p><strong>The agent figures name their model on purpose.</strong> They are measured on a
+self-hosted 27B open-weight model on a single machine, which is what a
+self-hosting user actually runs, rather than on a large hosted model that would
+report a smoother number. The gap between the two is stated alongside the
+result.</p>
 <h2 id="reproducing-a-result">Reproducing a result<a class="headerlink" href="#reproducing-a-result" title="Permanent link">&para;</a></h2>
 <p>The harness needs a running Vornik daemon, a companion key with memory access, and a
 database that is <strong>not</strong> your production one.</p>
