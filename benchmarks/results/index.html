@@ -2448,6 +2448,11 @@ each is stated:</p>
 <td><strong>agent row only</strong></td>
 <td>The agent arm above was taken on the release candidate (<code>2026.8.9-70-g5d247f72</code>). No LongMemEval row: the memory axes were measured 50 commits earlier in the same cycle and nothing in the intervening work touches the retrieval path. Stated rather than left as a silent gap.</td>
 </tr>
+<tr>
+<td><code>2026.9.1</code></td>
+<td>none</td>
+<td>No run was taken. The cycle is bug fixes and the forge re-review feature; nothing in it touches ingestion, embedding, retrieval or the agent harness, so the axes stand where <code>2026.8.9-50-g4b343821</code> (memory, both axes) and <code>2026.8.9-70-g5d247f72</code> (agent arm) left them. A row measured on an unchanged path would add a data point without adding evidence, and the cost of a 120-item n=3 run is not free. Stated rather than left as a silent gap.</td>
+</tr>
 </tbody>
 </table>
 <p>A missing row stated as missing is honest. An absent row is not — which is the whole

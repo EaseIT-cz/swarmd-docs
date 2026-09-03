@@ -1292,6 +1292,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="What it does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#re-review-new-commits-and-asking-for-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      Re-review: new commits, and asking for one
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1325,6 +1340,15 @@
   <a href="#review-behaviour" class="md-nav__link">
     <span class="md-ellipsis">
       Review behaviour
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-the-target-is-gone" class="md-nav__link">
+    <span class="md-ellipsis">
+      When the target is gone
     </span>
   </a>
   
@@ -1813,6 +1837,21 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="What it does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#re-review-new-commits-and-asking-for-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      Re-review: new commits, and asking for one
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1846,6 +1885,15 @@
   <a href="#review-behaviour" class="md-nav__link">
     <span class="md-ellipsis">
       Review behaviour
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-the-target-is-gone" class="md-nav__link">
+    <span class="md-ellipsis">
+      When the target is gone
     </span>
   </a>
   
@@ -1903,11 +1951,75 @@ what to do) and drives two main flows:</p>
   way the daemon opens the PR (titled <code>Fix #&lt;n&gt;: …</code> or <code>Implement #&lt;n&gt;: …</code>,
   closing the issue). <strong>Every automated PR is opened as a draft</strong> — a human marks
   it ready.</li>
-<li><strong>Pull request opened → review.</strong> When a PR is opened, reopened, or marked
-  ready for review, the daemon fetches the diff, a reviewer agent reads it, and
+<li><strong>Pull request opened → review.</strong> When a PR is opened, reopened, marked ready
+  for review, or <strong>updated with new commits</strong>, the daemon fetches the diff, a
+  reviewer agent reads it, and
   the daemon posts the review back through GitHub's review API.</li>
 </ul>
 <p>A bare issue with no label is ignored — only a <em>labelled</em> issue is actionable.</p>
+<p><strong>Draft pull requests are not reviewed automatically.</strong> A draft is work in
+progress; marking it ready for review is what starts the review. An explicit
+request (below) still reviews a draft — asking is consent.</p>
+<h3 id="re-review-new-commits-and-asking-for-one">Re-review: new commits, and asking for one<a class="headerlink" href="#re-review-new-commits-and-asking-for-one" title="Permanent link">&para;</a></h3>
+<p>A pull request is reviewed again when you push to it. Two things keep that from
+becoming noise:</p>
+<ul>
+<li><strong>A burst of pushes produces one review, not one per push.</strong> While a review is
+  running, further pushes update what it will look at rather than queueing more
+  reviews.</li>
+<li><strong>A re-review looks at what changed</strong> since the last review it posted, not the
+  whole pull request again — so it does not repeat findings you have already
+  read. If the baseline is unavailable for any reason, including a force-push
+  that rewrote it, the review falls back to the complete diff rather than
+  reviewing less than it should.</li>
+</ul>
+<p>You can also ask directly, by mentioning the bot in a comment on the pull
+request. <strong><code>&lt;bot&gt;</code> is your GitHub App's own handle</strong> — its slug, e.g.
+<code>@vornik-companion</code>. It is configurable (<code>mention_handle</code>), and it
+should be a handle you own: a handle that happens to be someone else's account
+notifies a stranger every time anyone addresses the bot.</p>
+<table>
+<thead>
+<tr>
+<th>Comment</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@&lt;bot&gt; review</code></td>
+<td>review now, covering what changed since the last one</td>
+</tr>
+<tr>
+<td><code>@&lt;bot&gt; full review</code></td>
+<td>review the whole pull request, ignoring the baseline</td>
+</tr>
+<tr>
+<td><code>@&lt;bot&gt; pause</code></td>
+<td>stop reviewing this PR automatically; commands still work</td>
+</tr>
+<tr>
+<td><code>@&lt;bot&gt; resume</code></td>
+<td>resume automatic review of this PR</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Only people with standing in the repository can run these</strong> — its owner,
+organisation members, and invited collaborators. A review is model spend, so on
+a public repository an ungated command would let any passer-by spend your
+budget. Note that a <em>contributor</em> — someone who has had a pull request merged —
+does not qualify: that describes the past, not permission to trigger spend at
+will. Anything the forge does not vouch for is refused, so an unfamiliar payload
+fails closed.</p>
+<p>A review posted in answer to a comment <strong>quotes the request it is answering</strong>, so
+the review says what it was asked. Without that a reader sees a verdict with no
+idea which question produced it — and comments can be edited or deleted, taking
+the context with them, while the review itself stays.</p>
+<p>A mention that isn't one of these commands gets a conversational reply, exactly
+as before.</p>
+<p>To turn automatic review-on-push off for a whole project rather than one PR, set
+<code>github_app.auto_review_on_push: false</code>. Automatic review of drafts can be turned
+on with <code>github_app.review_draft_prs: true</code>.</p>
 <h2 id="backlog-origin-pull-requests">Backlog-origin pull requests<a class="headerlink" href="#backlog-origin-pull-requests" title="Permanent link">&para;</a></h2>
 <p>The two flows above are inbound-event-driven: an issue label or an opened PR
 tells Forge what to do and which repo to do it in. A project running
@@ -1958,8 +2070,8 @@ write credentials, because it never has them.</p>
 <li><strong>Create a GitHub App</strong> and download its private key (PEM). Note the App ID.</li>
 <li><strong>Grant permissions:</strong> Contents (read &amp; write — verified at daemon startup),
    Issues (read &amp; write), Pull requests (read &amp; write), and Metadata (read).</li>
-<li><strong>Subscribe to webhook events:</strong> <code>issues</code>, <code>pull_request</code>, and (for <code>@vornik</code>
-   mention replies) <code>issue_comment</code>.</li>
+<li><strong>Subscribe to webhook events:</strong> <code>issues</code>, <code>pull_request</code>, and (for PR review
+   commands and <code>@&lt;bot&gt;</code> mention replies) <code>issue_comment</code>.</li>
 <li><strong>Point the webhook</strong> at your daemon's signed webhook endpoint,
    <code>POST /api/v1/webhooks/{projectId}/{source}</code>, and set a webhook secret. Forge
    verifies every delivery's <code>X-Hub-Signature-256</code> HMAC; the secret is supplied
@@ -1997,9 +2109,29 @@ approves. Set <code>gating_reviews: true</code> on the review step to turn the r
 verdict into a real GitHub APPROVE / REQUEST_CHANGES. (A review that would
 approve the App's <em>own</em> PR is automatically downgraded to a comment, since GitHub
 won't let an author approve their own pull request.)</p>
+<h2 id="when-the-target-is-gone">When the target is gone<a class="headerlink" href="#when-the-target-is-gone" title="Permanent link">&para;</a></h2>
+<p>A review needs the pull request it was asked about. If the forge says that PR is
+not there — it was deleted, the number never existed, the repository was renamed
+— <strong>the task fails immediately rather than retrying.</strong></p>
+<p>That is deliberate. Retrying cannot make a missing pull request exist, and each
+attempt spends real forge API rate limit that your other reviews need. Before
+this, a review aimed at a non-existent PR would quietly burn its whole retry
+budget in a few seconds and then tell you to "try again".</p>
+<p>The failure is reported as <code>FORGE_TARGET_UNAVAILABLE</code>, and
+<code>vornikctl playbook show FORGE_TARGET_UNAVAILABLE</code> says what to check. In
+practice it is one of two things:</p>
+<ul>
+<li><strong>The target really is gone or was never there</strong> — the invocation pointed at
+  the wrong number or a renamed repo. Fix the caller; nothing is wrong with
+  Vornik.</li>
+<li><strong>The target exists but Vornik can no longer see it</strong> — the App was uninstalled
+  from that repository, or its permissions no longer cover it.</li>
+</ul>
+<p>Rate limits and GitHub outages are <em>not</em> treated this way: a 429 or a 5xx is
+temporary, so those keep their full retry budget exactly as before.</p>
 <h2 id="conversational-replies">Conversational replies<a class="headerlink" href="#conversational-replies" title="Permanent link">&para;</a></h2>
-<p>A separate GitHub App <em>channel</em> handles <code>@vornik</code> mentions in issue comments:
-an allowlisted user mentioning <code>@vornik</code> routes through vornik and gets a reply
+<p>A separate GitHub App <em>channel</em> handles <code>@&lt;bot&gt;</code> mentions in issue comments:
+an allowlisted user mentioning the bot routes through vornik and gets a reply
 posted as an issue comment. This is the chat surface; the deterministic flows
 above are the automation surface.</p>
 <h2 id="notes-and-limits">Notes and limits<a class="headerlink" href="#notes-and-limits" title="Permanent link">&para;</a></h2>

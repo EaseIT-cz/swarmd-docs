@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202691" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.9.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202690" class="md-nav__link">
     <span class="md-ellipsis">
       2026.9.0
@@ -2028,6 +2037,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202691" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.9.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202690" class="md-nav__link">
     <span class="md-ellipsis">
       2026.9.0
@@ -2342,6 +2360,126 @@ before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
 <hr />
+<h2 id="202691">2026.9.1<a class="headerlink" href="#202691" title="Permanent link">&para;</a></h2>
+<p><strong>A workflow's system step now hands its output to the next agent.</strong> This is a
+customer-reported bug and it is the reason for this release. When a workflow ran
+a system step (for example <code>forge.fetch_diff</code>) and the next step was an agent,
+the agent received <em>empty</em> previous-step context — in every workflow, for every
+system step that succeeded. The failure path already reported itself; only
+success was silent. If you have an agent prompt that says "the previous step
+provided X", it now actually has X. Injected output is capped at 256 KiB, and a
+truncation says so inside the text the agent reads.</p>
+<p><strong>Pull requests get reviewed again after you push.</strong> Previously only
+<code>pull_request.opened</code> triggered a review, so there was no way to get a fresh one
+after addressing feedback. Reviews now also fire on <strong>new commits, reopen and
+ready-for-review</strong>, and you can ask for one directly:</p>
+<table>
+<thead>
+<tr>
+<th>Comment</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@&lt;bot&gt; review</code></td>
+<td>review now, covering what changed since the last review</td>
+</tr>
+<tr>
+<td><code>@&lt;bot&gt; full review</code></td>
+<td>review the whole pull request</td>
+</tr>
+<tr>
+<td><code>@&lt;bot&gt; pause</code></td>
+<td>stop reviewing this pull request automatically</td>
+</tr>
+<tr>
+<td><code>@&lt;bot&gt; resume</code></td>
+<td>resume automatic review</td>
+</tr>
+</tbody>
+</table>
+<p>A comment that mentions the bot without matching a command still gets an ordinary
+conversational reply.</p>
+<p>Three things keep the cost sane: a push burst <strong>coalesces into one review</strong> of
+the final state, a re-review reads only <strong>what changed since the last one</strong>, and
+drafts are not auto-reviewed. Every uncertainty resolves toward <em>more</em> review —
+a missing baseline, a force-push that rewrote it, or an unreadable state row all
+fall back to the complete diff, because a wrongly narrowed review silently omits
+code nobody will look at again.</p>
+<p><strong>Two things to set before you upgrade if you use the forge reviewer:</strong></p>
+<ul>
+<li><strong>Set your mention handle.</strong> <code>mention_handle</code> defaults to this project's own
+  App slug. You install your <strong>own</strong> GitHub App under your own name, so set it to
+  <em>your</em> App's slug or commands will not match. An empty value matches nothing,
+  deliberately — a handle that happens to be somebody's real account notifies a
+  stranger every time anyone addresses the bot, which is a bug this release
+  fixes rather than a naming preference.</li>
+<li><strong>Review volume goes up on active repositories.</strong> On a project configured with
+  <code>github_app:</code>, <code>github_app.auto_review_on_push: false</code> restores the previous
+  first-review-only behaviour. On the generic <code>webhooks.sources</code> ingress that
+  key does not exist yet; use the per-pull-request <code>pause</code> command.</li>
+</ul>
+<p><strong>Only people with standing in the repository can run review commands</strong> — the
+owner, organisation members, and invited collaborators. A review is real model
+spend, so on a public repository an unguarded command is a way for a stranger to
+run up your bill. Outside contributors are deliberately excluded.</p>
+<p><strong>A permanent forge failure no longer burns the retry budget.</strong> A pull request
+that does not exist, a deleted one, a renamed repository or a revoked
+installation used to consume all three attempts on identical 404s and then report
+<code>UNKNOWN</code>, whose guidance is "try again". Those now fail immediately with a
+class that says what happened. Rate limits and outages are unchanged — a 429 or a
+5xx keeps its full retry budget.</p>
+<p><strong>A review quotes the request it is answering.</strong> Comments get deleted; reviews
+are durable. A comment-triggered review now opens with an attributed quote of what
+was asked.</p>
+<p><strong><code>vornikctl doctor</code> tells you more than it could before.</strong></p>
+<ul>
+<li><code>pricing_coverage</code> used to report "all N models have pricing entries" while
+  examining only swarm role models. It now also reads role fallbacks, project
+  judge models, chat and router models, the embedding model, the narrator, wizard
+  and fixit — and it reports <strong>what it examined</strong> instead of "all models". It may
+  now surface gaps it previously could not see; an unpriced model was always
+  silently inheriting the default rate.</li>
+<li>Model-circuit failures are classified as <code>MODEL_UNHEALTHY</code> instead of landing
+  in the unclassified bucket, where they were the large majority of it. The
+  <code>unclassified_step_failures</code> threshold is re-calibrated from 15% to 5% as a
+  result — the old value could not fire once those failures were named. A
+  migration reclassifies historical rows so the check is not stuck warning for a
+  month while they age out.</li>
+</ul>
+<p><strong>A sustained latency breach now proposes a change you can apply</strong>, instead of an
+observation telling you to go run Diagnose yourself. The proposal names a
+specific model for a specific role and validates it against your configured model
+universe before offering it. It deliberately does <strong>not</strong> pick the model from
+latency data alone: the fastest model on a fleet is usually the smallest, and
+that trade would swap output quality nobody is measuring for a number everybody
+is. The rationale says so, so you read the trade-off before approving.</p>
+<p><strong>Stored artifacts are no longer rewritten by heuristic secret rules.</strong> The two
+heuristic rules (entropy and generic key/value) could replace ordinary text —
+test identifiers, hashed filenames — with <code>[REDACTED:…]</code> markers, and redaction
+is one-way, so the original bytes were gone. Across two production surfaces those
+rules produced roughly 7,000 findings and zero true positives. Detection is
+unchanged; every finding is still found, counted and logged. Only the rewrite
+narrows, and the log now distinguishes "found but not rewritten" from "nothing
+found".</p>
+<p><strong>Output-guard findings name the rule that produced them</strong>, not just the
+category — two different patterns can produce the same category, which was enough
+to decide redaction but not enough to triage a false positive. The metric gains a
+<code>rule</code> label.</p>
+<p><strong>The agent container image is published for arm64.</strong> It was being built for the
+release runner's architecture only, while arm64 packages were shipping — so an
+arm64 install named an image it could not pull and discovered it at the first
+agent run. Packaged installs also carry an image provenance record again, with
+per-architecture digests for registry images and a source commit for images built
+on your own host.</p>
+<p><strong>MCP audience checks accept equivalent spellings of the same URL.</strong> Host case, a
+longhand default port (<code>:443</code> on https), a trailing dot, and the Unicode form of
+an internationalised host all used to mismatch, so a correctly configured
+endpoint could be refused with "needs reconnect". Genuinely different endpoints —
+a non-default port, the other scheme's default port, a different host — are still
+different, and credentials embedded in a URL never count as the host.</p>
+<hr />
 <h2 id="202690">2026.9.0<a class="headerlink" href="#202690" title="Permanent link">&para;</a></h2>
 <p><strong><code>vornikctl doctor</code> no longer reports OK for a check it never ran.</strong> Thirty
 checks returned <code>OK</code> from paths that meant <em>not evaluated</em> — no database, no
@@ -2377,12 +2515,19 @@ path-scoped, reconnect it after changing its URL path.</p>
 have been following <code>UPDATING.md</code>, you may not have received an updated agent
 image for some time — the rebuild was opt-in. Parts of each release ship inside
 that image, so an update that swapped only the daemon delivered half of it.</p>
-<p><strong>Packaged installs can verify their images.</strong> A release now records the images
-it declares, and the daemon compares what it is running against that record —
-in both directions, so a package upgrade that has not been restarted yet is
-reported rather than passing silently. The <code>image_freshness</code> check also now
-works at all; it previously compared two different SHA formats and could never
-pass.</p>
+<p><strong>The <code>image_freshness</code> check now works at all.</strong> It previously compared two
+different SHA formats and could never pass, on any host. It now reports honestly
+whether your images and daemon were built from the same commit — and compares in
+both directions, so a package upgrade you have not restarted into yet is
+reported rather than passing silently.</p>
+<p><em>Correction, 2026-09-01:</em> this entry originally also said packaged (rpm/deb)
+installs can verify their images against a record shipped in the package. They
+cannot — the EE package does not ship that record, and did not in this release.
+The record is built from images that exist on the machine doing the build, which
+a cross-architecture package build does not have. On a packaged host the check
+reports that it cannot verify, rather than reporting a pass. Hosts that build
+their images locally (the quickstart and <code>make install-enterprise</code> paths) are
+unaffected and get the full check.</p>
 <p><strong>The agent image is published to GHCR</strong>, so hosts pull it rather than building
 it. Air-gapped hosts continue to build locally under the same name.</p>
 <p><strong>New doctor check: <code>unclassified_step_failures</code></strong>, reporting the share of step
