@@ -855,6 +855,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#recording-a-projects-model-exchanges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recording a project's model exchanges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-what-a-step-was-handed-and-what-it-handed-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading what a step was handed and what it handed back
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#previewing-and-applying" class="md-nav__link">
     <span class="md-ellipsis">
       Previewing and applying
@@ -1925,6 +1943,24 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#recording-a-projects-model-exchanges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recording a project's model exchanges
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reading-what-a-step-was-handed-and-what-it-handed-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading what a step was handed and what it handed back
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#previewing-and-applying" class="md-nav__link">
     <span class="md-ellipsis">
       Previewing and applying
@@ -2078,6 +2114,36 @@ billing while trimming chat sooner:</p>
 </code></pre></div>
 <p>The minimum effective retention is one day. Setting a field to <code>0</code> means
 "inherit the default," not "delete immediately."</p>
+<h3 id="recording-a-projects-model-exchanges">Recording a project's model exchanges<a class="headerlink" href="#recording-a-projects-model-exchanges" title="Permanent link">&para;</a></h3>
+<p>A project can opt in to keeping every model request and response of its agent
+steps, redacted, for replay and post-mortem:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># projects/&lt;id&gt;.yaml</span>
+<span class="nt">recording</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">llm_exchanges</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">    </span><span class="c1"># default false</span>
+</code></pre></div>
+<p>Off by default because it costs storage: one row per model call carrying the
+whole conversation at that point, so a 30-iteration step stores roughly 30
+times its final context. The rows live exactly as long as their execution and
+are swept with it; <code>vornikctl retention preview</code> reports how many are waiting
+under <code>llm_exchanges</code>. Read them back with
+<code>vornikctl execution exchanges &lt;executionId&gt; &lt;stepId&gt;</code>, or export a replayable
+recording with <code>--export</code>. The switch is read at each model call, so a reload
+takes effect at a running step's next request.</p>
+<h3 id="reading-what-a-step-was-handed-and-what-it-handed-back">Reading what a step was handed and what it handed back<a class="headerlink" href="#reading-what-a-step-was-handed-and-what-it-handed-back" title="Permanent link">&para;</a></h3>
+<p>Every agent step keeps, beside the prompt its model was first told, the two
+files at the container boundary: the <code>task.json</code> the daemon wrote for the
+container and the <code>result.json</code> the container wrote back. Both are stored
+after secret redaction (a <code>[REDACTED:type]</code> marker stands where a credential
+was, so do not read the stored input as exactly what the container saw where
+one appears), content-addressed, and pruned with the step outcome that
+references them — there is no separate retention setting. A file over 4 MiB is
+not stored; <code>vornik_executor_step_io_skipped_total</code> counts it.</p>
+<div class="highlight"><pre><span></span><code>vornikctl execution input  &lt;executionId&gt; &lt;stepId&gt; [--export task.json]
+vornikctl execution result &lt;executionId&gt; &lt;stepId&gt; [--export result.json]
+</code></pre></div>
+<p>Bare JSON on stdout, so both pipe into <code>jq</code>; <code>--export</code> writes the file with
+mode 0600. A step run before the daemon kept these files answers "not
+recorded", and one whose file has since been pruned answers "gone".</p>
 <h3 id="previewing-and-applying">Previewing and applying<a class="headerlink" href="#previewing-and-applying" title="Permanent link">&para;</a></h3>
 <p><code>vornikctl retention</code> runs in preview mode by default — it shows what <em>would</em>
 be pruned without deleting anything. Add <code>--apply</code> to actually delete.</p>

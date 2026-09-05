@@ -2223,6 +2223,13 @@ install it from the bundled plugin marketplace for a persistent setup. Once
 loaded, the tools and slash commands are available in the session, and a
 start-up digest brings recently-completed delegations and fresh memory back into
 context.</p>
+<p>The hook also fires <strong>after a compaction</strong>, and does something different there:
+it re-plants the standing directives — repo scope, recall-before-reading-code,
+skill capture — and deliberately does not reprint the delegation digest.
+Compaction is where a long session has lost the most context, so the directives
+are exactly what needs restoring; the digest is a point-in-time list you have
+usually already acted on, and reprinting it would spend the context the
+compaction just freed. Run <code>/peek</code> if you want it back.</p>
 <p>For Codex, install <code>codex-companion</code> from the bundled Codex marketplace at
 <code>&lt;path&gt;/.agents/plugins/marketplace.json</code>, or load the plugin directly from
 <code>&lt;path&gt;/contrib/codex-companion</code>. Do not install the Claude marketplace at

@@ -1975,8 +1975,8 @@ becoming noise:</p>
 </ul>
 <p>You can also ask directly, by mentioning the bot in a comment on the pull
 request. <strong><code>&lt;bot&gt;</code> is your GitHub App's own handle</strong> — its slug, e.g.
-<code>@vornik-companion</code>. It is configurable (<code>mention_handle</code>), and it
-should be a handle you own: a handle that happens to be someone else's account
+<code>@vornik-companion</code>. It is configurable — <code>forge.mention_handle</code> on the project,
+which applies to both ingresses — and it should be a handle you own: a handle that happens to be someone else's account
 notifies a stranger every time anyone addresses the bot.</p>
 <table>
 <thead>
@@ -2005,7 +2005,9 @@ notifies a stranger every time anyone addresses the bot.</p>
 </tbody>
 </table>
 <p><strong>Only people with standing in the repository can run these</strong> — its owner,
-organisation members, and invited collaborators. A review is model spend, so on
+organisation members, and invited collaborators. This is enforced on every
+ingress: the check lives with the shared review rules, so both the GitHub App
+channel and the generic webhook path apply the same one. A review is model spend, so on
 a public repository an ungated command would let any passer-by spend your
 budget. Note that a <em>contributor</em> — someone who has had a pull request merged —
 does not qualify: that describes the past, not permission to trigger spend at

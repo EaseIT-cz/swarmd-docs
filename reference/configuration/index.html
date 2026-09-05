@@ -2427,7 +2427,7 @@
 <!-- Generated from source — do not edit by hand. -->
 
 <h1 id="configuration-reference">Configuration reference<a class="headerlink" href="#configuration-reference" title="Permanent link">&para;</a></h1>
-<p>vornik reads its configuration from <code>config.yaml</code>. The keys below are the customer-facing settings, by dotted YAML path.</p>
+<p>vornik reads its configuration from <code>config.yaml</code>. The keys below are the customer-facing settings, by dotted YAML path. Where an environment variable overrides a key it is listed; an override wins over the file, and <code>vornikctl config show --provenance</code> shows which one supplied each value on the running daemon.</p>
 <h2 id="steering_notifications_enabled">steering_notifications_enabled<a class="headerlink" href="#steering_notifications_enabled" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -2435,6 +2435,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2442,6 +2443,7 @@
 <td><code>steering_notifications_enabled</code></td>
 <td>bool</td>
 <td>Push a chat/DM prompt when a task needs operator steering (input/approval). Default true.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2452,6 +2454,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2459,6 +2462,7 @@
 <td><code>steering_operator_alert</code></td>
 <td>struct</td>
 <td>Fallback chat recipient alerted when an ownerless autonomy task needs steering (channel/session[/address]).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2469,6 +2473,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2476,6 +2481,7 @@
 <td><code>cluster</code></td>
 <td>struct</td>
 <td>Cluster-diagnostics: expected endpoints + monitor interval.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2486,6 +2492,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2493,6 +2500,7 @@
 <td><code>control_plane</code></td>
 <td>struct</td>
 <td>Control-plane worker knobs (self-healing incident detection).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2503,6 +2511,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2510,6 +2519,7 @@
 <td><code>named_secrets</code></td>
 <td>list</td>
 <td>Per-secret allowlist of env credentials injected into agent containers, scoped by project.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2520,6 +2530,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2527,6 +2538,7 @@
 <td><code>telemetry</code></td>
 <td>struct</td>
 <td>Anonymous install and project-creation telemetry. Enabled by default; set enabled=false to opt out.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2537,6 +2549,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2544,41 +2557,49 @@
 <td><code>server.address</code></td>
 <td>string</td>
 <td>TCP listen address for the HTTP API.</td>
+<td><code>VORNIK_SERVER_ADDRESS</code></td>
 </tr>
 <tr>
 <td><code>server.read_timeout</code></td>
 <td>string</td>
 <td>Max time to read a request.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>server.write_timeout</code></td>
 <td>string</td>
 <td>Max time to write a response.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>server.unix_socket</code></td>
 <td>string</td>
 <td>Optional Unix socket path the API is also served on, alongside the TCP address. Required for zero-egress agents.</td>
+<td><code>VORNIK_SERVER_UNIX_SOCKET</code></td>
 </tr>
 <tr>
 <td><code>server.real_ip.enabled</code></td>
 <td>bool</td>
 <td>Honour the trusted client-IP header from trusted_proxies. Off ⇒ always key on RemoteAddr.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>server.real_ip.trusted_proxies</code></td>
 <td>list</td>
 <td>CIDRs/IPs trusted to set the real-IP header. List ONLY the cloudflared host.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>server.real_ip.header</code></td>
 <td>string</td>
 <td>Trusted client-IP header. Default CF-Connecting-IP.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>server.public_base_url</code></td>
 <td>string</td>
 <td>Public origin (scheme://host[:port]) for git clone/push HTTPS URLs; used only to render the clone URL on the project page.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2589,6 +2610,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2596,31 +2618,37 @@
 <td><code>database.host</code></td>
 <td>string</td>
 <td>PostgreSQL host.</td>
+<td><code>VORNIK_DATABASE_HOST</code></td>
 </tr>
 <tr>
 <td><code>database.port</code></td>
 <td>int</td>
 <td>PostgreSQL port.</td>
+<td><code>VORNIK_DATABASE_PORT</code></td>
 </tr>
 <tr>
 <td><code>database.name</code></td>
 <td>string</td>
 <td>Database name.</td>
+<td><code>VORNIK_DATABASE_NAME</code></td>
 </tr>
 <tr>
 <td><code>database.user</code></td>
 <td>string</td>
 <td>Database user.</td>
+<td><code>VORNIK_DATABASE_USER</code></td>
 </tr>
 <tr>
 <td><code>database.password</code></td>
 <td>string</td>
 <td>Password. Prefer the VORNIK_DATABASE_PASSWORD environment variable.</td>
+<td><code>VORNIK_DATABASE_PASSWORD</code></td>
 </tr>
 <tr>
 <td><code>database.sslmode</code></td>
 <td>string</td>
 <td>One of disable, require, verify-ca, verify-full.</td>
+<td><code>VORNIK_DATABASE_SSLMODE</code></td>
 </tr>
 </tbody>
 </table>
@@ -2631,6 +2659,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2638,51 +2667,61 @@
 <td><code>storage.artifacts_path</code></td>
 <td>string</td>
 <td>Local directory for artifacts when using the filesystem backend.</td>
+<td><code>VORNIK_ARTIFACTS_PATH</code></td>
 </tr>
 <tr>
 <td><code>storage.backend</code></td>
 <td>string</td>
 <td>filesystem (local disk) or s3 (S3-compatible object store, including MinIO).</td>
+<td><code>VORNIK_STORAGE_BACKEND</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.endpoint</code></td>
 <td>string</td>
 <td>S3 endpoint URL. Leave empty for AWS S3; set for MinIO/non-AWS.</td>
+<td><code>VORNIK_STORAGE_S3_ENDPOINT</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.region</code></td>
 <td>string</td>
 <td>AWS region. Required when backend is s3.</td>
+<td><code>VORNIK_STORAGE_S3_REGION</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.bucket</code></td>
 <td>string</td>
 <td>Bucket holding artifacts. Required when backend is s3; must already exist.</td>
+<td><code>VORNIK_STORAGE_S3_BUCKET</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.prefix</code></td>
 <td>string</td>
 <td>Optional key prefix to namespace one bucket across deployments.</td>
+<td><code>VORNIK_STORAGE_S3_PREFIX</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.access_key_id</code></td>
 <td>string</td>
 <td>Access key. Prefer VORNIK_STORAGE_S3_ACCESS_KEY_ID.</td>
+<td><code>VORNIK_STORAGE_S3_ACCESS_KEY_ID</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.secret_access_key</code></td>
 <td>string</td>
 <td>Secret key. Prefer VORNIK_STORAGE_S3_SECRET_ACCESS_KEY.</td>
+<td><code>VORNIK_STORAGE_S3_SECRET_ACCESS_KEY</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.use_path_style</code></td>
 <td>bool</td>
 <td>Force path-style addressing. Set true for MinIO.</td>
+<td><code>VORNIK_STORAGE_S3_USE_PATH_STYLE</code></td>
 </tr>
 <tr>
 <td><code>storage.s3.force_ssl</code></td>
 <td>bool</td>
 <td>Require HTTPS. Set false only for local MinIO development.</td>
+<td><code>VORNIK_STORAGE_S3_FORCE_SSL</code></td>
 </tr>
 </tbody>
 </table>
@@ -2693,6 +2732,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2700,51 +2740,61 @@
 <td><code>artifacts.artifacts_path</code></td>
 <td>string</td>
 <td>Local directory for artifacts when using the filesystem backend.</td>
+<td><code>VORNIK_ARTIFACTS_PATH</code></td>
 </tr>
 <tr>
 <td><code>artifacts.backend</code></td>
 <td>string</td>
 <td>filesystem (local disk) or s3 (S3-compatible object store, including MinIO).</td>
+<td><code>VORNIK_STORAGE_BACKEND</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.endpoint</code></td>
 <td>string</td>
 <td>S3 endpoint URL. Leave empty for AWS S3; set for MinIO/non-AWS.</td>
+<td><code>VORNIK_STORAGE_S3_ENDPOINT</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.region</code></td>
 <td>string</td>
 <td>AWS region. Required when backend is s3.</td>
+<td><code>VORNIK_STORAGE_S3_REGION</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.bucket</code></td>
 <td>string</td>
 <td>Bucket holding artifacts. Required when backend is s3; must already exist.</td>
+<td><code>VORNIK_STORAGE_S3_BUCKET</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.prefix</code></td>
 <td>string</td>
 <td>Optional key prefix to namespace one bucket across deployments.</td>
+<td><code>VORNIK_STORAGE_S3_PREFIX</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.access_key_id</code></td>
 <td>string</td>
 <td>Access key. Prefer VORNIK_STORAGE_S3_ACCESS_KEY_ID.</td>
+<td><code>VORNIK_STORAGE_S3_ACCESS_KEY_ID</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.secret_access_key</code></td>
 <td>string</td>
 <td>Secret key. Prefer VORNIK_STORAGE_S3_SECRET_ACCESS_KEY.</td>
+<td><code>VORNIK_STORAGE_S3_SECRET_ACCESS_KEY</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.use_path_style</code></td>
 <td>bool</td>
 <td>Force path-style addressing. Set true for MinIO.</td>
+<td><code>VORNIK_STORAGE_S3_USE_PATH_STYLE</code></td>
 </tr>
 <tr>
 <td><code>artifacts.s3.force_ssl</code></td>
 <td>bool</td>
 <td>Require HTTPS. Set false only for local MinIO development.</td>
+<td><code>VORNIK_STORAGE_S3_FORCE_SSL</code></td>
 </tr>
 </tbody>
 </table>
@@ -2755,6 +2805,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2762,101 +2813,121 @@
 <td><code>runtime.run_as_user</code></td>
 <td>string</td>
 <td>Override the container user (uid, uid:gid, or user:group). Use to force non-root on root-default images.</td>
+<td><code>VORNIK_RUNTIME_RUN_AS_USER</code></td>
 </tr>
 <tr>
 <td><code>runtime.default_network</code></td>
 <td>string</td>
 <td>Default network policy for agent roles: host, none, or daemon-only (zero egress; requires server.unix_socket).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.endpoint</code></td>
 <td>string</td>
 <td>OpenAI-compatible base URL for the LLM agents call. Falls back to the chat section when empty.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.api_key</code></td>
 <td>string</td>
 <td>API key for the agent LLM endpoint.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.model</code></td>
 <td>string</td>
 <td>Default model for agents.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.context_size</code></td>
 <td>int</td>
 <td>Context-window tokens.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.max_tokens</code></td>
 <td>int</td>
 <td>Max output tokens per call.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.timeout</code></td>
 <td>string</td>
 <td>Bound on a single LLM call from inside an agent.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.tool_result_max_bytes</code></td>
 <td>int</td>
 <td>Max bytes of a tool result fed back to the model (0 = agent default 256 KiB).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.health.enabled</code></td>
 <td>bool</td>
 <td>Activate the model-health circuit breaker (default on; false disables).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.health.window</code></td>
 <td>string</td>
 <td>Rolling failure window, e.g. 60s (default 60s).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.health.min_samples</code></td>
 <td>int</td>
 <td>Minimum in-window failures before the breaker can trip (default 5).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.health.failure_rate</code></td>
 <td>float</td>
 <td>Failure fraction at/above which the breaker trips (default 0.5).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.agent_llm.health.open_cooldown</code></td>
 <td>string</td>
 <td>How long the circuit stays open before a half-open probe, e.g. 30s (default 30s).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.warm_pool.enabled</code></td>
 <td>bool</td>
 <td>Reuse warm containers for faster task start.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.warm_pool.idle_timeout</code></td>
 <td>string</td>
 <td>How long an idle warm container is kept.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.warm_pool.max_per_role</code></td>
 <td>int</td>
 <td>Max warm containers per project and role.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.project_workspace_path</code></td>
 <td>string</td>
 <td>Base directory for per-project persistent workspaces.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.delegation_depth_limit</code></td>
 <td>int</td>
 <td>Max nesting depth for delegation chains (0 = default).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>runtime.delegation_fanout_limit</code></td>
 <td>int</td>
 <td>Max child tasks one parent may spawn in a batch (0 = default).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2867,6 +2938,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2874,51 +2946,61 @@
 <td><code>scheduler.max_concurrent_tasks</code></td>
 <td>int</td>
 <td>Maximum tasks running at once across all projects.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.lease_timeout</code></td>
 <td>string</td>
 <td>How long a task lease is held before it is considered stale.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.enabled</code></td>
 <td>bool</td>
 <td>Scale time budgets by measured decode speed. Off by default; off is byte-identical to not having the feature.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.reference_tokens_per_sec</code></td>
 <td>float</td>
 <td>Decode rate the shipped base timeouts were calibrated against. Must be declared; a local measurement cannot serve as its own reference.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.min_factor</code></td>
 <td>float</td>
 <td>Floor, so fast hardware cannot starve a step of startup time.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.max_factor</code></td>
 <td>float</td>
 <td>Ceiling. Deliberately below what the slowest hardware demands: hitting it is reported, because the honest answer there is that the hardware cannot run the workload at this shape.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.observed_tokens_per_sec</code></td>
 <td>float</td>
 <td>This host's measured decode rate (see: vornikctl profile). Zero disables scaling.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.min_samples</code></td>
 <td>int</td>
 <td>Steps required before a fitted profile is trusted at all.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.speed_aware_timeouts.window</code></td>
 <td>string</td>
 <td>Rolling window the profile is fitted over.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>scheduler.default_step_timeout</code></td>
 <td>string</td>
 <td>Ceiling for a step whose workflow declares no timeout. Empty = 30m.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2929,6 +3011,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2936,21 +3019,25 @@
 <td><code>watchdog.enabled</code></td>
 <td>bool</td>
 <td>Periodic scan for stuck executions.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>watchdog.interval</code></td>
 <td>string</td>
 <td>Gap between scans.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>watchdog.stuck_threshold</code></td>
 <td>string</td>
 <td>Idle time before an execution is flagged.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>watchdog.action</code></td>
 <td>string</td>
 <td>warn (log only) or fail (mark the task terminal).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2961,6 +3048,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2968,16 +3056,19 @@
 <td><code>effective_cost.enabled</code></td>
 <td>bool</td>
 <td>Turn the drift monitor on.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>effective_cost.interval</code></td>
 <td>string</td>
 <td>Evaluation cadence.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>effective_cost.ratio_threshold</code></td>
 <td>float</td>
 <td>Current/baseline cost ratio that triggers an alert.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -2988,6 +3079,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -2995,26 +3087,31 @@
 <td><code>secrets.enabled</code></td>
 <td>bool</td>
 <td>Turn detection on.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>secrets.allowlist</code></td>
 <td>list</td>
 <td>Extra regexes appended to the default allowlist.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>secrets.checkpoints</code></td>
 <td>map</td>
 <td>Map a channel to an action: detect, redact, or block.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>secrets.trusted_output_tools</code></td>
 <td>list</td>
 <td>Tool-name prefixes whose tool-audit OUTPUT is exempt from generic_kv/entropy redaction (strong credential patterns still redact; input always scanned).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>secrets.tool_credentials</code></td>
 <td>list</td>
 <td>Map a trusted tool to a credential field in its output to capture and surface code-formatted + copyable (strong-pattern values are never captured).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3025,6 +3122,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3032,41 +3130,49 @@
 <td><code>retention.enabled</code></td>
 <td>bool</td>
 <td>Turn the background sweeper on.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.interval</code></td>
 <td>string</td>
 <td>How often the sweeper runs.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.task_llm_usage_days</code></td>
 <td>int</td>
 <td>Days to keep per-task LLM usage rows.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.tasks_days</code></td>
 <td>int</td>
 <td>Days to keep task rows.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.executions_days</code></td>
 <td>int</td>
 <td>Days to keep execution rows.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.artifacts_days</code></td>
 <td>int</td>
 <td>Days to keep artifacts.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.response_cache_days</code></td>
 <td>int</td>
 <td>Days to keep cached LLM responses (30d recommended on busy deployments).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>retention.embedding_cache_days</code></td>
 <td>int</td>
 <td>Days to keep cached embeddings before evicting cold entries (0 = keep forever; 30d recommended if the table grows large).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3077,6 +3183,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3084,11 +3191,13 @@
 <td><code>workspace_ingest.enabled</code></td>
 <td>bool</td>
 <td>Turn on automatic ingestion of Workspace documents. Off by default; ingest-on-request works regardless.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>workspace_ingest.sources</code></td>
 <td>list</td>
 <td>Explicit source rules. No rules means nothing is ingested automatically.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3099,6 +3208,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3106,16 +3216,19 @@
 <td><code>metrics.enabled</code></td>
 <td>bool</td>
 <td>Expose a Prometheus metrics endpoint.</td>
+<td><code>VORNIK_METRICS_ENABLED</code></td>
 </tr>
 <tr>
 <td><code>metrics.addr</code></td>
 <td>string</td>
 <td>Listen address for the dedicated metrics server.</td>
+<td><code>VORNIK_METRICS_ADDR</code></td>
 </tr>
 <tr>
 <td><code>metrics.require_admin</code></td>
 <td>bool</td>
 <td>Require the admin key on the main port metrics endpoint.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3126,6 +3239,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3133,11 +3247,13 @@
 <td><code>tracing.enabled</code></td>
 <td>bool</td>
 <td>Enable OpenTelemetry tracing.</td>
+<td><code>VORNIK_TRACING_ENABLED</code></td>
 </tr>
 <tr>
 <td><code>tracing.endpoint</code></td>
 <td>string</td>
 <td>OTLP gRPC endpoint for trace export.</td>
+<td><code>VORNIK_TRACING_ENDPOINT</code></td>
 </tr>
 </tbody>
 </table>
@@ -3148,6 +3264,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3155,81 +3272,97 @@
 <td><code>logging.level</code></td>
 <td>string</td>
 <td>Log level (e.g. info, debug).</td>
+<td><code>VORNIK_LOG_LEVEL</code></td>
 </tr>
 <tr>
 <td><code>logging.format</code></td>
 <td>string</td>
 <td>Log format (e.g. json, text).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.enabled</code></td>
 <td>bool</td>
 <td>Enable centralised log forwarding to remote sinks.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.scopes</code></td>
 <td>list</td>
 <td>Allowlist of log categories to forward. Empty ships all scopes.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.queue_size</code></td>
 <td>int</td>
 <td>Bounded forward queue size; overflow is dropped + counted.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.batch_size</code></td>
 <td>int</td>
 <td>Max events per shipped batch.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.flush_interval</code></td>
 <td>string</td>
 <td>Max time a partial batch waits before shipping (e.g. 5s).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.http.enabled</code></td>
 <td>bool</td>
 <td>Enable the HTTP webhook log sink.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.http.url</code></td>
 <td>string</td>
 <td>Collector ingest URL the HTTP sink POSTs NDJSON to.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.http.bearer_token_env</code></td>
 <td>string</td>
 <td>Env-var NAME holding the HTTP sink bearer token (never the token itself).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.http.timeout</code></td>
 <td>string</td>
 <td>Per-request HTTP sink timeout (e.g. 5s).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.http.max_retries</code></td>
 <td>int</td>
 <td>Max HTTP sink retries on 5xx/transport error.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.syslog.enabled</code></td>
 <td>bool</td>
 <td>Enable the syslog log sink.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.syslog.address</code></td>
 <td>string</td>
 <td>host:port of the syslog collector.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.syslog.protocol</code></td>
 <td>string</td>
 <td>Syslog transport: udp | tcp | tls.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>logging.forward.syslog.ca_file</code></td>
 <td>string</td>
 <td>Optional PEM CA bundle for syslog tls (system roots otherwise).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3240,6 +3373,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3247,31 +3381,37 @@
 <td><code>api.auth_enabled</code></td>
 <td>bool</td>
 <td>Require a valid API key on every request. Turn this on for any network-reachable deployment.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>api.auth_dry_run</code></td>
 <td>bool</td>
 <td>Evaluate and log auth verdicts without enforcing. Cannot be set together with auth_enabled: true.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>api.api_keys</code></td>
 <td>list</td>
 <td>Static bearer keys. Prefer per-project DB-backed keys via vornikctl key.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>api.rate_limit.per_ip.rps</code></td>
 <td>int</td>
 <td>Per-IP sustained request rate (unauthenticated backstop).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>api.rate_limit.per_ip.burst</code></td>
 <td>int</td>
 <td>Per-IP burst capacity.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>api.rate_limit.per_ip.trusted_proxies</code></td>
 <td>list</td>
 <td>Deprecated: use server.real_ip.trusted_proxies. CIDRs/IPs trusted to set X-Forwarded-For.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3282,6 +3422,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3289,6 +3430,7 @@
 <td><code>a2a</code></td>
 <td>struct</td>
 <td>Outbound A2A federation: consultable peer instances + consult guardrails.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3299,6 +3441,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3306,251 +3449,301 @@
 <td><code>chat.enabled</code></td>
 <td>bool</td>
 <td>Turn the chat client on.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.provider</code></td>
 <td>string</td>
 <td>http (OpenAI-compatible) or router (multi-provider).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.default</code></td>
 <td>string</td>
 <td>Sub-provider used when no route matches. Required for router.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.model_fallbacks</code></td>
 <td>map</td>
 <td>Non-swarm per-model fallback map (primary model -&gt; fallback model), used when the primary's circuit is open. Empty disables non-swarm fallback.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.claude_cli.effort_level</code></td>
 <td>string</td>
 <td>CLI reasoning effort: low|medium|high|xhigh|max (default low); honored by claude-cli, ignored by codex-cli.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.claude_subscription.thinking_budget</code></td>
 <td>int</td>
 <td>Anthropic extended-thinking budget_tokens; 0 disables (router subprovider).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.codex_cli.effort_level</code></td>
 <td>string</td>
 <td>CLI reasoning effort: low|medium|high|xhigh|max (default low); honored by claude-cli, ignored by codex-cli.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.codex_subscription.effort_level</code></td>
 <td>string</td>
 <td>Codex reasoning effort: low|medium|high (empty = omit).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.http.enabled</code></td>
 <td>bool</td>
 <td>Enable the OpenAI-compatible sub-provider.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.http.endpoint</code></td>
 <td>string</td>
 <td>Endpoint URL for the HTTP sub-provider.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.http.api_key</code></td>
 <td>string</td>
 <td>API key for the HTTP sub-provider.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.http.model</code></td>
 <td>string</td>
 <td>Default model for the HTTP sub-provider.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.vertex.enabled</code></td>
 <td>bool</td>
 <td>Enable Google Vertex AI (Gemini).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.vertex.api_key</code></td>
 <td>string</td>
 <td>Vertex API key.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.vertex.project_id</code></td>
 <td>string</td>
 <td>GCP project that owns the Vertex endpoint.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.vertex.location</code></td>
 <td>string</td>
 <td>Vertex region; defaults to global.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.vertex.model</code></td>
 <td>string</td>
 <td>Default Vertex model.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.openrouter.enabled</code></td>
 <td>bool</td>
 <td>Enable the OpenRouter sub-provider.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.openrouter.api_key</code></td>
 <td>string</td>
 <td>OpenRouter API key.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.openrouter.model</code></td>
 <td>string</td>
 <td>OpenRouter default model.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.openrouter.free_only</code></td>
 <td>bool</td>
 <td>Reject any non-:free model — a hard guard against accidental spend.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.ollama_cloud.enabled</code></td>
 <td>bool</td>
 <td>Enable the Ollama Cloud sub-provider.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.ollama_cloud.api_key</code></td>
 <td>string</td>
 <td>Ollama Cloud API key.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.ollama_cloud.model</code></td>
 <td>string</td>
 <td>Ollama Cloud default model, e.g. gpt-oss:120b.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.bedrock.enabled</code></td>
 <td>bool</td>
 <td>Enable AWS Bedrock (credentials via the AWS SDK chain).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.bedrock.region</code></td>
 <td>string</td>
 <td>Bedrock region.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.bedrock.model</code></td>
 <td>string</td>
 <td>Bedrock default model.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.health.enabled</code></td>
 <td>bool</td>
 <td>Activate the model-health circuit breaker (default on; false disables).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.health.window</code></td>
 <td>string</td>
 <td>Rolling failure window, e.g. 60s (default 60s).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.health.min_samples</code></td>
 <td>int</td>
 <td>Minimum in-window failures before the breaker can trip (default 5).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.health.failure_rate</code></td>
 <td>float</td>
 <td>Failure fraction at/above which the breaker trips (default 0.5).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.router.health.open_cooldown</code></td>
 <td>string</td>
 <td>How long the circuit stays open before a half-open probe, e.g. 30s (default 30s).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.endpoint</code></td>
 <td>string</td>
 <td>OpenAI-compatible base URL (single-provider mode).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.api_key</code></td>
 <td>string</td>
 <td>API key for the endpoint. Prefer an environment variable.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.model</code></td>
 <td>string</td>
 <td>Default model identifier when a request does not pin one.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.model_capabilities</code></td>
 <td>map</td>
 <td>Per-model modality declarations (text, vision, audio). Undeclared models fall back to built-in id patterns, then text-only.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.wizard_model</code></td>
 <td>string</td>
 <td>Model for the project-setup wizard.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.fixit_model</code></td>
 <td>string</td>
 <td>Model for the Fix-It Doctor repair chat.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.timeout</code></td>
 <td>string</td>
 <td>Bound on a single LLM round-trip.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.dispatch_timeout</code></td>
 <td>string</td>
 <td>Bound on one complete interactive (multi-call) turn.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.max_history</code></td>
 <td>int</td>
 <td>Max conversation messages kept.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.max_history_tokens</code></td>
 <td>int</td>
 <td>Soft token budget for history trimming.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.compaction.enabled</code></td>
 <td>bool</td>
 <td>Summarize overflow turns into a topic gist instead of dropping them.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.compaction.max_gist_terms</code></td>
 <td>int</td>
 <td>Topics retained in the compaction gist (0 = default 24).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.max_tool_iterations</code></td>
 <td>int</td>
 <td>Tool-call loop cap per dispatcher turn.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.deferred_tool_threshold</code></td>
 <td>int</td>
 <td>MCP catalog size above which chat sessions defer MCP tools behind tool_search. 0 = default (20); negative = never defer.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.max_concurrent_requests</code></td>
 <td>int</td>
 <td>Max in-flight chat backend calls; excess queues.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.context_size</code></td>
 <td>int</td>
 <td>Context-window tokens.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.max_tokens</code></td>
 <td>int</td>
 <td>Max output tokens per call.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>chat.prompt_cache_mode</code></td>
 <td>string</td>
 <td>Provider-native prompt caching: off, auto (recommended), or prefix.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3561,6 +3754,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3568,26 +3762,31 @@
 <td><code>autonomy.default_evaluate_timeout</code></td>
 <td>string</td>
 <td>Bound on one evaluation tick when a project does not set its own.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>autonomy.circuit_breaker.enabled</code></td>
 <td>bool</td>
 <td>Auto-pause autonomy on a project that fails repeatedly.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>autonomy.circuit_breaker.threshold</code></td>
 <td>int</td>
 <td>Failure count that trips the breaker.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>autonomy.circuit_breaker.window</code></td>
 <td>string</td>
 <td>Rolling window the count is measured over.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>autonomy.approval_timeout_hours</code></td>
 <td>int</td>
 <td>Cancel tasks awaiting approval after this many hours (0 = never; default 96).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3598,6 +3797,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3605,51 +3805,61 @@
 <td><code>telegram.enabled</code></td>
 <td>bool</td>
 <td>Turn the Telegram bot on.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.bot_token</code></td>
 <td>string</td>
 <td>Bot token. Prefer an environment variable.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.allowed_users</code></td>
 <td>map</td>
 <td>Map of Telegram user ID to access. true = full access; a list of project IDs scopes the user. Absent users are denied.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.allow_unlisted_users</code></td>
 <td>bool</td>
 <td>When allowed_users is empty, admit every Telegram user (dev only). Default false = deny.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.rate_limit</code></td>
 <td>int</td>
 <td>Requests per minute per user.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.session_path</code></td>
 <td>string</td>
 <td>Path for conversation persistence (empty = none).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.session_ttl</code></td>
 <td>string</td>
 <td>Auto-expire idle sessions (e.g. 24h).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.dispatcher_max_iterations</code></td>
 <td>int</td>
 <td>Tool-call loop cap per chat turn.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.forum_chat_id</code></td>
 <td>int</td>
 <td>Supergroup ID for one forum topic per task (0 = off).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>telegram.web_ui_base_url</code></td>
 <td>string</td>
 <td>Public base URL of the web UI, used in onboarding links.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3660,6 +3870,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3667,211 +3878,253 @@
 <td><code>memory.enabled</code></td>
 <td>bool</td>
 <td>Activate the memory subsystem.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.embedding_provider</code></td>
 <td>string</td>
 <td>Embedding transport: empty or openai for an OpenAI-compatible /v1/embeddings endpoint, or bedrock for native AWS Bedrock InvokeModel embeddings.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.sufficiency.enabled</code></td>
 <td>bool</td>
 <td>Widen-and-retry recall when too few high-relevance hits (requires the reranker).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.sufficiency.min_high_rel</code></td>
 <td>int</td>
 <td>Hits at/above score_floor that count as 'enough' (0 = default 3).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.sufficiency.score_floor</code></td>
 <td>float</td>
 <td>Absolute reranker relevance floor in [0,1] (0 = default 0.6).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.sufficiency.max_rounds</code></td>
 <td>int</td>
 <td>Hard cap on retrieval rounds (&lt;=1 = single shot; 0 = default 3).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.reranker.enabled</code></td>
 <td>bool</td>
 <td>LLM-rerank context-assembly recall (the pre-delegation hint) and activate scored-sufficiency. Adds one LLM call (seconds) to that path only; the interactive memory_search tool and companion recall stay fast RRF.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.reranker.model</code></td>
 <td>string</td>
 <td>Reranker model id; small OSS recommended. Empty = chat router default (often overkill).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.reranker.max_candidates</code></td>
 <td>int</td>
 <td>Top-K results scored per recall (0 = default 20).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.reranker.timeout_seconds</code></td>
 <td>int</td>
 <td>Per-recall rerank timeout in seconds (0 = default 15).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.reranker.max_snippet_bytes</code></td>
 <td>int</td>
 <td>Per-candidate snippet sent to the reranker (0 = default 600).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.k</code></td>
 <td>int</td>
 <td>Top-K window the trust mean is computed over (0 = default 5).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.min_results</code></td>
 <td>int</td>
 <td>Floor result count for a non-low verdict; must be &lt;= k (0 = default 1).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.high_threshold</code></td>
 <td>float</td>
 <td>Trust-mean at/above which the verdict is high (0 = default 0.70).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.low_threshold</code></td>
 <td>float</td>
 <td>Trust-mean below which the verdict is low and the widen fires (0 = default 0.40).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.w_status</code></td>
 <td>float</td>
 <td>Weight of the validation-status leg (0 = default 0.6).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.w_conf</code></td>
 <td>float</td>
 <td>Weight of the confidence leg (0 = default 0.2).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.w_fresh</code></td>
 <td>float</td>
 <td>Weight of the freshness leg (0 = default 0.2).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.unverified_conf_discount</code></td>
 <td>float</td>
 <td>Discount applied to unverified chunks' confidence term (0 = default 0.5).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.no_ttl_age_cap_days</code></td>
 <td>int</td>
 <td>Age in days past which a no-TTL chunk is stale and, as top hit, caps the verdict at medium (0 = default 180).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.no_ttl_stale_freshness</code></td>
 <td>float</td>
 <td>Freshness floor for an aged no-TTL chunk (0 = default 0.3).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.max_rounds</code></td>
 <td>int</td>
 <td>Hard cap on verdict-predicated widen rounds (0 = default 3).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.widen_enabled</code></td>
 <td>bool</td>
 <td>Enable the verdict-predicated DB widen (default true; set false for verdict-only).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.retrieval_routing.enabled</code></td>
 <td>bool</td>
 <td>Master switch for confidence-based retrieval routing (default true; set false to disable the feature entirely).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.min_refute_score</code></td>
 <td>float</td>
 <td>Minimum hybrid-search (RRF) score a chunk must reach before memory_correct's claim search will refute it (0 = default 0.05). Guards against refuting an unrelated chunk on a weak claim match.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.embedding_model</code></td>
 <td>string</td>
 <td>Embedding model name. Required when enabled.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.embedding_dimension</code></td>
 <td>int</td>
 <td>Vector dimension produced by the model.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.embedding_endpoint</code></td>
 <td>string</td>
 <td>Override endpoint for embedding requests.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.embedding_api_key</code></td>
 <td>string</td>
 <td>Override API key for embedding requests.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.bedrock.region</code></td>
 <td>string</td>
 <td>AWS region for native Bedrock embeddings when memory.embedding_provider=bedrock.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.ingest_require_producer_success</code></td>
 <td>bool</td>
 <td>Gate RAG ingest on the producing task reaching COMPLETED (default on).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.embedding_cache_enabled</code></td>
 <td>bool</td>
 <td>Cache embeddings to skip repeat API calls.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.response_cache_enabled</code></td>
 <td>bool</td>
 <td>Cache memory-pipeline LLM responses.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.chunk_tokens</code></td>
 <td>int</td>
 <td>Approximate tokens per chunk.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.chunk_overlap</code></td>
 <td>int</td>
 <td>Token overlap between adjacent chunks.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.worker_concurrency</code></td>
 <td>int</td>
 <td>Embed-queue worker goroutines.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.graph.enabled</code></td>
 <td>bool</td>
 <td>Knowledge-graph extraction pipeline.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.titler.enabled</code></td>
 <td>bool</td>
 <td>Generate a short topic label per chunk (one LLM call each).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.classifier.enabled</code></td>
 <td>bool</td>
 <td>LLM content-class backfill.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.prompt_injection_scan</code></td>
 <td>string</td>
 <td>Ingest prompt-injection gate: off (default), detect, or quarantine.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.claim_audit_disabled_projects</code></td>
 <td>list</td>
 <td>Project IDs that skip the claim-audit/hallucination ingest gate.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>memory.deny_patterns</code></td>
 <td>list</td>
 <td>Substring deny-list (NOT regex) that quarantines matching content at memory ingest.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3882,6 +4135,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -3889,101 +4143,121 @@
 <td><code>instinct.enabled</code></td>
 <td>bool</td>
 <td>Master switch for the instinct layer.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.cadence_seconds</code></td>
 <td>int</td>
 <td>Extraction-worker tick interval.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.lookback_seconds</code></td>
 <td>int</td>
 <td>How far back each tick scans.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.min_support</code></td>
 <td>int</td>
 <td>Corroborating outcomes before a pattern goes active.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.active_confidence</code></td>
 <td>float</td>
 <td>Confidence floor for an active instinct.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.decay_halflife_days</code></td>
 <td>int</td>
 <td>Recency half-life for confidence decay.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.failure_playbooks</code></td>
 <td>bool</td>
 <td>Surface recovery instincts on failed-task views.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.architect_priors</code></td>
 <td>bool</td>
 <td>Feed workflow instincts to the architect as priors.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.memory_hygiene</code></td>
 <td>bool</td>
 <td>Feed retrieval instincts to memory sweepers.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.tool_budget</code></td>
 <td>bool</td>
 <td>Let learned budget instincts fill an absent complexity tier (default off).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.lift_eval</code></td>
 <td>bool</td>
 <td>Measure true instinct lift and propose retiring instincts that do not help (default off).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.auto_apply.enabled</code></td>
 <td>bool</td>
 <td>Promote high-confidence recovery instincts to a prompt-level directive (default off).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.auto_apply.min_confidence</code></td>
 <td>float</td>
 <td>Confidence floor for auto-apply (default 0.85).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.auto_apply.min_clean_support</code></td>
 <td>int</td>
 <td>Min clean (zero-contradiction) supports for auto-apply; 0 = off.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.consumers.auto_apply.allowed_error_classes</code></td>
 <td>list</td>
 <td>Failure classes eligible for auto-apply; empty = all.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.lift.min_treatment</code></td>
 <td>int</td>
 <td>Minimum applied outcomes before lift is measured (0 = 8).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.lift.min_baseline</code></td>
 <td>int</td>
 <td>Minimum baseline outcomes before lift is measured (0 = 8).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.lift.margin</code></td>
 <td>float</td>
 <td>Propose retirement only when lift &lt;= -margin (0 = 0.05).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.lift.reeval_cooldown_hours</code></td>
 <td>int</td>
 <td>Suppress re-proposing a rejected instinct for this many hours (0 = 168).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>instinct.lift.window_hours</code></td>
 <td>int</td>
 <td>Measurement window in hours (0 = the confidence model's evidence-freshness horizon, else the decay half-life).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -3994,6 +4268,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4001,46 +4276,55 @@
 <td><code>auth.bootstrap_admins</code></td>
 <td>list</td>
 <td>Channel identities (channel:external_id) auto-granted admin on first login.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.external_base_url</code></td>
 <td>string</td>
 <td>Public origin of the daemon (scheme://host[:port]). Required when a login provider is configured.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.session.lifetime</code></td>
 <td>string</td>
 <td>Fixed session expiry.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.session.idle_timeout</code></td>
 <td>string</td>
 <td>Cut sessions idle longer than this.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.providers.github.client_id</code></td>
 <td>string</td>
 <td>GitHub OAuth App client ID.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.providers.github.client_secret_file</code></td>
 <td>string</td>
 <td>Path to the GitHub OAuth client secret (preferred over inline).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.providers.github.org</code></td>
 <td>string</td>
 <td>Restrict/soft-gate login to a GitHub org.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.providers.github.org_member_role</code></td>
 <td>string</td>
 <td>Auto-grant role for GitHub org members on login: empty (default, no auto-grant), 'user', or 'admin'. Requires 'org' set.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>auth.providers.github.org_member_projects</code></td>
 <td>list</td>
 <td>Projects an auto-granted org member (user role) receives; '*' = all projects.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4051,6 +4335,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4058,21 +4343,25 @@
 <td><code>voice.stt.provider</code></td>
 <td>string</td>
 <td>Speech-to-text provider (whisper-local).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>voice.stt.model</code></td>
 <td>string</td>
 <td>Absolute path to the STT model file.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>voice.tts.provider</code></td>
 <td>string</td>
 <td>Text-to-speech provider (piper).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>voice.tts.voice</code></td>
 <td>string</td>
 <td>Absolute path to the TTS voice model.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4083,6 +4372,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4090,31 +4380,37 @@
 <td><code>media.stage_max_bytes</code></td>
 <td>int</td>
 <td>Largest raw media file staged into an agent container alongside its extraction. 0 = unbounded.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>media.inline_max_bytes</code></td>
 <td>int</td>
 <td>Largest single image attached to a dispatcher chat turn. 0 = built-in default (5 MB).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>media.inline_max_bytes_total</code></td>
 <td>int</td>
 <td>Combined image bytes allowed on one dispatcher chat turn. 0 = built-in default (10 MB).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>media.inline_max_images</code></td>
 <td>int</td>
 <td>Most images attached to one dispatcher chat turn. 0 = built-in default (4).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>media.video.max_frames</code></td>
 <td>int</td>
 <td>Most keyframes sampled from one video. 0 = extractor default (8).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>media.video.min_interval_seconds</code></td>
 <td>int</td>
 <td>Shortest gap between sampled keyframes. 0 = extractor default (5).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4125,6 +4421,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4132,76 +4429,91 @@
 <td><code>node.profile</code></td>
 <td>string</td>
 <td>Role preset: all|ui|worker|webhook. Default all.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.serve_ui</code></td>
 <td>bool</td>
 <td>Mount /ui routes.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.serve_api</code></td>
 <td>bool</td>
 <td>Mount data-plane / control endpoints.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.serve_webhooks</code></td>
 <td>bool</td>
 <td>Mount public webhook ingress.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.run_workers</code></td>
 <td>bool</td>
 <td>Run scheduler+executor and leader-elected singletons.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay.upstream</code></td>
 <td>string</td>
 <td>Job-tier internal ingress base URL (https://host:8443).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay.client_cert</code></td>
 <td>string</td>
 <td>PEM client cert for mTLS to the job tier.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay.client_key</code></td>
 <td>string</td>
 <td>PEM client key for mTLS to the job tier.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay.ca</code></td>
 <td>string</td>
 <td>PEM CA bundle that signed the job-tier server cert.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay.max_retries</code></td>
 <td>int</td>
 <td>Bounded relay retries before 5xx to provider. 0 → 3.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay.timeout</code></td>
 <td>string</td>
 <td>Per-relay-attempt timeout. Empty → 5s.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay_ingress.addr</code></td>
 <td>string</td>
 <td>Listen address for the mTLS relay ingress, e.g. :8443.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay_ingress.server_cert</code></td>
 <td>string</td>
 <td>PEM server cert presented to relaying webhook nodes.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay_ingress.server_key</code></td>
 <td>string</td>
 <td>PEM server key for the relay ingress.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>node.relay_ingress.client_ca</code></td>
 <td>string</td>
 <td>PEM CA bundle; only client certs it signed are accepted.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4212,6 +4524,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4219,6 +4532,7 @@
 <td><code>integrations.allowed_hosts</code></td>
 <td>list</td>
 <td>Hostnames allowed to bypass the Integrations Hub's private-range SSRF guard for probes/saves. Empty = block all private/loopback/link-local destinations (secure default).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4229,6 +4543,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4236,41 +4551,49 @@
 <td><code>narrator.enabled</code></td>
 <td>bool</td>
 <td>Activate the narrator worker.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.model</code></td>
 <td>string</td>
 <td>Model used for narration LLM calls (cheapest tier).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.debounce</code></td>
 <td>int</td>
 <td>Seconds a step-start line waits before emitting, to collapse into a fast completion.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.long_tool_threshold</code></td>
 <td>int</td>
 <td>Seconds before a still-running tool call gets a heartbeat line.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.min_line_interval</code></td>
 <td>int</td>
 <td>Minimum seconds between narration lines for the same execution.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.max_lines</code></td>
 <td>int</td>
 <td>Per-execution narration line cap.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.max_cost_usd</code></td>
 <td>float</td>
 <td>Per-execution narrator LLM spend cap in USD; switches to template-only on breach.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>narrator.chat_milestone_kinds</code></td>
 <td>list</td>
 <td>Narration trigger kinds eligible for the chat push (default: step_completed, completion).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4281,6 +4604,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4288,16 +4612,19 @@
 <td><code>composer.enabled</code></td>
 <td>bool</td>
 <td>Activate the NL automation composer (wizard tier-3).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>composer.max_tier</code></td>
 <td>int</td>
 <td>Highest composer tier allowed (2 disables free-form synthesis; 3 = full).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>composer.max_tier3_turns</code></td>
 <td>int</td>
 <td>Per-session cap on expensive tier-3 composer turns.</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4308,6 +4635,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4315,21 +4643,25 @@
 <td><code>web.writes</code></td>
 <td>string</td>
 <td>Web write-action mode: off (default), on (per-project write_allowlist), or insecure (bypass the allowlist — dev only, requires insecure_ack).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>web.insecure_ack</code></td>
 <td>bool</td>
 <td>Must be true to activate web.writes=insecure. A deliberate second flag so the allowlist bypass cannot be enabled by a single value.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>web.submit_secret</code></td>
 <td>string</td>
 <td>Daemon↔scraper web_submit capability secret attached as daemon_auth (prefer submit_secret_file). Required when web.writes is on/insecure.</td>
+<td><code>VORNIK_WEB_SUBMIT_SECRET</code></td>
 </tr>
 <tr>
 <td><code>web.submit_secret_file</code></td>
 <td>string</td>
 <td>Path to a file holding the web_submit capability secret (preferred over inline submit_secret).</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -4340,6 +4672,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4347,31 +4680,37 @@
 <td><code>gateway.enabled</code></td>
 <td>bool</td>
 <td>Turn the query_api gateway integration on.</td>
+<td><code>VORNIK_GATEWAY_ENABLED</code></td>
 </tr>
 <tr>
 <td><code>gateway.address</code></td>
 <td>string</td>
 <td>Base URL the daemon uses to reach the local gateway, e.g. http://127.0.0.1:8010.</td>
+<td><code>VORNIK_GATEWAY_ADDRESS</code></td>
 </tr>
 <tr>
 <td><code>gateway.token</code></td>
 <td>string</td>
 <td>Internal daemon↔gateway key-auth secret (prefer token_file).</td>
+<td><code>VORNIK_GATEWAY_TOKEN</code></td>
 </tr>
 <tr>
 <td><code>gateway.token_file</code></td>
 <td>string</td>
 <td>Path to a file holding the gateway token (preferred over inline token).</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>gateway.providers</code></td>
 <td>map</td>
 <td>Registered API providers the agent may call by name.</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>gateway.agent_writes</code></td>
 <td>string</td>
 <td>Tri-state policy for query_api writes from task-executing agents: off (default; task-originated writes refused — chat-direct writes unaffected), user (permit only when the task's request-root creation_source is USER, i.e. a human-initiated tree; autonomous/scheduled/route-rooted trees stay read-only), all (any task-originated write permitted). Always AND-gated by the provider's writes_enabled and the gateway route allowlist. 'all' is broad (a prompt-injected autonomous agent can write to every writes_enabled provider) and emits a load-time warning.</td>
+<td><code>VORNIK_GATEWAY_AGENT_WRITES</code></td>
 </tr>
 </tbody>
 </table>
@@ -4382,6 +4721,7 @@
 <th>Key</th>
 <th>Type</th>
 <th>Description</th>
+<th>Environment override</th>
 </tr>
 </thead>
 <tbody>
@@ -4389,6 +4729,7 @@
 <td><code>taint_lineage.enforcement_mode</code></td>
 <td>string</td>
 <td>Daemon-default taint-lineage enforcement for autonomous writes: off (record only, never park/refuse), advisory (default; record + flag, never park/refuse), enforce (park tainted forge writes for operator review, synchronously refuse tainted query_api writes). Per-project overridable. Audit is always recorded regardless. Never LLM-settable.</td>
+<td><code>VORNIK_TAINT_LINEAGE_MODE</code></td>
 </tr>
 </tbody>
 </table>

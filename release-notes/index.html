@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202692" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.9.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202691" class="md-nav__link">
     <span class="md-ellipsis">
       2026.9.1
@@ -2037,6 +2046,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202692" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.9.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202691" class="md-nav__link">
     <span class="md-ellipsis">
       2026.9.1
@@ -2360,6 +2378,56 @@ before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
 <hr />
+<h2 id="202692">2026.9.2<a class="headerlink" href="#202692" title="Permanent link">&para;</a></h2>
+<p><strong>The agent's file and git tools moved from bash into a small Go helper inside
+the agent image.</strong> Behaviour was recorded before anything moved and the port was
+checked against that recording, so what a tool returns is unchanged for valid
+UTF-8 content. You need the rebuilt agent image for this; the updater builds it.</p>
+<p><strong>Four tool-boundary escapes found by a code audit are closed.</strong> A dangling
+symlink let <code>file_write</code> create a file outside the workspace, a planted
+temporary-file symlink let <code>file_edit</code> overwrite one, recursive <code>grep</code> could
+read one through a leaf symlink, and a git revision beginning with <code>-</code> was taken
+as an option. All four are fixed, each with the reproduction as a test.
+Exploiting any of them needed a role granted the tool plus a crafted argument or
+a planted link; none is a container escape. Alongside: reads no longer allocate
+the whole file before truncating, non-ASCII glob patterns match, <code>grep</code>'s
+<code>head_limit</code> must be at least 1, and <code>read_many_files</code> counts characters again
+and never cuts a multibyte character in half.</p>
+<p><strong>If <code>vornik-update.sh</code> has been failing since late August, this fixes it.</strong> The
+updater could not build the agent image (<code>image build failed for
+ghcr.io/grinco/vornik-agent:latest</code>) because of how it read the image list;
+nothing was half-applied, but nothing updated either. Rerun it. It now also
+recreates the long-running sidecar containers (the scraper, and any other
+compose- or unit-run service built from a manifest image) when their image was
+rebuilt — previously they kept running the old image after every update, and
+nothing reported it. <code>--no-recreate-sidecars</code> opts out. The public agent image also gets
+a version tag on GHCR from this release on (<code>ghcr.io/grinco/vornik-agent:2026.9.2</code>);
+earlier releases only ever published <code>:latest</code>.</p>
+<p><strong>You can read what a step was told and what it handed back.</strong>
+<code>vornikctl execution prompt &lt;exec&gt; &lt;step&gt;</code> shows the system prompt, user content
+and tools the step's model saw at its first request; <code>execution input</code> and
+<code>execution result</code> show the <code>task.json</code> the daemon wrote for the container and
+the <code>result.json</code> it wrote back. All three are stored after secret redaction and
+pruned with the step outcome that references them. A project can also opt in to
+recording every model exchange of its steps (<code>recording: {llm_exchanges: true}</code>,
+off by default because it costs storage) and export them with
+<code>vornikctl execution exchanges &lt;exec&gt; &lt;step&gt; --export</code> — the recording a replay
+test consumes.</p>
+<p><strong><code>vornikctl config show --provenance</code></strong> says where every resolved value came
+from — file, environment, default or reload — and <code>--trees</code> indexes the registry
+the daemon is actually running.</p>
+<p><strong>Also in this release:</strong> the Community <code>vornikctl support-report</code> collects the
+bundle locally and states the edition it really is; <code>vornikctl doctor</code> runs every
+check on SQLite; four SQLite-only persistence defects found by new shared
+backend tests are fixed; a model fallback gets one attempt and a slow model can
+trip its own breaker; pull-request review commands are gated on the author's
+standing in the repository, and a push during a review is no longer lost;
+<code>grpc</code> 1.83.1 closes a HIGH advisory.</p>
+<p><strong>Upgrade notes.</strong> Migrations 174–178 apply on start, all additive. Rebuild the
+agent image (the updater does). The updater now recreates sidecar containers
+before restarting the daemon; a tool call in flight against one fails at that
+moment, inside the same window the restart already interrupts.</p>
+<hr />
 <h2 id="202691">2026.9.1<a class="headerlink" href="#202691" title="Permanent link">&para;</a></h2>
 <p><strong>A workflow's system step now hands its output to the next agent.</strong> This is a
 customer-reported bug and it is the reason for this release. When a workflow ran
@@ -2470,9 +2538,11 @@ to decide redaction but not enough to triage a false positive. The metric gains 
 <p><strong>The agent container image is published for arm64.</strong> It was being built for the
 release runner's architecture only, while arm64 packages were shipping — so an
 arm64 install named an image it could not pull and discovered it at the first
-agent run. Packaged installs also carry an image provenance record again, with
-per-architecture digests for registry images and a source commit for images built
-on your own host.</p>
+agent run.</p>
+<p><em>Correction, 2026-09-03:</em> this section originally also said packaged installs
+carry an image provenance record again. The record's schema shipped, but the
+packaging step that writes it aborted every build, so <strong>2026.9.1 produced no
+packages and no record</strong>. Fixed after the release; the next release carries it.</p>
 <p><strong>MCP audience checks accept equivalent spellings of the same URL.</strong> Host case, a
 longhand default port (<code>:443</code> on https), a trailing dot, and the Unicode form of
 an internationalised host all used to mismatch, so a correctly configured

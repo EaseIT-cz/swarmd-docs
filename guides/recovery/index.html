@@ -1872,9 +1872,11 @@ keeping.</p>
 <h2 id="re-run-from-a-step">Re-run from a step<a class="headerlink" href="#re-run-from-a-step" title="Permanent link">&para;</a></h2>
 <p>When the early steps were fine and only a later step went wrong, you can <strong>rerun
 from that step</strong> instead of repeating the good work. On a failed (terminal)
-execution's detail page in the Web UI, choose a completed step and <strong>Rerun from
-step</strong>: vornik rewinds the execution to that point — keeping the upstream steps'
-results and artifacts — and runs forward again.</p>
+execution's detail page in the Web UI, choose a completed step — or the step
+that failed — and <strong>Rerun from step</strong>: vornik rewinds the execution to that
+point — keeping the upstream steps' results and artifacts — and runs forward
+again. The chosen step's earlier outcome is marked <em>superseded</em>, so workflow
+statistics count the rerun, not both attempts.</p>
 <p>Two things to know:</p>
 <ul>
 <li>It <strong>rewinds the same execution</strong> rather than cloning a new one, so the
