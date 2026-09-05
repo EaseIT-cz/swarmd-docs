@@ -1823,6 +1823,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-execution-exchanges" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution exchanges
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-execution-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution input
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-execution-inspect" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl execution inspect
@@ -1844,6 +1862,15 @@
   <a href="#vornikctl-execution-prompt" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl execution prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-execution-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution result
     </span>
   </a>
   
@@ -3463,6 +3490,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-execution-exchanges" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution exchanges
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-execution-input" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution input
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-execution-inspect" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl execution inspect
@@ -3484,6 +3529,15 @@
   <a href="#vornikctl-execution-prompt" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl execution prompt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-execution-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution result
     </span>
   </a>
   
@@ -5617,6 +5671,58 @@ when auth is enabled).</p>
 <h2 id="vornikctl-execution">vornikctl execution<a class="headerlink" href="#vornikctl-execution" title="Permanent link">&para;</a></h2>
 <p>Manage executions</p>
 <p>Inspect and list workflow executions in the vornik control plane.</p>
+<h2 id="vornikctl-execution-exchanges">vornikctl execution exchanges<a class="headerlink" href="#vornikctl-execution-exchanges" title="Permanent link">&para;</a></h2>
+<p>List a step's recorded model exchanges, or export them as a replay recording</p>
+<p>List every model request/response pair the chat proxy recorded for the step —
+seq, iteration, model, tokens, duration, how many secrets were redacted, and
+the finish reason. Recorded only for projects with recording.llm_exchanges
+set; a step of any other project prints nothing. With --export the same rows
+are written as the JSONL recording the replay server consumes, so a test can
+replay the step's model without the model.</p>
+<div class="highlight"><pre><span></span><code>vornikctl execution exchanges &lt;executionId&gt; &lt;stepId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--export</code></td>
+<td></td>
+<td>Write the step's exchanges as a JSONL recording to this path instead of printing the table</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-execution-input">vornikctl execution input<a class="headerlink" href="#vornikctl-execution-input" title="Permanent link">&para;</a></h2>
+<p>Print the task.json the executor handed the step's container</p>
+<p>Print the step's input file as the daemon stored it — the task.json the
+executor wrote for the container, redacted at write (step-I/O persistence design
+§5). A [REDACTED:type] marker stands where the container saw a value; do not read
+the stored file as what the container saw where one appears. Bare JSON on stdout
+so it pipes into jq; --export writes it 0600. Empty for a step run before the
+daemon persisted boundary files, and for a step no container ran.</p>
+<div class="highlight"><pre><span></span><code>vornikctl execution input &lt;executionId&gt; &lt;stepId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--export</code></td>
+<td></td>
+<td>Write the file to this path (0600) instead of printing it</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-execution-inspect">vornikctl execution inspect<a class="headerlink" href="#vornikctl-execution-inspect" title="Permanent link">&para;</a></h2>
 <p>Inspect an execution</p>
 <p>Get detailed information about an execution by ID.</p>
@@ -5701,6 +5807,31 @@ an agent image that predates step-prompt persistence.</p>
 <td><code>--part</code></td>
 <td></td>
 <td>Print one part only: system, user or tools</td>
+</tr>
+</tbody>
+</table>
+<h2 id="vornikctl-execution-result">vornikctl execution result<a class="headerlink" href="#vornikctl-execution-result" title="Permanent link">&para;</a></h2>
+<p>Print the result.json the step's container handed back</p>
+<p>Print the step's result file as the daemon read it back — whole, after the
+result_json secrets checkpoint, even when it did not parse (that is the case
+where keeping it has value). Bare JSON on stdout so it pipes into jq; --export
+writes it 0600, which is how a replay fixture's expected_result.json is taken
+from the production run rather than from the first replay.</p>
+<div class="highlight"><pre><span></span><code>vornikctl execution result &lt;executionId&gt; &lt;stepId&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--export</code></td>
+<td></td>
+<td>Write the file to this path (0600) instead of printing it</td>
 </tr>
 </tbody>
 </table>
