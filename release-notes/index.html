@@ -1706,6 +1706,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202693" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.9.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202692" class="md-nav__link">
     <span class="md-ellipsis">
       2026.9.2
@@ -2046,6 +2055,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#202693" class="md-nav__link">
+    <span class="md-ellipsis">
+      2026.9.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#202692" class="md-nav__link">
     <span class="md-ellipsis">
       2026.9.2
@@ -2378,6 +2396,43 @@ before upgrading. A few releases ask you to restart the daemon to pick up
 new behavior; those are called out below.</p>
 </div>
 <hr />
+<h2 id="202693">2026.9.3<a class="headerlink" href="#202693" title="Permanent link">&para;</a></h2>
+<p><strong>If <code>vornik-update.sh</code> has ever reported "Checkout already at target commit.
+Nothing to do." after a failed run, read this first.</strong> The updater checked out
+the new release while bash was still reading the script file, so on any upgrade
+where the script changed size the run died just after the checkout — with a
+confusing error like <code>line 200: F: command not found</code> — and everything after it
+silently never ran: the binary build, the image refresh, the sidecar recreate,
+the restart. Because the checkout had already moved, running it again reported
+"Nothing to do" and exited successfully. An install that was never updated,
+reporting success.</p>
+<p>Check whether yours is affected:</p>
+<div class="highlight"><pre><span></span><code>vornik<span class="w"> </span>--version<span class="w">                    </span><span class="c1"># the installed binary</span>
+git<span class="w"> </span>-C<span class="w"> </span>~/vornik<span class="w"> </span>describe<span class="w"> </span>--tags<span class="w">     </span><span class="c1"># what the checkout claims</span>
+</code></pre></div>
+<p>If they disagree, or <code>vornikctl doctor</code> reports <code>image_freshness</code> drift, run
+<code>./vornik-update.sh --force</code>. <code>--force</code> is needed precisely because the checkout
+already matches, which is what made the failure invisible.</p>
+<p><strong>Note that the fix cannot repair the update that delivers it</strong> — your host runs
+its own copy of the old script. Expect the first update to 2026.9.3 to fail on an
+affected host, then run it again; the second run works. From then on the script
+runs from a private copy, so the file it reads cannot change underneath it.</p>
+<p><strong>The agent image is now pulled instead of built.</strong> It is published to
+<code>ghcr.io/grinco/vornik-agent</code>, and the updater fetches it <strong>by digest</strong> rather
+than building a container on every host, so an ordinary update no longer spends
+several minutes on it. Images that are not published — the cluster pair, and the
+sidecar images — are still built locally, exactly as before.</p>
+<p><strong>Air-gapped and offline installs are unaffected.</strong> With no reachable registry
+the updater builds locally as it always did. And a host that already pulled an
+image and later loses its network <strong>keeps that image</strong> rather than rebuilding
+over it: it cannot know the target, so it changes nothing and says so, and
+<code>vornikctl doctor</code> continues to report the real state.</p>
+<p><strong><code>vornikctl doctor</code> now says how you obtained each image</strong> — for example
+<code>Obtained: 1 pulled, 6 built locally</code>. Neither an image's digest nor its build
+label can tell you this after the fact, so the update path records it at the
+moment it knows.</p>
+<p><strong>Also fixed:</strong> <code>vornik-update.sh --no-build</code> failed with
+<code>VERSION: unbound variable</code> whenever an image needed refreshing.</p>
 <h2 id="202692">2026.9.2<a class="headerlink" href="#202692" title="Permanent link">&para;</a></h2>
 <p><strong>The agent's file and git tools moved from bash into a small Go helper inside
 the agent image.</strong> Behaviour was recorded before anything moved and the port was
