@@ -2181,7 +2181,11 @@ such as a push to your default branch.</p>
   <code>ci.comment_on_failure: false</code>.</li>
 <li>A <strong>green</strong> run is recorded quietly. If you set <code>ci.success_workflow_id</code> it
   also starts that workflow once per run — useful for depositing a merged build's
-  output somewhere, and off unless you configure it.</li>
+  output somewhere, and off unless you configure it. You can also name the
+  review workflow here, so a <em>completed</em> run is what triggers a review rather
+  than the push that started it: a workflow that needs a pull request runs only
+  for runs that have one, and a green push to your default branch is recorded
+  without starting anything.</li>
 <li>Any review that runs later reads the outcomes for the commit it is reviewing.</li>
 </ul>
 <p><strong>Getting the actual output in.</strong> Conclusions come free. Content — a

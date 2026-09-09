@@ -2428,7 +2428,11 @@ is not treated as a failure. To get content in — a <code>terraform plan</code>
 report — have your pipeline upload it as an artifact and name it in
 <code>ci.artifact_name</code>; Forge reads artifacts, never job logs. Your GitHub App
 needs <strong>Actions (read)</strong> and the <code>workflow_run</code> event, asked for only when the
-feature is on. See the Forge guide, <em>Reading CI outcomes</em>.</p>
+feature is on. You may name the review workflow as the success workflow, so a
+<em>completed</em> run — not the push — triggers the review: a workflow that needs a
+pull request runs only for runs that have one, and a green push to your
+default branch is recorded without starting anything. See the Forge guide,
+<em>Reading CI outcomes</em>.</p>
 <p><strong>A reviewer no longer approves code it never read.</strong> When a pull request's
 head had not moved since its last review, the reviewer still ran — on a
 one-sentence diff — and could post a confident review of a <em>different</em> pull
