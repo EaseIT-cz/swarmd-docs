@@ -2466,8 +2466,10 @@ cached embeddings computed from its text; on SQLite, the entities view lists a
 mention's chunks newest-first, as on Postgres; verifier refusals ("claimed a
 file that is not on disk", "cited a commit that does not exist") are classified
 instead of landing in <code>unclassified</code>; <code>install-enterprise</code> can replace a
-running daemon (<code>Text file busy</code>); and the public release tag is created by the
-pipeline, so every release ships a version-tagged agent image.</p>
+running daemon (<code>Text file busy</code>); the public release tag is created by the
+pipeline, so every release ships a version-tagged agent image; and the
+Community repository's CI, red since the 2026-09-07 export on two tests that
+only pass against the Enterprise tree, is green again.</p>
 <p><strong>Upgrading:</strong> migrations run on start; new keys are additive and default to
 the previous behaviour, except that with <code>forge.ci</code> enabled a red pipeline
 withholds approvals by default. Re-install the systemd unit as above.</p>
