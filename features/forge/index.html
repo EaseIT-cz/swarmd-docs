@@ -1364,6 +1364,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reading-ci-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading CI outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#notes-and-limits" class="md-nav__link">
     <span class="md-ellipsis">
       Notes and limits
@@ -1909,6 +1918,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#reading-ci-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reading CI outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#notes-and-limits" class="md-nav__link">
     <span class="md-ellipsis">
       Notes and limits
@@ -2071,9 +2089,15 @@ write credentials, because it never has them.</p>
 <ol>
 <li><strong>Create a GitHub App</strong> and download its private key (PEM). Note the App ID.</li>
 <li><strong>Grant permissions:</strong> Contents (read &amp; write — verified at daemon startup),
-   Issues (read &amp; write), Pull requests (read &amp; write), and Metadata (read).</li>
+   Issues (read &amp; write), Pull requests (read &amp; write), and Metadata (read).
+   Add <strong>Actions (read)</strong> only if you want CI outcomes — see <em>Reading CI
+   outcomes</em> below. It is a separate, later grant on purpose: adding a
+   permission to an existing App requires each repository owner to <strong>re-accept
+   the installation</strong>, so Forge does not ask for it unless you turn the feature
+   on.</li>
 <li><strong>Subscribe to webhook events:</strong> <code>issues</code>, <code>pull_request</code>, and (for PR review
-   commands and <code>@&lt;bot&gt;</code> mention replies) <code>issue_comment</code>.</li>
+   commands and <code>@&lt;bot&gt;</code> mention replies) <code>issue_comment</code>. Add <code>workflow_run</code>
+   for CI outcomes.</li>
 <li><strong>Point the webhook</strong> at your daemon's signed webhook endpoint,
    <code>POST /api/v1/webhooks/{projectId}/{source}</code>, and set a webhook secret. Forge
    verifies every delivery's <code>X-Hub-Signature-256</code> HMAC; the secret is supplied
@@ -2136,6 +2160,104 @@ temporary, so those keep their full retry budget exactly as before.</p>
 an allowlisted user mentioning the bot routes through vornik and gets a reply
 posted as an issue comment. This is the chat surface; the deterministic flows
 above are the automation surface.</p>
+<h2 id="reading-ci-outcomes">Reading CI outcomes<a class="headerlink" href="#reading-ci-outcomes" title="Permanent link">&para;</a></h2>
+<p>Forge can read what your CI concluded and put it in front of the review, so a
+reviewer is not looking at a diff while the pipeline that tested it is invisible.</p>
+<p><strong>What it records.</strong> When a workflow run completes, Forge stores its conclusion,
+its per-job conclusions and its timing, against the <strong>commit</strong> the run tested.
+That happens for every run it watches — including runs with no pull request,
+such as a push to your default branch.</p>
+<p><strong>What it does with it.</strong></p>
+<ul>
+<li>A <strong>failed</strong> run triggers a review, coalesced through the same machinery that
+  collapses a push burst, so six workflows finishing together produce one review
+  rather than six.</li>
+<li>A <strong>failed</strong> run whose commit has <em>already</em> been reviewed gets a short factual
+  <strong>comment</strong> instead — the workflow, the conclusion, the failing jobs and a link
+  to the run. This is the common case, because CI usually finishes just after the
+  review of the push that triggered it. No model writes that comment, so there is
+  nothing in it to be wrong: re-reviewing a commit with no new code is how a bot
+  ends up describing the wrong pull request. Turn it off with
+  <code>ci.comment_on_failure: false</code>.</li>
+<li>A <strong>green</strong> run is recorded quietly. If you set <code>ci.success_workflow_id</code> it
+  also starts that workflow once per run — useful for depositing a merged build's
+  output somewhere, and off unless you configure it.</li>
+<li>Any review that runs later reads the outcomes for the commit it is reviewing.</li>
+</ul>
+<p><strong>Getting the actual output in.</strong> Conclusions come free. Content — a
+<code>terraform plan</code>, a test report, a scan result — has to be <strong>uploaded by your
+pipeline as an artifact</strong>, and you name it in <code>ci.artifact_name</code>. Forge reads
+artifacts, never job logs: a log has no format contract and is where secrets get
+printed, whereas an upload is a deliberate act by whoever wrote the pipeline.
+There is no tool-specific parsing anywhere — Terraform is simply a repository
+that uploads a plan, and the same setup works for anything else.</p>
+<p>Uploaded content is treated as <strong>untrusted</strong>: anyone who can push a branch can
+make CI print anything, so it reaches a model marked as data rather than
+instructions, and it is size-capped with any truncation stated rather than
+silent.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">forge</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w">              </span><span class="c1"># master switch; false is today's behaviour exactly</span>
+<span class="w">    </span><span class="nt">artifact_name</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w">           </span><span class="c1"># opt in to content; empty records conclusions only</span>
+<span class="w">    </span><span class="nt">max_artifact_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1048576</span><span class="w"> </span><span class="c1"># refuse a download above this</span>
+<span class="w">    </span><span class="nt">max_excerpt_bytes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">65536</span><span class="w">    </span><span class="c1"># store at most this, and say when it truncated</span>
+<span class="w">    </span><span class="nt">review_on_failure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">     </span><span class="c1"># a failed run triggers a coalesced review</span>
+<span class="w">    </span><span class="nt">success_workflow_id</span><span class="p">:</span><span class="w"> </span><span class="s">""</span><span class="w">     </span><span class="c1"># a green run fires this workflow; empty is off</span>
+<span class="w">    </span><span class="nt">comment_on_failure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w">    </span><span class="c1"># say so when a failure cannot produce a review</span>
+<span class="w">    </span><span class="nt">block_approval_on_failure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"> </span><span class="c1"># withhold an APPROVE while a run is red</span>
+<span class="w">    </span><span class="nt">workflow_paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">          </span><span class="c1"># record only these workflow files; empty means all</span>
+<span class="w">    </span><span class="nt">trigger_workflow_paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">  </span><span class="c1"># of those, only these may TRIGGER; empty means all</span>
+</code></pre></div>
+<p><strong>A red pipeline withholds the approval.</strong> With <code>block_approval_on_failure</code>
+(default on), <code>forge.post_review</code> will not submit an <strong>APPROVE</strong> while a run it
+recorded for the reviewed commit has failed. The review is posted as an ordinary
+comment instead, led by a line naming the failing workflow — so the reasoning
+still reaches the pull request, but it cannot satisfy branch protection on a
+commit its own pipeline rejected.</p>
+<p>This is a check on the recorded outcome, not on the reviewer's opinion: it does
+not read the review text and cannot be argued with. A <code>REQUEST_CHANGES</code> verdict
+is unaffected, and a commit with no recorded runs is not treated as a failure —
+"nothing ran" and "CI failed" are different facts. Set it to <code>false</code> to restore
+the previous behaviour.</p>
+<p><strong>Why two path lists.</strong> <code>workflow_paths</code> decides what is <em>recorded</em>;
+<code>trigger_workflow_paths</code> decides which of those recorded runs may <em>start</em> a
+review. On a repository where several workflows run per pull request, one list
+cannot express what you want:</p>
+<ul>
+<li>record everything and let everything trigger, and a green push fires the
+  success workflow once per run — several reviews for one push;</li>
+<li>record only one workflow, and the review sees only that one. It can then
+  report a green pipeline while another workflow is red, which is worse than
+  having no CI context at all.</li>
+</ul>
+<p>So record everything and nominate one gate:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">forge</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">workflow_paths</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w">                                   </span><span class="c1"># record all of them</span>
+<span class="w">    </span><span class="nt">trigger_workflow_paths</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">".github/workflows/integration.yml"</span><span class="w">              </span><span class="c1"># …this one starts the review</span>
+</code></pre></div>
+<p>Pick the workflow that finishes last, or the one you consider authoritative:
+the review renders the outcomes recorded <em>when it runs</em>, so a gate that
+finishes early shows a partial picture. It never invents one — a run that has
+not completed is reported as not completed, never as passing.</p>
+<p>Naming a path in <code>trigger_workflow_paths</code> that a non-empty <code>workflow_paths</code>
+excludes is rejected at startup: that run would never be ingested, so the
+trigger could never fire.</p>
+<p>If your events arrive on the generic signed webhook rather than the App
+channel, give the source a <code>ci_workflow_id</code> as well — a CI run is not a change
+request, so without one it would fall to the source's default (issue) workflow:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">webhooks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">sources</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github</span>
+<span class="w">      </span><span class="nt">change_request_workflow_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github-review</span>
+<span class="w">      </span><span class="nt">ci_workflow_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">github-review</span><span class="w">   </span><span class="c1"># or a workflow of its own</span>
+</code></pre></div>
+<p><strong>One limitation worth knowing before you rely on it.</strong> GitHub does not tell
+Forge which pull request a run belongs to when the PR comes from a <strong>fork</strong> —
+the event arrives with no pull request attached. Such a run is still recorded
+and still visible to a review of that commit, but a CI failure on a fork PR will
+not <em>start</em> a review on its own.</p>
 <h2 id="notes-and-limits">Notes and limits<a class="headerlink" href="#notes-and-limits" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Automated PRs are always <strong>drafts</strong> — promotion to ready is a human action.</li>

@@ -1868,6 +1868,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-execution-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-execution-result" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl execution result
@@ -2015,6 +2024,15 @@
   <a href="#vornikctl-knowledge" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl knowledge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge-rollup" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge rollup
     </span>
   </a>
   
@@ -3535,6 +3553,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vornikctl-execution-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl execution rate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#vornikctl-execution-result" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl execution result
@@ -3682,6 +3709,15 @@
   <a href="#vornikctl-knowledge" class="md-nav__link">
     <span class="md-ellipsis">
       vornikctl knowledge
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vornikctl-knowledge-rollup" class="md-nav__link">
+    <span class="md-ellipsis">
+      vornikctl knowledge rollup
     </span>
   </a>
   
@@ -5810,6 +5846,37 @@ an agent image that predates step-prompt persistence.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="vornikctl-execution-rate">vornikctl execution rate<a class="headerlink" href="#vornikctl-execution-rate" title="Permanent link">&para;</a></h2>
+<p>Record your verdict on what an execution produced</p>
+<p>Record, change or withdraw YOUR rating of an execution.</p>
+<p>Re-rating replaces your previous verdict — an operator's first reaction
+to a digest is not their considered one. A second operator's rating is a
+separate row, never an overwrite.</p>
+<p>The rater is resolved from your credentials, so the deployment needs
+per-operator API keys; one shared service key has no identity to record.</p>
+<div class="highlight"><pre><span></span><code>vornikctl execution rate &lt;execution-id&gt; [up|down] [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--clear</code></td>
+<td><code>false</code></td>
+<td>Withdraw your rating of this execution</td>
+</tr>
+<tr>
+<td><code>--reason</code></td>
+<td></td>
+<td>Optional one-line reason (max 500 chars). A down-vote never requires one.</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-execution-result">vornikctl execution result<a class="headerlink" href="#vornikctl-execution-result" title="Permanent link">&para;</a></h2>
 <p>Print the result.json the step's container handed back</p>
 <p>Print the step's result file as the daemon read it back — whole, after the
@@ -6345,6 +6412,33 @@ injects into every project's roles — e.g. a skill captured from a Claude
 companion session becomes available to the janka and assistant autonomy
 roles. Promotion does not change a skill's maturity; an approved skill
 stays approved.</p>
+<h2 id="vornikctl-knowledge-rollup">vornikctl knowledge rollup<a class="headerlink" href="#vornikctl-knowledge-rollup" title="Permanent link">&para;</a></h2>
+<p>Show whether a knowledge skill's outputs are rated worse than comparable ones</p>
+<p>Compare how operators rated executions this skill was injected into
+against comparable executions in the same project and workflow that it was not.</p>
+<p>Reported per (project, workflow), never pooled: a digest and a code review are
+not comparable outputs. Every figure is printed beside its baseline and the
+coverage of both arms — a rating exists only where someone chose to write one,
+so a difference between two differently-watched arms measures who was watching.</p>
+<p>Advisory only. Nothing retires a skill on this.</p>
+<div class="highlight"><pre><span></span><code>vornikctl knowledge rollup &lt;skill-id&gt; [flags]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--window-hours</code></td>
+<td><code>0</code></td>
+<td>Measurement window in hours (0 = the daemon's default of one week)</td>
+</tr>
+</tbody>
+</table>
 <h2 id="vornikctl-knowledge-set-global">vornikctl knowledge set-global<a class="headerlink" href="#vornikctl-knowledge-set-global" title="Permanent link">&para;</a></h2>
 <p>Promote a knowledge skill to GLOBAL (injects into ALL projects)</p>
 <div class="highlight"><pre><span></span><code>vornikctl knowledge set-global &lt;skill-id&gt;
